@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="使用 Jekyll 在 Github 上写博客 | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>使用 Jekyll 在 Github 上写博客</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+	</head>
+	<body>
+		<nav id="nav">
+			<img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100">
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><sapn>机器学习</sapn></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>D3</span></li>
+				<li id="label6" class="label"><span>其他</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">D3</h2>
+				<h2 id="title6" class="title">其他</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="others cate1" href="/2013/01/blogging-with-jekyll"><span class="circle_icon"></span>使用 Jekyll 在 Github 上写博客<span class="date">Jan 2013</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">使用 Jekyll 在 Github 上写博客</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>纪念刚刚过去的 2012 年，展望 2013，开始用时下流行的 Jekyll 在 Github 上写博客，积累经验，深度思考，期望在新的一年取得更好的成绩。</p>
+
+<p>网络上关于 Jekyll 的文章已经非常详细了，在这里附上一点使用心得，从业余的角度看 Jekyll，也许能方便刚刚开始接触 Jekyll 的同学。</p>
+
+<ol>
+<li>门槛：需要理解 Github 的工作方式，熟悉 Github 客户端，熟悉 Html 与 CSS；</li>
+<li>不妨一边开始写静态模板，一边了解 Jekyll 布局所用到的 <a href="https://github.com/mojombo/jekyll/wiki/Liquid-Extensions">Liquid Tag</a>，磨刀不误砍柴工；</li>
+<li>Jekyll 博客，可以看作是一套文件结构，通过 Jekyll 程序编译成静态网站。如果不熟悉命令，完全可以不安装 Jekyll，只需按照<a href="https://github.com/mojombo/jekyll/wiki/usage">要求的格式</a>创建文件后再上传到 Github，然后访问主页就可以了，因为 Github Pages 便是由 Jekyll 驱动的，或者直接使用 <a href="http://jekyllbootstrap.com">Jekyll-Bootstrap</a> 的结构；</li>
+<li>Jekyll 的文件结构大概可以这样分：配置文件 <code>_config.yml</code>，布局文件 <code>_layouts</code>，模块文件 <code>_includes</code>，插件 <code>_plugin</code>，文章 <code>_posts</code>，其他文件（不以<em>下划线</em>开头的文件及文件夹都会完整的拷贝到生成的静态网站中，比如 CSS 文件、图片等），以及将会生成的静态站 <code>_site</code>；</li>
+<li>Jekyll 命令很简单，先使用 <code>cd</code> 命令进入目标文件夹，然后输入 <code>jekyll --server</code> 生成网站，浏览器中输入 <code>0.0.0.0:4000</code> 访问生成的静态网站，<code>jekyll --server --auto</code> 命令将开启实时更新，修改文件后在浏览器中刷新就可看到效果，对本地调试很有帮助；</li>
+<li>Github Pages 禁用所有插件，需要使用自定义插件，只能上传生成的网站文件 <code>_site</code>，或者试试 <a href="http://edhedges.com/blog/2012/07/30/jekyll-with-plugins-hosted-on-github-pages/">这个办法</a> ;</li>
+<li>想写草稿不想被编译？创建一个以下划线开头文件夹就会被忽略，例如在 <code>_posts</code> 下创建 <code>_drafts</code> 存储草稿；</li>
+<li>默认的 Markdown 引擎问题很多，建议替换成 <a href="https://github.com/mojombo/jekyll/wiki/Install#rdiscount">RDiscount</a>。</li>
+</ol>
+
+
+<h2>Jekyll Alfred 2 Workflows</h2>
+
+<p>三个 Alfred2 Workflows 让 Jekyll 用起来更方便：Create a Jekyll Post, Generate Jekyll site, 以及 Push Jekyll post to Github，下载地址：<a href="https://github.com/P233/Jekyll-Alfred-Extensions">https://github.com/P233/Jekyll-Alfred-Extensions</a></p>
+
+
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/01/blogging-with-jekyll&title=使用 Jekyll 在 Github 上写博客"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/01/blogging-with-jekyll&text=使用 Jekyll 在 Github 上写博客"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+			
+			</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+	</body>
+</html>

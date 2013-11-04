@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术改变世界</title>
+    <link>http://yangchao.me/</link>
+    <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
+    <description>阅读塑造人生</description>
+    <language>zh_CN</language>
+    <pubDate>Mon, 04 Nov 2013 06:19:46 -0800</pubDate>
+    <lastBuildDate>Mon, 04 Nov 2013 06:19:46 -0800</lastBuildDate>
+
+    
+    <item>
+      <title>使用 Jekyll 在 Github 上写博客</title>
+      <link>http://yangchao.me/2013/01/blogging-with-jekyll</link>
+      <pubDate>02 Jan 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/01/blogging-with-jekyll</guid>
+      <description>&lt;p&gt;纪念刚刚过去的 2012 年，展望 2013，开始用时下流行的 Jekyll 在 Github 上写博客，积累经验，深度思考，期望在新的一年取得更好的成绩。&lt;/p&gt;
+
+&lt;p&gt;网络上关于 Jekyll 的文章已经非常详细了，在这里附上一点使用心得，从业余的角度看 Jekyll，也许能方便刚刚开始接触 Jekyll 的同学。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;门槛：需要理解 Github 的工作方式，熟悉 Github 客户端，熟悉 Html 与 CSS；&lt;/li&gt;
+&lt;li&gt;不妨一边开始写静态模板，一边了解 Jekyll 布局所用到的 &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/Liquid-Extensions&quot;&gt;Liquid Tag&lt;/a&gt;，磨刀不误砍柴工；&lt;/li&gt;
+&lt;li&gt;Jekyll 博客，可以看作是一套文件结构，通过 Jekyll 程序编译成静态网站。如果不熟悉命令，完全可以不安装 Jekyll，只需按照&lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/usage&quot;&gt;要求的格式&lt;/a&gt;创建文件后再上传到 Github，然后访问主页就可以了，因为 Github Pages 便是由 Jekyll 驱动的，或者直接使用 &lt;a href=&quot;http://jekyllbootstrap.com&quot;&gt;Jekyll-Bootstrap&lt;/a&gt; 的结构；&lt;/li&gt;
+&lt;li&gt;Jekyll 的文件结构大概可以这样分：配置文件 &lt;code&gt;_config.yml&lt;/code&gt;，布局文件 &lt;code&gt;_layouts&lt;/code&gt;，模块文件 &lt;code&gt;_includes&lt;/code&gt;，插件 &lt;code&gt;_plugin&lt;/code&gt;，文章 &lt;code&gt;_posts&lt;/code&gt;，其他文件（不以&lt;em&gt;下划线&lt;/em&gt;开头的文件及文件夹都会完整的拷贝到生成的静态网站中，比如 CSS 文件、图片等），以及将会生成的静态站 &lt;code&gt;_site&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;Jekyll 命令很简单，先使用 &lt;code&gt;cd&lt;/code&gt; 命令进入目标文件夹，然后输入 &lt;code&gt;jekyll --server&lt;/code&gt; 生成网站，浏览器中输入 &lt;code&gt;0.0.0.0:4000&lt;/code&gt; 访问生成的静态网站，&lt;code&gt;jekyll --server --auto&lt;/code&gt; 命令将开启实时更新，修改文件后在浏览器中刷新就可看到效果，对本地调试很有帮助；&lt;/li&gt;
+&lt;li&gt;Github Pages 禁用所有插件，需要使用自定义插件，只能上传生成的网站文件 &lt;code&gt;_site&lt;/code&gt;，或者试试 &lt;a href=&quot;http://edhedges.com/blog/2012/07/30/jekyll-with-plugins-hosted-on-github-pages/&quot;&gt;这个办法&lt;/a&gt; ;&lt;/li&gt;
+&lt;li&gt;想写草稿不想被编译？创建一个以下划线开头文件夹就会被忽略，例如在 &lt;code&gt;_posts&lt;/code&gt; 下创建 &lt;code&gt;_drafts&lt;/code&gt; 存储草稿；&lt;/li&gt;
+&lt;li&gt;默认的 Markdown 引擎问题很多，建议替换成 &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/Install#rdiscount&quot;&gt;RDiscount&lt;/a&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;Jekyll Alfred 2 Workflows&lt;/h2&gt;
+
+&lt;p&gt;三个 Alfred2 Workflows 让 Jekyll 用起来更方便：Create a Jekyll Post, Generate Jekyll site, 以及 Push Jekyll post to Github，下载地址：&lt;a href=&quot;https://github.com/P233/Jekyll-Alfred-Extensions&quot;&gt;https://github.com/P233/Jekyll-Alfred-Extensions&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
