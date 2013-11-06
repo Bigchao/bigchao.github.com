@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Tue, 05 Nov 2013 23:14:42 -0800</pubDate>
-    <lastBuildDate>Tue, 05 Nov 2013 23:14:42 -0800</lastBuildDate>
+    <pubDate>Tue, 05 Nov 2013 23:33:31 -0800</pubDate>
+    <lastBuildDate>Tue, 05 Nov 2013 23:33:31 -0800</lastBuildDate>
 
     
     <item>
@@ -236,19 +236,12 @@ Year   Anomaly10y Unc10y
     </item>
     
     <item>
-      <title>Wilkinson Dot Plot</title>
+      <title>ggplot2 - Wilkinson Dot Plot</title>
       <link>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</link>
       <pubDate>27 Apr 2013</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</guid>
-      <description>&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-categories: DataVis&lt;/p&gt;
-
-&lt;h2&gt;title: ggplot2 - Wilkinson Dot Plot&lt;/h2&gt;
-
-&lt;p&gt;有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。&lt;/p&gt;
+      <description>&lt;p&gt;有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;geom_dotplot()&lt;/li&gt;

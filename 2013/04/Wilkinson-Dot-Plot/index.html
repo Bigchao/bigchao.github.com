@@ -1,11 +1,92 @@
-<hr />
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="ggplot2 - Wilkinson Dot Plot | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>ggplot2 - Wilkinson Dot Plot</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+	</head>
+	<body>
+		<nav id="nav">
+			<img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100">
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><sapn>机器学习</sapn></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>D3</span></li>
+				<li id="label6" class="label"><span>其他</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
 
-<p>layout: post
-categories: DataVis</p>
+		</nav>
 
-<h2>title: ggplot2 - Wilkinson Dot Plot</h2>
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">D3</h2>
+				<h2 id="title6" class="title">其他</h2>
+			</div>
 
-<p>有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。</p>
+			<div id="post_list">
+			
+				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/Wilkinson-Dot-Plot"><span class="circle_icon"></span>ggplot2 - Wilkinson Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/heat-map"><span class="circle_icon"></span>ggplot2 - Heat Map<span class="date">Apr 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/04/cleveland-Dotplot"><span class="circle_icon"></span>gggplot2 - Cleveland Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/ggplot2-line-graph"><span class="circle_icon"></span>ggplot2 - Line Graph<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/03/plyr-dataming"><span class="circle_icon"></span>Plyr- 数据整合力器<span class="date">Mar 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>用Reshape 2拓展包自定义统计变量和Colsplit<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>Reshape2 Package<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">ggplot2 - Wilkinson Dot Plot</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。</p>
 
 <ul>
 <li>geom_dotplot()</li>
@@ -50,3 +131,26 @@ categories: DataVis</p>
 
 
 <p><img src="http://i.imgur.com/QgEY7D0.png" alt="" /></p>
+
+
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/Wilkinson-Dot-Plot&title=ggplot2 - Wilkinson Dot Plot"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/Wilkinson-Dot-Plot&text=ggplot2 - Wilkinson Dot Plot"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+			
+			</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+	</body>
+</html>
