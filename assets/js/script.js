@@ -112,7 +112,7 @@ function contentEffects() {
 	var ds_loaded = false,
 			top = $("#disqus_thread").offset().top;
 			identifier = $('#identifier').text();
-	window.disqus_shortname = 'p233';
+	window.disqus_shortname = 'Bigchao';
 	window.disqus_identifier = identifier;
 
 	function check(){

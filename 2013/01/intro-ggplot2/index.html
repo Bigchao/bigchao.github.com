@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="技术改变世界，阅读塑造人生 | 技术改变世界">
+		<meta name="description" content="ggplot2 - 作图哲学 | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>技术改变世界，阅读塑造人生</title>
+		<title>ggplot2 - 作图哲学</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -60,28 +60,58 @@
 		<div id="container">
 			<div id="pjax">
 				<article id="post">
-  <header id="header">
-    <h1>技术改变世界，阅读塑造人生</h1>
-    <button id="fullscreen" class="header_icon"></button>
-    <button id="fontsize" class="header_icon"></button>
-  </header>
-  <div id="content">
-    <p>这里是杨超的个人网页。毕业于香港城市大学应用经济专业，现在我在城市大学做助理研究员，主要负责一些科学运算以及可视化的工作。我的兴趣广泛，从纯理论模型推倒到数据分析假设检验，再到数据挖掘机器学习可视化。研究生学习阶段特别喜欢SAS和Excel，工作用主要用Matlab，后来爱上了R和Python，D3，对于编程半路出家的我走了不少弯路才慢慢找到点感觉，这其中也得到了不少热心朋友的帮助。所以希望可以总结自己所学，和大家分享使得后来人少走弯路。这个博客中将主要覆盖机器学习、科学运算在Python和R中的实现，用R和D3.js数据可视化，还有一些其他数据库，Python，R等等的经验分享。希望可以和大家共同成长提高。</p>
+	<header id="header">
+		<h1 id="identifier">ggplot2 - 作图哲学</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>在真正开始GGPLOT2的旅程之前，从亲身感受我觉得有必要跟大家分享下，其实真正的数据可视化也好，机器学习，数据挖掘也好，一半的功夫都在做数据清理，和预处理。而这方面在本系列中涉及不多，但有的关于其他拓展包的语法如，Reshape，Pylr包等等，我会在注释中写清楚。
+这方面我比较喜欢用SQL，Python，和R （按喜爱顺序排列），个人不同爱好啦。</p>
 
-    <p>对世界永远好奇，喜欢结交更多朋友，用心探索未知。希望能与大家多多交流，Email: <a href="mailto:48437649&#64;&#113;&#113;&#46;&#99;&#111;&#109;?Subject=Hi%20阿超你好！">48437649&#64;&#113;&#113;&#46;&#99;&#111;&#109;</a>>。</p>
+<p>如果你现在一头雾水，没什么任何R基础，请看这个懒人速速起步，对于大多数人来说是够用了。</p>
 
-    <div id="copyright">
-      <a id="cc_link" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">
-        <span id="cc"></span>
-        <span id="cc_by"></span>
-        <span id="cc_nc"></span>
-        <span id="cc_sa"></span>
-      </a>
-      <p>Hosted on <a href="http://pages.github.com/" target="_blank">Github Pages</a></p>
-      <p>Powered by <a href="https://github.com/mojombo/jekyll" target="_blank">Jekyll</a> / <a href="http://peters-playground.com/" target="_blank">Peter's Playgournd</a> </p>
-    </div>
-  </div>
+<p>本章主要介绍有关条形图在GGPLOT2中的实现，代码来自
+<a href="http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956">R Graphics Cookbook</a> 第三章</p>
+
+<p>ggplot2基本要素</p>
+
+<ul>
+<li>数据（Data）和映射（Mapping）</li>
+<li>几何对象（Geometric）</li>
+<li>标尺（Scale）</li>
+<li>统计变换（Statistics）</li>
+<li>坐标系统（Coordinante）</li>
+<li>图层（Layer）</li>
+<li>分面（Facet）</li>
+<li>主题（Theme）</li>
+</ul>
+
+
+<p>我的理解是一张图，我们把数据映射到图层上
+比如散点图我们除了x，y轴表示了不同的变量之后，还可以用颜色表示第三个变量，用点的大小表示第四个变量，当然也可以设置散点的形状，这就是第五个变量了。</p>
+
+<p>这几个要素中，可以任意变换任意参数。</p>
+
+<p>更加详细的如果有兴趣可以看<a href="http://ygc.name/stats/ggplot2.html">这里</a></p>
+
+<p>需要安装部分拓展包除了ggplot2，还包括gcookbook（数据集），plyr，reshape等等。</p>
+
+<p>接下来的教程中，我会选取非常有代表性的图形来给大家做详细讲解，但是最重要的思想大家这里要体会下。</p>
+
+
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/01/intro-ggplot2&title=ggplot2 - 作图哲学"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/01/intro-ggplot2&text=ggplot2 - 作图哲学"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+			
+			</div>
+	</div>
 </article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
 			</div>
 		</div>
 

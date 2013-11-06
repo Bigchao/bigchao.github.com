@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="使用 Jekyll 在 Github 上写博客 | 技术改变世界">
+		<meta name="description" content="Welcome to ggplot2! | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>使用 Jekyll 在 Github 上写博客</title>
+		<title>Welcome to ggplot2!</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -61,35 +61,62 @@
 			<div id="pjax">
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">使用 Jekyll 在 Github 上写博客</h1>
+		<h1 id="identifier">Welcome to ggplot2!</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>纪念刚刚过去的 2012 年，展望 2013，开始用时下流行的 Jekyll 在 Github 上写博客，积累经验，深度思考，期望在新的一年取得更好的成绩。</p>
+		<p><strong>GGplot2</strong> 基于R的一个数据可视化包，可以做出非常绚丽的图片，由于对ggplot的痴迷，所以前一阵把 <a href="http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956/ref=sr_1_2?ie=UTF8&amp;qid=1379479004&amp;sr=8-2&amp;keywords=r+graphics">R Graphics Cookbook</a> 和网上相关的教程通读了一遍，现在把学习成果分享给大家。也算是一个小小的教程吧。所有代码非商用。</p>
 
-<p>网络上关于 Jekyll 的文章已经非常详细了，在这里附上一点使用心得，从业余的角度看 Jekyll，也许能方便刚刚开始接触 Jekyll 的同学。</p>
+<h3>专为 Data Visualization 打造</h3>
 
-<ol>
-<li>门槛：需要理解 Github 的工作方式，熟悉 Github 客户端，熟悉 Html 与 CSS；</li>
-<li>不妨一边开始写静态模板，一边了解 Jekyll 布局所用到的 <a href="https://github.com/mojombo/jekyll/wiki/Liquid-Extensions">Liquid Tag</a>，磨刀不误砍柴工；</li>
-<li>Jekyll 博客，可以看作是一套文件结构，通过 Jekyll 程序编译成静态网站。如果不熟悉命令，完全可以不安装 Jekyll，只需按照<a href="https://github.com/mojombo/jekyll/wiki/usage">要求的格式</a>创建文件后再上传到 Github，然后访问主页就可以了，因为 Github Pages 便是由 Jekyll 驱动的，或者直接使用 <a href="http://jekyllbootstrap.com">Jekyll-Bootstrap</a> 的结构；</li>
-<li>Jekyll 的文件结构大概可以这样分：配置文件 <code>_config.yml</code>，布局文件 <code>_layouts</code>，模块文件 <code>_includes</code>，插件 <code>_plugin</code>，文章 <code>_posts</code>，其他文件（不以<em>下划线</em>开头的文件及文件夹都会完整的拷贝到生成的静态网站中，比如 CSS 文件、图片等），以及将会生成的静态站 <code>_site</code>；</li>
-<li>Jekyll 命令很简单，先使用 <code>cd</code> 命令进入目标文件夹，然后输入 <code>jekyll --server</code> 生成网站，浏览器中输入 <code>0.0.0.0:4000</code> 访问生成的静态网站，<code>jekyll --server --auto</code> 命令将开启实时更新，修改文件后在浏览器中刷新就可看到效果，对本地调试很有帮助；</li>
-<li>Github Pages 禁用所有插件，需要使用自定义插件，只能上传生成的网站文件 <code>_site</code>，或者试试 <a href="http://edhedges.com/blog/2012/07/30/jekyll-with-plugins-hosted-on-github-pages/">这个办法</a> ;</li>
-<li>想写草稿不想被编译？创建一个以下划线开头文件夹就会被忽略，例如在 <code>_posts</code> 下创建 <code>_drafts</code> 存储草稿；</li>
-<li>默认的 Markdown 引擎问题很多，建议替换成 <a href="https://github.com/mojombo/jekyll/wiki/Install#rdiscount">RDiscount</a>。</li>
-</ol>
+<p>数据可视化的工具有很多，从最基本的C，Java，Python，到R的基本包，Processing，Javascript都可以可视化。
+还有一些GUI像Excel，Tableau，Gephi也都特别强大。
+当然还包括在更加专业的想Adobe旗下的若干产品，像Photoshop，illustrator等等。</p>
+
+<p>在其中我个人觉得GGPLOT2的强大之处有两点</p>
+
+<ul>
+<li>因为R的越来越强大，所以基于R的GGPlot2在使用的时候更加方便。从数据清理，到分析，再到展现可谓一气呵成</li>
+<li>GGplot2的语法简洁，可操作性高，出图的质量也好</li>
+</ul>
 
 
-<h2>Jekyll Alfred 2 Workflows</h2>
+<p>除了一些基本的像条形图，柱形图，散点图等基本的可视化图形
+下面欣赏下用GGPLOT2可视化的图。都会在本教程中详细教大家如何实现的。</p>
 
-<p>三个 Alfred2 Workflows 让 Jekyll 用起来更方便：Create a Jekyll Post, Generate Jekyll site, 以及 Push Jekyll post to Github，下载地址：<a href="https://github.com/P233/Jekyll-Alfred-Extensions">https://github.com/P233/Jekyll-Alfred-Extensions</a></p>
+<p><img src="http://i.imgur.com/EqAfePR.png" alt="" /></p>
+
+<p><img src="http://i.imgur.com/LAMbWk2.png" alt="" /></p>
+
+<p><img src="http://i.imgur.com/OfeeRMr.png" alt="" /></p>
+
+<p><img src="http://i.imgur.com/sZ9mv4H.png" alt="" /></p>
+
+<p>其中有一副微博很火的一幅图，我们GGPLOT2同样可以做出类似的</p>
+
+<p><img src="http://i.imgur.com/mCdFCY7.jpg" alt="" /></p>
+
+<p>这幅图的原址在 <a href="http://www.slate.com/blogs/the_vault/2013/08/12/the_1931_histomap_the_entire_history_of_the_world_distilled_into_a_single.html">这里</a>
+<img src="http://i.imgur.com/SQQD3wg.png" alt="" /></p>
+
+<p>是不是很炫？
+接下来的教程里我将和大家一点一点分享GGPLOT的语法，作图代码等等，我们一起加油吧！</p>
+
+<p>推荐阅读</p>
+
+<ul>
+<li><a href="http://ggplot2.org/">ggplot2官方网站</a></li>
+<li><a href="http://www.cookbook-r.com/Graphs/">Cookbook-r</a></li>
+<li><a href="http://cos.name/wp-content/uploads/2012/05/3-xiaokai-ggplot2.pdf">肖凯老师的GGPLOT2快速教程</a></li>
+<li><a href="http://www.statmethods.net/advgraphs/ggplot2.html">Quick-R</a></li>
+</ul>
+
 
 
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/01/blogging-with-jekyll&title=使用 Jekyll 在 Github 上写博客"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/01/blogging-with-jekyll&text=使用 Jekyll 在 Github 上写博客"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/01/welcome-ggplot2&title=Welcome to ggplot2!"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/01/welcome-ggplot2&text=Welcome to ggplot2!"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 			
 			</div>

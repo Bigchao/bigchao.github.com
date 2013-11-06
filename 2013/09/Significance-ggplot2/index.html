@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="ggplot2-为拟合曲线加置信空间 | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>ggplot2-为拟合曲线加置信空间</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+	</head>
+	<body>
+		<nav id="nav">
+			<img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100">
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><sapn>机器学习</sapn></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>D3</span></li>
+				<li id="label6" class="label"><span>其他</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">D3</h2>
+				<h2 id="title6" class="title">其他</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+			
+				<a class="others cate1" href="/2013/01/blogging-with-jekyll"><span class="circle_icon"></span>使用 Jekyll 在 Github 上写博客<span class="date">Jan 2013</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">ggplot2-为拟合曲线加置信空间</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>如何在拟合曲线图中增加置信空间呢？</p>
+
+<p>答案很简单：</p>
+
+<ul>
+<li><strong>geom_ribbon()</strong></li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">     library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+     <span class="c1"># Grab a subset of the climate data</span>
+     clim <span class="o">&lt;-</span> subset<span class="p">(</span>climate<span class="p">,</span> Source <span class="o">==</span> <span class="s">&quot;Berkeley&quot;</span><span class="p">,</span> select<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="s">&quot;Anomaly10y&quot;</span><span class="p">,</span> <span class="s">&quot;Unc10y&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+
+<p>这时数据是泽个样子滴:
+其中Unc10y是置信空间，Anomaly10y是我们关注的变量</p>
+
+<pre>
+Year   Anomaly10y Unc10y
+ 1800     -0.435  0.505
+ 1801     -0.453  0.493
+ 1802     -0.460  0.486
+...
+ 2003      0.869  0.028
+ 2004      0.884  0.029
+</pre>
+
+
+<p>下面就可以作图啦~带上我们的geom_ribbon</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>clim<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">))</span> <span class="o">+</span>
+      geom_ribbon<span class="p">(</span>aes<span class="p">(</span>ymin<span class="o">=</span>Anomaly10y<span class="o">-</span>Unc10y<span class="p">,</span> ymax<span class="o">=</span>Anomaly10y<span class="o">+</span>Unc10y<span class="p">),</span> alpha<span class="o">=</span><span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
+      geom_line<span class="p">()</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/1g0JO13.png" alt="" /></p>
+
+<p>当然了，我们可以把置信空间设置为曲线
+代码如下：</p>
+
+<div class="highlight"><pre><code class="r">    <span class="c1"># With a dotted line for upper and lower bounds</span>
+    ggplot<span class="p">(</span>clim<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">))</span> <span class="o">+</span>
+      geom_line<span class="p">(</span>aes<span class="p">(</span>y<span class="o">=</span>Anomaly10y<span class="o">-</span>Unc10y<span class="p">),</span> colour<span class="o">=</span><span class="s">&quot;grey50&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+      geom_line<span class="p">(</span>aes<span class="p">(</span>y<span class="o">=</span>Anomaly10y<span class="o">+</span>Unc10y<span class="p">),</span> colour<span class="o">=</span><span class="s">&quot;grey50&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+      geom_line<span class="p">()</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/syubzvU.png" alt="" /></p>
+
+
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/09/Significance-ggplot2&title=ggplot2-为拟合曲线加置信空间"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/09/Significance-ggplot2&text=ggplot2-为拟合曲线加置信空间"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+			
+			</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+	</body>
+</html>
