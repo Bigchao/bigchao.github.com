@@ -6,9 +6,67 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Tue, 05 Nov 2013 22:54:50 -0800</pubDate>
-    <lastBuildDate>Tue, 05 Nov 2013 22:54:50 -0800</lastBuildDate>
+    <pubDate>Tue, 05 Nov 2013 23:14:42 -0800</pubDate>
+    <lastBuildDate>Tue, 05 Nov 2013 23:14:42 -0800</lastBuildDate>
 
+    
+    <item>
+      <title>ggplot2 - 二维数据密度图</title>
+      <link>http://yangchao.me/2013/11/ggplot2-2d-density</link>
+      <pubDate>05 Nov 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/11/ggplot2-2d-density</guid>
+      <description>&lt;p&gt;地理课上，我们经常会看到等高线。在ggplot2中，也有实现一个和等高线差不多的利器&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;stat_density2d()&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;看个例子先&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# The base plot&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eruptions&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/nE3VPUs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们可以在原始图中添加类似登高线的表示，用以标记密集程度。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Contour lines, with &amp;quot;height&amp;quot; mapped to color&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..level..&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/nghFH1z.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Map density estimate to fill color&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/bnGh3DC.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# With points, and map density estimate to alpha&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tile&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/j1b0kxp.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;同一维的密度曲线一样，stat_density2d也可以调整binwidth用h()函数即可
+体会下下面的这个例子&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; h&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/aDAgAtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>ggplot2-为拟合曲线加置信空间</title>
@@ -71,126 +129,859 @@ Year   Anomaly10y Unc10y
     </item>
     
     <item>
-      <title>ggplot2 - 作图哲学</title>
-      <link>http://yangchao.me/2013/01/intro-ggplot2</link>
-      <pubDate>04 Jan 2013</pubDate>
+      <title>ggplot2 - Stacked Area Graph</title>
+      <link>http://yangchao.me/2013/05/stack-area-ggplot2</link>
+      <pubDate>31 May 2013</pubDate>
       <author>Peter</author>
-      <guid>http://yangchao.me/2013/01/intro-ggplot2</guid>
-      <description>&lt;p&gt;在真正开始GGPLOT2的旅程之前，从亲身感受我觉得有必要跟大家分享下，其实真正的数据可视化也好，机器学习，数据挖掘也好，一半的功夫都在做数据清理，和预处理。而这方面在本系列中涉及不多，但有的关于其他拓展包的语法如，Reshape，Pylr包等等，我会在注释中写清楚。
-这方面我比较喜欢用SQL，Python，和R （按喜爱顺序排列），个人不同爱好啦。&lt;/p&gt;
-
-&lt;p&gt;如果你现在一头雾水，没什么任何R基础，请看这个懒人速速起步，对于大多数人来说是够用了。&lt;/p&gt;
-
-&lt;p&gt;本章主要介绍有关条形图在GGPLOT2中的实现，代码来自
-&lt;a href=&quot;http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956&quot;&gt;R Graphics Cookbook&lt;/a&gt; 第三章&lt;/p&gt;
-
-&lt;p&gt;ggplot2基本要素&lt;/p&gt;
+      <guid>http://yangchao.me/2013/05/stack-area-ggplot2</guid>
+      <description>&lt;p&gt;这一节重点介绍ggplot2中，关于堆积图的制作方法。
+提纲挈领记住最重要的！&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;数据（Data）和映射（Mapping）&lt;/li&gt;
-&lt;li&gt;几何对象（Geometric）&lt;/li&gt;
-&lt;li&gt;标尺（Scale）&lt;/li&gt;
-&lt;li&gt;统计变换（Statistics）&lt;/li&gt;
-&lt;li&gt;坐标系统（Coordinante）&lt;/li&gt;
-&lt;li&gt;图层（Layer）&lt;/li&gt;
-&lt;li&gt;分面（Facet）&lt;/li&gt;
-&lt;li&gt;主题（Theme）&lt;/li&gt;
+&lt;li&gt;Geom_area()&lt;/li&gt;
 &lt;/ul&gt;
 
 
-&lt;p&gt;我的理解是一张图，我们把数据映射到图层上
-比如散点图我们除了x，y轴表示了不同的变量之后，还可以用颜色表示第三个变量，用点的大小表示第四个变量，当然也可以设置散点的形状，这就是第五个变量了。&lt;/p&gt;
+&lt;p&gt;接下来的步骤大家可以想到了吧。
+在拎清这个主题之后，我们就会慢慢来对图形进行微调即可&lt;/p&gt;
 
-&lt;p&gt;这几个要素中，可以任意变换任意参数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Base Plot&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;更加详细的如果有兴趣可以看&lt;a href=&quot;http://ygc.name/stats/ggplot2.html&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;需要安装部分拓展包除了ggplot2，还包括gcookbook（数据集），plyr，reshape等等。&lt;/p&gt;
-
-&lt;p&gt;接下来的教程中，我会选取非常有代表性的图形来给大家做详细讲解，但是最重要的思想大家这里要体会下。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Welcome to ggplot2!</title>
-      <link>http://yangchao.me/2013/01/welcome-ggplot2</link>
-      <pubDate>02 Jan 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/01/welcome-ggplot2</guid>
-      <description>&lt;p&gt;&lt;strong&gt;GGplot2&lt;/strong&gt; 基于R的一个数据可视化包，可以做出非常绚丽的图片，由于对ggplot的痴迷，所以前一阵把 &lt;a href=&quot;http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956/ref=sr_1_2?ie=UTF8&amp;amp;qid=1379479004&amp;amp;sr=8-2&amp;amp;keywords=r+graphics&quot;&gt;R Graphics Cookbook&lt;/a&gt; 和网上相关的教程通读了一遍，现在把学习成果分享给大家。也算是一个小小的教程吧。所有代码非商用。&lt;/p&gt;
-
-&lt;h3&gt;专为 Data Visualization 打造&lt;/h3&gt;
-
-&lt;p&gt;数据可视化的工具有很多，从最基本的C，Java，Python，到R的基本包，Processing，Javascript都可以可视化。
-还有一些GUI像Excel，Tableau，Gephi也都特别强大。
-当然还包括在更加专业的想Adobe旗下的若干产品，像Photoshop，illustrator等等。&lt;/p&gt;
-
-&lt;p&gt;在其中我个人觉得GGPLOT2的强大之处有两点&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;因为R的越来越强大，所以基于R的GGPlot2在使用的时候更加方便。从数据清理，到分析，再到展现可谓一气呵成&lt;/li&gt;
-&lt;li&gt;GGplot2的语法简洁，可操作性高，出图的质量也好&lt;/li&gt;
-&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_area&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;除了一些基本的像条形图，柱形图，散点图等基本的可视化图形
-下面欣赏下用GGPLOT2可视化的图。都会在本教程中详细教大家如何实现的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/ZAghMVD.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/EqAfePR.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/LAMbWk2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/OfeeRMr.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/sZ9mv4H.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;其中有一副微博很火的一幅图，我们GGPLOT2同样可以做出类似的&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/mCdFCY7.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这幅图的原址在 &lt;a href=&quot;http://www.slate.com/blogs/the_vault/2013/08/12/the_1931_histomap_the_entire_history_of_the_world_distilled_into_a_single.html&quot;&gt;这里&lt;/a&gt;
-&lt;img src=&quot;http://i.imgur.com/SQQD3wg.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;是不是很炫？
-接下来的教程里我将和大家一点一点分享GGPLOT的语法，作图代码等等，我们一起加油吧！&lt;/p&gt;
-
-&lt;p&gt;推荐阅读&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://ggplot2.org/&quot;&gt;ggplot2官方网站&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cookbook-r.com/Graphs/&quot;&gt;Cookbook-r&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://cos.name/wp-content/uploads/2012/05/3-xiaokai-ggplot2.pdf&quot;&gt;肖凯老师的GGPLOT2快速教程&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.statmethods.net/advgraphs/ggplot2.html&quot;&gt;Quick-R&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>使用 Jekyll 在 Github 上写博客</title>
-      <link>http://yangchao.me/2013/01/blogging-with-jekyll</link>
-      <pubDate>02 Jan 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/01/blogging-with-jekyll</guid>
-      <description>&lt;p&gt;纪念刚刚过去的 2012 年，展望 2013，开始用时下流行的 Jekyll 在 Github 上写博客，积累经验，深度思考，期望在新的一年取得更好的成绩。&lt;/p&gt;
-
-&lt;p&gt;网络上关于 Jekyll 的文章已经非常详细了，在这里附上一点使用心得，从业余的角度看 Jekyll，也许能方便刚刚开始接触 Jekyll 的同学。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;
+我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;门槛：需要理解 Github 的工作方式，熟悉 Github 客户端，熟悉 Html 与 CSS；&lt;/li&gt;
-&lt;li&gt;不妨一边开始写静态模板，一边了解 Jekyll 布局所用到的 &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/Liquid-Extensions&quot;&gt;Liquid Tag&lt;/a&gt;，磨刀不误砍柴工；&lt;/li&gt;
-&lt;li&gt;Jekyll 博客，可以看作是一套文件结构，通过 Jekyll 程序编译成静态网站。如果不熟悉命令，完全可以不安装 Jekyll，只需按照&lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/usage&quot;&gt;要求的格式&lt;/a&gt;创建文件后再上传到 Github，然后访问主页就可以了，因为 Github Pages 便是由 Jekyll 驱动的，或者直接使用 &lt;a href=&quot;http://jekyllbootstrap.com&quot;&gt;Jekyll-Bootstrap&lt;/a&gt; 的结构；&lt;/li&gt;
-&lt;li&gt;Jekyll 的文件结构大概可以这样分：配置文件 &lt;code&gt;_config.yml&lt;/code&gt;，布局文件 &lt;code&gt;_layouts&lt;/code&gt;，模块文件 &lt;code&gt;_includes&lt;/code&gt;，插件 &lt;code&gt;_plugin&lt;/code&gt;，文章 &lt;code&gt;_posts&lt;/code&gt;，其他文件（不以&lt;em&gt;下划线&lt;/em&gt;开头的文件及文件夹都会完整的拷贝到生成的静态网站中，比如 CSS 文件、图片等），以及将会生成的静态站 &lt;code&gt;_site&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;Jekyll 命令很简单，先使用 &lt;code&gt;cd&lt;/code&gt; 命令进入目标文件夹，然后输入 &lt;code&gt;jekyll --server&lt;/code&gt; 生成网站，浏览器中输入 &lt;code&gt;0.0.0.0:4000&lt;/code&gt; 访问生成的静态网站，&lt;code&gt;jekyll --server --auto&lt;/code&gt; 命令将开启实时更新，修改文件后在浏览器中刷新就可看到效果，对本地调试很有帮助；&lt;/li&gt;
-&lt;li&gt;Github Pages 禁用所有插件，需要使用自定义插件，只能上传生成的网站文件 &lt;code&gt;_site&lt;/code&gt;，或者试试 &lt;a href=&quot;http://edhedges.com/blog/2012/07/30/jekyll-with-plugins-hosted-on-github-pages/&quot;&gt;这个办法&lt;/a&gt; ;&lt;/li&gt;
-&lt;li&gt;想写草稿不想被编译？创建一个以下划线开头文件夹就会被忽略，例如在 &lt;code&gt;_posts&lt;/code&gt; 下创建 &lt;code&gt;_drafts&lt;/code&gt; 存储草稿；&lt;/li&gt;
-&lt;li&gt;默认的 Markdown 引擎问题很多，建议替换成 &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/Install#rdiscount&quot;&gt;RDiscount&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;改图例：通过改变Scale中的breaks值&lt;/li&gt;
 &lt;/ol&gt;
 
 
-&lt;h2&gt;Jekyll Alfred 2 Workflows&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;levels&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#rev 表示将图例倒转&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;三个 Alfred2 Workflows 让 Jekyll 用起来更方便：Create a Jekyll Post, Generate Jekyll site, 以及 Push Jekyll post to Github，下载地址：&lt;a href=&quot;https://github.com/P233/Jekyll-Alfred-Extensions&quot;&gt;https://github.com/P233/Jekyll-Alfred-Extensions&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/G1umci8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;改数据：引用Plyr中desc函数&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the desc() function&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; order&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;desc&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/xS9aP30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt;
+我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Geom_area 中的颜色设为NA&lt;/li&gt;
+&lt;li&gt;使用 Geom_line&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; order&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;desc&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stack&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/JUEp6T8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;
+如果想制作成比例的堆积图，应该怎么办？&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;只需要在Plyr拓展包稍微改变下数据即可，和成比例柱形图的道理完全一样&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# For the ddply() function&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Convert Thousands to Percent&lt;/span&gt;
+    uspopage_prop &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Year&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;transform&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Percent &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;sum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 在uspopage数据中，把Year中对应的Thousands值除以同一个Year中所有Thousands的总和。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下面的做法就和之间的完全一样了&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage_prop&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Percent&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;levels&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/dSxIwAu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Wilkinson Dot Plot</title>
+      <link>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</link>
+      <pubDate>27 Apr 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</guid>
+      <description>&lt;hr /&gt;
+
+&lt;p&gt;layout: post
+categories: DataVis&lt;/p&gt;
+
+&lt;h2&gt;title: ggplot2 - Wilkinson Dot Plot&lt;/h2&gt;
+
+&lt;p&gt;有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;geom_dotplot()&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;首先看一个例子&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+    countries2009 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; subset&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;countries&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Year&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2009&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; healthexp&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;countries2009&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;infmortality&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/X8gxtci.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们发现其实图并不是很好看
+- Y轴没有意义 用scale_y_continuous来调整
+- bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_rug&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+        scale_y_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Remove tick markers&lt;/span&gt;
+        theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;axis.title.y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Remove axis label&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;&lt;img src=&quot;http://i.imgur.com/Tw1MtH7.png&quot; alt=&quot;&quot; /&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题&lt;/strong&gt;：不同变量出现在一个图上&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;设置binaxis&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+        ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;heightweight&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;heightIn&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+        geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binaxis&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; stackdir&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;center&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/QgEY7D0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ggplot2 - Heat Map</title>
+      <link>http://yangchao.me/2013/04/heat-map</link>
+      <pubDate>26 Apr 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/04/heat-map</guid>
+      <description>&lt;p&gt;在最开始的GGPLOT介绍中，我就拿出了一副热力图
+&lt;img src=&quot;http://i.imgur.com/CEi7DEx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个
+- geom_tile()
+- geom_raster()&lt;/p&gt;
+
+&lt;p&gt;做好热力学图并不是那么简单，需要很多微调，不过有一个固定的套路我们来一点一点实现&lt;/p&gt;
+
+&lt;p&gt;有关geom_tile和geom_raster其实差不多
+相对来说geom_raster更有效率，而且在输出中，两个没有特别的分别。只是在输出成PDF时，可能会有小小不同。&lt;/p&gt;
+
+&lt;p&gt;首先是R graphics Cookbook中p281页的例子&lt;/p&gt;
+
+&lt;p&gt;在完成热力图之前，要把格式改为可以读出的格式。
+原数据是这个样子的&lt;/p&gt;
+
+&lt;pre&gt;
+     Qtr1 Qtr2 Qtr3 Qtr4
+1945   NA   87   82   75
+1946   63   50   43   32
+1947   35   60   54   55
+1948   36   39   NA   NA
+1949   69   57   57   51
+1950   45   37   46   39
+1951   36   24   32   23
+.
+.
+.
+&lt;/pre&gt;
+
+
+&lt;p&gt;但是我们想要的格式是这样的&lt;/p&gt;
+
+&lt;pre&gt;
+    rating  year    quarter
+1   NA      1945    1
+2   87      1945    2
+3   82      1945    3
+4   75      1945    4
+5   63      1946    1
+6   50      1946    2
+ &lt;/pre&gt;
+
+
+&lt;p&gt;这里用到了一个比较投机的方法&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    pres_rating &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.frame&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    rating  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; as.numeric&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;presidents&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    year    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; as.numeric&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;floor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;time&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;presidents&lt;span class=&quot;p&quot;&gt;))),&lt;/span&gt;
+    quarter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; as.numeric&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cycle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;presidents&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在数据整合上，有R内置的reshape函数，但是我不太推荐，因为语法比较复杂
+推荐：reshape拓展包和pylr拓展包，我写了两个快速教程讲解这两个包，推荐大家看下。&lt;/p&gt;
+
+&lt;p&gt;接着用GGPlot2来做热力学图&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Base plot&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;pres_rating&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;quarter&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rating&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Using geom_tile()&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_tile&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Using geom_raster() - looks the same, but a little more efficient&lt;/span&gt;
+    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_raster&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/KfWUIzx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看出，真正作图的代码只有一行&lt;/p&gt;
+
+&lt;p&gt;我们对此热力学图进行微调&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;scale_y_reverse:倒转Y轴&lt;/li&gt;
+&lt;li&gt;scale_x_continuous:修改X轴标记&lt;/li&gt;
+&lt;li&gt;scale_fill_gradient2:增加中间点的色阶&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;代码如下&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_tile&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    scale_x_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1940&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1976&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    scale_y_reverse&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    scale_fill_gradient2&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;midpoint&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey70&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; limits&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/UYiPmd0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>gggplot2 - Cleveland Dot Plot</title>
+      <link>http://yangchao.me/2013/04/cleveland-Dotplot</link>
+      <pubDate>25 Apr 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/04/cleveland-Dotplot</guid>
+      <description>&lt;p&gt;在&lt;a href=&quot;http://www.amazon.com/Elements-Graphing-Data-William-Cleveland/dp/0963488414&quot;&gt;The Elements of Graphing Data&lt;/a&gt;中，作者Cleveland提出了一种新的数据表现形式，以后就命名为Cleveland Dot Plot。（实在没有找到对应的中文名是什么）&lt;/p&gt;
+
+&lt;p&gt;用GGPLOT2可以非常容易的实现&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;用 &lt;strong&gt;geom_point&lt;/strong&gt;即可&lt;/li&gt;
+&lt;li&gt;其他的进行小小的微调&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Basic Plot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+    tophit &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; tophitters2001&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;# Take the top 25 from the tophitters data set&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+    geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/hVabevA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从图中看出，数据的排列顺序是按照名称的字母排列来的。效果就是造成的图不直观，比较乱&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;用reorder函数进行重新排序&lt;/li&gt;
+&lt;li&gt;对图形背景进行微调&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;reorder&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# Use a larger dot&lt;/span&gt;
+    theme_bw&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.grid.major.x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+          panel.grid.minor.x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+          panel.grid.major.y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey60&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# 以上两行是将x轴的坐标轴主刻度线和副刻度线都去掉,同时y轴的刻度线改为间断线型，同时颜色改为灰色&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/mUmcaIv.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当然也可以调换x，y轴的顺序&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;reorder&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; avg&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;                        &lt;span class=&quot;c1&quot;&gt;# Use a larger dot&lt;/span&gt;
+    theme_bw&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;axis.text.x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; element_text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;angle&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; hjust&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+          panel.grid.major.y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; element_blank&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+          panel.grid.minor.y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; element_blank&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+          panel.grid.major.x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; element_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey60&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/3z81WG7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果想要根据不同类别再次作图
+- 重新进行排序
+- 微调图型元素&lt;/p&gt;
+
+&lt;p&gt;因为reorder只能对一个变量排序，如果想按照两个排序则必须要手动来。书中给出的方法如下&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Get the names, sorted first by lg, then by avg&lt;/span&gt;
+    nameorder &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; tophit&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;order&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;lg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; tophit&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Turn name into a factor, with levels in the order of nameorder&lt;/span&gt;
+    tophit&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;name &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; levels&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nameorder&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;geom_segment:实现将直线只到圆点位置&lt;/li&gt;
+&lt;li&gt;把图例放在图中需要在theme中修改&lt;code&gt;legend.position()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;整个代码&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_segment&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yend&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; xend&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey50&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lg&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    scale_colour_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Set1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; limits&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;NL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;AL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme_bw&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.grid.major.y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; element_blank&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;   
+          &lt;span class=&quot;c1&quot;&gt;# No horizontal grid lines&lt;/span&gt;
+          legend.position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.55&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;             
+          &lt;span class=&quot;c1&quot;&gt;# Put legend inside plot area&lt;/span&gt;
+          legend.justification&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cKWISqQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;也可以用facet_grid来实现相关
+代码改动量不大&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tophit&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;avg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_segment&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yend&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;xend&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey50&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lg&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      scale_colour_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Set1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;limits&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;NL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;AL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;guide&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      theme_bw&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.grid.major.y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      facet_grid&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lg &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;scales&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;free_y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;space&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;free_y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 只是把scale_colour_brewer部分和后面改了一点&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/3u738ru.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;注意在facet_grid中的参数&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;scales：表示是否允许不同面（facet）的坐标轴变化，或者固定。 &lt;code&gt;scales=free_y&lt;/code&gt; 表示y轴随意变化。我们看到因为两个facet所含数据是不一样的，所以改成&lt;code&gt;free_y&lt;/code&gt;显得更加好看&lt;/li&gt;
+&lt;li&gt;space： 也是一个道理&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>ggplot2 - Line Graph</title>
+      <link>http://yangchao.me/2013/04/ggplot2-line-graph</link>
+      <pubDate>01 Apr 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/04/ggplot2-line-graph</guid>
+      <description>&lt;p&gt;上次讲过了GGPlot的条形图，大家对GGPLOT2的画图理念一定有了基本的理解。这次我们来学习折线图。&lt;/p&gt;
+
+&lt;p&gt;基本的语法可谓非常简单&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Base Plot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    ggplot &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/GTtCqKV.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们查看BOD的原数据&lt;/p&gt;
+
+&lt;pre&gt;
+Time demand
+    1    8.3
+    2   10.3
+    3   19.0
+    4   16.0
+    5   15.6
+    7   19.8&lt;/pre&gt;
+
+
+&lt;p&gt;这个时候用到Factor函数，将Time进行因子化&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    BOD1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; BOD &lt;span class=&quot;c1&quot;&gt;# Make a copy of the data&lt;/span&gt;
+    BOD1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Time &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; group&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;尤其要注意，因子化之后必须用到aes(group=1),才能正常画出图来。&lt;/li&gt;
+&lt;li&gt;若想改变坐标的上下限可以用到如下代码，放在之前代码的后面。具体的用法我们以后会专门讲&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;            ylim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            expand_limits&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;：如果现在我想在原来折线图上加散点怎么办？
+其实也很简单！&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/p25J3mB.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;同样，个人觉得，这个图做出来尚且没有Excel方便，也没有Excel好看。 LOL&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt; ：如果想用Log Y的坐标轴的话，其实也很简单，还稍微可以体现点GGPLOT2的价值了。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;worldpop&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Population&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; scale_y_log10&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/E0c7o7t.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;最后的一行代码用处就是把Y轴设为log10形式的，大家感受下&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;： 如果想一图多线怎么办？
+其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看&lt;/span&gt;
+    tg &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ToothGrowth&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;supp&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;dose&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; summarise&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; length&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;len&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 对ToothGrowth数据集中的supp，dose两个求len变量的平均&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在这个例子中，dose应该被因子化：0.5,1.0,1.5 只包含这三个剂量。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; group&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/VCyTzUO.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这里特别要注意！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这里特别要注意！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这里特别要注意！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在因子化之后，aes中一定要包含group=supp 这个语句。
+否则会出现如下报错：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;geom_path: Each group consists of only one
+observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我当时自己作图的时候，出现过这个问题找了好多资料都没有给出一个特别好的解答。还是要啃官方的manual，一个字一个字的读，这样才能理解透彻。&lt;/p&gt;
+
+&lt;p&gt;有关这个问题的最好解答：&lt;a href=&quot;http://kohske.wordpress.com/2010/12/27/faq-geom_line-doesnt-draw-lines/&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题4&lt;/strong&gt;： 改变线中散点的颜色&lt;/p&gt;
+
+&lt;p&gt;改变其中的这两个参数即可
+- shape
+- fill&lt;/p&gt;
+
+&lt;p&gt;体会如下语句&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;           
+    &lt;span class=&quot;c1&quot;&gt;# Make the points a little larger&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/JrojSxN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;# Also use a point with a color fill&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cAvavrJ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们发现上面的作图方法会出现点重合的情况
+所以要可以稍稍微调下&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;         
+    &lt;span class=&quot;c1&quot;&gt;# Dodge lines by 0.2&lt;/span&gt;
+    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;# Dodge points by 0.2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/BqSaXvs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题5&lt;/strong&gt;： 如果想改变折线和散点的颜色和类型怎么办？&lt;/p&gt;
+
+&lt;p&gt;修改下列括号中的参数即可&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;geom_line()&lt;/li&gt;
+&lt;li&gt;geom_point()&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+        geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wXPFtXP.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+        geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+        geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/KRXvejA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面给大家基本介绍了一下有关折线图的简单画法。一直在纠结的问题就是，这样的作图其实并不太方便。相比之下还是Excel来得快。
+但是，在R作图有个好处是可以自定义的东西很多，可以精雕细琢的很多，尤其通常在数据分析之后直接出图很是方便。写成代码可以重复使用。而Excel如果不用VBA，或者其他插件，相比R还是有不少差距的。建议大家还是学学ggplot。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Plyr- 数据整合力器</title>
+      <link>http://yangchao.me/2013/03/plyr-dataming</link>
+      <pubDate>10 Mar 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/03/plyr-dataming</guid>
+      <description>&lt;h2&gt;Plyr 拓展包快速入门&lt;/h2&gt;
+
+&lt;p&gt;大神Hadley Wickham写的Plyr拓展包，是所有拓展包里下载最多的。联合上Reshape2，和GGplot2，已经成为业界口碑最好的。&lt;/p&gt;
+
+&lt;p&gt;今天着重介绍DDPly()函数&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;transform(df, var1 = expr1, ...)&lt;/li&gt;
+&lt;li&gt;summarise(df, var1 = expr1, ...)&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;注意两者差别&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Transform modiﬁes an existing data frame.&lt;/li&gt;
+&lt;li&gt;Summarise creates a new data frame.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>ggplot2 - Histogram</title>
+      <link>http://yangchao.me/2013/02/ggplot2-histogram</link>
+      <pubDate>14 Feb 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/02/ggplot2-histogram</guid>
+      <description>&lt;p&gt;&lt;strong&gt;基本问题&lt;/strong&gt;：想做直方图
+- geom_histogram&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Basic Plot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wMSbdnr.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;geom_histogram可以对数据框和单一向量做处理，如果想快速看看一个变量的分布是什么样子的可以用下面的代码：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Store the values in a simple vector&lt;/span&gt;
+    w &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; faithful&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;waiting
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;w&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;即把数据框位置设为NULL即可。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;: 改变直方图中柱子的个数。
+默认中，默认的bin个数是30。
+- geom_histogram(binwidth)中修改&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Divide the x range into 15 bins&lt;/span&gt;
+    binsize &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; diff&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;range&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;binsize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wh9T1UM.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt;： 多变量的直方图&lt;/p&gt;
+
+&lt;p&gt;如果想观察多变量直方图&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;facet_grid()&lt;/li&gt;
+&lt;li&gt;map the grouping variable to fill&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;1.facet_grid&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;MASS&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Use smoke as the faceting variable&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bwt&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      facet_grid&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;smoke &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/DXoLuNH.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;注意这里有一个小问题，就是Y轴的坐标上限都是一样的。有时会出现如果不同类别的变量绝对值相差很大，图看起来就不够清爽。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;facet_grid(,scales=&quot;free&quot;)来修改&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bwt&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      facet_grid&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;race &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; scales&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;free&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/2pU3Wiv.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.map the grouping variable to fill&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;把变量放在aes（,fill=)中&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    birthwt1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;birthwt &lt;span class=&quot;c1&quot;&gt;# Make a copy of the data&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Convert smoke to a factor&lt;/span&gt;
+    birthwt1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;smoke &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;smoke&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Map smoke to fill, make the bars NOT stacked, and make them semitransparent&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bwt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smoke&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;identity&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wn5suUY.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;： 为直方图上加密度曲线&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;geom_density()&lt;/li&gt;
+&lt;li&gt;geom_line(stat=&quot;density&quot;)&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;首先看看geom_density()的用法&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_density&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/fp2Ng9T.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是发现在侧边和底部也有黑框包围，不好看。这时候就用到了geom_line()&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# The expand_limits() increases the y range to include the value 0&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      expand_limits&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/VG10TJ6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是援引原书中原句&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;A kernel density curve is an estimate of the population distribution, based on the sample data. The amount of smoothing depends on the kernel bandwidth: the larger the band‐width, the more smoothing there is. The bandwidth can be set with the adjust parameter, which has a default value of 1.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;感受如下代码&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adjust&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adjust&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/NMIwC4u.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们发现adjust的值越大，曲线就越平滑。
+回到最基本的延伸问题：如果想把曲线加到直方图上
+- geom_histogram() + geom_density
+就可以啦&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cornsilk&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey60&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_density&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      xlim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;35&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;105&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Q6wvUTN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>用Reshape 2拓展包自定义统计变量和Colsplit</title>
+      <link>http://yangchao.me/2013/02/reshape-advanced</link>
+      <pubDate>07 Feb 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/02/reshape-advanced</guid>
+      <description>&lt;p&gt;上次提到了Reshape包中的强大的cast函数。由于时间关系，对fun.aggreate，drop，subset等函数没有完全讲清。今天补上&lt;/p&gt;
+
+&lt;p&gt;先看下面的一个例子体会一下&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;reshape&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# example table with non-unique row-names&lt;/span&gt;
+    tab &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.frame&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gene&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;letters&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; each&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; s1&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;runif&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; s2&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;runif&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# melt&lt;/span&gt;
+    tab.melt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; melt&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tab&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# function to summarize with logic: &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# mean if max/min &amp;lt; 1.5, else median&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 在max/min 小于1.5的时候取均值，而其他情况去中位数&lt;/span&gt;
+    summarize &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;ifelse&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;min&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; median&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;))}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# ifelse函数的通用用法： ifelse（test, yes,no)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# cast with summarized values&lt;/span&gt;
+    dcast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tab.melt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; gene&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;variable&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里强大之处在于，在最后dcast的时候，我们自定义了一个统计函数，而没有用到原来比较简单的mean,max等等。&lt;/p&gt;
+
+&lt;p&gt;但是注意这样一个情况，在运行的时候会出现这样的报错&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; Error in vapply(indices, fun, .default) : 
+    values must be type &amp;#39;logical&amp;#39;,
+     but FUN(X[[1]]) result is type &amp;#39;double&amp;#39;
+    In addition: Warning messages:
+    1: In max(x) : no non-missing arguments to max; returning -Inf
+    2: In min(x) : no non-missing arguments to min; returning Inf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里讲到了fill的情况，原帖在&lt;a href=&quot;http://stackoverflow.com/questions/4835202/error-with-custom-aggregate-function-for-a-cast-call-in-r-reshape2/4835804#4835804?s=7400121f-cdc1-4f76-8bf3-1fc020e44d48&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;注意把代码改为&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    dcast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tab.melt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; gene&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;variable&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其实说的道理就是要提供给fill一个参数，原来default的参数是不行的，不一定fill=NaN，我试了下fill=o，fill=1，等等任意一个情况都是可行的。&lt;/p&gt;
+
+&lt;p&gt;这样可以体会到Reshape 自定义的强大了吧！&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;在Reshape2拓展包中，还有几个非常有用的函数&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;colsplit&lt;/strong&gt;：把变量分开到不同的列&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    x &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;a_1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;a_2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;b_2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;c_3&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    vars &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; colsplit&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;trt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;time&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行之后就出现了如下结果，是不是很炫？！&lt;/p&gt;
+
+&lt;pre&gt;
+    trt time
+1   a   1
+2   a   2
+3   b   2
+4   c   3
+&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Recast&lt;/strong&gt;： 在一步中实现melt和cast功能&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    recast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; formula&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id.var&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; measure.var&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;例子&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    recast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;french_fries&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; time &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; variable&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id.var &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
 </description>
     </item>
     

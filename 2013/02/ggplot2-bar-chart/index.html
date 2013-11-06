@@ -1,0 +1,321 @@
+<hr />
+
+<p>layout: post
+categories: DataVis</p>
+
+<h2>title: ggplot2 - Barchart</h2>
+
+<p>本章主要介绍有关条形图在GGPLOT2中的实现，代码来自
+<a href="http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956">R Graphics Cookbook</a> 第三章</p>
+
+<p><strong>Base Problem</strong>：Basic Bar Chart
+<strong>Solution</strong> ：ggplot() 和 geom_bar(stat="identity")</p>
+
+<p>以上是固定搭配,记住</p>
+
+<div class="highlight"><pre><code class="r">    library（ggplot2）
+    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+    ggplot<span class="p">(</span>pg_mean<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>group<span class="p">,</span> y<span class="o">=</span>weight<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+    <span class="c1"># aes 表示x轴和y轴对应的映射，Geom_bar表示显示为柱状图</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/VhPMUx7.png" alt="" /></p>
+
+<p>通常默认的barchart颜色是黑色，非常难看
+可以换成自定义颜色
+在fill中改，注意对比上下代码差别，同时可以修改自定义的柱状图外框颜色</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>pg_mean<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>group<span class="p">,</span> y<span class="o">=</span>weight<span class="p">))</span> <span class="o">+</span>
+    geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;lightblue&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/buxnSKT.png" alt="" /></p>
+
+<hr />
+
+<p><strong>延伸问题 1</strong> ：Grouping Bars Together
+<strong>Solution</strong> ： 在aes中，把第三个变量映射到fill中，同时把postion换成 <strong>dodge</strong></p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+    geom_bar<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/CxRfugY.png" alt="" /></p>
+
+<ul>
+<li>如果要修改外框颜色，在geom_bar() 中修改 colour='black'</li>
+<li>修改柱子的颜色可以用scale_fill_brewer() 或者scale_fill_manual().</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span> 
+      geom_bar<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span> 
+      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Pastel1&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/84MFCnj.png" alt="" /></p>
+
+<hr />
+
+<p><strong>延伸问题 2</strong> ： 在柱状图中使用不同颜色
+<strong>Solution</strong> ： 把适当的变量映射到Fill中</p>
+
+<p>首先数据源是这样的</p>
+
+<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+    upc <span class="o">&lt;-</span>subset<span class="p">(</span>uspopchange<span class="p">,</span>rank<span class="p">(</span>Change<span class="p">)</span><span class="o">&gt;</span><span class="m">40</span><span class="p">)</span>
+    upc
+</code></pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th>State </th>
+<th> Abb </th>
+<th> Region    </th>
+<th> Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arizona </td>
+<td> AZ </td>
+<td>  West </td>
+<td>  24.6</td>
+</tr>
+<tr>
+<td>Colorado </td>
+<td>  CO </td>
+<td>    West </td>
+<td>  16.9</td>
+</tr>
+<tr>
+<td>Florida </td>
+<td>FL </td>
+<td> South</td>
+<td>    17.6</td>
+</tr>
+<tr>
+<td>Georgia </td>
+<td>GA</td>
+<td>    South</td>
+<td>  18.3</td>
+</tr>
+<tr>
+<td>Idaho   </td>
+<td>ID</td>
+<td>    West</td>
+<td>   21.1</td>
+</tr>
+<tr>
+<td>Nevada  </td>
+<td>NV</td>
+<td>    West    </td>
+<td>35.1</td>
+</tr>
+<tr>
+<td>North Carolina</td>
+<td> NC</td>
+<td> South</td>
+<td>  18.5</td>
+</tr>
+<tr>
+<td>South Carolina</td>
+<td> SC</td>
+<td> South</td>
+<td>  15.3</td>
+</tr>
+<tr>
+<td>Texas</td>
+<td>  TX</td>
+<td> South</td>
+<td>  20.6</td>
+</tr>
+<tr>
+<td>Utah</td>
+<td>   UT</td>
+<td> West</td>
+<td>   23.8</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>在fill中加上region，就会映射过来</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Abb<span class="p">,</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
+    geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+
+ 
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/piTTpmj.png" alt="" /></p>
+
+<ul>
+<li>用reorder函数，把柱状图按照大小排列会显得更专业</li>
+<li>复习修改颜色的scale_fill_manual</li>
+<li>对x轴修改坐标轴注释</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>Abb<span class="p">,</span> Change<span class="p">),</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>  <span class="o">+</span>
+      scale_fill_manual<span class="p">(</span>values<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;#669933&quot;</span><span class="p">,</span> <span class="s">&quot;#FFCC66&quot;</span><span class="p">))</span> <span class="o">+</span> 
+      xlab<span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+
+ 
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/IFu6DAK.png" alt="" /></p>
+
+<hr />
+
+<p><strong>延伸问题 3</strong>：Coloring Negative and Postive Bars Differently
+<strong>Solution</strong>: 设定新的变量，将新建变量映射到fill中</p>
+
+<p>其实这个方法很常见，在以后讲坐标轴的时候还会再次提到，方法比较简单就是根据subset函数新建一个符合要求的函数，然后只要在GGPLOT的时候把新建函数映射即可，其他都一样</p>
+
+<div class="highlight"><pre><code class="r">    csub <span class="o">&lt;-</span> subset<span class="p">(</span>climate<span class="p">,</span> Source<span class="o">==</span><span class="s">&quot;Berkeley&quot;</span> <span class="o">&amp;</span> Year <span class="o">&gt;=</span> <span class="m">1900</span><span class="p">)</span>
+    csub<span class="o">$</span>pos <span class="o">&lt;-</span> csub<span class="o">$</span>Anomaly10y <span class="o">&gt;=</span> <span class="m">0</span>
+    ggplot<span class="p">(</span>csub<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">,</span> fill<span class="o">=</span>pos<span class="p">))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+
+ 
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/gS0niDp.png" alt="" /></p>
+
+<p>对这个图的小微调
+- 再次复习scale_fill_manual()进行修改颜色
+- 通过设定guide=FALSE 去掉图例
+- 改变柱子外框黑线的厚度，通过设定size</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>csub<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">,</span> fill<span class="o">=</span>pos<span class="p">))</span> <span class="o">+</span> 
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.25</span><span class="p">)</span> <span class="o">+</span>
+      scale_fill_manual<span class="p">(</span>values<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;#CCEEFF&quot;</span><span class="p">,</span> <span class="s">&quot;#FFDDDD&quot;</span><span class="p">),</span> guide<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+
+ 
+</code></pre></div>
+
+
+<h2><img src="http://i.imgur.com/gLFTMbs.png" alt="" /></h2>
+
+<p><strong>延伸问题 4</strong>： Adjusting Bar Width and Spacing
+<strong>Solution</strong>： 在geom_bar中调整width参数</p>
+
+<ul>
+<li>在geom_bar中调整width改变柱子宽度，也就是改变了柱子之间的距离</li>
+<li>如果用dodge方法做的图，可以用position_dodge（）参数来改，默认的参数设置是0.9，如果不写则为两个贴在一起</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+    geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">)</span>
+
+ 
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/FPaVWds.png" alt="" /></p>
+
+<p>以下设置了在geom_bar中设置了width，postion_dodge()</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.7</span><span class="p">))</span>
+
+ 
+</code></pre></div>
+
+
+<h2><img src="http://i.imgur.com/iqy952E.png" alt="" /></h2>
+
+<p><strong>延伸问题 5</strong> ：Making a Stacked Bar Graph
+<strong>Solution</strong> ： 用geom_bar，同时映射到fill中</p>
+
+<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+
+ 
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/opTysNC.png" alt="" /></p>
+
+<p>注意上段代码和<strong>延伸问题1</strong>的唯一不同之处之处就在于在geom_bar
+()中
+- 堆积图：stat="indentity"
+- 聚集图：position="dodge"</p>
+
+<p>我们看到图和图例中的是反的，要修正这个问题，用如下代码</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+      guides<span class="p">(</span>fill<span class="o">=</span>guide_legend<span class="p">(</span>reverse<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+
+ 
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/52ChlFe.png" alt="" /></p>
+
+<p>当然，我们也可以改变图中堆积的颜色。这需要用到pylr拓展包，这个拓展包可谓非常强大，在R下载量最多的拓展包中排名保持第一名。</p>
+
+<p>具体做法
+- 用order指令
+- desc函数</p>
+
+<div class="highlight"><pre><code class="r">    
+
+    library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># Needed for desc()</span>
+    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>Cultivar<span class="p">)))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/9k0Y2le.png" alt="" /></p>
+
+<hr />
+
+<p><strong>延伸问题 6</strong>：Making a Propotional Stacked Bar Graph
+<strong>Solution</strong>：用到Pylr拓展包</p>
+
+<p>其实这个问题可以转化为另外一个问题
+1. 新建一个函数，算出比例
+2. 根据比例在作图</p>
+
+<p>其实这本身和GGPLOT2没有特别关系了，就是我之前提到的数据预处理的问题</p>
+
+<p>用Plyr比较简单，当然用其他工具也都可以胜任，技术难度不高</p>
+
+<div class="highlight"><pre><code class="r">    
+
+    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+    library<span class="p">(</span>plyr<span class="p">)</span>
+    <span class="c1"># Do a group-wise transform(), splitting on &quot;Date&quot;</span>
+    ce <span class="o">&lt;-</span> ddply<span class="p">(</span>cabbage_exp<span class="p">,</span> <span class="s">&quot;Date&quot;</span><span class="p">,</span> transform<span class="p">,</span>
+            percent_weight <span class="o">=</span> Weight <span class="o">/</span> sum<span class="p">(</span>Weight<span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">)</span>
+    ggplot<span class="p">(</span>ce<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>percent_weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/pZAfWxF.png" alt="" /></p>
+
+<p>着重解析下plyr里ddply的语法</p>
+
+<ul>
+<li>cabbage是数据集</li>
+<li>"Date" 通俗来说就是x轴的变量</li>
+<li>transform是要做的变形，在ddply中还有summarize等</li>
+<li>最后一项是是新建的变量和变型方法</li>
+</ul>
+

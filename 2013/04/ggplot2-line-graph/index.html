@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="ggplot2 - Line Graph | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>ggplot2 - Line Graph</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+	</head>
+	<body>
+		<nav id="nav">
+			<img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100">
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><sapn>机器学习</sapn></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>D3</span></li>
+				<li id="label6" class="label"><span>其他</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">D3</h2>
+				<h2 id="title6" class="title">其他</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
+			
+				<a class=" cate1" href="/2013/04/Wilkinson-Dot-Plot"><span class="circle_icon"></span>Wilkinson Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/heat-map"><span class="circle_icon"></span>ggplot2 - Heat Map<span class="date">Apr 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/04/cleveland-Dotplot"><span class="circle_icon"></span>gggplot2 - Cleveland Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/ggplot2-line-graph"><span class="circle_icon"></span>ggplot2 - Line Graph<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/03/plyr-dataming"><span class="circle_icon"></span>Plyr- 数据整合力器<span class="date">Mar 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>用Reshape 2拓展包自定义统计变量和Colsplit<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>Reshape2 Package<span class="date">Feb 2013</span></a>
+			
+				<a class=" cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>Ggplot2 Bar Chart<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">ggplot2 - Line Graph</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>上次讲过了GGPlot的条形图，大家对GGPLOT2的画图理念一定有了基本的理解。这次我们来学习折线图。</p>
+
+<p>基本的语法可谓非常简单</p>
+
+<p><strong>Base Plot</strong></p>
+
+<div class="highlight"><pre><code class="r">    
+    ggplot <span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span> geom_line
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/GTtCqKV.png" alt="" /></p>
+
+<p>我们查看BOD的原数据</p>
+
+<pre>
+Time demand
+    1    8.3
+    2   10.3
+    3   19.0
+    4   16.0
+    5   15.6
+    7   19.8</pre>
+
+
+<p>这个时候用到Factor函数，将Time进行因子化</p>
+
+<div class="highlight"><pre><code class="r">    BOD1 <span class="o">&lt;-</span> BOD <span class="c1"># Make a copy of the data</span>
+    BOD1<span class="o">$</span>Time <span class="o">&lt;-</span> factor<span class="p">(</span>BOD1<span class="o">$</span>Time<span class="p">)</span>
+    ggplot<span class="p">(</span>BOD1<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">,</span> group<span class="o">=</span><span class="m">1</span><span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
+</code></pre></div>
+
+
+<ul>
+<li>尤其要注意，因子化之后必须用到aes(group=1),才能正常画出图来。</li>
+<li>若想改变坐标的上下限可以用到如下代码，放在之前代码的后面。具体的用法我们以后会专门讲</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">            ylim<span class="p">(</span><span class="m">0</span><span class="p">,</span>max<span class="p">(</span>BOD<span class="o">$</span>demand<span class="p">)</span>
+            expand_limits<span class="p">(</span>y<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr />
+
+<p><strong>延伸问题1</strong>：如果现在我想在原来折线图上加散点怎么办？
+其实也很简单！</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span><span class="o">+</span>geom_line<span class="p">()</span><span class="o">+</span>geom_point<span class="p">()</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/p25J3mB.png" alt="" /></p>
+
+<p>同样，个人觉得，这个图做出来尚且没有Excel方便，也没有Excel好看。 LOL</p>
+
+<hr />
+
+<p><strong>延伸问题2</strong> ：如果想用Log Y的坐标轴的话，其实也很简单，还稍微可以体现点GGPLOT2的价值了。</p>
+
+<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span>
+    ggplot<span class="p">(</span>worldpop<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span>y<span class="o">=</span>Population<span class="p">)</span> <span class="o">+</span> geom_line<span class="p">()</span>
+     <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span> scale_y_log10<span class="p">()</span>
+        
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/E0c7o7t.png" alt="" /></p>
+
+<ul>
+<li>最后的一行代码用处就是把Y轴设为log10形式的，大家感受下</li>
+</ul>
+
+
+<hr />
+
+<p><strong>延伸问题3</strong>： 如果想一图多线怎么办？
+其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。</p>
+
+<div class="highlight"><pre><code class="r">    library<span class="p">(</span>plyr<span class="p">)</span>
+    <span class="c1"># 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看</span>
+    tg <span class="o">&lt;-</span> ddply<span class="p">(</span>ToothGrowth<span class="p">,</span> c<span class="p">(</span><span class="s">&quot;supp&quot;</span><span class="p">,</span> <span class="s">&quot;dose&quot;</span><span class="p">),</span> summarise<span class="p">,</span> length<span class="o">=</span>mean<span class="p">(</span>len<span class="p">))</span>
+    <span class="c1"># 对ToothGrowth数据集中的supp，dose两个求len变量的平均</span>
+</code></pre></div>
+
+
+<p>在这个例子中，dose应该被因子化：0.5,1.0,1.5 只包含这三个剂量。</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>factor<span class="p">(</span>dose<span class="p">),</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">,</span> group<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/VCyTzUO.png" alt="" /></p>
+
+<p><strong>这里特别要注意！</strong></p>
+
+<p><strong>这里特别要注意！</strong></p>
+
+<p><strong>这里特别要注意！</strong></p>
+
+<p>在因子化之后，aes中一定要包含group=supp 这个语句。
+否则会出现如下报错：</p>
+
+<p><strong>geom_path: Each group consists of only one
+observation. Do you need to adjust the group aesthetic?</strong></p>
+
+<p>我当时自己作图的时候，出现过这个问题找了好多资料都没有给出一个特别好的解答。还是要啃官方的manual，一个字一个字的读，这样才能理解透彻。</p>
+
+<p>有关这个问题的最好解答：<a href="http://kohske.wordpress.com/2010/12/27/faq-geom_line-doesnt-draw-lines/">这里</a></p>
+
+<hr />
+
+<p><strong>延伸问题4</strong>： 改变线中散点的颜色</p>
+
+<p>改变其中的这两个参数即可
+- shape
+- fill</p>
+
+<p>体会如下语句</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">4</span><span class="p">)</span>           
+    <span class="c1"># Make the points a little larger</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/JrojSxN.png" alt="" /></p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> fill<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">4</span><span class="p">,</span> shape<span class="o">=</span><span class="m">21</span><span class="p">)</span> 
+    <span class="c1"># Also use a point with a color fill</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/cAvavrJ.png" alt="" /></p>
+
+<p>我们发现上面的作图方法会出现点重合的情况
+所以要可以稍稍微调下</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
+    geom_line<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">))</span> <span class="o">+</span>         
+    <span class="c1"># Dodge lines by 0.2</span>
+    geom_point<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">),</span> size<span class="o">=</span><span class="m">4</span><span class="p">)</span> 
+    <span class="c1"># Dodge points by 0.2</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/BqSaXvs.png" alt="" /></p>
+
+<hr />
+
+<p><strong>延伸问题5</strong>： 如果想改变折线和散点的颜色和类型怎么办？</p>
+
+<p>修改下列括号中的参数即可</p>
+
+<ul>
+<li>geom_line()</li>
+<li>geom_point()</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">        ggplot<span class="p">(</span>BOD<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span>
+        geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/wXPFtXP.png" alt="" /></p>
+
+<div class="highlight"><pre><code class="r">        ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
+        geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span> <span class="o">+</span>
+        geom_point<span class="p">(</span>shape<span class="o">=</span><span class="m">22</span><span class="p">,</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>  
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/KRXvejA.png" alt="" /></p>
+
+<p>上面给大家基本介绍了一下有关折线图的简单画法。一直在纠结的问题就是，这样的作图其实并不太方便。相比之下还是Excel来得快。
+但是，在R作图有个好处是可以自定义的东西很多，可以精雕细琢的很多，尤其通常在数据分析之后直接出图很是方便。写成代码可以重复使用。而Excel如果不用VBA，或者其他插件，相比R还是有不少差距的。建议大家还是学学ggplot。</p>
+
+
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/ggplot2-line-graph&title=ggplot2 - Line Graph"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/ggplot2-line-graph&text=ggplot2 - Line Graph"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+			
+			</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+	</body>
+</html>

@@ -1,20 +1,60 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://peters-playground.com/2013/01/blogging-with-jekyll</loc>
-        <lastmod>2013-11-04T06:16:55-08:00</lastmod>
-    </url>
-    <url>
         <loc>http://peters-playground.com/2013/01/welcome-ggplot2</loc>
-        <lastmod>2013-11-04T18:30:55-08:00</lastmod>
+        <lastmod>2013-11-05T23:07:36-08:00</lastmod>
     </url>
     <url>
         <loc>http://peters-playground.com/2013/01/intro-ggplot2</loc>
         <lastmod>2013-11-05T00:40:06-08:00</lastmod>
     </url>
     <url>
+        <loc>http://peters-playground.com/2013/02/ggplot2-bar-chart</loc>
+        <lastmod>2013-11-05T22:40:45-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/02/reshape-basic</loc>
+        <lastmod>2013-11-05T22:38:00-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/02/reshape-advanced</loc>
+        <lastmod>2013-11-05T22:39:42-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/02/ggplot2-histogram</loc>
+        <lastmod>2013-11-05T22:39:23-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/03/plyr-dataming</loc>
+        <lastmod>2013-11-04T19:36:36-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/04/ggplot2-line-graph</loc>
+        <lastmod>2013-11-05T22:36:55-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/04/cleveland-Dotplot</loc>
+        <lastmod>2013-11-05T22:37:29-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/04/heat-map</loc>
+        <lastmod>2013-11-05T22:38:53-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/04/Wilkinson-Dot-Plot</loc>
+        <lastmod>2013-11-05T22:38:13-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/05/stack-area-ggplot2</loc>
+        <lastmod>2013-11-05T22:35:53-08:00</lastmod>
+    </url>
+    <url>
         <loc>http://peters-playground.com/2013/09/Significance-ggplot2</loc>
-        <lastmod>2013-11-05T22:02:52-08:00</lastmod>
+        <lastmod>2013-11-05T23:12:24-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peters-playground.com/2013/11/ggplot2-2d-density</loc>
+        <lastmod>2013-11-05T22:38:28-08:00</lastmod>
     </url>
     <url>
         <loc>http://peters-playground.com/rss.xml</loc>
@@ -22,6 +62,6 @@
     </url>
     <url>
         <loc>http://peters-playground.com/</loc>
-        <lastmod>2013-11-05T22:02:52-08:00</lastmod>
+        <lastmod>2013-11-05T23:12:24-08:00</lastmod>
     </url>
 </urlset>

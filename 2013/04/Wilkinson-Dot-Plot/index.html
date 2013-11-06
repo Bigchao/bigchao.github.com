@@ -1,0 +1,52 @@
+<hr />
+
+<p>layout: post
+categories: DataVis</p>
+
+<h2>title: ggplot2 - Wilkinson Dot Plot</h2>
+
+<p>有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。</p>
+
+<ul>
+<li>geom_dotplot()</li>
+</ul>
+
+
+<p>首先看一个例子</p>
+
+<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+    countries2009 <span class="o">&lt;-</span> subset<span class="p">(</span>countries<span class="p">,</span> Year<span class="o">==</span><span class="m">2009</span> <span class="o">&amp;</span> healthexp<span class="o">&gt;</span><span class="m">2000</span><span class="p">)</span>
+    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>countries2009<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>infmortality<span class="p">))</span>
+    p <span class="o">+</span> geom_dotplot<span class="p">()</span>
+        
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/X8gxtci.png" alt="" /></p>
+
+<p>我们发现其实图并不是很好看
+- Y轴没有意义 用scale_y_continuous来调整
+- bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</p>
+
+<div class="highlight"><pre><code class="r">        p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
+        scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>   <span class="c1"># Remove tick markers</span>
+        theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_blank<span class="p">())</span> <span class="c1"># Remove axis label</span>
+</code></pre></div>
+
+
+<h2><img src="http://i.imgur.com/Tw1MtH7.png" alt="" /></h2>
+
+<p><strong>延伸问题</strong>：不同变量出现在一个图上</p>
+
+<ul>
+<li>设置binaxis</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="r">        library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+        ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
+        geom_dotplot<span class="p">(</span>binaxis<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> binwidth<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stackdir<span class="o">=</span><span class="s">&quot;center&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p><img src="http://i.imgur.com/QgEY7D0.png" alt="" /></p>
