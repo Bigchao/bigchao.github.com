@@ -41,14 +41,14 @@
 				<h2 id="title3" class="title">数据可视化</h2>
 				<h2 id="title4" class="title">数据挖掘</h2>
 				<h2 id="title5" class="title">其他技术</h2>
-				<h2 id="title6" class="title">其他</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
 			</div>
 
 			<div id="post_list">
 			
 				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
 			
-				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
 			
 				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
 			
@@ -72,7 +72,7 @@
 			
 				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
 			
-				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
 			
 			</div>
 		</aside>
@@ -89,10 +89,11 @@
 		<p>本章主要介绍有关条形图在GGPLOT2中的实现，代码来自
 <a href="http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956">R Graphics Cookbook</a> 第三章</p>
 
-<p><strong>Base Problem</strong>：Basic Bar Chart
-<strong>Solution</strong> ：ggplot() 和 geom_bar(stat="identity")</p>
+<p><strong>Base Problem</strong>：Basic Bar Chart</p>
 
-<p>以上是固定搭配,记住</p>
+<p><strong>Solution</strong> ：ggplot() 和 geom_bar(stat="identity")</p>
+
+<p>以上是固定搭配,记住即可</p>
 
 <div class="highlight"><pre><code class="r">    library（ggplot2）
     library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
@@ -116,8 +117,9 @@
 
 <hr />
 
-<p><strong>延伸问题 1</strong> ：Grouping Bars Together
-<strong>Solution</strong> ： 在aes中，把第三个变量映射到fill中，同时把postion换成 <strong>dodge</strong></p>
+<p><strong>延伸问题 1</strong> ：Grouping Bars Together</p>
+
+<p><strong>Solution</strong> ： 在aes中，把第三个变量映射到fill中，同时把postion换成 <strong>dodge</strong></p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">)</span>
@@ -142,8 +144,9 @@
 
 <hr />
 
-<p><strong>延伸问题 2</strong> ： 在柱状图中使用不同颜色
-<strong>Solution</strong> ： 把适当的变量映射到Fill中</p>
+<p><strong>延伸问题 2</strong> ： 在柱状图中使用不同颜色</p>
+
+<p><strong>Solution</strong> ： 把适当的变量映射到Fill中</p>
 
 <p>首先数据源是这样的</p>
 
@@ -227,7 +230,8 @@
 </table>
 
 
-<p>在fill中加上region，就会映射过来</p>
+<p><br></br>
+在fill中加上region，就会映射过来</p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Abb<span class="p">,</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
@@ -258,8 +262,9 @@
 
 <hr />
 
-<p><strong>延伸问题 3</strong>：Coloring Negative and Postive Bars Differently
-<strong>Solution</strong>: 设定新的变量，将新建变量映射到fill中</p>
+<p><strong>延伸问题 3</strong>：Coloring Negative and Postive Bars Differently</p>
+
+<p><strong>Solution</strong>: 设定新的变量，将新建变量映射到fill中</p>
 
 <p>其实这个方法很常见，在以后讲坐标轴的时候还会再次提到，方法比较简单就是根据subset函数新建一个符合要求的函数，然后只要在GGPLOT的时候把新建函数映射即可，其他都一样</p>
 
@@ -289,8 +294,9 @@
 
 <h2><img src="http://i.imgur.com/gLFTMbs.png" alt="" /></h2>
 
-<p><strong>延伸问题 4</strong>： Adjusting Bar Width and Spacing
-<strong>Solution</strong>： 在geom_bar中调整width参数</p>
+<p><strong>延伸问题 4</strong>： Adjusting Bar Width and Spacing</p>
+
+<p><strong>Solution</strong>： 在geom_bar中调整width参数</p>
 
 <ul>
 <li>在geom_bar中调整width改变柱子宽度，也就是改变了柱子之间的距离</li>
@@ -318,8 +324,9 @@
 
 <h2><img src="http://i.imgur.com/iqy952E.png" alt="" /></h2>
 
-<p><strong>延伸问题 5</strong> ：Making a Stacked Bar Graph
-<strong>Solution</strong> ： 用geom_bar，同时映射到fill中</p>
+<p><strong>延伸问题 5</strong> ：Making a Stacked Bar Graph</p>
+
+<p><strong>Solution</strong> ： 用geom_bar，同时映射到fill中</p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
     ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
@@ -366,8 +373,9 @@
 
 <hr />
 
-<p><strong>延伸问题 6</strong>：Making a Propotional Stacked Bar Graph
-<strong>Solution</strong>：用到Pylr拓展包</p>
+<p><strong>延伸问题 6</strong>：Making a Propotional Stacked Bar Graph</p>
+
+<p><strong>Solution</strong>：用到Pylr拓展包</p>
 
 <p>其实这个问题可以转化为另外一个问题
 1. 新建一个函数，算出比例

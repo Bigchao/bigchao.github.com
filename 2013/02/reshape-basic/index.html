@@ -41,14 +41,14 @@
 				<h2 id="title3" class="title">数据可视化</h2>
 				<h2 id="title4" class="title">数据挖掘</h2>
 				<h2 id="title5" class="title">其他技术</h2>
-				<h2 id="title6" class="title">其他</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
 			</div>
 
 			<div id="post_list">
 			
 				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
 			
-				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
 			
 				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
 			
@@ -72,7 +72,7 @@
 			
 				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
 			
-				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
 			
 			</div>
 		</aside>
@@ -104,7 +104,6 @@ Smiths数据集原来是这样的
 <p>我们来melt一下</p>
 
 <div class="highlight"><pre><code class="r">    
-
     melt<span class="p">(</span>smiths<span class="p">)</span>
 </code></pre></div>
 
@@ -123,19 +122,17 @@ Smiths数据集原来是这样的
 </pre>
 
 
+<p><br></br></p>
+
 <p>大家发现了什么？是不是就是先按住第一列不要动，然后第二列的列名变成了新建变量variabe的值，然后原来第二列的值变成了第三列新建变量value的值，然后后边的列都以此类推？</p>
 
 <p>最浅显易懂就是这么理解了。
 当然，Melt()函数可以改变的参数很多，官方给出的参数在这里</p>
 
-<pre> 
-
 <div class="highlight"><pre><code class="r">    melt<span class="p">(</span>data<span class="p">,</span> <span class="o">&lt;</span>span style<span class="o">=</span><span class="s">&quot;color: #ff0000;&quot;</span><span class="o">&gt;</span>id.vars<span class="o">&lt;/</span>span<span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span>span style<span class="o">=</span><span class="s">&quot;color: #ff0000;&quot;</span><span class="o">&gt;</span> measure.vars<span class="o">&lt;/</span>span<span class="o">&gt;</span><span class="p">,</span>
     variable.name <span class="o">=</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="kc">...</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
     value.name <span class="o">=</span> <span class="s">&quot;value&quot;</span><span class="p">)</span>
 </code></pre></div>
-
-</pre>
 
 
 <p>注意上面，</p>
@@ -166,7 +163,8 @@ Smiths数据集原来是这样的
 6 Mary Smith    1 height   1.54</pre>
 
 
-<p>这样是不是非常方便把数据揉来揉去了？：）</p>
+<p><br></br>
+这样是不是非常方便把数据揉来揉去了？：）</p>
 
 <p>下面介绍下cast()函数
 如果说melt把数据变长，那么cast就把数据变宽。在Reshape2 Package中显而易见的一点不同是cast()函数变成了</p>
@@ -233,7 +231,8 @@ Smiths数据集原来是这样的
 3    1 height       1.87       1.54 </pre>
 
 
-<p>关于第一二点，不知道这样大家是否可以理解了呢？</p>
+<p><br></br>
+关于第一二点，不知道这样大家是否可以理解了呢？</p>
 
 <p>其中第三点和第四点稍微举了例子大家就能理解了</p>
 
@@ -258,6 +257,8 @@ Smiths数据集原来是这样的
 5     9 31.44828 167.4333 10.180000 76.90000 71.82689
 6 (all) 42.12931 185.9315  9.957516 77.88235 80.05722</pre>
 
+
+<p><br></br></p>
 
 <p>当然这个拓展包中还有其他若干好用的函数，有兴趣的话可以看看下面两个文档</p>
 

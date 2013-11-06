@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 06 Nov 2013 00:09:28 -0800</pubDate>
-    <lastBuildDate>Wed, 06 Nov 2013 00:09:28 -0800</lastBuildDate>
+    <pubDate>Wed, 06 Nov 2013 01:19:14 -0800</pubDate>
+    <lastBuildDate>Wed, 06 Nov 2013 01:19:14 -0800</lastBuildDate>
 
     
     <item>
@@ -19,7 +19,7 @@
       <description>&lt;p&gt;地理课上，我们经常会看到等高线。在ggplot2中，也有实现一个和等高线差不多的利器&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;stat_density2d()&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;stat_density2d()&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -69,7 +69,7 @@
     </item>
     
     <item>
-      <title>ggplot2-为拟合曲线加置信空间</title>
+      <title>ggplot2 - 为拟合曲线加置信空间</title>
       <link>http://yangchao.me/2013/09/Significance-ggplot2</link>
       <pubDate>24 Sep 2013</pubDate>
       <author>Peter</author>
@@ -102,6 +102,8 @@ Year   Anomaly10y Unc10y
  2004      0.884  0.029
 &lt;/pre&gt;
 
+
+&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
 
 &lt;p&gt;下面就可以作图啦~带上我们的geom_ribbon&lt;/p&gt;
 
@@ -138,7 +140,7 @@ Year   Anomaly10y Unc10y
 提纲挈领记住最重要的！&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Geom_area()&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geom_area()&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -158,8 +160,9 @@ Year   Anomaly10y Unc10y
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;
-我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;改图例：通过改变Scale中的breaks值&lt;/li&gt;
@@ -189,12 +192,14 @@ Year   Anomaly10y Unc10y
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/xS9aP30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
+&lt;hr /&gt;
+
 &lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt;
 我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Geom_area 中的颜色设为NA&lt;/li&gt;
-&lt;li&gt;使用 Geom_line&lt;/li&gt;
+&lt;li&gt;使用 &lt;strong&gt;Geom_line&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -244,7 +249,7 @@ Year   Anomaly10y Unc10y
       <description>&lt;p&gt;有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;geom_dotplot()&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;geom_dotplot()&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -264,9 +269,9 @@ Year   Anomaly10y Unc10y
 - Y轴没有意义 用scale_y_continuous来调整
 - bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_rug&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-        scale_y_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Remove tick markers&lt;/span&gt;
-        theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;axis.title.y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Remove axis label&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_rug&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    scale_y_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Remove tick markers&lt;/span&gt;
+    theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;axis.title.y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Remove axis label&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -274,14 +279,11 @@ Year   Anomaly10y Unc10y
 
 &lt;p&gt;&lt;strong&gt;延伸问题&lt;/strong&gt;：不同变量出现在一个图上&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;设置binaxis&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2&gt;- 设置&lt;code&gt;binaxis&lt;/code&gt;&lt;/h2&gt;
 
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-        ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;heightweight&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;heightIn&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-        geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binaxis&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; stackdir&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;center&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;heightweight&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;heightIn&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binaxis&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; stackdir&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;center&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -373,9 +375,9 @@ Year   Anomaly10y Unc10y
 &lt;p&gt;我们对此热力学图进行微调&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;scale_y_reverse:倒转Y轴&lt;/li&gt;
-&lt;li&gt;scale_x_continuous:修改X轴标记&lt;/li&gt;
-&lt;li&gt;scale_fill_gradient2:增加中间点的色阶&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scale_y_reverse&lt;/code&gt;:  倒转Y轴&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scale_x_continuous&lt;/code&gt;:  修改X轴标记&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scale_fill_gradient2&lt;/code&gt;:  增加中间点的色阶&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -549,6 +551,8 @@ Time demand
     7   19.8&lt;/pre&gt;
 
 
+&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
+
 &lt;p&gt;这个时候用到Factor函数，将Time进行因子化&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    BOD1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; BOD &lt;span class=&quot;c1&quot;&gt;# Make a copy of the data&lt;/span&gt;
@@ -570,8 +574,9 @@ Time demand
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;：如果现在我想在原来折线图上加散点怎么办？
-其实也很简单！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;：如果现在我想在原来折线图上加散点怎么办？&lt;/p&gt;
+
+&lt;p&gt;其实也很简单！&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -601,8 +606,9 @@ Time demand
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;： 如果想一图多线怎么办？
-其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;： 如果想一图多线怎么办？&lt;/p&gt;
+
+&lt;p&gt;其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;# 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看&lt;/span&gt;
@@ -640,8 +646,8 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;延伸问题4&lt;/strong&gt;： 改变线中散点的颜色&lt;/p&gt;
 
 &lt;p&gt;改变其中的这两个参数即可
-- shape
-- fill&lt;/p&gt;
+- &lt;strong&gt;shape&lt;/strong&gt;
+- &lt;strong&gt;fill&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;体会如下语句&lt;/p&gt;
 
@@ -665,10 +671,10 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 所以要可以稍稍微调下&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;         
-    &lt;span class=&quot;c1&quot;&gt;# Dodge lines by 0.2&lt;/span&gt;
-    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-    &lt;span class=&quot;c1&quot;&gt;# Dodge points by 0.2&lt;/span&gt;
+      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;         
+      &lt;span class=&quot;c1&quot;&gt;# Dodge lines by 0.2&lt;/span&gt;
+      geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+      &lt;span class=&quot;c1&quot;&gt;# Dodge points by 0.2&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -681,21 +687,21 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;修改下列括号中的参数即可&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;geom_line()&lt;/li&gt;
-&lt;li&gt;geom_point()&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;geom_line()&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;geom_point()&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-        geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wXPFtXP.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-        geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-        geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -927,7 +933,7 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;这里讲到了fill的情况，原帖在&lt;a href=&quot;http://stackoverflow.com/questions/4835202/error-with-custom-aggregate-function-for-a-cast-call-in-r-reshape2/4835804#4835804?s=7400121f-cdc1-4f76-8bf3-1fc020e44d48&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这里讲到了&lt;code&gt;fill&lt;/code&gt;的情况，原帖在&lt;a href=&quot;http://stackoverflow.com/questions/4835202/error-with-custom-aggregate-function-for-a-cast-call-in-r-reshape2/4835804#4835804?s=7400121f-cdc1-4f76-8bf3-1fc020e44d48&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;注意把代码改为&lt;/p&gt;
 
@@ -962,7 +968,8 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;/pre&gt;
 
 
-&lt;p&gt;&lt;strong&gt;Recast&lt;/strong&gt;： 在一步中实现melt和cast功能&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/br&gt;
+&lt;strong&gt;Recast&lt;/strong&gt;： 在一步中实现melt和cast功能&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    recast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; formula&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id.var&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; measure.var&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

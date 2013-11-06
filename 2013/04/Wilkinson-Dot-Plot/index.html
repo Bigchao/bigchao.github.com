@@ -41,14 +41,14 @@
 				<h2 id="title3" class="title">数据可视化</h2>
 				<h2 id="title4" class="title">数据挖掘</h2>
 				<h2 id="title5" class="title">其他技术</h2>
-				<h2 id="title6" class="title">其他</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
 			</div>
 
 			<div id="post_list">
 			
 				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
 			
-				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
 			
 				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
 			
@@ -72,7 +72,7 @@
 			
 				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
 			
-				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
 			
 			</div>
 		</aside>
@@ -89,7 +89,7 @@
 		<p>有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。</p>
 
 <ul>
-<li>geom_dotplot()</li>
+<li><strong>geom_dotplot()</strong></li>
 </ul>
 
 
@@ -109,9 +109,9 @@
 - Y轴没有意义 用scale_y_continuous来调整
 - bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</p>
 
-<div class="highlight"><pre><code class="r">        p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
-        scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>   <span class="c1"># Remove tick markers</span>
-        theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_blank<span class="p">())</span> <span class="c1"># Remove axis label</span>
+<div class="highlight"><pre><code class="r">    p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
+    scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>   <span class="c1"># Remove tick markers</span>
+    theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_blank<span class="p">())</span> <span class="c1"># Remove axis label</span>
 </code></pre></div>
 
 
@@ -119,14 +119,11 @@
 
 <p><strong>延伸问题</strong>：不同变量出现在一个图上</p>
 
-<ul>
-<li>设置binaxis</li>
-</ul>
+<h2>- 设置<code>binaxis</code></h2>
 
-
-<div class="highlight"><pre><code class="r">        library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-        ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
-        geom_dotplot<span class="p">(</span>binaxis<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> binwidth<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stackdir<span class="o">=</span><span class="s">&quot;center&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+    ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
+      geom_dotplot<span class="p">(</span>binaxis<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> binwidth<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stackdir<span class="o">=</span><span class="s">&quot;center&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 

@@ -41,14 +41,14 @@
 				<h2 id="title3" class="title">数据可视化</h2>
 				<h2 id="title4" class="title">数据挖掘</h2>
 				<h2 id="title5" class="title">其他技术</h2>
-				<h2 id="title6" class="title">其他</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
 			</div>
 
 			<div id="post_list">
 			
 				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
 			
-				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2-为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
 			
 				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
 			
@@ -72,7 +72,7 @@
 			
 				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
 			
-				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>Welcome to ggplot2!<span class="date">Jan 2013</span></a>
+				<a class="css cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
 			
 			</div>
 		</aside>
@@ -111,6 +111,8 @@ Time demand
     7   19.8</pre>
 
 
+<p><br></br></p>
+
 <p>这个时候用到Factor函数，将Time进行因子化</p>
 
 <div class="highlight"><pre><code class="r">    BOD1 <span class="o">&lt;-</span> BOD <span class="c1"># Make a copy of the data</span>
@@ -132,8 +134,9 @@ Time demand
 
 <hr />
 
-<p><strong>延伸问题1</strong>：如果现在我想在原来折线图上加散点怎么办？
-其实也很简单！</p>
+<p><strong>延伸问题1</strong>：如果现在我想在原来折线图上加散点怎么办？</p>
+
+<p>其实也很简单！</p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span><span class="o">+</span>geom_line<span class="p">()</span><span class="o">+</span>geom_point<span class="p">()</span>
 </code></pre></div>
@@ -163,8 +166,9 @@ Time demand
 
 <hr />
 
-<p><strong>延伸问题3</strong>： 如果想一图多线怎么办？
-其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。</p>
+<p><strong>延伸问题3</strong>： 如果想一图多线怎么办？</p>
+
+<p>其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。</p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>plyr<span class="p">)</span>
     <span class="c1"># 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看</span>
@@ -202,8 +206,8 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 <p><strong>延伸问题4</strong>： 改变线中散点的颜色</p>
 
 <p>改变其中的这两个参数即可
-- shape
-- fill</p>
+- <strong>shape</strong>
+- <strong>fill</strong></p>
 
 <p>体会如下语句</p>
 
@@ -227,10 +231,10 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 所以要可以稍稍微调下</p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
-    geom_line<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">))</span> <span class="o">+</span>         
-    <span class="c1"># Dodge lines by 0.2</span>
-    geom_point<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">),</span> size<span class="o">=</span><span class="m">4</span><span class="p">)</span> 
-    <span class="c1"># Dodge points by 0.2</span>
+      geom_line<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">))</span> <span class="o">+</span>         
+      <span class="c1"># Dodge lines by 0.2</span>
+      geom_point<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">),</span> size<span class="o">=</span><span class="m">4</span><span class="p">)</span> 
+      <span class="c1"># Dodge points by 0.2</span>
 </code></pre></div>
 
 
@@ -243,21 +247,21 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 <p>修改下列括号中的参数即可</p>
 
 <ul>
-<li>geom_line()</li>
-<li>geom_point()</li>
+<li><strong>geom_line()</strong></li>
+<li><strong>geom_point()</strong></li>
 </ul>
 
 
-<div class="highlight"><pre><code class="r">        ggplot<span class="p">(</span>BOD<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span>
-        geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>BOD<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span>
+      geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 
 <p><img src="http://i.imgur.com/wXPFtXP.png" alt="" /></p>
 
-<div class="highlight"><pre><code class="r">        ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
-        geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span> <span class="o">+</span>
-        geom_point<span class="p">(</span>shape<span class="o">=</span><span class="m">22</span><span class="p">,</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>  
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
+      geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span> <span class="o">+</span>
+      geom_point<span class="p">(</span>shape<span class="o">=</span><span class="m">22</span><span class="p">,</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>    
 </code></pre></div>
 
 
