@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 06 Nov 2013 01:19:14 -0800</pubDate>
-    <lastBuildDate>Wed, 06 Nov 2013 01:19:14 -0800</lastBuildDate>
+    <pubDate>Wed, 06 Nov 2013 21:32:50 -0800</pubDate>
+    <lastBuildDate>Wed, 06 Nov 2013 21:32:50 -0800</lastBuildDate>
 
     
     <item>
@@ -395,7 +395,7 @@ Year   Anomaly10y Unc10y
     </item>
     
     <item>
-      <title>gggplot2 - Cleveland Dot Plot</title>
+      <title>ggplot2 - Cleveland Dot Plot</title>
       <link>http://yangchao.me/2013/04/cleveland-Dotplot</link>
       <pubDate>25 Apr 2013</pubDate>
       <author>Peter</author>
@@ -713,7 +713,7 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
     </item>
     
     <item>
-      <title>Plyr- 数据整合力器</title>
+      <title>Plyr- 数据整合利器</title>
       <link>http://yangchao.me/2013/03/plyr-dataming</link>
       <pubDate>10 Mar 2013</pubDate>
       <author>Peter</author>

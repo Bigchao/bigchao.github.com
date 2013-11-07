@@ -38,11 +38,11 @@ $(function(){
 
 	// get post link
 	cate1 = $('.cate1');
-	cate2 = $('.CSS');
-	cate3 = $('.Front_end');
-	cate4 = $('.Mac');
-	cate5 = $('.Codepen');
-	cate6 = $('.Github');
+	cate2 = $('.ml');
+	cate3 = $('.datavis');
+	cate4 = $('.datamining');
+	cate5 = $('.related');
+	cate6 = $('.life');
 
 	// switch
 	var clickHandler = function(k) {
