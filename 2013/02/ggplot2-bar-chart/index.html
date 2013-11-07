@@ -18,6 +18,7 @@
 				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	"		})();
 		</script>
+		
 	</head>
 	<body>
 		<nav id="nav">
@@ -64,9 +65,9 @@
 			
 				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
 			
-				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>用Reshape 2拓展包自定义统计变量和Colsplit<span class="date">Feb 2013</span></a>
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>R - Reshape Package II<span class="date">Feb 2013</span></a>
 			
-				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>Reshape2 Package<span class="date">Feb 2013</span></a>
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>R - Reshape2 Package<span class="date">Feb 2013</span></a>
 			
 				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
 			
@@ -91,7 +92,13 @@
 
 <p><strong>Base Problem</strong>：Basic Bar Chart</p>
 
-<p><strong>Solution</strong> ：ggplot() 和 geom_bar(stat="identity")</p>
+<p><strong>Solution</strong> ：</p>
+
+<ul>
+<li><strong>ggplot()</strong></li>
+<li><strong>geom_bar(stat="identity")</strong></li>
+</ul>
+
 
 <p>以上是固定搭配,记住即可</p>
 
@@ -119,7 +126,7 @@
 
 <p><strong>延伸问题 1</strong> ：Grouping Bars Together</p>
 
-<p><strong>Solution</strong> ： 在aes中，把第三个变量映射到fill中，同时把postion换成 <strong>dodge</strong></p>
+<p><strong>Solution</strong> ： 在aes中，把第三个变量映射到fill中，同时把<code>postion</code>换成 <strong>dodge</strong></p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">)</span>
@@ -129,8 +136,8 @@
 <p><img src="http://i.imgur.com/CxRfugY.png" alt="" /></p>
 
 <ul>
-<li>如果要修改外框颜色，在geom_bar() 中修改 colour='black'</li>
-<li>修改柱子的颜色可以用scale_fill_brewer() 或者scale_fill_manual().</li>
+<li>如果要修改外框颜色，在<code>geom_bar()</code>中修改 <code>colour='black'</code></li>
+<li>修改柱子的颜色可以用<code>scale_fill_brewer()</code>或者<code>scale_fill_manual()</code>.</li>
 </ul>
 
 
@@ -146,7 +153,7 @@
 
 <p><strong>延伸问题 2</strong> ： 在柱状图中使用不同颜色</p>
 
-<p><strong>Solution</strong> ： 把适当的变量映射到Fill中</p>
+<p><strong>Solution</strong> ： 把适当的变量映射到<code>Fill</code>中</p>
 
 <p>首先数据源是这样的</p>
 
@@ -231,7 +238,7 @@
 
 
 <p><br></br>
-在fill中加上region，就会映射过来</p>
+在<code>fill</code>中加上<code>region</code>，就会映射过来</p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Abb<span class="p">,</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
@@ -243,8 +250,8 @@
 <p><img src="http://i.imgur.com/piTTpmj.png" alt="" /></p>
 
 <ul>
-<li>用reorder函数，把柱状图按照大小排列会显得更专业</li>
-<li>复习修改颜色的scale_fill_manual</li>
+<li>用<code>reorder</code>函数，把柱状图按照大小排列会显得更专业</li>
+<li>复习修改颜色的<code>scale_fill_manual</code></li>
 <li>对x轴修改坐标轴注释</li>
 </ul>
 
@@ -296,11 +303,11 @@
 
 <p><strong>延伸问题 4</strong>： Adjusting Bar Width and Spacing</p>
 
-<p><strong>Solution</strong>： 在geom_bar中调整width参数</p>
+<p><strong>Solution</strong>： 在<code>geom_bar</code>中调整width参数</p>
 
 <ul>
 <li>在geom_bar中调整width改变柱子宽度，也就是改变了柱子之间的距离</li>
-<li>如果用dodge方法做的图，可以用position_dodge（）参数来改，默认的参数设置是0.9，如果不写则为两个贴在一起</li>
+<li>如果用dodge方法做的图，可以用<code>position_dodge（）</code>参数来改，默认的参数设置是0.9，如果不写则为两个贴在一起</li>
 </ul>
 
 
@@ -313,7 +320,7 @@
 
 <p><img src="http://i.imgur.com/FPaVWds.png" alt="" /></p>
 
-<p>以下设置了在geom_bar中设置了width，postion_dodge()</p>
+<p>以下设置了在<code>geom_bar</code>中设置了<code>width，postion_dodge()</code></p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
       geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.7</span><span class="p">))</span>
@@ -326,7 +333,7 @@
 
 <p><strong>延伸问题 5</strong> ：Making a Stacked Bar Graph</p>
 
-<p><strong>Solution</strong> ： 用geom_bar，同时映射到fill中</p>
+<p><strong>Solution</strong> ： 用<code>geom_bar</code>，同时映射到<code>fill</code>中</p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
     ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
@@ -339,9 +346,13 @@
 <p><img src="http://i.imgur.com/opTysNC.png" alt="" /></p>
 
 <p>注意上段代码和<strong>延伸问题1</strong>的唯一不同之处之处就在于在geom_bar
-()中
-- 堆积图：stat="indentity"
-- 聚集图：position="dodge"</p>
+()中</p>
+
+<ul>
+<li>堆积图：<code>stat="indentity"</code></li>
+<li>聚集图：<code>position="dodge"</code></li>
+</ul>
+
 
 <p>我们看到图和图例中的是反的，要修正这个问题，用如下代码</p>
 
@@ -357,9 +368,13 @@
 
 <p>当然，我们也可以改变图中堆积的颜色。这需要用到pylr拓展包，这个拓展包可谓非常强大，在R下载量最多的拓展包中排名保持第一名。</p>
 
-<p>具体做法
-- 用order指令
-- desc函数</p>
+<p>具体做法</p>
+
+<ul>
+<li>用order指令</li>
+<li>desc函数</li>
+</ul>
+
 
 <div class="highlight"><pre><code class="r">    
 
@@ -377,9 +392,13 @@
 
 <p><strong>Solution</strong>：用到Pylr拓展包</p>
 
-<p>其实这个问题可以转化为另外一个问题
-1. 新建一个函数，算出比例
-2. 根据比例在作图</p>
+<p>其实这个问题可以转化为另外一个问题</p>
+
+<ol>
+<li>新建一个函数，算出比例</li>
+<li>根据比例在作图</li>
+</ol>
+
 
 <p>其实这本身和GGPLOT2没有特别关系了，就是我之前提到的数据预处理的问题</p>
 
@@ -429,5 +448,24 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+         $("#profile").click(function(){
+		$.get('/sitemap.xml',function(data){
+		 var $xml=$(data);
+		 url=$xml.find("url")
+		 n = url.size()
+		 n = getRandom(n)
+		 position=url.get(n)
+		 location.href =position.find("loc").text()
+	
+  })
+	
+})
+	//随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+});
+		</script>
+		
 	</body>
 </html>

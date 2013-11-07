@@ -259,23 +259,23 @@ a {
   font-size: 14px;
   float: right; }
 
-.CSS .circle_icon {
+.ml .circle_icon {
   background: #ed3324;
   border-color: #ed3324; }
 
-.Front_end .circle_icon {
+.datavis .circle_icon {
   background: #fba418;
   border-color: #fba418; }
 
-.Mac .circle_icon {
+.datamining .circle_icon {
   background: #56a61c;
   border-color: #56a61c; }
 
-.Codepen .circle_icon {
+.related .circle_icon {
   background: #14baa5;
   border-color: #14baa5; }
 
-.Github .circle_icon {
+.life .circle_icon {
   background: #3f9cca;
   border-color: #3f9cca; }
 

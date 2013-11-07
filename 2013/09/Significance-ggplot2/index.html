@@ -18,6 +18,7 @@
 				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	"		})();
 		</script>
+		
 	</head>
 	<body>
 		<nav id="nav">
@@ -64,9 +65,9 @@
 			
 				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
 			
-				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>用Reshape 2拓展包自定义统计变量和Colsplit<span class="date">Feb 2013</span></a>
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>R - Reshape Package II<span class="date">Feb 2013</span></a>
 			
-				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>Reshape2 Package<span class="date">Feb 2013</span></a>
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>R - Reshape2 Package<span class="date">Feb 2013</span></a>
 			
 				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
 			
@@ -160,5 +161,24 @@ Year   Anomaly10y Unc10y
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+         $("#profile").click(function(){
+		$.get('/sitemap.xml',function(data){
+		 var $xml=$(data);
+		 url=$xml.find("url")
+		 n = url.size()
+		 n = getRandom(n)
+		 position=url.get(n)
+		 location.href =position.find("loc").text()
+	
+  })
+	
+})
+	//随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+});
+		</script>
+		
 	</body>
 </html>

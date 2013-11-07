@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 06 Nov 2013 21:32:50 -0800</pubDate>
-    <lastBuildDate>Wed, 06 Nov 2013 21:32:50 -0800</lastBuildDate>
+    <pubDate>Thu, 07 Nov 2013 06:28:39 -0800</pubDate>
+    <lastBuildDate>Thu, 07 Nov 2013 06:28:39 -0800</lastBuildDate>
 
     
     <item>
@@ -300,9 +300,13 @@ Year   Anomaly10y Unc10y
       <description>&lt;p&gt;在最开始的GGPLOT介绍中，我就拿出了一副热力图
 &lt;img src=&quot;http://i.imgur.com/CEi7DEx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个
-- geom_tile()
-- geom_raster()&lt;/p&gt;
+&lt;p&gt;在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;geom_tile()&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;geom_raster()&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 
 &lt;p&gt;做好热力学图并不是那么简单，需要很多微调，不过有一个固定的套路我们来一点一点实现&lt;/p&gt;
 
@@ -746,8 +750,12 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
       <pubDate>14 Feb 2013</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2013/02/ggplot2-histogram</guid>
-      <description>&lt;p&gt;&lt;strong&gt;基本问题&lt;/strong&gt;：想做直方图
-- geom_histogram&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;基本问题&lt;/strong&gt;：想做直方图&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;geom_histogram&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 
 &lt;p&gt;&lt;strong&gt;Basic Plot&lt;/strong&gt;&lt;/p&gt;
 
@@ -896,7 +904,7 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
     </item>
     
     <item>
-      <title>用Reshape 2拓展包自定义统计变量和Colsplit</title>
+      <title>R - Reshape Package II</title>
       <link>http://yangchao.me/2013/02/reshape-advanced</link>
       <pubDate>07 Feb 2013</pubDate>
       <author>Peter</author>
