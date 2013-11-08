@@ -107,28 +107,18 @@ function contentEffects() {
 		}
 	});
 
-	// Lazy loading Disqus
-	// http://jsfiddle.net/dragoncrew/SHGwe/1/
-	var ds_loaded = false,
-			top = $("#disqus_thread").offset().top;
-			identifier = $('#identifier').text();
-	window.disqus_shortname = 'Bigchao';
-	window.disqus_identifier = identifier;
-
-	function check(){
-		if ( !ds_loaded && $('#container').scrollTop() + $('#container').height() > top ) {
-			$.ajax({
-				type: "GET",
-				url: "http://" + disqus_shortname + ".disqus.com/embed.js",
-				dataType: "script",
-				cache: true
-			});
-			ds_loaded = true;
-		}
-	}
-	$('#container').scroll(check);
-	check();
-}
+<script type="text/javascript">
+(function(){
+var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=http%3A%2F%2Fopen.weibo.com%2Fwidget%2Fcomments.php&appkey=1822296402&dpc=1";
+document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
+})();
+</script>
+<script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+window.WBComment.init({
+    "id": "WBCommentFrame"
+});
+</script>
 
 /**
 * @name jQuery Simple Fullscreen Plugin
