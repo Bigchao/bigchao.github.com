@@ -23,7 +23,7 @@
 	</head>
 	<body>
 		<nav id="nav">
-		    <a href="/index.html"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
+		    <a href="#"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
 			<ul id="menu">
 				<li id="label1" class="label selected"><span>最新文章</span></li>
 				<li id="label2" class="label"><span>机器学习</span></li>
@@ -81,6 +81,7 @@
 
 		<div id="container">
 			<div id="pjax">
+				
 				<article id="post">
 	<header id="header">
 		<h1 id="identifier">ggplot2 - 二维数据密度图</h1>
@@ -163,8 +164,8 @@
 		<script type="text/javascript" src="/assets/js/script.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-         $("#profile").click(function(){
-		$.get('/sitemap.xml',function(data){
+        $("#profile").click(function(){
+		$.get("sitemap.xml",function(data){
 		 var $xml=$(data);
 		 url=$xml.find("url")
 		 n = url.size()

@@ -23,7 +23,7 @@
 	</head>
 	<body>
 		<nav id="nav">
-		    <a href="/index.html"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
+		    <a href="#"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
 			<ul id="menu">
 				<li id="label1" class="label selected"><span>最新文章</span></li>
 				<li id="label2" class="label"><span>机器学习</span></li>
@@ -81,6 +81,7 @@
 
 		<div id="container">
 			<div id="pjax">
+				
 				<article id="post">
   <header id="header">
     <h1>技术改变世界，阅读塑造人生</h1>
@@ -88,22 +89,18 @@
     <button id="fontsize" class="header_icon"></button>
   </header>
   <div id="content">
-    <p>这里是杨超的个人网页。毕业于香港城市大学应用经济专业，现在我在城市大学做助理研究员，主要负责一些科学运算以及可视化的工作。我的兴趣广泛，从纯理论模型推倒到数据分析假设检验，再到数据挖掘机器学习可视化。研究生学习阶段特别喜欢SAS和Excel，工作用主要用Matlab，后来爱上了R和Python，D3，对于编程半路出家的我走了不少弯路才慢慢找到点感觉，这其中也得到了不少热心朋友的帮助。所以希望可以总结自己所学，和大家分享使得后来人少走弯路。这个博客中将主要覆盖机器学习、科学运算在Python和R中的实现，用R和D3.js数据可视化，还有一些其他数据库，Python，R等等的经验分享。希望可以和大家共同成长提高。</p>
+    <p>这里是杨超的个人网页。毕业于香港城市大学应用经济专业，现在我在城市大学做助理研究员，主要负责一些科学运算以及可视化的工作。我的兴趣广泛，从纯理论模型推导到数据分析假设检验，再到数据挖掘机器学习可视化。研究生学习阶段特别喜欢SAS和Excel，工作主要用Matlab，后来爱上了R和Python，D3，对于编程半路出家的我走了不少弯路才慢慢找到点感觉，这其中也得到了不少热心朋友的帮助。所以希望可以总结自己所学，和大家分享使得后来人少走弯路。这个博客中将主要覆盖机器学习、科学运算在Python和R中的实现，用R和D3.js数据可视化，还有一些其他数据库，Python，R等等的经验分享。希望可以和大家共同成长提高。</p>
 	
-    <p>对世界永远好奇，喜欢结交更多朋友，用心探索未知。希望能与大家多多交流，Email: <a href="mailto:48437649&#64;&#113;&#113;&#46;&#99;&#111;&#109;?Subject=Hi%20阿超你好！">48437649&#64;&#113;&#113;&#46;&#99;&#111;&#109;</a>>。</p>
+    <p>对世界永远好奇，喜欢结交更多朋友，用心探索未知。希望能与大家多多交流，Email: <a href="mailto:&#121;&#97;&#110;&#103;&#99;&#104;&#97;&#111;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hi%20阿超你好！">&#121;&#97;&#110;&#103;&#99;&#104;&#97;&#111;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a></p>
 
     <div id="copyright">
-      <a id="cc_link" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank">
-        <span id="cc"></span>
-        <span id="cc_by"></span>
-        <span id="cc_nc"></span>
-        <span id="cc_sa"></span>
-      </a>
+
       <p>Hosted on <a href="http://pages.github.com/" target="_blank">Github Pages</a></p>
       <p>Powered by <a href="https://github.com/mojombo/jekyll" target="_blank">Jekyll</a> / <a href="http://peters-playground.com/" target="_blank">Peter's Playgournd</a> </p>
     </div>
   </div>
 </article>
+
 			</div>
 		</div>
 
@@ -113,8 +110,8 @@
 		<script type="text/javascript" src="/assets/js/script.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-         $("#profile").click(function(){
-		$.get('/sitemap.xml',function(data){
+        $("#profile").click(function(){
+		$.get("sitemap.xml",function(data){
 		 var $xml=$(data);
 		 url=$xml.find("url")
 		 n = url.size()
