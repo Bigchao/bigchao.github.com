@@ -108,9 +108,13 @@
 
 <p><img src="http://i.imgur.com/X8gxtci.png" alt="" /></p>
 
-<p>我们发现其实图并不是很好看
-- Y轴没有意义 用scale_y_continuous来调整
-- bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</p>
+<p>我们发现其实图并不是很好看</p>
+
+<ul>
+<li>Y轴没有意义 用scale_y_continuous来调整</li>
+<li>bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</li>
+</ul>
+
 
 <div class="highlight"><pre><code class="r">    p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
     scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>   <span class="c1"># Remove tick markers</span>
@@ -122,7 +126,10 @@
 
 <p><strong>延伸问题</strong>：不同变量出现在一个图上</p>
 
-<h2>- 设置<code>binaxis</code></h2>
+<ul>
+<li>设置<code>binaxis</code></li>
+</ul>
+
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
     ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
@@ -132,13 +139,20 @@
 
 <p><img src="http://i.imgur.com/QgEY7D0.png" alt="" /></p>
 
+<hr />
 
+<ul>
+<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1mWQc5">这里</a></li>
+</ul>
+
+
+		
+		
 		<div id="social">
 		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/Wilkinson-Dot-Plot&title=ggplot2 - Wilkinson Dot Plot"></a>
 			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/Wilkinson-Dot-Plot&text=ggplot2 - Wilkinson Dot Plot"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
-			
-			</div>
+		</div>
 	</div>
 </article>
 

@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Mon, 11 Nov 2013 07:26:23 -0800</pubDate>
-    <lastBuildDate>Mon, 11 Nov 2013 07:26:23 -0800</lastBuildDate>
+    <pubDate>Tue, 12 Nov 2013 21:37:22 -0800</pubDate>
+    <lastBuildDate>Tue, 12 Nov 2013 21:37:22 -0800</lastBuildDate>
 
     
     <item>
@@ -65,6 +65,13 @@
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/aDAgAtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
@@ -94,12 +101,12 @@
 
 &lt;pre&gt;
 Year   Anomaly10y Unc10y
- 1800     -0.435  0.505
- 1801     -0.453  0.493
- 1802     -0.460  0.486
+1800     -0.435  0.505
+1801     -0.453  0.493
+1802     -0.460  0.486
 ...
- 2003      0.869  0.028
- 2004      0.884  0.029
+2003      0.869  0.028
+2004      0.884  0.029
 &lt;/pre&gt;
 
 
@@ -127,6 +134,13 @@ Year   Anomaly10y Unc10y
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/syubzvU.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1gRnnX&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
@@ -237,6 +251,13 @@ Year   Anomaly10y Unc10y
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/dSxIwAu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1nCMPq&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
@@ -265,9 +286,13 @@ Year   Anomaly10y Unc10y
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/X8gxtci.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;我们发现其实图并不是很好看
-- Y轴没有意义 用scale_y_continuous来调整
-- bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整&lt;/p&gt;
+&lt;p&gt;我们发现其实图并不是很好看&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Y轴没有意义 用scale_y_continuous来调整&lt;/li&gt;
+&lt;li&gt;bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整&lt;/li&gt;
+&lt;/ul&gt;
+
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_rug&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
     scale_y_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Remove tick markers&lt;/span&gt;
@@ -279,7 +304,10 @@ Year   Anomaly10y Unc10y
 
 &lt;p&gt;&lt;strong&gt;延伸问题&lt;/strong&gt;：不同变量出现在一个图上&lt;/p&gt;
 
-&lt;h2&gt;- 设置&lt;code&gt;binaxis&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;设置&lt;code&gt;binaxis&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
     ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;heightweight&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;heightIn&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
@@ -288,6 +316,13 @@ Year   Anomaly10y Unc10y
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/QgEY7D0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1mWQc5&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
@@ -395,6 +430,13 @@ Year   Anomaly10y Unc10y
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/UYiPmd0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1tc26g&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
@@ -519,6 +561,13 @@ Year   Anomaly10y Unc10y
 &lt;ul&gt;
 &lt;li&gt;scales：表示是否允许不同面（facet）的坐标轴变化，或者固定。 &lt;code&gt;scales=free_y&lt;/code&gt; 表示y轴随意变化。我们看到因为两个facet所含数据是不一样的，所以改成&lt;code&gt;free_y&lt;/code&gt;显得更加好看&lt;/li&gt;
 &lt;li&gt;space： 也是一个道理&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1LAKA&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
@@ -713,6 +762,13 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;上面给大家基本介绍了一下有关折线图的简单画法。一直在纠结的问题就是，这样的作图其实并不太方便。相比之下还是Excel来得快。
 但是，在R作图有个好处是可以自定义的东西很多，可以精雕细琢的很多，尤其通常在数据分析之后直接出图很是方便。写成代码可以重复使用。而Excel如果不用VBA，或者其他插件，相比R还是有不少差距的。建议大家还是学学ggplot。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1mqTOL&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
@@ -900,6 +956,13 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Q6wvUTN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1pEGo8&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
     </item>
     
