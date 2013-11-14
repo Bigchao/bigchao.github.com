@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Tue, 12 Nov 2013 23:36:55 -0800</pubDate>
-    <lastBuildDate>Tue, 12 Nov 2013 23:36:55 -0800</lastBuildDate>
+    <pubDate>Wed, 13 Nov 2013 22:39:44 -0800</pubDate>
+    <lastBuildDate>Wed, 13 Nov 2013 22:39:44 -0800</lastBuildDate>
 
     
     <item>
@@ -137,6 +137,158 @@ Year   Anomaly10y Unc10y
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1gRnnX&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+</description>
+    </item>
+    
+    <item>
+      <title>Plyr- 多因子整合</title>
+      <link>http://yangchao.me/2013/06/plyr-advanced</link>
+      <pubDate>18 Jun 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/06/plyr-advanced</guid>
+      <description>&lt;p&gt;在上次我们看到的例子，Iris数据集中只有Species一个是因子 （factor），其实plyr更加适合于在多因子的数据集中进行操作&lt;/p&gt;
+
+&lt;p&gt;今天我们用一个稍微复杂一点的数据集来详细讲解&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/hadley/data-baby-names/blob/master/baby-names.csv&quot;&gt;babynames&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;原数据大约2万5千行，包括四个字段year，name，pecent，sex。其中year是从1880到2008&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    options&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stringsAsFactors &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    babyname &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.csv&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;bnames.csv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;数据就是这个样子的&lt;/p&gt;
+
+&lt;pre&gt;
+  year    name      percent     sex
+1 1880    John      0.081541    boy
+2 1880 William      0.080511    boy
+3 1880   James      0.050057    boy
+4 1880 Charles      0.045167    boy
+5 1880  George      0.043292    boy
+6 1880   Frank      0.027380    boy
+&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;strong&gt;问题1&lt;/strong&gt;： 找到每一年，每种性别中最受欢迎的名字&lt;/p&gt;
+
+&lt;p&gt;还是按照我们的SAC思想&lt;/p&gt;
+
+&lt;p&gt;S：把原数据按照sex和year两个因子进行切片&lt;/p&gt;
+
+&lt;p&gt;A：每个切片中得到最受欢迎的名字&lt;/p&gt;
+
+&lt;p&gt;C：把结果整合&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sex&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?????&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;前两部份我们都已经很熟悉了，原数据切片。但是后面得到最受欢迎的名字应该怎么办？&lt;/p&gt;
+
+&lt;p&gt;我们要自定义一个函数，来求出最受欢迎的人名，然后再把它加到ddply中的function里面&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    mostPopular &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    x&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;which.max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;percent&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sex&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; mostPopular&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;结果一下就出来了（截取）&lt;/p&gt;
+
+&lt;pre&gt;
+   year  sex       V1
+1   1880  boy     John
+2   1880 girl     Mary
+3   1881  boy     John
+4   1881 girl     Mary
+5   1882  boy     John
+6   1882 girl     Mary
+7   1883  boy     John
+8   1883 girl     Mary
+9   1884  boy     John
+10  1884 girl     Mary
+11  1885  boy     John
+12  1885 girl     Mary
+13  1886  boy     John
+14  1886 girl     Mary
+15  1887  boy     John
+16  1887 girl     Mary
+17  1888  boy     John
+18  1888 girl     Mary
+19  1889  boy     John
+20  1889 girl     Mary
+&lt;/pre&gt;
+
+
+&lt;p&gt;可以看出，1889年，都是男的叫John最多，女的叫Mary最多。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;问题2&lt;/strong&gt;：每一年，每种性别中 （ 作者注： 这就是告诉你怎么切片呢 ）， 名字的首字母所占比例是多少？&lt;/p&gt;
+
+&lt;p&gt;解释下问题： Get the total percentage of the first character of the baby names by year and gender&lt;/p&gt;
+
+&lt;p&gt;就比如2000年一共15个男孩出生，5个叫杨超，5个叫贾超，5个叫牛超&lt;/p&gt;
+
+&lt;p&gt;那Y（Yang）的首字母占比是 1/3
+同理 J （Jia ） 和 N （Niu ）也是 1/3&lt;/p&gt;
+
+&lt;p&gt;还是SAC思想&lt;/p&gt;
+
+&lt;p&gt;S： 按照性别、年份选出进行切片。
+&lt;strong&gt;注意！&lt;/strong&gt; 这里不仅仅是要对这两个变量进行切片，还有自定义一个新的变量 &lt;code&gt;姓名的首字母&lt;/code&gt;！&lt;/p&gt;
+
+&lt;p&gt;请在反思上面的简单引例。&lt;/p&gt;
+
+&lt;p&gt;A： 对同样的首字母百分比进行加和&lt;/p&gt;
+
+&lt;p&gt;C： 数据整合&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;#首先提取名字的首字母&lt;/span&gt;
+    firstletter &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    tolower&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;substr&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 根据ddply可以得出结果&lt;/span&gt;
+    letterFreq &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; first&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;firstletter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sumPer &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;percent&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;最后的结果就是这样的&lt;/p&gt;
+
+&lt;pre&gt;
+  year sex  first   sumPer
+1 1880 boy     a    0.062543
+2 1880 boy     b    0.017858
+3 1880 boy     c    0.084047
+4 1880 boy     d    0.021010
+5 1880 boy     e    0.058219
+6 1880 boy     f    0.055142
+&lt;/pre&gt;
+
+
+&lt;p&gt;最后我们可以可视化一下，用到ggplot2&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;letterFreq&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sumPer&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; group&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;color&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; facet_wrap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; first&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; nrow&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/eQloL6A.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在Hadley的官网上，有不少这样的例子，大家一定要多去看看，多感受就更有感觉了。&lt;/p&gt;
+
+&lt;p&gt;原文的数据，代码，最后的图在&lt;a href=&quot;http://pan.baidu.com/s/19r800&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -604,8 +756,8 @@ Time demand
 &lt;/ul&gt;
 
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;            ylim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            expand_limits&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ylim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    expand_limits&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -760,23 +912,190 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
       <pubDate>10 Mar 2013</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2013/03/plyr-dataming</guid>
-      <description>&lt;h2&gt;Plyr 拓展包快速入门&lt;/h2&gt;
+      <description>&lt;p&gt;Hadley Wickham写的Plyr拓展包，是所有拓展包里下载最多的。联合上Reshape2，和ggplot2，devtools已经成为业界口碑最好的。&lt;/p&gt;
 
-&lt;p&gt;大神Hadley Wickham写的Plyr拓展包，是所有拓展包里下载最多的。联合上Reshape2，和GGplot2，已经成为业界口碑最好的。&lt;/p&gt;
+&lt;p&gt;在开始介绍plyr拓展包之前，先简单介绍一种数据预处理和数据清洁的思想&lt;/p&gt;
 
-&lt;p&gt;今天着重介绍DDPly()函数&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h3&gt;S-A-C&lt;/h3&gt;
+
+&lt;p&gt;S： Split 即为把数据切片等待处理&lt;/p&gt;
+
+&lt;p&gt;A： Apply 对于每一个片层进行数据的运算&lt;/p&gt;
+
+&lt;p&gt;C： Combine 把结果进行相加&lt;/p&gt;
+
+&lt;p&gt;我们先看一个引例:&lt;/p&gt;
+
+&lt;p&gt;用到的是R自带的Iris数据集&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+&lt;pre&gt;
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;原数据有150行，有5个字段，其中Species中有setosa,virginica,versicolor三种。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;任务&lt;/strong&gt;： 计算在Species字段中，计算每一种物种类别Sepal.Length的平均值&lt;/p&gt;
+
+&lt;p&gt;S：把原数据切片，按照Species的三类分为三个子数据集&lt;/p&gt;
+
+&lt;p&gt;A：在每一个数据集中计算Sepal.Length的平均值&lt;/p&gt;
+
+&lt;p&gt;C：把三个计算后的结果再放回到一起&lt;/p&gt;
+
+&lt;p&gt;也就是说我们要的结果是下面这个样子的。&lt;/p&gt;
+
+&lt;pre&gt;
+     Species meanSL     
+1     setosa  5.006
+2 versicolor  5.936 
+3  virginica  6.588 
+&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这个思想很重要，切片，计算，整合。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;不管是用到什么方法来具体实现，基本都是遵循这个思想。&lt;/p&gt;
+
+&lt;p&gt;我们先来看一种最简单粗暴的实现方法。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;# Split the data according to Species&lt;/span&gt;
+    splitedIris &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; split&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Apply the mean function to each  individual pieces&lt;/span&gt;
+    m1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+    m2 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+    m3 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 注意上面，是用两个方括号，单个方括号返回列表，而两个方括号返回列表的提取对象&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Combine the results&lt;/span&gt;
+    c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;m1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; m2&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; m3&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面就是最直观的运用这种思想来实现的方法。&lt;/p&gt;
+
+&lt;p&gt;当然我们可以进行小小的改进，用一个循环来稍微简化下，看如下代码&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    splitedIris &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; split&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    res &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;i &lt;span class=&quot;kr&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;i&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在我们开始学习R的时候，就有一句&lt;strong&gt;懒人法则&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;尽量不要用循环！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因为基本上可以循环的已经被写成拓展包可以直接调用了。&lt;/p&gt;
+
+&lt;p&gt;我们可以用到的高阶函数如 &lt;code&gt;by&lt;/code&gt;,&lt;code&gt;aggregate&lt;/code&gt;,&lt;code&gt;tapply&lt;/code&gt;等等吧&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;# 用by函数来实现&lt;/span&gt;
+    by&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 用tapply函数实现&lt;/span&gt;
+    tapply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当然实现的方法很多种，还有不少package可以实现&lt;/p&gt;
+
+&lt;p&gt;但是我们的主角终于要登场了！&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href=&quot;http://plyr.had.co.nz/&quot;&gt;Plyr&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;此包一出，其他都可以洗洗睡了。&lt;/p&gt;
+
+&lt;p&gt;这个包里有若干函数，但是我们主要讲的就是&lt;code&gt;ddply&lt;/code&gt;函数&lt;/p&gt;
+
+&lt;p&gt;有关其他函数命名原则可以看&lt;a href=&quot;http://xccds1977.blogspot.hk/2012/04/plyrapply.html&quot;&gt;肖凯老师的博客&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ddply(.data, .variables, .fun = NULL,…)&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;transform(df, var1 = expr1, ...)&lt;/li&gt;
-&lt;li&gt;summarise(df, var1 = expr1, ...)&lt;/li&gt;
+&lt;li&gt;.data ： 原来的数据集&lt;/li&gt;
+&lt;li&gt;.variables : 如何对原数据进行切片&lt;/li&gt;
+&lt;li&gt;.fun : 对切片的数据如何进行再操作&lt;/li&gt;
 &lt;/ul&gt;
 
 
-&lt;p&gt;注意两者差别&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; meanSL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; sdSL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里边我们可以分解看下，&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Transform modiﬁes an existing data frame.&lt;/li&gt;
-&lt;li&gt;Summarise creates a new data frame.&lt;/li&gt;
+&lt;li&gt;iris是原数据集&lt;/li&gt;
+&lt;li&gt;.(Species) 是对Species这个字段进行切片&lt;/li&gt;
+&lt;li&gt;summarize 是一个函数关键字，表示新建一个新的data.frame。 在plyr里与之相对的是&lt;code&gt;transform&lt;/code&gt;，表示在原有数据集中进行修改&lt;/li&gt;
+&lt;li&gt;meanSL，sdSL就是如何计算产生新的字段并最后整合&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;不仅可以这样，还可以在&lt;code&gt;Apply&lt;/code&gt;这一部自定义函数&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; transform&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; SLZ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; sd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面我就自己造了一个函数 来计算Z-Score。&lt;/p&gt;
+
+&lt;p&gt;最后的结果是这个样子的。&lt;/p&gt;
+
+&lt;pre&gt;
+      Sepal.Length Sepal.Width Petal.Length Petal.Width    Species         SLZ
+1            5.1         3.5          1.4         0.2     setosa     0.26667447
+2            4.9         3.0          1.4         0.2     setosa    -0.30071802
+3            4.7         3.2          1.3         0.2     setosa    -0.86811050
+4            4.6         3.1          1.5         0.2     setosa    -1.15180675
+5            5.0         3.6          1.4         0.2     setosa    -0.01702177
+6            5.4         3.9          1.7         0.4     setosa     1.11776320
+7            4.6         3.4          1.4         0.3     setosa    -1.15180675
+8            5.0         3.4          1.5         0.2     setosa    -0.01702177
+9            4.4         2.9          1.4         0.2     setosa    -1.71919923
+10           4.9         3.1          1.5         0.1     setosa    -0.30071802
+
+&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;br&gt;
+这样一来也可以直观的看出来&lt;code&gt;Summarize&lt;/code&gt;和&lt;code&gt;Transform&lt;/code&gt;差别了。&lt;/p&gt;
+
+&lt;p&gt;大家先体会一下plyr包的强大之处，我们在下一篇博文里继续介绍一些高阶用法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;强烈建议大家读一下原作者的这篇&lt;a href=&quot;www.jstatsoft.org/v40/i01/paper%E2%80%8E&quot;&gt;Paper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;还有这个&lt;a href=&quot;http://streaming.stat.iastate.edu/workshops/r-intro/lectures/6-advancedmanipulation.pdf&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
@@ -942,96 +1261,6 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1pEGo8&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>R - Reshape Package II</title>
-      <link>http://yangchao.me/2013/02/reshape-advanced</link>
-      <pubDate>07 Feb 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/02/reshape-advanced</guid>
-      <description>&lt;p&gt;上次提到了Reshape包中的强大的cast函数。由于时间关系，对fun.aggreate，drop，subset等函数没有完全讲清。今天补上&lt;/p&gt;
-
-&lt;p&gt;先看下面的一个例子体会一下&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;reshape&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# example table with non-unique row-names&lt;/span&gt;
-    tab &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.frame&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gene&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;letters&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; each&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; s1&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;runif&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; s2&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;runif&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# melt&lt;/span&gt;
-    tab.melt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; melt&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tab&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# function to summarize with logic: &lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# mean if max/min &amp;lt; 1.5, else median&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 在max/min 小于1.5的时候取均值，而其他情况去中位数&lt;/span&gt;
-    summarize &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;ifelse&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;min&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; median&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;))}&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# ifelse函数的通用用法： ifelse（test, yes,no)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# cast with summarized values&lt;/span&gt;
-    dcast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tab.melt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; gene&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;variable&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;这里强大之处在于，在最后dcast的时候，我们自定义了一个统计函数，而没有用到原来比较简单的mean,max等等。&lt;/p&gt;
-
-&lt;p&gt;但是注意这样一个情况，在运行的时候会出现这样的报错&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; Error in vapply(indices, fun, .default) : 
-    values must be type &amp;#39;logical&amp;#39;,
-     but FUN(X[[1]]) result is type &amp;#39;double&amp;#39;
-    In addition: Warning messages:
-    1: In max(x) : no non-missing arguments to max; returning -Inf
-    2: In min(x) : no non-missing arguments to min; returning Inf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;这里讲到了&lt;code&gt;fill&lt;/code&gt;的情况，原帖在&lt;a href=&quot;http://stackoverflow.com/questions/4835202/error-with-custom-aggregate-function-for-a-cast-call-in-r-reshape2/4835804#4835804?s=7400121f-cdc1-4f76-8bf3-1fc020e44d48&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;注意把代码改为&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    dcast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tab.melt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; gene&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;variable&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;其实说的道理就是要提供给fill一个参数，原来default的参数是不行的，不一定fill=NaN，我试了下fill=o，fill=1，等等任意一个情况都是可行的。&lt;/p&gt;
-
-&lt;p&gt;这样可以体会到Reshape 自定义的强大了吧！&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;在Reshape2拓展包中，还有几个非常有用的函数&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;colsplit&lt;/strong&gt;：把变量分开到不同的列&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    x &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;a_1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;a_2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;b_2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;c_3&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    vars &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; colsplit&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;trt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;time&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;运行之后就出现了如下结果，是不是很炫？！&lt;/p&gt;
-
-&lt;pre&gt;
-    trt time
-1   a   1
-2   a   2
-3   b   2
-4   c   3
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/br&gt;
-&lt;strong&gt;Recast&lt;/strong&gt;： 在一步中实现melt和cast功能&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    recast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; formula&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id.var&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; measure.var&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;例子&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    recast&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;french_fries&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; time &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; variable&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id.var &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 
 </description>
     </item>
