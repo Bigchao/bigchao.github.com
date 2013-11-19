@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 13 Nov 2013 22:39:44 -0800</pubDate>
-    <lastBuildDate>Wed, 13 Nov 2013 22:39:44 -0800</lastBuildDate>
+    <pubDate>Mon, 18 Nov 2013 17:43:15 -0800</pubDate>
+    <lastBuildDate>Mon, 18 Nov 2013 17:43:15 -0800</lastBuildDate>
 
     
     <item>
@@ -177,6 +177,8 @@ Year   Anomaly10y Unc10y
 &lt;/pre&gt;
 
 
+&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;strong&gt;问题1&lt;/strong&gt;： 找到每一年，每种性别中最受欢迎的名字&lt;/p&gt;
 
 &lt;p&gt;还是按照我们的SAC思想&lt;/p&gt;
@@ -231,6 +233,8 @@ Year   Anomaly10y Unc10y
 &lt;/pre&gt;
 
 
+&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
+
 &lt;p&gt;可以看出，1889年，都是男的叫John最多，女的叫Mary最多。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;问题2&lt;/strong&gt;：每一年，每种性别中 （ 作者注： 这就是告诉你怎么切片呢 ）， 名字的首字母所占比例是多少？&lt;/p&gt;
@@ -276,7 +280,8 @@ Year   Anomaly10y Unc10y
 &lt;/pre&gt;
 
 
-&lt;p&gt;最后我们可以可视化一下，用到ggplot2&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/br&gt;
+最后我们可以可视化一下，用到ggplot2&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
     require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;

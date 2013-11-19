@@ -2,63 +2,63 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://yangchao.me/2013/01/welcome-ggplot2</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/01/intro-ggplot2</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/ggplot2-bar-chart</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/reshape-basic</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/reshape-advanced</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/ggplot2-histogram</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/03/plyr-dataming</loc>
-        <lastmod>2013-11-13T20:22:04-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/ggplot2-line-graph</loc>
-        <lastmod>2013-11-13T22:24:49-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/cleveland-Dotplot</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/heat-map</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/05/stack-area-ggplot2</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/06/plyr-advanced</loc>
-        <lastmod>2013-11-13T22:33:40-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/09/Significance-ggplot2</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/11/ggplot2-2d-density</loc>
-        <lastmod>2013-11-12T23:53:15-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/rss.xml</loc>
@@ -66,6 +66,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2013-11-13T22:33:40-08:00</lastmod>
+        <lastmod>2013-11-18T17:37:18-08:00</lastmod>
     </url>
 </urlset>
