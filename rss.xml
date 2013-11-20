@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Mon, 18 Nov 2013 17:43:15 -0800</pubDate>
-    <lastBuildDate>Mon, 18 Nov 2013 17:43:15 -0800</lastBuildDate>
+    <pubDate>Wed, 20 Nov 2013 03:10:01 -0800</pubDate>
+    <lastBuildDate>Wed, 20 Nov 2013 03:10:01 -0800</lastBuildDate>
 
     
     <item>
@@ -68,6 +68,80 @@
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>Horizon Chart - 惊艳到爆的哲学</title>
+      <link>http://yangchao.me/2013/10/horizon-plot</link>
+      <pubDate>20 Oct 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/10/horizon-plot</guid>
+      <description>&lt;p&gt;对于Horizon Chart，可能大家还都比较陌生。
+先来看一个比较经典的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/qSF60Mo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们在日后的ggplot2的教程里会详细讲解这样一个Horizon Chart 是如何做出来的。&lt;/p&gt;
+
+&lt;p&gt;但是大家应该和我差不多，第一次看到这个图的时候感觉是虽然看不太懂，但是觉得很绚丽。&lt;/p&gt;
+
+&lt;p&gt;时髦的词叫作“不明觉历”。&lt;/p&gt;
+
+&lt;p&gt;想要做出一个漂亮的Horizon Chart 第一点就是要看懂它&lt;/p&gt;
+
+&lt;p&gt;这个商业做Horizon Chart 的软件里，介绍了它的作图方法&lt;/p&gt;
+
+&lt;p&gt;原文在：&lt;a href=&quot;http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Horizon Chart主要应用在时间序列的数据里，尤其在金融，物流等等领域可以说应用非常广泛。&lt;/p&gt;
+
+&lt;p&gt;原理比较简单：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;首先有一个最传统的折线图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/ZexplPb.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;分别用不同的颜色标记正值和负值，同时在一个色调里用颜色深浅来表明绝对值的大小&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/uL1yC0Q.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;取负值的镜像，都画在正向的坐标里。这样一来就可以省去不少空间。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/p0O7zku.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/SDsgxgQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;按照图层的不同，在几个不同的图层再次重叠到一起，这样可以再次节省不少空间。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/6GoZEHS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当同时看不同类别时间序列的变化时，这种可视化的方法就显得非常有效。易懂信息量也够大。&lt;/p&gt;
+
+&lt;p&gt;比如上图，可以轻松看到50种股票价格的变化趋势。&lt;/p&gt;
+
+&lt;p&gt;关于Horizon Plot的具体实现方法，主要是ggplot2和LatticeExtra，
+在今后的博客中都会具体讲到。大家先体会下这种Horizon Chart的巨大魅力。&lt;/p&gt;
+
+&lt;p&gt;相关文章：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf&quot;&gt;The Development of the Horizon Graph&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.perceptualedge.com/articles/visual_business_intelligence/time_on_the_horizon.pdf&quot;&gt;Time on the Horizon&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://vis.berkeley.edu/papers/horizon/2009-TimeSeries-CHI.pdf&quot;&gt;Sizing the Horizon: The Effects of Chart Size and Layering
+on the Graphical Perception of Time Series Visualizations&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
@@ -953,7 +1027,8 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;/pre&gt;
 
 
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
 
 &lt;p&gt;原数据有150行，有5个字段，其中Species中有setosa,virginica,versicolor三种。&lt;/p&gt;
 
@@ -1101,170 +1176,6 @@ observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;强烈建议大家读一下原作者的这篇&lt;a href=&quot;www.jstatsoft.org/v40/i01/paper%E2%80%8E&quot;&gt;Paper&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;还有这个&lt;a href=&quot;http://streaming.stat.iastate.edu/workshops/r-intro/lectures/6-advancedmanipulation.pdf&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>ggplot2 - Histogram</title>
-      <link>http://yangchao.me/2013/02/ggplot2-histogram</link>
-      <pubDate>14 Feb 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/02/ggplot2-histogram</guid>
-      <description>&lt;p&gt;&lt;strong&gt;基本问题&lt;/strong&gt;：想做直方图&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;geom_histogram&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;strong&gt;Basic Plot&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wMSbdnr.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;geom_histogram可以对数据框和单一向量做处理，如果想快速看看一个变量的分布是什么样子的可以用下面的代码：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Store the values in a simple vector&lt;/span&gt;
-    w &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; faithful&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;waiting
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;w&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;即把数据框位置设为NULL即可。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;: 改变直方图中柱子的个数。
-默认中，默认的bin个数是30。
-- geom_histogram(binwidth)中修改&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Divide the x range into 15 bins&lt;/span&gt;
-    binsize &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; diff&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;range&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;binsize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wh9T1UM.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt;： 多变量的直方图&lt;/p&gt;
-
-&lt;p&gt;如果想观察多变量直方图&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;facet_grid()&lt;/li&gt;
-&lt;li&gt;map the grouping variable to fill&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;strong&gt;1.facet_grid&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;MASS&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Use smoke as the faceting variable&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bwt&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      facet_grid&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;smoke &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/DXoLuNH.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;注意这里有一个小问题，就是Y轴的坐标上限都是一样的。有时会出现如果不同类别的变量绝对值相差很大，图看起来就不够清爽。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;facet_grid(,scales=&quot;free&quot;)来修改&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bwt&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      facet_grid&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;race &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; scales&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;free&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/2pU3Wiv.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.map the grouping variable to fill&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;把变量放在aes（,fill=)中&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    birthwt1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;birthwt &lt;span class=&quot;c1&quot;&gt;# Make a copy of the data&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Convert smoke to a factor&lt;/span&gt;
-    birthwt1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;smoke &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;smoke&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Map smoke to fill, make the bars NOT stacked, and make them semitransparent&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;birthwt1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bwt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smoke&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;identity&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wn5suUY.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;： 为直方图上加密度曲线&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;geom_density()&lt;/li&gt;
-&lt;li&gt;geom_line(stat=&quot;density&quot;)&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;首先看看geom_density()的用法&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_density&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/fp2Ng9T.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;但是发现在侧边和底部也有黑框包围，不好看。这时候就用到了geom_line()&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# The expand_limits() increases the y range to include the value 0&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      expand_limits&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/VG10TJ6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;但是援引原书中原句&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;A kernel density curve is an estimate of the population distribution, based on the sample data. The amount of smoothing depends on the kernel bandwidth: the larger the band‐width, the more smoothing there is. The bandwidth can be set with the adjust parameter, which has a default value of 1.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;感受如下代码&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adjust&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;density&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adjust&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/NMIwC4u.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们发现adjust的值越大，曲线就越平滑。
-回到最基本的延伸问题：如果想把曲线加到直方图上
-- geom_histogram() + geom_density
-就可以啦&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_histogram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cornsilk&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey60&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_density&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      xlim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;35&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;105&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Q6wvUTN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1pEGo8&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
