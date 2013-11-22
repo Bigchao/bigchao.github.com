@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Fri, 22 Nov 2013 07:46:04 -0800</pubDate>
-    <lastBuildDate>Fri, 22 Nov 2013 07:46:04 -0800</lastBuildDate>
+    <pubDate>Fri, 22 Nov 2013 07:53:17 -0800</pubDate>
+    <lastBuildDate>Fri, 22 Nov 2013 07:53:17 -0800</lastBuildDate>
 
     
     <item>
@@ -68,6 +68,253 @@
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>latticeExtra - Horizon Chart - 应用</title>
+      <link>http://yangchao.me/2013/10/latticeextra-horizon-applied</link>
+      <pubDate>25 Oct 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/10/latticeextra-horizon-applied</guid>
+      <description>&lt;p&gt;感谢一个&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>latticeExtra - Horizon Plot的简单实现</title>
+      <link>http://yangchao.me/2013/10/horizon-lattice-extra</link>
+      <pubDate>24 Oct 2013</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2013/10/horizon-lattice-extra</guid>
+      <description>&lt;p&gt;上次给大家介绍了一下Horizon Plot的作图哲学，这次我们尝试着用LatticeExtra 这个包来实现以下。&lt;/p&gt;
+
+&lt;p&gt;基本代码量不大，不过可以自定义的地方不少。&lt;/p&gt;
+
+&lt;p&gt;有关Horizon Plot的作图哲学和一些其它预备知识，请看：&lt;a href=&quot;http://yangchao.me/2013/10/horizon-plot&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;文中实现的是按照原作者的Manual中的源代码, 在: &lt;strong&gt;&lt;a href=&quot;http://latticeextra.r-forge.r-project.org/man/horizonplot.html&quot;&gt;这里&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;并对代码进行详细注释。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;latticeExtra&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;## 产生数据集&lt;/span&gt;
+    set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    dat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ts&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;matrix&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cumsum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; ncol &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; paste&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;series&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; LETTERS&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在安装latticeExtra的时候如果遇到问题，请参见一下代码重新安装&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xtsExtra&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://R-Forge.R-project.org&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;horizon plot是将时间序列的数据可视化。所以我们需要将原来随机出来的数据转变成为随机数列， 用到的就是 &lt;code&gt;ts&lt;/code&gt;命令&lt;/p&gt;
+
+&lt;p&gt;产生之后的数据是大概是这个样子&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;n&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+&lt;pre&gt;
+
+        series A  series B series C series D  series E   series F  series G  series H  series I  series J  series K
+ [1,] -0.6264538  7.517331 16.30991 6.529042 -14.14928 -10.513177 -29.42972 -19.38421 -14.69748 -32.70429 -28.79620
+ [2,] -0.4428105  9.206204 18.20556 8.031466 -15.97536  -9.401245 -27.50656 -19.20529 -14.68476 -32.12291 -30.71846
+ [3,] -1.2784391 10.792793 17.60257 8.559774 -14.98008 -10.272023 -29.36339 -19.48783 -15.55821 -32.26963 -29.09876
+ [4,]  0.3168417 10.461885 17.21170 9.101965 -14.99194 -10.061291 -31.46951 -20.25513 -15.21541 -30.76265 -28.57949
+ [5,]  0.6463495  8.176649 16.79548 8.965292 -15.59157  -9.991895 -30.77186 -20.83154 -15.39280 -31.04218 -28.63534
+ [6,] -0.1741189 10.674311 16.41982 7.828558 -15.76952 -11.654544 -29.86441 -21.74639 -14.47136 -29.01444 -27.93892
+ [7,]  0.3133101 11.341377 16.05319 6.331931 -16.19550 -10.843704 -30.06040 -21.37648 -14.17042 -30.21018 -27.88540
+ [8,]  1.0516348 11.882704 15.75751 6.108545 -15.19884 -12.756050 -30.26722 -22.84417 -13.47703 -28.89786 -29.19569
+ [9,]  1.6274162 11.869305 17.19933 8.110265 -14.47118 -14.002804 -29.54218 -24.58953 -13.15156 -29.42187 -31.31875
+[10,]  1.3220278 12.379413 16.50179 8.331968 -16.19781 -13.004649 -28.14346 -25.25691 -12.74351 -29.06762 -31.52683
+[11,]  2.8338090 12.215037 16.11363 8.496341 -15.84441 -13.545522 -29.73402 -24.17263 -11.98367 -29.13930 -31.83962
+[12,]  3.2236522 12.635732 16.76616 8.828965 -15.11760 -13.761898 -28.42952 -24.04980 -14.27082 -29.27244 -32.89785
+[13,]  2.6024116 12.235485 17.89093 8.443757 -14.44934 -15.383835 -28.23351 -24.54405 -13.75298 -29.36052 -32.48063
+[14,]  0.3877118 10.865277 17.11882 7.045003 -16.87365 -16.834799 -28.57285 -23.87446 -15.10022 -28.44273 -32.79608
+[15,]  1.5126427 11.853116 16.61074 9.720744 -17.10901 -16.483889 -27.30771 -24.22594 -14.73706 -28.41129 -31.97053
+[16,]  1.4677091 13.372861 17.13436 9.297058 -15.12938 -16.658436 -26.36793 -24.34092 -13.42231 -27.05236 -30.67926
+[17,]  1.4515188 13.064120 18.15211 8.998456 -14.33258 -17.249865 -25.08998 -24.26793 -13.87061 -26.93886 -31.30437
+[18,]  2.3953550 11.810830 17.90095 7.206114 -16.04186 -18.583892 -25.38114 -23.17916 -14.67878 -26.76456 -32.17951
+[19,]  3.2165762 12.453072 16.47095 6.958106 -17.70553 -19.681190 -24.60497 -21.88659 -14.76505 -26.81804 -32.03616
+[20,]  3.8104775 12.408363 18.18008 6.710802 -17.21442 -17.645087 -24.30924 -20.60408 -13.17962 -27.24280 -30.61097
+       series L
+ [1,] -35.67228
+ [2,] -34.86300
+ [3,] -35.57462
+ [4,] -38.26421
+ [5,] -38.83126
+ [6,] -37.53206
+ [7,] -37.72235
+ [8,] -38.36040
+ [9,] -40.39578
+[10,] -41.00015
+[11,] -41.80832
+[12,] -42.41509
+[13,] -42.32819
+[14,] -42.56248
+[15,] -41.29996
+[16,] -42.86375
+[17,] -44.35723
+[18,] -45.45436
+[19,] -45.48347
+[20,] -43.30978
+
+&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;我们可以基本认定这个就是一个时间序列的数据了。&lt;/p&gt;
+
+&lt;p&gt;因为我们是纯介绍这个Horizon Plot 这个图的作图格式，上面的代码只是模拟产生一个数据集。&lt;/p&gt;
+
+&lt;p&gt;首先我们可以将数据简单的可视化一下子。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;## show simple line plot first, for reference.&lt;/span&gt;
+    xyplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/zvu0wfQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;数据的大概变化就是如此吧&lt;/p&gt;
+
+&lt;p&gt;下面开始我们的&lt;strong&gt;Horizon Plot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;## 先设定基本的图层设置&lt;/span&gt;
+    infolayers &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;
+    layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.scaleArrow&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;grey&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                         srt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; current.panel.limits&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+        panel.text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; round&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; font &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                   cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;#9FC8DC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这两个图层的大概意思是&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;第一个图层： 在右侧画出每个空间，然后箭头&lt;/li&gt;
+&lt;li&gt;第二个图层： 计算出每个不同的变量的Horizon Plot中的基准值，并标图形的左边&lt;/li&gt;
+&lt;li&gt;有关颜色的编码信息可以参照这个网站，并推荐之。&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;如果大家对基准值的这个概念还不是很熟悉的话，可以快速看看我之前的这篇博客 &lt;a href=&quot;http://yangchao.me/2013/10/horizon-plot&quot;&gt;《Horizon Chart - 惊艳到爆的哲学》&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下面我们通过一系列的变通来分别体会下不同的参数的含义。
+命令都接近于自然语言，所以有些很显而易见的就不提了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Case 1&lt;/strong&gt;：each panel has a different origin and scale:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;## (&amp;#39;origin&amp;#39; default is the first data value in each series).&lt;/span&gt;
+    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      infolayers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/2i7atuA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;短短一行代码，已经把Horizon Plot画出来了。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;colorky = TRUE 的意思是最右面是否把表明色阶的注释标出。大家可以试一试如果改成&lt;code&gt;FALSE&lt;/code&gt;会怎样&lt;/li&gt;
+&lt;li&gt;每一个Panel的初始值和范围变化都是不一样的。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Case 2&lt;/strong&gt;: fixed scale but different origin (baseline):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
+    &lt;span class=&quot;c1&quot;&gt;## (similar in concept to scales = &amp;quot;sliced&amp;quot;)&lt;/span&gt;
+    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      infolayers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/q3TGAps.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过&lt;code&gt;horizonscale=10&lt;/code&gt;, 所有的变化范围都变成了相同的值&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Case 3&lt;/strong&gt;: fixed scale and constant origin (all same scales):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        
+    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      infolayers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/0Rs2hLj.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过&lt;code&gt;origin=0&lt;/code&gt;把所有的初始值都设为0&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Case 4&lt;/strong&gt;：same scales with full coverage of color scale:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        
+    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;relation &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+            colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey.digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      infolayers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/8CwVN62.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过&lt;code&gt;scales = list(y = list(relation = &quot;same&quot;))&lt;/code&gt;将右边的scales显示为绝对值, 而不是变化值。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Case 5&lt;/strong&gt;: use ylab rather than strip.left, for readability.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        
+    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; strip.left &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; rot &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+      layer_&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.fill&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gray90&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; panel.xblocks&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/F0tqAw5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过&lt;code&gt;strip.left = FALSE&lt;/code&gt;把原来竖起来的图例去掉&lt;/li&gt;
+&lt;li&gt;再通过&lt;code&gt;ylab = list(rev(colnames(dat)), rot = 0, cex = 0.7))&lt;/code&gt;把原来的加上&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;Horizon Plot基本上常用的就是这一些用法。当然还有不少应用到实际中的，特别是在表现在股票价格变化中的时候，就可以明显感觉它的强大之处。我们会在之后介绍具体的特别应用&lt;/p&gt;
+
+&lt;p&gt;相关文章：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://latticeextra.r-forge.r-project.org/#segplot&amp;amp;theme=default&quot;&gt;LatticeExtra: R Forger&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://cran.r-project.org/web/packages/latticeExtra/latticeExtra.pdf&quot;&gt;官方Manual&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;文中代码和图片在: &lt;a href=&quot;http://pan.baidu.com/s/1DvW29&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
@@ -783,399 +1030,6 @@ Year   Anomaly10y Unc10y
 &lt;li&gt;scales：表示是否允许不同面（facet）的坐标轴变化，或者固定。 &lt;code&gt;scales=free_y&lt;/code&gt; 表示y轴随意变化。我们看到因为两个facet所含数据是不一样的，所以改成&lt;code&gt;free_y&lt;/code&gt;显得更加好看&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;space： 也是一个道理&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1LAKA&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>ggplot2 - Line Graph</title>
-      <link>http://yangchao.me/2013/04/ggplot2-line-graph</link>
-      <pubDate>01 Apr 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/04/ggplot2-line-graph</guid>
-      <description>&lt;p&gt;上次讲过了GGPlot的条形图，大家对GGPLOT2的画图理念一定有了基本的理解。这次我们来学习折线图。&lt;/p&gt;
-
-&lt;p&gt;基本的语法可谓非常简单&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Base Plot&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    ggplot &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/GTtCqKV.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们查看BOD的原数据&lt;/p&gt;
-
-&lt;pre&gt;
-Time demand
-    1    8.3
-    2   10.3
-    3   19.0
-    4   16.0
-    5   15.6
-    7   19.8&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
-
-&lt;p&gt;这个时候用到Factor函数，将Time进行因子化&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    BOD1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; BOD &lt;span class=&quot;c1&quot;&gt;# Make a copy of the data&lt;/span&gt;
-    BOD1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Time &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD1&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; group&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;尤其要注意，因子化之后必须用到aes(group=1),才能正常画出图来。&lt;/li&gt;
-&lt;li&gt;若想改变坐标的上下限可以用到如下代码，放在之前代码的后面。具体的用法我们以后会专门讲&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ylim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    expand_limits&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;：如果现在我想在原来折线图上加散点怎么办？&lt;/p&gt;
-
-&lt;p&gt;其实也很简单！&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/p25J3mB.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;同样，个人觉得，这个图做出来尚且没有Excel方便，也没有Excel好看。 LOL&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt; ：如果想用Log Y的坐标轴的话，其实也很简单，还稍微可以体现点GGPLOT2的价值了。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;worldpop&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Population&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; scale_y_log10&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/E0c7o7t.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;最后的一行代码用处就是把Y轴设为log10形式的，大家感受下&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;： 如果想一图多线怎么办？&lt;/p&gt;
-
-&lt;p&gt;其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看&lt;/span&gt;
-    tg &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ToothGrowth&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;supp&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;dose&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; summarise&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; length&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;len&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 对ToothGrowth数据集中的supp，dose两个求len变量的平均&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;在这个例子中，dose应该被因子化：0.5,1.0,1.5 只包含这三个剂量。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;factor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; group&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/VCyTzUO.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;这里特别要注意！&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;这里特别要注意！&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;这里特别要注意！&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在因子化之后，aes中一定要包含group=supp 这个语句。
-否则会出现如下报错：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;geom_path: Each group consists of only one
-observation. Do you need to adjust the group aesthetic?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;我当时自己作图的时候，出现过这个问题找了好多资料都没有给出一个特别好的解答。还是要啃官方的manual，一个字一个字的读，这样才能理解透彻。&lt;/p&gt;
-
-&lt;p&gt;有关这个问题的最好解答：&lt;a href=&quot;http://kohske.wordpress.com/2010/12/27/faq-geom_line-doesnt-draw-lines/&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题4&lt;/strong&gt;： 改变线中散点的颜色&lt;/p&gt;
-
-&lt;p&gt;改变其中的这两个参数即可
-- &lt;strong&gt;shape&lt;/strong&gt;
-- &lt;strong&gt;fill&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;体会如下语句&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;           
-    &lt;span class=&quot;c1&quot;&gt;# Make the points a little larger&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/JrojSxN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-    &lt;span class=&quot;c1&quot;&gt;# Also use a point with a color fill&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cAvavrJ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们发现上面的作图方法会出现点重合的情况
-所以要可以稍稍微调下&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;         
-      &lt;span class=&quot;c1&quot;&gt;# Dodge lines by 0.2&lt;/span&gt;
-      geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_dodge&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-      &lt;span class=&quot;c1&quot;&gt;# Dodge points by 0.2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/BqSaXvs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题5&lt;/strong&gt;： 如果想改变折线和散点的颜色和类型怎么办？&lt;/p&gt;
-
-&lt;p&gt;修改下列括号中的参数即可&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;geom_line()&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;geom_point()&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;BOD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Time&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;demand&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wXPFtXP.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tg&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dose&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;supp&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dashed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;shape&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/KRXvejA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;上面给大家基本介绍了一下有关折线图的简单画法。一直在纠结的问题就是，这样的作图其实并不太方便。相比之下还是Excel来得快。
-但是，在R作图有个好处是可以自定义的东西很多，可以精雕细琢的很多，尤其通常在数据分析之后直接出图很是方便。写成代码可以重复使用。而Excel如果不用VBA，或者其他插件，相比R还是有不少差距的。建议大家还是学学ggplot。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1mqTOL&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Plyr- 数据整合利器</title>
-      <link>http://yangchao.me/2013/03/plyr-dataming</link>
-      <pubDate>10 Mar 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/03/plyr-dataming</guid>
-      <description>&lt;p&gt;Hadley Wickham写的Plyr拓展包，是所有拓展包里下载最多的。联合上Reshape2，和ggplot2，devtools已经成为业界口碑最好的。&lt;/p&gt;
-
-&lt;p&gt;在开始介绍plyr拓展包之前，先简单介绍一种数据预处理和数据清洁的思想&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3&gt;S-A-C&lt;/h3&gt;
-
-&lt;p&gt;S： Split 即为把数据切片等待处理&lt;/p&gt;
-
-&lt;p&gt;A： Apply 对于每一个片层进行数据的运算&lt;/p&gt;
-
-&lt;p&gt;C： Combine 把结果进行相加&lt;/p&gt;
-
-&lt;p&gt;我们先看一个引例:&lt;/p&gt;
-
-&lt;p&gt;用到的是R自带的Iris数据集&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
-
-&lt;pre&gt;
-  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;
-&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;原数据有150行，有5个字段，其中Species中有setosa,virginica,versicolor三种。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;任务&lt;/strong&gt;： 计算在Species字段中，计算每一种物种类别Sepal.Length的平均值&lt;/p&gt;
-
-&lt;p&gt;S：把原数据切片，按照Species的三类分为三个子数据集&lt;/p&gt;
-
-&lt;p&gt;A：在每一个数据集中计算Sepal.Length的平均值&lt;/p&gt;
-
-&lt;p&gt;C：把三个计算后的结果再放回到一起&lt;/p&gt;
-
-&lt;p&gt;也就是说我们要的结果是下面这个样子的。&lt;/p&gt;
-
-&lt;pre&gt;
-     Species meanSL     
-1     setosa  5.006
-2 versicolor  5.936 
-3  virginica  6.588 
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;这个思想很重要，切片，计算，整合。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;不管是用到什么方法来具体实现，基本都是遵循这个思想。&lt;/p&gt;
-
-&lt;p&gt;我们先来看一种最简单粗暴的实现方法。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;# Split the data according to Species&lt;/span&gt;
-    splitedIris &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; split&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Apply the mean function to each  individual pieces&lt;/span&gt;
-    m1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-    m2 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-    m3 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 注意上面，是用两个方括号，单个方括号返回列表，而两个方括号返回列表的提取对象&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Combine the results&lt;/span&gt;
-    c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;m1&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; m2&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; m3&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;上面就是最直观的运用这种思想来实现的方法。&lt;/p&gt;
-
-&lt;p&gt;当然我们可以进行小小的改进，用一个循环来稍微简化下，看如下代码&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    splitedIris &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; split&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    res &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;i &lt;span class=&quot;kr&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;length&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    res&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;splitedIris&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;i&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;在我们开始学习R的时候，就有一句&lt;strong&gt;懒人法则&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;尽量不要用循环！&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;因为基本上可以循环的已经被写成拓展包可以直接调用了。&lt;/p&gt;
-
-&lt;p&gt;我们可以用到的高阶函数如 &lt;code&gt;by&lt;/code&gt;,&lt;code&gt;aggregate&lt;/code&gt;,&lt;code&gt;tapply&lt;/code&gt;等等吧&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;# 用by函数来实现&lt;/span&gt;
-    by&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 用tapply函数实现&lt;/span&gt;
-    tapply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; iris&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;当然实现的方法很多种，还有不少package可以实现&lt;/p&gt;
-
-&lt;p&gt;但是我们的主角终于要登场了！&lt;/p&gt;
-
-&lt;h3&gt;&lt;a href=&quot;http://plyr.had.co.nz/&quot;&gt;Plyr&lt;/a&gt;&lt;/h3&gt;
-
-&lt;p&gt;此包一出，其他都可以洗洗睡了。&lt;/p&gt;
-
-&lt;p&gt;这个包里有若干函数，但是我们主要讲的就是&lt;code&gt;ddply&lt;/code&gt;函数&lt;/p&gt;
-
-&lt;p&gt;有关其他函数命名原则可以看&lt;a href=&quot;http://xccds1977.blogspot.hk/2012/04/plyrapply.html&quot;&gt;肖凯老师的博客&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ddply(.data, .variables, .fun = NULL,…)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;.data ： 原来的数据集&lt;/li&gt;
-&lt;li&gt;.variables : 如何对原数据进行切片&lt;/li&gt;
-&lt;li&gt;.fun : 对切片的数据如何进行再操作&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; meanSL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; sdSL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;这里边我们可以分解看下，&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;iris是原数据集&lt;/li&gt;
-&lt;li&gt;.(Species) 是对Species这个字段进行切片&lt;/li&gt;
-&lt;li&gt;summarize 是一个函数关键字，表示新建一个新的data.frame。 在plyr里与之相对的是&lt;code&gt;transform&lt;/code&gt;，表示在原有数据集中进行修改&lt;/li&gt;
-&lt;li&gt;meanSL，sdSL就是如何计算产生新的字段并最后整合&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;不仅可以这样，还可以在&lt;code&gt;Apply&lt;/code&gt;这一部自定义函数&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iris&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Species&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; transform&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; SLZ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; sd&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Sepal.Length&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;上面我就自己造了一个函数 来计算Z-Score。&lt;/p&gt;
-
-&lt;p&gt;最后的结果是这个样子的。&lt;/p&gt;
-
-&lt;pre&gt;
-      Sepal.Length Sepal.Width Petal.Length Petal.Width    Species         SLZ
-1            5.1         3.5          1.4         0.2     setosa     0.26667447
-2            4.9         3.0          1.4         0.2     setosa    -0.30071802
-3            4.7         3.2          1.3         0.2     setosa    -0.86811050
-4            4.6         3.1          1.5         0.2     setosa    -1.15180675
-5            5.0         3.6          1.4         0.2     setosa    -0.01702177
-6            5.4         3.9          1.7         0.4     setosa     1.11776320
-7            4.6         3.4          1.4         0.3     setosa    -1.15180675
-8            5.0         3.4          1.5         0.2     setosa    -0.01702177
-9            4.4         2.9          1.4         0.2     setosa    -1.71919923
-10           4.9         3.1          1.5         0.1     setosa    -0.30071802
-
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;
-这样一来也可以直观的看出来&lt;code&gt;Summarize&lt;/code&gt;和&lt;code&gt;Transform&lt;/code&gt;差别了。&lt;/p&gt;
-
-&lt;p&gt;大家先体会一下plyr包的强大之处，我们在下一篇博文里继续介绍一些高阶用法&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;强烈建议大家读一下原作者的这篇&lt;a href=&quot;www.jstatsoft.org/v40/i01/paper%E2%80%8E&quot;&gt;Paper&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;还有这个&lt;a href=&quot;http://streaming.stat.iastate.edu/workshops/r-intro/lectures/6-advancedmanipulation.pdf&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>

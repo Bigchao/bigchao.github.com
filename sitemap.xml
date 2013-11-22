@@ -5,6 +5,10 @@
         <lastmod>2013-11-19T19:31:25-08:00</lastmod>
     </url>
     <url>
+        <loc>http://yangchao.me/2012/06/memorize-michael-jackson</loc>
+        <lastmod>2013-11-21T08:04:45-08:00</lastmod>
+    </url>
+    <url>
         <loc>http://yangchao.me/2012/08/story-vision</loc>
         <lastmod>2013-11-19T18:59:36-08:00</lastmod>
     </url>
@@ -66,7 +70,15 @@
     </url>
     <url>
         <loc>http://yangchao.me/2013/10/horizon-plot</loc>
-        <lastmod>2013-11-19T23:04:21-08:00</lastmod>
+        <lastmod>2013-11-21T21:07:04-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2013/10/horizon-lattice-extra</loc>
+        <lastmod>2013-11-22T01:05:01-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2013/10/latticeextra-horizon-applied</loc>
+        <lastmod>2013-11-21T22:20:44-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/11/ggplot2-2d-density</loc>
@@ -78,6 +90,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2013-11-19T23:04:21-08:00</lastmod>
+        <lastmod>2013-11-22T01:05:01-08:00</lastmod>
     </url>
 </urlset>

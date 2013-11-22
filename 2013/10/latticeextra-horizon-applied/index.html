@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="R - Reshape Package II | 技术改变世界">
+		<meta name="description" content="latticeExtra - Horizon Chart - 应用 | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>R - Reshape Package II</title>
+		<title>latticeExtra - Horizon Chart - 应用</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -98,100 +98,20 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">R - Reshape Package II</h1>
+		<h1 id="identifier">latticeExtra - Horizon Chart - 应用</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>上次提到了Reshape包中的强大的cast函数。由于时间关系，对fun.aggreate，drop，subset等函数没有完全讲清。今天补上</p>
-
-<p>先看下面的一个例子体会一下</p>
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>reshape<span class="p">)</span>
-    <span class="c1"># example table with non-unique row-names</span>
-    tab <span class="o">&lt;-</span> data.frame<span class="p">(</span>gene<span class="o">=</span>rep<span class="p">(</span>letters<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> each<span class="o">=</span><span class="m">3</span><span class="p">),</span> s1<span class="o">=</span>runif<span class="p">(</span><span class="m">9</span><span class="p">),</span> s2<span class="o">=</span>runif<span class="p">(</span><span class="m">9</span><span class="p">))</span>
-    <span class="c1"># melt</span>
-    tab.melt <span class="o">&lt;-</span> melt<span class="p">(</span>tab<span class="p">,</span> id<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-    <span class="c1"># function to summarize with logic: </span>
-    <span class="c1"># mean if max/min &lt; 1.5, else median</span>
-    <span class="c1"># 在max/min 小于1.5的时候取均值，而其他情况去中位数</span>
-    summarize <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">){</span>ifelse<span class="p">(</span>max<span class="p">(</span>x<span class="p">)</span><span class="o">/</span>min<span class="p">(</span>x<span class="p">)</span><span class="o">&lt;</span><span class="m">1.5</span><span class="p">,</span> mean<span class="p">(</span>x<span class="p">),</span> median<span class="p">(</span>x<span class="p">))}</span>
-    <span class="c1"># ifelse函数的通用用法： ifelse（test, yes,no)</span>
-    <span class="c1"># cast with summarized values</span>
-    dcast<span class="p">(</span>tab.melt<span class="p">,</span> gene<span class="o">~</span>variable<span class="p">,</span> summarize<span class="p">)</span>
-</code></pre></div>
-
-
-<p>这里强大之处在于，在最后dcast的时候，我们自定义了一个统计函数，而没有用到原来比较简单的mean,max等等。</p>
-
-<p>但是注意这样一个情况，在运行的时候会出现这样的报错</p>
-
-<div class="highlight"><pre><code class="html"> Error in vapply(indices, fun, .default) : 
-    values must be type &#39;logical&#39;,
-     but FUN(X[[1]]) result is type &#39;double&#39;
-    In addition: Warning messages:
-    1: In max(x) : no non-missing arguments to max; returning -Inf
-    2: In min(x) : no non-missing arguments to min; returning Inf
-</code></pre></div>
-
-
-<p>这里讲到了<code>fill</code>的情况，原帖在<a href="http://stackoverflow.com/questions/4835202/error-with-custom-aggregate-function-for-a-cast-call-in-r-reshape2/4835804#4835804?s=7400121f-cdc1-4f76-8bf3-1fc020e44d48">这里</a></p>
-
-<p>注意把代码改为</p>
-
-<div class="highlight"><pre><code class="r">    dcast<span class="p">(</span>tab.melt<span class="p">,</span> gene<span class="o">~</span>variable<span class="p">,</span> summarize<span class="p">,</span> fill<span class="o">=</span><span class="kc">NaN</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>其实说的道理就是要提供给fill一个参数，原来default的参数是不行的，不一定fill=NaN，我试了下fill=o，fill=1，等等任意一个情况都是可行的。</p>
-
-<p>这样可以体会到Reshape 自定义的强大了吧！</p>
-
-<hr />
-
-<p>在Reshape2拓展包中，还有几个非常有用的函数</p>
-
-<p><strong>colsplit</strong>：把变量分开到不同的列</p>
-
-<div class="highlight"><pre><code class="r">    
-    x <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;a_1&quot;</span><span class="p">,</span> <span class="s">&quot;a_2&quot;</span><span class="p">,</span> <span class="s">&quot;b_2&quot;</span><span class="p">,</span> <span class="s">&quot;c_3&quot;</span><span class="p">)</span>
-    vars <span class="o">&lt;-</span> colsplit<span class="p">(</span>x<span class="p">,</span> <span class="s">&quot;_&quot;</span><span class="p">,</span> c<span class="p">(</span><span class="s">&quot;trt&quot;</span><span class="p">,</span> <span class="s">&quot;time&quot;</span><span class="p">))</span>
-</code></pre></div>
-
-
-<p>运行之后就出现了如下结果，是不是很炫？！</p>
-
-<pre>
-    trt time
-1   a   1
-2   a   2
-3   b   2
-4   c   3
-</pre>
-
-
-<p><br></br>
-<strong>Recast</strong>： 在一步中实现melt和cast功能</p>
-
-<div class="highlight"><pre><code class="r">    recast<span class="p">(</span>data<span class="p">,</span> formula<span class="p">,</span> <span class="kc">...</span><span class="p">,</span> id.var<span class="p">,</span> measure.var<span class="p">)</span>
-</code></pre></div>
-
-
-<p>例子</p>
-
-<div class="highlight"><pre><code class="r">    recast<span class="p">(</span>french_fries<span class="p">,</span> time <span class="o">~</span> variable<span class="p">,</span> id.var <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span>
-</code></pre></div>
-
-
-
+		<p>感谢一个</p>
 
 		
 		<div id="donation">
 		欢迎<a href="https://me.alipay.com/bigchao">捐赠作者</a>,鼓励更多分享:)
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/02/reshape-advanced&title=R - Reshape Package II"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/02/reshape-advanced&text=R - Reshape Package II"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/10/latticeextra-horizon-applied&title=latticeExtra - Horizon Chart - 应用"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/10/latticeextra-horizon-applied&text=latticeExtra - Horizon Chart - 应用"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>
