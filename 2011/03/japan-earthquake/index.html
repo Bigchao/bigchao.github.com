@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="ggplot2 - Wilkinson Dot Plot | 技术改变世界">
+		<meta name="description" content=" | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>ggplot2 - Wilkinson Dot Plot</title>
+		<title></title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -100,73 +100,40 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">ggplot2 - Wilkinson Dot Plot</h1>
+		<h1 id="identifier"></h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。</p>
+		<p>日本地震了。当我看到这条消息的时候只想到了自己大学朝夕相处的室友光林和小弟张雨生在东京，赵雪在福冈。我想确认他们很安全。说老实话，地不地震的跟我关系并不大。</p>
 
-<ul>
-<li><strong>geom_dotplot()</strong></li>
-</ul>
+<p>后来网上出现了两方比较明显的不同的态度。</p>
 
+<p>首先，灾难面前无国界，本着这样的原则，作为近邻的中国民众开始在各种媒介上表示祈福。当然另一方面无可回避的，中国人是恩怨意识无比强烈的民族，大家念着汶川地震时候日本救援队留下的一幕幕感人画面，来而不往非礼也，祈福一下无可厚非。另一个角度，中日历来水火不相容，本着这样的原则，作为近百年深受这个所谓忘恩负义国家欺凌的民族，在同样强烈的恩怨意识灌输下，作为近邻的中国民众在网络上也开始表示对死难者的哀悼，不同在于，背景音乐配的是经典节庆曲目好日子。所谓装叉派和批判派就诞生了。</p>
 
-<p>首先看一个例子</p>
+<p>本来是觉得嚷着“热烈庆祝日本地震”是种非常荒唐的行为，但是当你看到“日本坚强，我们一起共度难关”就会觉得更加刺眼。虽然那些热烈庆贺日本地震的人不值得追捧，但这些打着人性的旗号，透着装高雅本质的批判帝们却是货真价实的更加让人不爽。</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    countries2009 <span class="o">&lt;-</span> subset<span class="p">(</span>countries<span class="p">,</span> Year<span class="o">==</span><span class="m">2009</span> <span class="o">&amp;</span> healthexp<span class="o">&gt;</span><span class="m">2000</span><span class="p">)</span>
-    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>countries2009<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>infmortality<span class="p">))</span>
-    p <span class="o">+</span> geom_dotplot<span class="p">()</span>
-        
-</code></pre></div>
+<p>其实我也不是那么的狭隘的民族主义者，或者说我确实有点狭隘，但是没有那么狭隘。但是面对这样一群非常谄媚的祈福，我能够嗅到的只是一种崇洋媚外的味道。而且这种谄媚站到了人性的道德的制高点来俯视批判别人，本身看来就是可笑的。在我看来这确实不是高雅，就是装。难道他们在批判别人不够宽容没有人性的时候，忘了中日这种特殊的身份。</p>
 
+<p>看过的资料统计显示，日本人对中国或中国人有好感的在40%以下，对于中国崛起持敌视态度的超过半数。有人会转载汶川地震时日本论坛上的言论来证明日本人民的国际人道主义精神。但也有人事后说他看到的日本论坛不是这么一回事。没有人民的支持，鹰派政府人物如何上得了台面，首相如何进得了神社。所以没有不变的友谊，只有不变的利益，大家一个劲儿傻呵呵为日本祈福，对于偶尔出现的愤青言论得而诛之，这个真有点儿狗拿耗子多管闲事之嫌。</p>
 
-<p><img src="http://i.imgur.com/X8gxtci.png" alt="" /></p>
+<p>有个小故事来讽刺这种宽容： 一个女孩在年轻的时候遭人强奸，后来告到法院，却因为施暴者的亲戚是公安局长最终女孩败诉。因此她没法上学出外打工，历经沧桑和痛苦。再后来她听说施暴者家里火灾死了。她回到村里，打了一个条幅：“老天有眼，恶有恶报。” 后来全村人都骂她，说她不够“宽容”。</p>
 
-<p>我们发现其实图并不是很好看</p>
+<p>南京鸣警笛纪念大屠杀70周年，姥爷是南京人，市场星星点点提过，每次提起就摇头话题一转而过。看电视上，当尖锐的警报骤然响起，内心有种无力的感觉。想到抗战时牺牲的4000万同胞，感到很是沧桑。</p>
 
-<ul>
-<li>Y轴没有意义 用scale_y_continuous来调整</li>
-<li>bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</li>
-</ul>
+<p>其实让我最不爽的是。国内云南的地震就在日本地震的前一天没有人关注。而大家却嚷嚷着给日本去献血。还有更加让我不理解的是，为什么有人还再散布诋毁我们国家形象的谣言呢？</p>
 
+<p>谣言大概是这样的：“日本震后三得利免费发放食品饮料，而我国云南地震震后却要让灾区先交钱才能领取救灾帐篷。”同时夹杂了对中国的各种不满。 后来这样的谣言攻破了。日本没有免费发送食品饮料，我们云南也没有办出这么丧尽天良的事情。我不知道传播这样谣言的动机什么。 日本人的素质确实很高，在面对灾难的那种秩序和镇定值得我们学习。但是以此来无中生有捏造让我感到非常反感。</p>
 
-<div class="highlight"><pre><code class="r">    p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
-    scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>   <span class="c1"># Remove tick markers</span>
-    theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_blank<span class="p">())</span> <span class="c1"># Remove axis label</span>
-</code></pre></div>
-
-
-<h2><img src="http://i.imgur.com/Tw1MtH7.png" alt="" /></h2>
-
-<p><strong>延伸问题</strong>：不同变量出现在一个图上</p>
-
-<ul>
-<li>设置<code>binaxis</code></li>
-</ul>
-
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
-      geom_dotplot<span class="p">(</span>binaxis<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> binwidth<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stackdir<span class="o">=</span><span class="s">&quot;center&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p><img src="http://i.imgur.com/QgEY7D0.png" alt="" /></p>
-
-<ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1mWQc5">这里</a></li>
-</ul>
-
+<p>最后，看到一个非常血气方刚的态度：如果和日本开战，我会抱着枪冲在最前面；如果去日本救灾，我会抬着担架跑在最前面；这是我心中的真男人！</p>
 
 		
 		<div id="donation">
 		欢迎<a href="https://me.alipay.com/bigchao">捐赠作者</a>,鼓励更多分享:)
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/Wilkinson-Dot-Plot&title=ggplot2 - Wilkinson Dot Plot"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/Wilkinson-Dot-Plot&text=ggplot2 - Wilkinson Dot Plot"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2011/03/japan-earthquake&title="></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2011/03/japan-earthquake&text="></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>
