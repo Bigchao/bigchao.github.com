@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://yangchao.me/2011/03/japan-earthquake</loc>
-        <lastmod>2013-11-22T08:24:55-08:00</lastmod>
+        <lastmod>2013-11-24T06:26:26-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2012/06/happy-madives</loc>
@@ -82,7 +82,7 @@
     </url>
     <url>
         <loc>http://yangchao.me/2013/10/latticeextra-horizon-applied</loc>
-        <lastmod>2013-11-24T06:11:35-08:00</lastmod>
+        <lastmod>2013-11-24T06:45:52-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/11/ggplot2-2d-density</loc>
@@ -94,6 +94,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2013-11-24T06:11:35-08:00</lastmod>
+        <lastmod>2013-11-24T06:45:52-08:00</lastmod>
     </url>
 </urlset>
