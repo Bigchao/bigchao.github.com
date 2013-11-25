@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Sun, 24 Nov 2013 22:53:12 -0800</pubDate>
-    <lastBuildDate>Sun, 24 Nov 2013 22:53:12 -0800</lastBuildDate>
+    <pubDate>Mon, 25 Nov 2013 03:48:32 -0800</pubDate>
+    <lastBuildDate>Mon, 25 Nov 2013 03:48:32 -0800</lastBuildDate>
 
     
     <item>
@@ -31,7 +31,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/nE3VPUs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/nE3VPUs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们可以在原始图中添加类似登高线的表示，用以标记密集程度。&lt;/p&gt;
 
@@ -40,14 +40,14 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/nghFH1z.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/nghFH1z.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Map density estimate to fill color&lt;/span&gt;
     p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/bnGh3DC.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/bnGh3DC.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# With points, and map density estimate to alpha&lt;/span&gt;
     p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
@@ -55,7 +55,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/j1b0kxp.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/j1b0kxp.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;同一维的密度曲线一样，stat_density2d也可以调整binwidth用h()函数即可
 体会下下面的这个例子&lt;/p&gt;
@@ -64,7 +64,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/aDAgAtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/aDAgAtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
@@ -198,7 +198,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/zvu0wfQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/zvu0wfQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;数据的大概变化就是如此吧&lt;/p&gt;
 
@@ -238,7 +238,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/2i7atuA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/2i7atuA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;短短一行代码，已经把Horizon Plot画出来了。&lt;/p&gt;
 
@@ -257,7 +257,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/q3TGAps.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/q3TGAps.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;通过&lt;code&gt;horizonscale=10&lt;/code&gt;, 所有的变化范围都变成了相同的值&lt;/li&gt;
@@ -272,7 +272,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/0Rs2hLj.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/0Rs2hLj.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;通过&lt;code&gt;origin=0&lt;/code&gt;把所有的初始值都设为0&lt;/li&gt;
@@ -289,7 +289,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/8CwVN62.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/8CwVN62.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;通过&lt;code&gt;scales = list(y = list(relation = &quot;same&quot;))&lt;/code&gt;将右边的scales显示为绝对值, 而不是变化值。&lt;/li&gt;
@@ -306,7 +306,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/F0tqAw5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/F0tqAw5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;通过&lt;code&gt;strip.left = FALSE&lt;/code&gt;把原来竖起来的图例去掉&lt;/li&gt;
@@ -339,7 +339,7 @@
       <description>&lt;p&gt;对于Horizon Chart，可能大家还都比较陌生。
 先来看一个比较经典的&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/qSF60Mo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/qSF60Mo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们在日后的ggplot2的教程里会详细讲解这样一个Horizon Chart 是如何做出来的。&lt;/p&gt;
 
@@ -361,29 +361,29 @@
 
 &lt;p&gt;首先有一个最传统的折线图&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/ZexplPb.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/ZexplPb.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;2&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;分别用不同的颜色标记正值和负值，同时在一个色调里用颜色深浅来表明绝对值的大小&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/uL1yC0Q.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/uL1yC0Q.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;3&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;取负值的镜像，都画在正向的坐标里。这样一来就可以省去不少空间。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/p0O7zku.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/p0O7zku.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;4&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/SDsgxgQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/SDsgxgQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;按照图层的不同，在几个不同的图层再次重叠到一起，这样可以再次节省不少空间。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/6GoZEHS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/6GoZEHS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;当同时看不同类别时间序列的变化时，这种可视化的方法就显得非常有效。易懂信息量也够大。&lt;/p&gt;
 
@@ -449,7 +449,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/1g0JO13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-significance/1g0JO13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;当然了，我们可以把置信空间设置为曲线
 代码如下：&lt;/p&gt;
@@ -462,7 +462,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/syubzvU.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-significance/syubzvU.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1gRnnX&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
@@ -620,7 +620,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/eQloL6A.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/plyr-advanced/eQloL6A.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在Hadley的官网上，有不少这样的例子，大家一定要多去看看，多感受就更有感觉了。&lt;/p&gt;
 
@@ -654,7 +654,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/ZAghMVD.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/ZAghMVD.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -674,7 +674,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/G1umci8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/G1umci8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;改数据：引用Plyr中desc函数&lt;/li&gt;
@@ -688,7 +688,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/xS9aP30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/xS9aP30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -708,7 +708,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/JUEp6T8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/JUEp6T8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;
 如果想制作成比例的堆积图，应该怎么办？&lt;/p&gt;
@@ -734,7 +734,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/dSxIwAu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/dSxIwAu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1nCMPq&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
@@ -766,7 +766,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/X8gxtci.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-wdp/X8gxtci.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们发现其实图并不是很好看&lt;/p&gt;
 
@@ -782,7 +782,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;&lt;img src=&quot;http://i.imgur.com/Tw1MtH7.png&quot; alt=&quot;&quot; /&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;img src=&quot;/assets/images/ggplot2-wdp/Tw1MtH7.png&quot; alt=&quot;&quot; /&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;延伸问题&lt;/strong&gt;：不同变量出现在一个图上&lt;/p&gt;
 
@@ -797,7 +797,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/QgEY7D0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-wdp/QgEY7D0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1mWQc5&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
@@ -813,7 +813,7 @@ Year   Anomaly10y Unc10y
       <author>Peter</author>
       <guid>http://yangchao.me/2013/04/heat-map</guid>
       <description>&lt;p&gt;在最开始的GGPLOT介绍中，我就拿出了一副热力图
-&lt;img src=&quot;http://i.imgur.com/CEi7DEx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/images/ggplot2-heatmap/CEi7DEx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个&lt;/p&gt;
 
@@ -887,7 +887,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/KfWUIzx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-heatmap/KfWUIzx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;可以看出，真正作图的代码只有一行&lt;/p&gt;
 
@@ -909,7 +909,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/UYiPmd0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-heatmap/UYiPmd0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1tc26g&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
@@ -945,7 +945,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/hVabevA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-clp/hVabevA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;从图中看出，数据的排列顺序是按照名称的字母排列来的。效果就是造成的图不直观，比较乱&lt;/p&gt;
 
@@ -965,7 +965,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/mUmcaIv.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-clp/mUmcaIv.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;当然也可以调换x，y轴的顺序&lt;/p&gt;
 
@@ -979,7 +979,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/3z81WG7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-clp/3z81WG7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;如果想要根据不同类别再次作图
 - 重新进行排序
@@ -1015,7 +1015,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cKWISqQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-clp/cKWISqQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;也可以用facet_grid来实现相关
 代码改动量不大&lt;/p&gt;
@@ -1032,7 +1032,7 @@ Year   Anomaly10y Unc10y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/3u738ru.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-clp/3u738ru.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;注意在facet_grid中的参数&lt;/p&gt;
 

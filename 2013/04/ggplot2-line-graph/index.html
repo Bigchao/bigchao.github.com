@@ -116,7 +116,7 @@
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/GTtCqKV.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/GTtCqKV.png" alt="" /></p>
 
 <p>我们查看BOD的原数据</p>
 
@@ -161,7 +161,7 @@ Time demand
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/p25J3mB.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/p25J3mB.png" alt="" /></p>
 
 <p>同样，个人觉得，这个图做出来尚且没有Excel方便，也没有Excel好看。 LOL</p>
 
@@ -176,7 +176,7 @@ Time demand
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/E0c7o7t.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/E0c7o7t.png" alt="" /></p>
 
 <ul>
 <li>最后的一行代码用处就是把Y轴设为log10形式的，大家感受下</li>
@@ -202,7 +202,7 @@ Time demand
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/VCyTzUO.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/VCyTzUO.png" alt="" /></p>
 
 <p><strong>这里特别要注意！</strong></p>
 
@@ -236,7 +236,7 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/JrojSxN.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/JrojSxN.png" alt="" /></p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> fill<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
     geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">4</span><span class="p">,</span> shape<span class="o">=</span><span class="m">21</span><span class="p">)</span> 
@@ -244,7 +244,7 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/cAvavrJ.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/cAvavrJ.png" alt="" /></p>
 
 <p>我们发现上面的作图方法会出现点重合的情况
 所以要可以稍稍微调下</p>
@@ -257,7 +257,7 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/BqSaXvs.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/BqSaXvs.png" alt="" /></p>
 
 <hr />
 
@@ -276,7 +276,7 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/wXPFtXP.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/wXPFtXP.png" alt="" /></p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
       geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span> <span class="o">+</span>
@@ -284,7 +284,7 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/KRXvejA.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-line/KRXvejA.png" alt="" /></p>
 
 <p>上面给大家基本介绍了一下有关折线图的简单画法。一直在纠结的问题就是，这样的作图其实并不太方便。相比之下还是Excel来得快。
 但是，在R作图有个好处是可以自定义的东西很多，可以精雕细琢的很多，尤其通常在数据分析之后直接出图很是方便。写成代码可以重复使用。而Excel如果不用VBA，或者其他插件，相比R还是有不少差距的。建议大家还是学学ggplot。</p>

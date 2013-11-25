@@ -120,7 +120,7 @@
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/nE3VPUs.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-density/nE3VPUs.png" alt="" /></p>
 
 <p>我们可以在原始图中添加类似登高线的表示，用以标记密集程度。</p>
 
@@ -129,14 +129,14 @@
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/nghFH1z.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-density/nghFH1z.png" alt="" /></p>
 
 <div class="highlight"><pre><code class="r">    <span class="c1"># Map density estimate to fill color</span>
     p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>fill<span class="o">=</span>..density..<span class="p">),</span> geom<span class="o">=</span><span class="s">&quot;raster&quot;</span><span class="p">,</span> contour<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/bnGh3DC.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-density/bnGh3DC.png" alt="" /></p>
 
 <div class="highlight"><pre><code class="r">    <span class="c1"># With points, and map density estimate to alpha</span>
     p <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span>
@@ -144,7 +144,7 @@
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/j1b0kxp.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-density/j1b0kxp.png" alt="" /></p>
 
 <p>同一维的密度曲线一样，stat_density2d也可以调整binwidth用h()函数即可
 体会下下面的这个例子</p>
@@ -153,7 +153,7 @@
 </code></pre></div>
 
 
-<p><img src="http://i.imgur.com/aDAgAtw.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-density/aDAgAtw.png" alt="" /></p>
 
 <ul>
 <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1sw5uP">这里</a></li>
