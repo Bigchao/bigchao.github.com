@@ -591,29 +591,63 @@ a#end_cc, a#twitter, a#weibo {
 /* -------------------------------------
  * https://gist.github.com/edwardhotchkiss/2005058
  * ------------------------------------- */
+/*!-------------------------------------
+ * Syntax Colours
+ * https://gist.github.com/edwardhotchkiss/2005058
+ *
+ * Theme based on prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
+ * @author Tim  Shedor
+ * ------------------------------------- */
+/*! Modified by Peiwen Lu @ 30 Nov 2013 */
+/* Code blocks */
 .highlight {
-  margin: 1.5em 0;
-  padding: 15px;
-  font-size: 16px;
-  line-height: 1.4;
-  text-shadow: 0 1px white;
-  background-color: #f7f7f7;
-  overflow-x: auto; }
-  .highlight::-webkit-scrollbar {
-    height: 10px; }
-  .highlight::-webkit-scrollbar-thumb {
-    background: #e7e7e7; }
-    .highlight::-webkit-scrollbar-thumb:hover {
-      background: #dbdbdb; }
+  margin: 1.715em 0; }
 
 pre {
-  margin: 0; }
+  padding: 1em;
+  font: .9em/1.5 Consolas, Monaco, 'Andale Mono', monospace;
+  border: 1px solid #e5e8ec;
+  border-radius: 3px;
+  background-color: #fdfdfd;
+  background-image: -webkit-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+  background-image: -moz-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+  background-image: -ms-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+  background-image: -o-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+  background-image: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+  background-size: 3em 3em;
+  background-origin: content-box;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; }
+  pre::-webkit-scrollbar {
+    height: 7px; }
+  pre::-webkit-scrollbar-thumb {
+    background: #e5e8ec; }
+    pre::-webkit-scrollbar-thumb:hover {
+      background: #d6dbe1; }
 
-code {
-  font-family: monospace;
-  -moz-tab-size: 2;
-  -o-tab-size: 2;
-  tab-size: 2; }
+pre > code {
+  font-family: inherit;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none; }
+
+/* Inline code */
+:not(pre) > code {
+  padding: .25em .5em .1em;
+  color: black;
+  font: .85em Consolas, Monaco, 'Andale Mono', monospace;
+  background: #fafafa;
+  border: 1px solid #e5e8ec;
+  border-radius: .25em;
+  vertical-align: 2px; }
 
 .highlight .c {
   color: #586e75; }

@@ -93,19 +93,19 @@ function contentEffects() {
 	});
 
 	// fullscreen
-	//if ($.fullScreen("state") == 'fullscreen') {
-	//	$('#fullscreen').addClass('return');
-	//} else {
+	if ($.fullScreen("state") == 'fullscreen') {
+		$('#fullscreen').addClass('return');
+	} else {
 		$('#fullscreen').removeClass('return');
-	//}
-	//$('#fullscreen').on('click', function() {
-	//	if (!$.fullScreen()) {
-	//		alert("Your browser does not support Full Screen API");
-	//	} else {
-	//		$.fullScreen("toggle");
-	//		$(this).toggleClass("return");
-	//	}
-	//});
+	}
+	$('#fullscreen').on('click', function() {
+		if (!$.fullScreen()) {
+			alert("Your browser does not support Full Screen API");
+		} else {
+			$.fullScreen("toggle");
+			$(this).toggleClass("return");
+		}
+	});
 
         	// Lazy loading Disqus
 	// http://jsfiddle.net/dragoncrew/SHGwe/1/
@@ -130,23 +130,6 @@ function contentEffects() {
 	check();
 
 }
-
-// Enable fullscreen.
-$('#js-fullscreen').on('click', function() {
-  if (button.hasClass('fullscreen')) {
-    sidebar.removeClass('fullscreen');
-    button.removeClass('fullscreen');
-    content.delay(300).queue(function(){
-      $(this).removeClass('fullscreen').dequeue();
-    });
-  } else {
-    sidebar.addClass('fullscreen');
-    button.addClass('fullscreen');
-    content.delay(200).queue(function(){
-      $(this).addClass('fullscreen').dequeue();
-    });
-  }
-});
 
 /**
 * @name jQuery Simple Fullscreen Plugin
