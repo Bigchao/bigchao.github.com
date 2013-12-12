@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Mon, 25 Nov 2013 07:18:47 -0800</pubDate>
-    <lastBuildDate>Mon, 25 Nov 2013 07:18:47 -0800</lastBuildDate>
+    <pubDate>Wed, 11 Dec 2013 23:48:56 -0800</pubDate>
+    <lastBuildDate>Wed, 11 Dec 2013 23:48:56 -0800</lastBuildDate>
 
     
     <item>
@@ -345,11 +345,11 @@
 
 &lt;p&gt;但是大家应该和我差不多，第一次看到这个图的时候感觉是虽然看不太懂，但是觉得很绚丽。&lt;/p&gt;
 
-&lt;p&gt;时髦的词叫作“不明觉历”。&lt;/p&gt;
+&lt;p&gt;时髦的词叫作“不明觉厉”。&lt;/p&gt;
 
 &lt;p&gt;想要做出一个漂亮的Horizon Chart 第一点就是要看懂它&lt;/p&gt;
 
-&lt;p&gt;这个商业做Horizon Chart 的软件里，介绍了它的作图方法&lt;/p&gt;
+&lt;p&gt;这个商业做Horizon Chart 的软件里，介绍了它的作图方法 ：&lt;/p&gt;
 
 &lt;p&gt;原文在：&lt;a href=&quot;http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
 
@@ -389,8 +389,9 @@
 
 &lt;p&gt;比如上图，可以轻松看到50种股票价格的变化趋势。&lt;/p&gt;
 
-&lt;p&gt;关于Horizon Plot的具体实现方法，主要是ggplot2和LatticeExtra，
-在今后的博客中都会具体讲到。大家先体会下这种Horizon Chart的巨大魅力。&lt;/p&gt;
+&lt;p&gt;关于Horizon Plot的具体实现方法，主要是ggplot2和LatticeExtra，&lt;/p&gt;
+
+&lt;p&gt;在这篇博客中，我们会讲到horizon plot 的具体实现方法： &lt;a href=&quot;http://yangchao.me/2013/10/horizon-lattice-extra&quot;&gt;Go&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;相关文章：&lt;/p&gt;
 
@@ -481,7 +482,9 @@ Year   Anomaly10y Unc10y
 
 &lt;p&gt;还是先把经典的那个视频翻出来吧&lt;/p&gt;
 
-&lt;p&gt;&lt;embed src=&quot;http://player.youku.com/player.php/sid/XMzAxMDYwNDIw/v.swf&quot; allowFullScreen=&quot;true&quot; quality=&quot;high&quot; width=&quot;480&quot; height=&quot;400&quot; align=&quot;middle&quot; allowScriptAccess=&quot;always&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
+&lt;p&gt;&lt;embed src=&quot;http://player.youku.com/player.php/sid/XMTQ3ODIzOTU2/v.swf&quot; allowFullScreen=&quot;true&quot; quality=&quot;high&quot; width=&quot;480&quot; height=&quot;400&quot; align=&quot;middle&quot; allowScriptAccess=&quot;always&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
+
+&lt;p&gt;不得不说，优酷的广告简直太恶心了, 而且加载的很慢。&lt;/p&gt;
 
 &lt;p&gt;就像麦当娜在2009MTV颁奖典礼上为MJ的致词一样，她重复最多的一句话莫过于“ He is a super star, but he’s also a human being.”是啊，“他是个超级巨星，但同时他也是个凡人。”这样一位多年来饱受媒体负面报道影响的巨星，可以在公众视线之外如此谦逊、温和、低调地为人处事，他的心里要承载多少对人间的爱。他最缺少的，其实就是关爱，但他付出最多的，恰恰也是关爱。We&#39;re the World. They don&#39;t Care About Us. Earth Song. Heal the World. 我列举的都还只是那些关于和平关于孩子关于爱的歌曲，那些听了让我们会心平气和会感到柔软的歌曲。&lt;/p&gt;
 
