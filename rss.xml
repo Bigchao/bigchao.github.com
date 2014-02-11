@@ -6,9 +6,236 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Mon, 30 Dec 2013 22:29:09 -0800</pubDate>
-    <lastBuildDate>Mon, 30 Dec 2013 22:29:09 -0800</lastBuildDate>
+    <pubDate>Tue, 11 Feb 2014 06:30:48 -0800</pubDate>
+    <lastBuildDate>Tue, 11 Feb 2014 06:30:48 -0800</lastBuildDate>
 
+    
+    <item>
+      <title>烟波至爽，数据为王</title>
+      <link>http://yangchao.me/2014/02/douban</link>
+      <pubDate>02 Feb 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/02/douban</guid>
+      <description>&lt;p&gt;最近觉得有必要把这段时间数据挖掘的知识做一个详尽的数理，有些东西总也不碰就会忘了。所以想到开一个豆瓣专栏，写一些R进行数据分析、可视化的知识。 尤其是data.table的用法。经过了一次修改，现在专栏计划已经通过了，马上就要发表了。&lt;/p&gt;
+
+&lt;p&gt;前两天和Guy聊天，讲到我们香港的R用户现在人数已经在Dim Sum Lab放不下啦，想让我帮忙从城大定一个教室，我欣然答应。毕竟从成立的不到10个人，每次来的人都一点一点增加，心里真是高兴。下次我会做一个专门针对于&lt;strong&gt;data.table&lt;/strong&gt;的tutorial，这两天赶紧准备下。上次的&lt;code&gt;ggplot2&lt;/code&gt;的tutorial还是挺受欢迎的，当然还有&lt;code&gt;knitr&lt;/code&gt;的, Fuk的几次tutorial讲Rcurl, plyr也都非常棒。靠我们这帮子人刚开始的热情终于让越来越多的人加入到这个社区来。写《The Art of pragramming R》的老爷爷，Norm还是我们香港R用户的一员呢。&lt;/p&gt;
+
+&lt;p&gt;现在的技术路线就是facebook上面的信息用Rcurl发布，展示的内容用knitr写Rmarkdown文件，用slidefy做presentation。 感觉活在R里边了。&lt;/p&gt;
+
+&lt;p&gt;最近另外一个着迷的就是emacs。 虽然我算是半个vim党，但是emacs的org mode确实太强大了，所以想好好学学。&lt;/p&gt;
+
+&lt;p&gt;专栏是免费阅读，我先放个样章在这里。&lt;/p&gt;
+
+&lt;p&gt;所有的专栏内容都会从新写，不会从现在博客的ggplot2的教程中直接复制过去。更加面向实际操作一点， 而不是一点点的搞起。
+下面大家先一睹为快我的专栏导读把，不是吹， 以后可全是干货啊。都是我平时工作中遇到的实际问题，一点一点总结的经验呢。&lt;/p&gt;
+
+&lt;h3&gt;第一篇 ： 导读&lt;/h3&gt;
+
+&lt;p&gt;在为自己的专栏想一个特别霸气的名字的时候， 我和室友正在纪录片《故宫》， 里边讲到了承德避暑山庄的烟波至爽殿，于是名字也就脱口而出。觉得很满意，显得很有底蕴，特别适合豆瓣文青聚集地。 说到数据为王，这两年有关“大数据”的概念可以说是火的不行， 可以听到大家张口闭口就大数据，都知道这是一个“大数据时代”， 都知道了有的书中提到的”相关性比因果关系更加重要“等等的观点。&lt;/p&gt;
+
+&lt;p&gt;很遗憾，我可能有个特立独行的毛病，一个东西一旦太过炒作太多我就不太喜欢。但是为了照顾大家的兴致， 我会在专栏最后的部分给大家分享一个大家可能认为还算是一个大数据的数据分析的例子。&lt;/p&gt;
+
+&lt;h5&gt;那么我们讲什么呢？&lt;/h5&gt;
+
+&lt;p&gt;按照章节来分类&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;数据处理&lt;/li&gt;
+&lt;li&gt;数据分析 （篇幅最少）&lt;/li&gt;
+&lt;li&gt;数据可视化&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;专栏主要讲解利用R语言进行数据的处理、分析、可视化的具体细节和基本要点。主要想和大家分享一下我在平时工作中最常用、也最容易上手的一些基本思路和基本技巧。尤其是关于数据可视化的部分。我非常喜欢像Economicst，New York Times刊登出来那种的图表。看过很多介绍可视化的文章和书籍， 里边分享的很多， 但是当我看到这些图表的时候，我不想只是欣赏，也想自己做出来。但是我们不管是数据分析，还是数据可视化，其中接近百分之五十的经历都是在做一些数据的预处理。把原始数据转变为我们想要的数据进而在分析或者可视化。如果跳过这一部，在我可视化的过程中对数据的操作部分，大家可能看起来就会一知半解。 所以我们会用相当大量的篇幅来介绍数据的预处理。 对数据的预处理，却也是也就包含了一些简单基本的对数据的描述性分析。&lt;/p&gt;
+
+&lt;h5&gt;为什么用R语言？&lt;/h5&gt;
+
+&lt;p&gt;是的，开始这个专栏意味着你要开始学习编程了。虽然其他一些工具，像Excel可以胜任部分工作，为什么要学习一种编程语言呢？
+因为我们要开始学编程了！这难道还不是一个非常充分的理由么？&lt;/p&gt;
+
+&lt;p&gt;其实还有一个理由，因为我们都很懒。对，因为懒而编程。&lt;/p&gt;
+
+&lt;p&gt;我们想要完成一件事情，越快越好，越不费事费力越好。现在电脑可以帮我们完成的很多，只要我们会用命令指挥他们即可。在Excel中我们可以完成很多事情，但是一旦涉及到数据类型比较复杂，或是要重复性操作的时候Excel就显得有点力不从心了。&lt;/p&gt;
+
+&lt;p&gt;借用《Learn Python the Hard Way》中的一句话，&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;You can code. They cannot. That is pretty damn cool.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;这里不太需要再介绍R语言的优越之处，大家上网搜下即可。我的感受是R语言作为一种统计学家发明出来的语言，在数据分析方面有着比较大的优质。近来越来越受到人们的关注和重视，其开源社区的活跃程度让我们看到这个语言的生机勃勃的特性。其拥有大量的工具包，你想完成的事情已经有很多人搞定了。（这也使许多其他开源软件的好处，比如我的挚爱大GNU的Emacs。） 可谓站在了巨人的肩膀上。&lt;/p&gt;
+
+&lt;p&gt;我们学习编程，只是想实现算法，对一般的数据结构又不那么在意，数据量也没有大到内存都放不下， 所以对于初学者，R是可以很快上手并可以尝到甜头让人继续学习的。最重要的，我们想用R处理数据画图或者数据挖掘， 已经有人把代码写好了。我们只需要会看，然后再稍微微调下就可以了。这简直太适合懒人学习了。&lt;/p&gt;
+
+&lt;p&gt;我小时候学过8年的小提琴，天资不算聪颖，但最后练得也还不错。 所以对熟能生巧有特别的感觉。 近来Gladwell在他的畅销书《Outliers》（中文译名《异类》）有个特别时髦的理论， 10000小时理论。也讲得的是同一个意思。 每天上手练一点，慢慢也就熟悉了。无所谓高端还是屌丝， 无他， 唯手熟尔。&lt;/p&gt;
+
+&lt;p&gt;同时我也有另外一个感触，相比于C，C++等更偏向于底层的语言，学习R好比是练钢琴，开始学习的可以唱到甜头， 不用好久可以弹出比较简单但是也很好听的曲子，像”一闪一闪亮晶晶“之类的。不像小提琴， 学了两年可能还跟拉锯一样。 但是像真正精通， 后期的学习曲线还是挺陡峭的，不可避免要学习数据结构， 面向对象等知识， 而且到后来就觉得R在运算的时候很慢， 对内存的管理并不到位等等。 但是现在， 对于大多人来说， R已经足够了，我们不需要做到 “Perfect”， 到“Fairly Good” 对于大多数人就已经足够了。&lt;/p&gt;
+
+&lt;h5&gt;目标读者是哪些人？&lt;/h5&gt;
+
+&lt;p&gt;本专栏绝对倾情奉献， 目标读者是包括但不限于&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;喜爱玩数据，喜欢可视化的人！&lt;/li&gt;
+&lt;li&gt;对编程有点兴趣，也知道这个很有用应该学，但是一直以没时间懒得学年龄大了学不动了为借口拖延症患者！！&lt;/li&gt;
+&lt;li&gt;想对自己生活有些改变的朋友，并且需要即刻行动起来的人！！！&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;尤其对于第三点， 这也是我决心开设这样一个专栏的目的。这里不想心灵鸡汤， 不想拽成功学， 我是那种什么都喜欢折腾， 这么都愿意去学， 也觉得什么都有用的人。 正所谓乔布斯的“Connecting Dots”。 如果我们知道这个对于数据的处理确实有用， 想利用点时间学习下，而不只是逛逛微博， 看看韩剧， 日子这样一天天过去。 那么确实学点数据分析， 从功利主义的角度还是实用主义的角度都是高收益的。 因为我的工作现在是以数据处理为主， 过了大概一年当初的新鲜期感觉已经逐渐褪去， 自己学习的意愿也再减退。 所以这个时候我觉得有必要把我之前看过的那些书籍，走过的弯路，自己学校里比较受欢迎的讲座全都拿出来，温故而知新。 所谓教学相长， 大家一起交流。&lt;/p&gt;
+
+&lt;p&gt;同样，对于那些编程大牛们什么都知道的人， 可能觉得这篇专栏过于幼稚，我所写太过简单简直是在侮辱他们的智商。 首先，本系列倾情奉献， 绝对不能被理解为侮辱智商。我只是可能比我的目标读者们懂得这方面的知识多一点，想一起分享让他们少走弯路。如果你们发现我这个专栏里的每一个句子每一个知识点你已经了如指掌， 还是像《Learn Python the hard way》 里的忠告&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;ol&gt;
+&lt;li&gt;不要再阅读此专栏， 这不是为你们而写， 我是写给那些并不是什么都知道的人&lt;/li&gt;
+&lt;li&gt;倒空自己， 如果你已经什么都会了，就很难再向其他人学习任何东西&lt;/li&gt;
+&lt;li&gt;去学Lisp语言， 通常什么都会的人会喜欢Lisp&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h5&gt;专栏主要特色是什么？&lt;/h5&gt;
+
+&lt;p&gt;我自己想到的专栏的特色可能为三个字：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;接地气&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;因为这个专栏有一个很重要的读者： 我的女朋友。她作为一个纯文科生，学新闻在Marketing从业的绝对文青。 热爱电影，喜欢看小说。 经常觉得我看的讲程序的书都是那种特别“有用但是枯燥“的书，缺少了一种浪漫主义色彩。 这个专栏的存在就是想证明，其实这个这个数据的世界并不枯燥， 而且相当有趣！ 这篇专栏应该看起来满满的都是爱啊！&lt;/p&gt;
+
+&lt;p&gt;所以这个专栏算是手把手来教， 诚意十足。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;我觉得哪些部分在书籍或网上的资料已经相关帖子讨论的相当详尽， 我会给出相关链接， 不会拾人牙慧。&lt;/li&gt;
+&lt;li&gt;并不会面面俱到，我会着重于数据的整理和可视化。 会将一些琐碎的小案例经过自己的整理，呈现一条主线给大家。&lt;/li&gt;
+&lt;li&gt;主要以案例学习为主， 以平时工作马上就能用的到为主要目的。 不会像一般介绍R语言从赋值， array， list， dataframe一点点讲起。并不是说这个不重要，为什么如此参见第一条。 这样的写法带来的一个缺陷就是不够系统， 但是希望可以做到一个领进门的作用。刚开始大家对于code可能什么都不动，会做出非常详尽的讲解。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;但是我觉得相比于与其他的网上的教程， 我希望在如下方面可以有所胜出&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;阅读体验&lt;/li&gt;
+&lt;li&gt;互动性&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;如果你遇到什么问题，我会尽可能为您讲解，或是给您相关资料的链接。 遇到最基本的问题解决不了这是我们开始学习编程最容易泄气的地方。当时我一个人想学习Hadoop的相关知识，但是对于linux系统的不熟悉安装时候处处碰壁， 当时心里那种无助的感觉记忆深刻。 所以这个专栏的存在就是为了让大家减轻这方面的痛苦， 更加享受编程的过程。&lt;/p&gt;
+
+&lt;p&gt;我会根据读者的回馈来调整更新自己的内容，把大家普遍反映的问题着重讲。&lt;/p&gt;
+
+&lt;p&gt;但是不欢迎那些不经任何思考， 光光po问题的人。这点请参考《提问的艺术》。 请认真对待你的问题， 就像你期望大家可以认真的回答一样。在提问之前先思考下， 独立解决问题也是一种能力。提问的时候要表述清楚。&lt;/p&gt;
+
+&lt;p&gt;我会留作业， 也会判作业。 希望可以交到朋友， 因为和数据打交道了太久， 也想和人打打交道：）。 当然了，写了专栏，还是希望更多人看更多人喜欢！ 街坊邻居觉得好的多替我宣传哈！&lt;/p&gt;
+
+&lt;p&gt;其实我这个人还是挺扯淡的，后期的时候大家可以看到我稍微真实可爱的一面。不过开始还是要严谨， 严肃！&lt;/p&gt;
+
+&lt;h5&gt;一个例子&lt;/h5&gt;
+
+&lt;p&gt;现在给大家一个例子， 这个例子看不懂怎么实现的不要紧。 到后来的学习中我们还会提到。主要是让大家感受下，这个专栏中我们反复见到的数据分析的一般流程。&lt;/p&gt;
+
+&lt;p&gt;我现在有一个新浪微博的平时数据，我想来玩一玩这个数据&lt;/p&gt;
+
+&lt;p&gt;数据是这个样子的&lt;/p&gt;
+
+&lt;pre&gt;
+
+            V1       V2         V3 V4 V5 V6 V7 V8  V9 V10 V11 V12
+     1:      1 20120213 1011139914  0  0  1  0  0 \\N   0   0   0
+     2:      2 20120218 1011139914  0  1  2  2  0 \\N   1   0   0
+     3:      3 20120219 1011139914  0  1  0  0  0 \\N   2   0   0
+     4:      4 20120201 1011139914  0  1  0  0  0 \\N   0   0   0
+     5:      5 20120224 1011139914  0  1  2  0  0 \\N   1   0   0
+    ---                                                          
+835353: 835353 20120215  283149150  0  0  0  0  0 \\N   0   0   0
+835354: 835354 20120202  283149150  0  0  0  0  0 \\N   0   0   0
+835355: 835355 20120222  283149150  0  0  0  0  0 \\N   0   0   0
+835356: 835356 20120203  283149150  0  0  0  0  0 \\N   0   0   0
+835357: 835357 20120206  283149150  0  0  0  0  0 \\N   0   0   0
+&lt;/pre&gt;
+
+
+&lt;p&gt;可以看到，一共是83万行。12列&lt;/p&gt;
+
+&lt;p&gt;每一列其实是有名字的，我们要重新命名&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;library（data.table) 
+#  我们今后主要介绍的就是这个包，因为它是在太强大了！
+column_names &amp;lt;- c(&quot;ID&quot;,&quot;date&quot;,&quot;uid&quot;,&quot;origin&quot;,&quot;fwd&quot;,&quot;cmts&quot;,&quot;reply&quot;, &quot;fwded&quot;, &quot;ignore&quot;,&quot;cmted&quot;,&quot;liked&quot;,&quot;favorate&quot;)
+# 把新的列明起好， 因为防止中文乱码，所以我干脆用了英文来代替。分别表示ID，日期，用户ID，发帖量，评论量，回复量，转发量等等。
+setnames(DT, paste0(&quot;V&quot;,c(1:12)), column_names)
+# 把原来的列名 v1 - v12 全部换掉
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在数据已经是这个样子了&lt;/p&gt;
+
+&lt;pre&gt;
+            ID     date        uid origin fwd cmts reply fwded ignore cmted
+     1:      1 20120213 1011139914      0   0    1     0     0    \\N     0
+     2:      2 20120218 1011139914      0   1    2     2     0    \\N     1
+     3:      3 20120219 1011139914      0   1    0     0     0    \\N     2
+     4:      4 20120201 1011139914      0   1    0     0     0    \\N     0
+     5:      5 20120224 1011139914      0   1    2     0     0    \\N     1
+    ---                                                                    
+835353: 835353 20120215  283149150      0   0    0     0     0    \\N     0
+835354: 835354 20120202  283149150      0   0    0     0     0    \\N     0
+835355: 835355 20120222  283149150      0   0    0     0     0    \\N     0
+835356: 835356 20120203  283149150      0   0    0     0     0    \\N     0
+835357: 835357 20120206  283149150      0   0    0     0     0    \\N     0
+        liked favorate
+     1:     0        0
+     2:     0        0
+     3:     0        0
+     4:     0        0
+     5:     0        0
+    ---               
+835353:     0        0
+835354:     0        0
+835355:     0        0
+835356:     0        0
+835357:     0        0
+
+&lt;/pre&gt;
+
+
+&lt;p&gt;这是一个月的数据，我们想对每一天所有用户的发帖量，等所有除了ID，date， uid这三个加总。&lt;/p&gt;
+
+&lt;p&gt;在所有数据分析的开始，先要进行大概的描述性分析。虽然很简单，但是很重要&lt;/p&gt;
+
+&lt;p&gt;这一部也就是说我像知道2012年2月每天的加总情况是怎样的&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sum &amp;lt;- DT[, lapply(.SD, sum), by = date, .SDcols = 4:12 ]
+# 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里data.table 包里的简洁代码对我这种代码洁癖简直就是太适合了！
+之所以选择data.table， 原因有三点&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;速度快&lt;/li&gt;
+&lt;li&gt;代码简洁&lt;/li&gt;
+&lt;li&gt;但是代码不太容易懂，而且官方阅读材料比较少。这也就使得我这个专栏有了最直接的意义！&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;然后我就可以接着做一些可视化的工作了，比如二月有春节，我想知道春节时候的情况&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cp6Bmzy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个图完全是用R做出的，用的是非常著名的ggplot2包。网上关于这些包的教程有不少。大家可以搜搜看看，我在这个专栏里会对一些我感兴趣的图形做出针对性的讲解。&lt;/p&gt;
+
+&lt;p&gt;我现在有大概16个月的微博数据，那我想看看所有这些天的8个指标变化情况应该怎办呢？可以用热力学图。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/R97XKaw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个也是用R做出来的，调用一个包，代码量也非常少，我们在今后会对代码进行讲解，并分享给大家。&lt;/p&gt;
+
+&lt;p&gt;所以总结下来，这个专栏想让大家记住三个字&lt;/p&gt;
+
+&lt;p&gt;玩数据！&lt;/p&gt;
+
+&lt;p&gt;这次的作业： 安装好R， 初学者建议用Rstudio，简单学习R语法。我们下次再见！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Happy New Year</title>
@@ -841,177 +1068,57 @@ Year   Anomaly10y Unc10y
     </item>
     
     <item>
-      <title>ggplot2 - Wilkinson Dot Plot</title>
-      <link>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</link>
-      <pubDate>27 Apr 2013</pubDate>
+      <title>Sublime Text 2学习过程</title>
+      <link>http://yangchao.me/2013/05/Sublime-text-2</link>
+      <pubDate>23 May 2013</pubDate>
       <author>Peter</author>
-      <guid>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</guid>
-      <description>&lt;p&gt;有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。&lt;/p&gt;
+      <guid>http://yangchao.me/2013/05/Sublime-text-2</guid>
+      <description>&lt;p&gt;在金炎的大力推荐和成果展示炫耀下，今天准备开始配置一下ST2。
+Sbulime Text是一个跨平台的文本编辑器。收费，但是可以无限期免费试用，提醒交费的频率也非常低。
+我使用的是Ubuntu12.04系统。
+安装过程详见&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;geom_dotplot()&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.technoreply.com/how-to-install-sublime-text-2-on-ubuntu-12-04-unity/&quot;&gt;1&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;安装好，通常第二个就安装插件package control&lt;/p&gt;
 
-&lt;p&gt;首先看一个例子&lt;/p&gt;
+&lt;p&gt;这个插件的官方网址是&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-    countries2009 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; subset&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;countries&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Year&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2009&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; healthexp&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;countries2009&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;infmortality&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://wbond.net/sublime_packages/package_control&quot;&gt;2&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;可以自动输入代码安装。
+可能是因为学校网关的限制，通过命令行安装失败。所以我选择了用手动安装。
+安装过程大致如下&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-wdp/X8gxtci.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们发现其实图并不是很好看&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Y轴没有意义 用scale_y_continuous来调整&lt;/li&gt;
-&lt;li&gt;bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整&lt;/li&gt;
-&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;先下载，然后解压缩&lt;/li&gt;
+&lt;li&gt;在sublime中Preferences找到installed packages所在的文件夹。&lt;/li&gt;
+&lt;li&gt;拷贝进去即可。
+但是不知到为什么我这里也反复出现几个问题，都是有关权限的。&lt;/li&gt;
+&lt;/ol&gt;
 
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_rug&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    scale_y_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Remove tick markers&lt;/span&gt;
-    theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;axis.title.y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;element_blank&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Remove axis label&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://ruby-china.org/topics/7144&quot;&gt;3&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;RubyChina提到了一个权限的问题&lt;/p&gt;
 
-&lt;h2&gt;&lt;img src=&quot;/assets/images/ggplot2-wdp/Tw1MtH7.png&quot; alt=&quot;&quot; /&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/12284166/cant-install-package-control-in-sublime-text-2&quot;&gt;4&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;延伸问题&lt;/strong&gt;：不同变量出现在一个图上&lt;/p&gt;
+&lt;p&gt;stackflow 也提到了一个解决方案。反正就是在跌跌撞撞中装好了Packages Control&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;设置&lt;code&gt;binaxis&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;找到的几个比较好的网上教程&lt;/p&gt;
 
+&lt;p&gt;&lt;a href=&quot;http://net.tutsplus.com/tutorials/tools-and-tips/sublime-text-2-tips-and-tricks/&quot;&gt;5&lt;/a&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;heightweight&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;heightIn&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_dotplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;binaxis&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; binwidth&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; stackdir&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;center&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这个是基于Mac来写的。安装好package control之后我装了一个allignment，用来对齐等号的。但是因为快捷键冲突失败了。&lt;/p&gt;
 
+&lt;p&gt;下面就是把ST设置成为VIM格式&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-wdp/QgEY7D0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.sublimetext.com/docs/2/vintage.html&quot;&gt;6&lt;/a&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1mWQc5&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;因为太多的热键冲突。。我感觉已经很崩溃了。&lt;/p&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title>ggplot2 - Heat Map</title>
-      <link>http://yangchao.me/2013/04/heat-map</link>
-      <pubDate>26 Apr 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/04/heat-map</guid>
-      <description>&lt;p&gt;在最开始的GGPLOT介绍中，我就拿出了一副热力图
-&lt;img src=&quot;/assets/images/ggplot2-heatmap/CEi7DEx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;geom_tile()&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;geom_raster()&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;做好热力学图并不是那么简单，需要很多微调，不过有一个固定的套路我们来一点一点实现&lt;/p&gt;
-
-&lt;p&gt;有关geom_tile和geom_raster其实差不多
-相对来说geom_raster更有效率，而且在输出中，两个没有特别的分别。只是在输出成PDF时，可能会有小小不同。&lt;/p&gt;
-
-&lt;p&gt;首先是R graphics Cookbook中p281页的例子&lt;/p&gt;
-
-&lt;p&gt;在完成热力图之前，要把格式改为可以读出的格式。
-原数据是这个样子的&lt;/p&gt;
-
-&lt;pre&gt;
-     Qtr1 Qtr2 Qtr3 Qtr4
-1945   NA   87   82   75
-1946   63   50   43   32
-1947   35   60   54   55
-1948   36   39   NA   NA
-1949   69   57   57   51
-1950   45   37   46   39
-1951   36   24   32   23
-.
-.
-.
-&lt;/pre&gt;
-
-
-&lt;p&gt;但是我们想要的格式是这样的&lt;/p&gt;
-
-&lt;pre&gt;
-    rating  year    quarter
-1   NA      1945    1
-2   87      1945    2
-3   82      1945    3
-4   75      1945    4
-5   63      1946    1
-6   50      1946    2
- &lt;/pre&gt;
-
-
-&lt;p&gt;这里用到了一个比较投机的方法&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    pres_rating &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.frame&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    rating  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; as.numeric&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;presidents&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    year    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; as.numeric&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;floor&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;time&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;presidents&lt;span class=&quot;p&quot;&gt;))),&lt;/span&gt;
-    quarter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; as.numeric&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cycle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;presidents&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;在数据整合上，有R内置的reshape函数，但是我不太推荐，因为语法比较复杂
-推荐：reshape拓展包和pylr拓展包，我写了两个快速教程讲解这两个包，推荐大家看下。&lt;/p&gt;
-
-&lt;p&gt;接着用GGPlot2来做热力学图&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Base plot&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;pres_rating&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;quarter&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rating&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Using geom_tile()&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_tile&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Using geom_raster() - looks the same, but a little more efficient&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_raster&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-heatmap/KfWUIzx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;可以看出，真正作图的代码只有一行&lt;/p&gt;
-
-&lt;p&gt;我们对此热力学图进行微调&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;scale_y_reverse&lt;/code&gt;:  倒转Y轴&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;scale_x_continuous&lt;/code&gt;:  修改X轴标记&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;scale_fill_gradient2&lt;/code&gt;:  增加中间点的色阶&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;代码如下&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_tile&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    scale_x_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1940&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1976&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    scale_y_reverse&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    scale_fill_gradient2&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;midpoint&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey70&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; limits&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-heatmap/UYiPmd0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1tc26g&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
+&lt;p&gt;但是不得不说，这个风骚的小GUI确实看上去舒服极了， 让人写代码的心情一下就舒畅了起来。 或者说就起码没有那么憋屈啦。 网上有不同插件和不同的主题图案，现在我用的比较少。主要是一些基本功能， 支持vim格式等等。像前端人用的那些现在基本用的比较少呢。&lt;/p&gt;
 </description>
     </item>
     

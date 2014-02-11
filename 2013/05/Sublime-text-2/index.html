@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="ggplot2 - Heat Map | 技术改变世界">
+		<meta name="description" content="Sublime Text 2学习过程 | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>ggplot2 - Heat Map</title>
+		<title>Sublime Text 2学习过程</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -108,122 +108,65 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">ggplot2 - Heat Map</h1>
+		<h1 id="identifier">Sublime Text 2学习过程</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>在最开始的GGPLOT介绍中，我就拿出了一副热力图
-<img src="/assets/images/ggplot2-heatmap/CEi7DEx.png" alt="" /></p>
+		<p>在金炎的大力推荐和成果展示炫耀下，今天准备开始配置一下ST2。
+Sbulime Text是一个跨平台的文本编辑器。收费，但是可以无限期免费试用，提醒交费的频率也非常低。
+我使用的是Ubuntu12.04系统。
+安装过程详见</p>
 
-<p>在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个</p>
+<p><a href="http://www.technoreply.com/how-to-install-sublime-text-2-on-ubuntu-12-04-unity/">1</a></p>
 
-<ul>
-<li><strong>geom_tile()</strong></li>
-<li><strong>geom_raster()</strong></li>
-</ul>
+<p>安装好，通常第二个就安装插件package control</p>
 
+<p>这个插件的官方网址是</p>
 
-<p>做好热力学图并不是那么简单，需要很多微调，不过有一个固定的套路我们来一点一点实现</p>
+<p><a href="http://wbond.net/sublime_packages/package_control">2</a></p>
 
-<p>有关geom_tile和geom_raster其实差不多
-相对来说geom_raster更有效率，而且在输出中，两个没有特别的分别。只是在输出成PDF时，可能会有小小不同。</p>
+<p>可以自动输入代码安装。
+可能是因为学校网关的限制，通过命令行安装失败。所以我选择了用手动安装。
+安装过程大致如下</p>
 
-<p>首先是R graphics Cookbook中p281页的例子</p>
-
-<p>在完成热力图之前，要把格式改为可以读出的格式。
-原数据是这个样子的</p>
-
-<pre>
-     Qtr1 Qtr2 Qtr3 Qtr4
-1945   NA   87   82   75
-1946   63   50   43   32
-1947   35   60   54   55
-1948   36   39   NA   NA
-1949   69   57   57   51
-1950   45   37   46   39
-1951   36   24   32   23
-.
-.
-.
-</pre>
+<ol>
+<li>先下载，然后解压缩</li>
+<li>在sublime中Preferences找到installed packages所在的文件夹。</li>
+<li>拷贝进去即可。
+但是不知到为什么我这里也反复出现几个问题，都是有关权限的。</li>
+</ol>
 
 
-<p>但是我们想要的格式是这样的</p>
+<p><a href="http://ruby-china.org/topics/7144">3</a></p>
 
-<pre>
-    rating  year    quarter
-1   NA      1945    1
-2   87      1945    2
-3   82      1945    3
-4   75      1945    4
-5   63      1946    1
-6   50      1946    2
- </pre>
+<p>RubyChina提到了一个权限的问题</p>
 
+<p><a href="http://stackoverflow.com/questions/12284166/cant-install-package-control-in-sublime-text-2">4</a></p>
 
-<p>这里用到了一个比较投机的方法</p>
+<p>stackflow 也提到了一个解决方案。反正就是在跌跌撞撞中装好了Packages Control</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>ggplot2<span class="p">)</span>
-    library<span class="p">(</span>gcookbook<span class="p">)</span>
-    pres_rating <span class="o">&lt;-</span> data.frame<span class="p">(</span>
-    rating  <span class="o">=</span> as.numeric<span class="p">(</span>presidents<span class="p">),</span>
-    year    <span class="o">=</span> as.numeric<span class="p">(</span>floor<span class="p">(</span>time<span class="p">(</span>presidents<span class="p">))),</span>
-    quarter <span class="o">=</span> as.numeric<span class="p">(</span>cycle<span class="p">(</span>presidents<span class="p">))</span>
-    <span class="p">)</span>
-</code></pre></div>
+<p>找到的几个比较好的网上教程</p>
 
+<p><a href="http://net.tutsplus.com/tutorials/tools-and-tips/sublime-text-2-tips-and-tricks/">5</a></p>
 
-<p>在数据整合上，有R内置的reshape函数，但是我不太推荐，因为语法比较复杂
-推荐：reshape拓展包和pylr拓展包，我写了两个快速教程讲解这两个包，推荐大家看下。</p>
+<p>这个是基于Mac来写的。安装好package control之后我装了一个allignment，用来对齐等号的。但是因为快捷键冲突失败了。</p>
 
-<p>接着用GGPlot2来做热力学图</p>
+<p>下面就是把ST设置成为VIM格式</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># Base plot</span>
-    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>pres_rating<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>year<span class="p">,</span> y<span class="o">=</span>quarter<span class="p">,</span> fill<span class="o">=</span>rating<span class="p">))</span>
-    <span class="c1"># Using geom_tile()</span>
-    p <span class="o">+</span> geom_tile<span class="p">()</span>
-    <span class="c1"># Using geom_raster() - looks the same, but a little more efficient</span>
-    p <span class="o">+</span> geom_raster<span class="p">()</span>
-</code></pre></div>
+<p><a href="http://www.sublimetext.com/docs/2/vintage.html">6</a></p>
 
+<p>因为太多的热键冲突。。我感觉已经很崩溃了。</p>
 
-<p><img src="/assets/images/ggplot2-heatmap/KfWUIzx.png" alt="" /></p>
-
-<p>可以看出，真正作图的代码只有一行</p>
-
-<p>我们对此热力学图进行微调</p>
-
-<ul>
-<li><code>scale_y_reverse</code>:  倒转Y轴</li>
-<li><code>scale_x_continuous</code>:  修改X轴标记</li>
-<li><code>scale_fill_gradient2</code>:  增加中间点的色阶</li>
-</ul>
-
-
-<p>代码如下</p>
-
-<div class="highlight"><pre><code class="r">    p <span class="o">+</span> geom_tile<span class="p">()</span> <span class="o">+</span>
-    scale_x_continuous<span class="p">(</span>breaks <span class="o">=</span> seq<span class="p">(</span><span class="m">1940</span><span class="p">,</span> <span class="m">1976</span><span class="p">,</span> by <span class="o">=</span> <span class="m">4</span><span class="p">))</span> <span class="o">+</span>
-    scale_y_reverse<span class="p">()</span> <span class="o">+</span>
-    scale_fill_gradient2<span class="p">(</span>midpoint<span class="o">=</span><span class="m">50</span><span class="p">,</span> mid<span class="o">=</span><span class="s">&quot;grey70&quot;</span><span class="p">,</span> limits<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">100</span><span class="p">))</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-heatmap/UYiPmd0.png" alt="" /></p>
-
-<ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1tc26g">这里</a></li>
-</ul>
-
+<p>但是不得不说，这个风骚的小GUI确实看上去舒服极了， 让人写代码的心情一下就舒畅了起来。 或者说就起码没有那么憋屈啦。 网上有不同插件和不同的主题图案，现在我用的比较少。主要是一些基本功能， 支持vim格式等等。像前端人用的那些现在基本用的比较少呢。</p>
 
 		
 		<div id="donation">
 		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/heat-map&title=ggplot2 - Heat Map"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/heat-map&text=ggplot2 - Heat Map"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/05/Sublime-text-2&title=Sublime Text 2学习过程"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/05/Sublime-text-2&text=Sublime Text 2学习过程"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>

@@ -2,95 +2,107 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://yangchao.me/2011/03/japan-earthquake</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2012/06/happy-madives</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2012/06/memorize-michael-jackson</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2012/08/story-vision</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/01/welcome-ggplot2</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/01/intro-ggplot2</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/ggplot2-bar-chart</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/reshape-basic</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/reshape-advanced</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/02/ggplot2-histogram</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/03/plyr-dataming</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/ggplot2-line-graph</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/cleveland-Dotplot</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/heat-map</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2013/04/mahout</loc>
+        <lastmod>2014-02-11T04:20:19-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2013/05/Sublime-text-2</loc>
+        <lastmod>2014-02-11T04:43:16-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/05/stack-area-ggplot2</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/06/plyr-advanced</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/06/mj-memory</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/09/Significance-ggplot2</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/10/horizon-plot</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/10/horizon-lattice-extra</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/11/ggplot2-2d-density</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/12/happy-new-year</loc>
-        <lastmod>2013-12-30T22:28:21-08:00</lastmod>
+        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2014/02/douban</loc>
+        <lastmod>2014-02-11T05:00:02-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/rss.xml</loc>
@@ -98,6 +110,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2013-12-30T22:20:47-08:00</lastmod>
+        <lastmod>2014-02-11T06:29:32-08:00</lastmod>
     </url>
 </urlset>
