@@ -29,6 +29,10 @@
         <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
+        <loc>http://yangchao.me/2013/02/hadoop-hive</loc>
+        <lastmod>2014-02-11T06:47:08-08:00</lastmod>
+    </url>
+    <url>
         <loc>http://yangchao.me/2013/02/reshape-basic</loc>
         <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
@@ -61,8 +65,8 @@
         <lastmod>2013-12-30T22:33:17-08:00</lastmod>
     </url>
     <url>
-        <loc>http://yangchao.me/2013/04/mahout</loc>
-        <lastmod>2014-02-11T04:20:19-08:00</lastmod>
+        <loc>http://yangchao.me/2013/04/mahout-big-data</loc>
+        <lastmod>2014-02-11T06:45:01-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/05/Sublime-text-2</loc>
@@ -110,6 +114,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2014-02-11T06:29:32-08:00</lastmod>
+        <lastmod>2014-02-11T06:47:08-08:00</lastmod>
     </url>
 </urlset>

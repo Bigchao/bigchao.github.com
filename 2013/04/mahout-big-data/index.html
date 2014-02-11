@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="ggplot2 - Stacked Area Graph | 技术改变世界">
+		<meta name="description" content="Mahout简单部署备忘 | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>ggplot2 - Stacked Area Graph</title>
+		<title>Mahout简单部署备忘</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -110,125 +110,53 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">ggplot2 - Stacked Area Graph</h1>
+		<h1 id="identifier">Mahout简单部署备忘</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>这一节重点介绍ggplot2中，关于堆积图的制作方法。
-提纲挈领记住最重要的！</p>
+		<p>最近对机器学习相关的东西真是算上了瘾，像当年我对学习计量经济学一样。这种强大的求知欲真是让人兴奋不已，确实能学到东西总是好的。看来我对数据还真是非常的着迷啊。</p>
 
-<ul>
-<li><strong>Geom_area()</strong></li>
-</ul>
+<p>和张旭聊了聊，谈到了mahout。准备装了玩一玩，因为对linux系统不熟所以开始难免磕磕碰碰，但是我现在简直对这种操作Teminal的感觉非常着迷了， 玩儿的多了，遇到的问题多了，解决的问题多了自然就熟悉了起来。看来我国的windows盗版确实误事儿啊，linux这么炫酷的东西居然才开始学习。真是太遗憾了。话说现在让我留在windows的唯一理由就是SAS了。 毕竟，SAS在处理大数据方面比R还是要强上不少的。</p>
 
+<p>在安装了Hadoop之后， 准备学的就是Mahout。</p>
 
-<p>接下来的步骤大家可以想到了吧。
-在拎清这个主题之后，我们就会慢慢来对图形进行微调即可</p>
+<p>要装Mahout，要先安装maven。
+安装maven比较简单，几乎不存在什么错误的可能。
+注意加到环境变量之后maven的执行命令是mvn。
+然后</p>
 
-<p><strong>Base Plot</strong></p>
+<p><a href="http://blog.163.com/darkness@yeah/blog/static/131774484201210266154815/">1</a></p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> 
-    library<span class="p">(</span>ggplot2<span class="p">)</span>
-    <span class="c1"># For the data set</span>
-    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span> geom_area<span class="p">()</span>
-</code></pre></div>
+<p>这里稍微注意一下，下一步是要用maven来编译安装mahout，不仅仅是把mahout的压缩包解压。
+刚开始看到的几个网上教程没有说清。</p>
 
+<p><a href="https://cwiki.apache.org/confluence/display/MAHOUT/BuildingMahout">2</a></p>
 
-<p><img src="/assets/images/ggplot2-stack/ZAghMVD.png" alt="" /></p>
+<p><a href="http://blog.sina.com.cn/s/blog_5fc3f6f901016dwy.html">3</a></p>
 
-<hr />
+<p><a href="http://blog.163.com/darkness@yeah/blog/static/131774484201210266154815/">4</a></p>
 
-<p><strong>延伸问题1</strong></p>
+<p>这里有两个比较靠谱的教程。
+尤其是官方的那个。大概就是把mahout的压缩包解压（check out directory指的是下载的目录）
+然后进入解压好的目录（core directory）</p>
 
-<p>我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案</p>
+<p>用命令
+    mvn –Diskip Tests install</p>
 
-<ol>
-<li>改图例：通过改变Scale中的breaks值</li>
-</ol>
+<p>跳过测试过程，不建议使用mvn install
+大概安装了两次就可以了。
+然后注意要再加一下环境变量。</p>
 
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-    <span class="c1">#rev 表示将图例倒转</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/G1umci8.png" alt="" /></p>
-
-<ol>
-<li>改数据：引用Plyr中desc函数</li>
-</ol>
-
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># For the desc() function</span>
-    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/xS9aP30.png" alt="" /></p>
-
-<hr />
-
-<p><strong>延伸问题2</strong>
-我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？</p>
-
-<ul>
-<li>Geom_area 中的颜色设为NA</li>
-<li>使用 <strong>Geom_line</strong></li>
-</ul>
-
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="kc">NA</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span> <span class="o">+</span>
-      geom_line<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;stack&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/JUEp6T8.png" alt="" /></p>
-
-<p><strong>延伸问题3</strong>
-如果想制作成比例的堆积图，应该怎么办？</p>
-
-<ul>
-<li>只需要在Plyr拓展包稍微改变下数据即可，和成比例柱形图的道理完全一样</li>
-</ul>
-
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    library<span class="p">(</span>plyr<span class="p">)</span>  <span class="c1"># For the ddply() function</span>
-    <span class="c1"># Convert Thousands to Percent</span>
-    uspopage_prop <span class="o">&lt;-</span>ddply<span class="p">(</span>uspopage<span class="p">,</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span>transform<span class="p">,</span> Percent <span class="o">=</span>Thousands <span class="o">/</span>sum<span class="p">(</span>Thousands<span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">)</span>
-    <span class="c1"># 在uspopage数据中，把Year中对应的Thousands值除以同一个Year中所有Thousands的总和。</span>
-</code></pre></div>
-
-
-<p>下面的做法就和之间的完全一样了</p>
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>uspopage_prop<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Percent<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/dSxIwAu.png" alt="" /></p>
-
-<ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1nCMPq">这里</a></li>
-</ul>
-
+<p>具体的链接我在上面都给出了，怕今后忘了。自己也就不在写一遍了。</p>
 
 		
 		<div id="donation">
 		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/05/stack-area-ggplot2&title=ggplot2 - Stacked Area Graph"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/05/stack-area-ggplot2&text=ggplot2 - Stacked Area Graph"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/mahout-big-data&title=Mahout简单部署备忘"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/mahout-big-data&text=Mahout简单部署备忘"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>

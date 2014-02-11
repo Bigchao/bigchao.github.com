@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="ggplot2 - Stacked Area Graph | 技术改变世界">
+		<meta name="description" content="大数据体验之Hadoop, Rhadoop, 和Hive | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>ggplot2 - Stacked Area Graph</title>
+		<title>大数据体验之Hadoop, Rhadoop, 和Hive</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -110,125 +110,85 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">ggplot2 - Stacked Area Graph</h1>
+		<h1 id="identifier">大数据体验之Hadoop, Rhadoop, 和Hive</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>这一节重点介绍ggplot2中，关于堆积图的制作方法。
-提纲挈领记住最重要的！</p>
+		<h4>Hadoop配置</h4>
 
-<ul>
-<li><strong>Geom_area()</strong></li>
-</ul>
+<p>最近开始学习Hadoop。走了不少弯路，也有很多收获。现在把我从linux完全小白到安装成功的过程和大家分享一下。</p>
 
+<p><a href="http://weixiaolu.iteye.com/blog/1401931">1</a></p>
 
-<p>接下来的步骤大家可以想到了吧。
-在拎清这个主题之后，我们就会慢慢来对图形进行微调即可</p>
-
-<p><strong>Base Plot</strong></p>
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> 
-    library<span class="p">(</span>ggplot2<span class="p">)</span>
-    <span class="c1"># For the data set</span>
-    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span> geom_area<span class="p">()</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/ZAghMVD.png" alt="" /></p>
+<p><a href="http://weixiaolu.iteye.com/blog/1401786">2</a></p>
 
 <hr />
 
-<p><strong>延伸问题1</strong></p>
+<p>这篇文章还是讲的很好的。但是唯一有一点遗憾的是我没有实现在hadoop用户组完成无密码登录。也就是ssh那一步完成的有些问题，不过目前看来不是很影响。
+在安装Hadoop之前有一点很重要，就是一定要安装好JDK，也就是Java的运行环境。
+我在这部浪费了很长时间，因为网上有不同的安装方法，每次到运行的时候却总说没有安装。
+最后我还是采取了最笨的安装方法</p>
 
-<p>我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案</p>
+<p>所有的安装路径都在 root权限下
+    <code>/usr/local</code></p>
 
-<ol>
-<li>改图例：通过改变Scale中的breaks值</li>
-</ol>
+<p>因为保险起见，实在失败次数太多而无法找到原因，我连下载的JDK都和原来的作者是一模一样的。没有下载后缀名是.tar.gz 或者 .rfm的文件。</p>
 
+<p>安装好JDK之后就按部就班的把Hadoop一步一步安装好。
+注意，在我给的链接当中并没有把hadoop设置到环境变量中去，这点要稍微注意一下。
+hadoop的启动路径 <code>/usr/local/hadoop/bin/all-star.sh</code>
+启动并输入 jps 如果可以出现若干进程，就说明Hadoop已经配置成功了。</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-    <span class="c1">#rev 表示将图例倒转</span>
-</code></pre></div>
+<p>Rhadoop 的设置基本安装</p>
 
+<p><a href="http://cos.name/2013/03/rhadoop2-rhadoop/">3</a></p>
 
-<p><img src="/assets/images/ggplot2-stack/G1umci8.png" alt="" /></p>
+<p>一步一步来的。</p>
 
-<ol>
-<li>改数据：引用Plyr中desc函数</li>
-</ol>
+<p>有个小小的问题要注意。因为要用Root权限，所以有一些</p>
 
+<p>作者的另一篇问题给出了相应的解答</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># For the desc() function</span>
-    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span>
-</code></pre></div>
+<p><a href="http://blog.fens.me/category/r-lang/">4</a></p>
 
+<p>就是要在root用户下来进行</p>
 
-<p><img src="/assets/images/ggplot2-stack/xS9aP30.png" alt="" /></p>
+<p>`根据作者的回答我们发现，错误是由于：“R的类库在特定的用户下面，而不是标准合位置，导致类库不能被hadoop找到”。</p>
+
+<p>在我们的环境中，发现也是同样的配置，与错误描述一致。`</p>
+
+<p>这里稍微注意一下。
+切换root用户，安装即可。</p>
+
+<p>我在装完之后还缺少一个依赖库bitops，文中没有提到
+在r中安装即可</p>
+
+<h3>Hive配置</h3>
 
 <hr />
 
-<p><strong>延伸问题2</strong>
-我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？</p>
+<p><a href="http://blog.csdn.net/gudaoqianfu/article/details/7319287">1</a></p>
 
-<ul>
-<li>Geom_area 中的颜色设为NA</li>
-<li>使用 <strong>Geom_line</strong></li>
-</ul>
+<p>有了Hadoop的基础，其他就相对简单。
+但是hive装好启动之后还是会报错。
+WARNING: org.apache.hadoop.metrics.jvm.EventCounter is deprecated. Please use org.apache.hadoop.log.metrics.EventCounter in all the log4j.properties files.
+虽然不是什么大问题，但是也觉得很不爽。
+按照网上给出的方案我都试过了，但是还是不行。最后放弃解决，不影响使用就行了。</p>
 
+<p>在hive指令里打出 show table;
+注意一定要有分号。然后可以显示OK表明Hive安装成功了。</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="kc">NA</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span> <span class="o">+</span>
-      geom_line<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;stack&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/JUEp6T8.png" alt="" /></p>
-
-<p><strong>延伸问题3</strong>
-如果想制作成比例的堆积图，应该怎么办？</p>
-
-<ul>
-<li>只需要在Plyr拓展包稍微改变下数据即可，和成比例柱形图的道理完全一样</li>
-</ul>
-
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    library<span class="p">(</span>plyr<span class="p">)</span>  <span class="c1"># For the ddply() function</span>
-    <span class="c1"># Convert Thousands to Percent</span>
-    uspopage_prop <span class="o">&lt;-</span>ddply<span class="p">(</span>uspopage<span class="p">,</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span>transform<span class="p">,</span> Percent <span class="o">=</span>Thousands <span class="o">/</span>sum<span class="p">(</span>Thousands<span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">)</span>
-    <span class="c1"># 在uspopage数据中，把Year中对应的Thousands值除以同一个Year中所有Thousands的总和。</span>
-</code></pre></div>
-
-
-<p>下面的做法就和之间的完全一样了</p>
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>uspopage_prop<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Percent<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-</code></pre></div>
-
-
-<p><img src="/assets/images/ggplot2-stack/dSxIwAu.png" alt="" /></p>
-
-<ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1nCMPq">这里</a></li>
-</ul>
-
+<p>但是有个小问题就是
+用Mysql来代替dery数据源的设置还没有做，留着以后再搞。</p>
 
 		
 		<div id="donation">
 		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/05/stack-area-ggplot2&title=ggplot2 - Stacked Area Graph"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/05/stack-area-ggplot2&text=ggplot2 - Stacked Area Graph"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/02/hadoop-hive&title=大数据体验之Hadoop, Rhadoop, 和Hive"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/02/hadoop-hive&text=大数据体验之Hadoop, Rhadoop, 和Hive"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>
