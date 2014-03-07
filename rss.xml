@@ -6,9 +6,874 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Tue, 11 Feb 2014 07:17:58 -0800</pubDate>
-    <lastBuildDate>Tue, 11 Feb 2014 07:17:58 -0800</lastBuildDate>
+    <pubDate>Thu, 06 Mar 2014 23:13:54 -0800</pubDate>
+    <lastBuildDate>Thu, 06 Mar 2014 23:13:54 -0800</lastBuildDate>
 
+    
+    <item>
+      <title>python正则表达式：re.sub</title>
+      <link>http://yangchao.me/2014/03/python-re-sub</link>
+      <pubDate>04 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/python-re-sub</guid>
+      <description>&lt;p&gt;re.sub很强大，所以导致用法稍微有点复杂。所以当遇到稍微复杂的用法时候，就容易犯错。&lt;/p&gt;
+
+&lt;p&gt;所以此处，总结一下，在使用re.sub的时候，需要注意的一些事情。&lt;/p&gt;
+
+&lt;p&gt;re.sub共有五个参数。&lt;/p&gt;
+
+&lt;p&gt;其中三个必选参数：pattern, repl, string&lt;/p&gt;
+
+&lt;p&gt;两个可选参数：count, flags&lt;/p&gt;
+
+&lt;p&gt;re.sub(pattern, repl, string, count=0, flags=0)
+Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl. If the pattern isn’t found, string is returned unchanged. repl can be a string or a function; if it is a string, any backslash escapes in it are processed. That is, \n is converted to a single newline character, \r is converted to a carriage return, and so forth. Unknown escapes such as \j are left alone. Backreferences, such as \6, are replaced with the substring matched by group 6 in the pattern. For example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;    &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;def\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(\s*\):&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;        &lt;span class=&quot;s&quot;&gt;r&amp;#39;static PyObject*\npy_\1(void)\n{&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;        &lt;span class=&quot;s&quot;&gt;&amp;#39;def myfunc():&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;&amp;#39;static PyObject*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;py_myfunc(void)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If repl is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single match object argument, and returns the replacement string. For example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dashrepl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matchobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matchobj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;-{1,2}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dashrepl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;pro----gram-files&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;&amp;#39;pro--gram files&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\sAND\s&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;amp; &amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;Baked Beans And Spam&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IGNORECASE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;&amp;#39;Baked Beans &amp;amp; Spam&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The pattern may be a string or an RE object.
+The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous match, so sub(&#39;x*&#39;, &#39;-&#39;, &#39;abc&#39;) returns &#39;-a-b-c-&#39;.
+In addition to character escapes and backreferences as described above, \g&lt;name&gt; will use the substring matched by the group named name, as defined by the (?P&lt;name&gt;...) syntax. \g&lt;number&gt; uses the corresponding group number; \g&lt;2&gt; is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g&lt;2&gt;0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character &#39;0&#39;. The backreference \g&lt;0&gt; substitutes in the entire substring matched by the RE.&lt;/p&gt;
+
+&lt;p&gt;下面详细介绍一下这5个参数的基本配置&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第一个参数：pattern&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;pattern，表示正则中的模式字符串，这个没太多要解释的。&lt;/p&gt;
+
+&lt;p&gt;需要知道的是：&lt;/p&gt;
+
+&lt;p&gt;反斜杠加数字（\N），则对应着匹配的组（matched group）&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;比如\6，表示匹配前面pattern中的第6个group&lt;/li&gt;
+&lt;li&gt;意味着，pattern中，前面肯定是存在对应的，第6个group，然后你后面也才能去引用&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;比如，想要处理：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;hello
+, nihao crifan&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;且此处的，前后的crifan，肯定是一样的。&lt;/p&gt;
+
+&lt;p&gt;而想要把整个这样的字符串，换成crifanli&lt;/p&gt;
+
+&lt;p&gt;则就可以这样的re.sub实现替换：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello crifan, nihao crifan&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;hello (\w+), nihao \1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;crifanli&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#crifanli&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;第二个参数：repl&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;repl，就是replacement，被替换，的字符串的意思。&lt;/p&gt;
+
+&lt;p&gt;repl可以是字符串，也可以是函数。&lt;/p&gt;
+
+&lt;p&gt;如果repl是字符串的话，其中的任何反斜杠转义字符，都会被处理的。&lt;/p&gt;
+
+&lt;p&gt;即：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;\n：会被处理为对应的换行符；&lt;/li&gt;
+&lt;li&gt;\r：会被处理为回车符；
+其他不能识别的转移字符，则只是被识别为普通的字符：
+比如\j，会被处理为j这个字母本身；&lt;/li&gt;
+&lt;li&gt;反斜杠加g以及中括号内一个名字，即：\g&lt;name&gt;，对应着命了名的组，named group
+接着上面的举例：&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;想要把对应的：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;hello crifan, nihao crifan&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;中的crifan提取出来，只剩：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;crifan&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;就可以写成：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello crifan, nihao crifan&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;hello (\w+), nihao \1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;\g&amp;lt;1&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#crifan&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对应的带命名的组（named group）的版本是：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello crifan, nihao crifan&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;hello (?P&amp;lt;name&amp;gt;\w+), nihao (?P=name)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;\g&amp;lt;name&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#crifan&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当然repl也可以是函数&lt;/p&gt;
+
+&lt;p&gt;举例说明：&lt;/p&gt;
+
+&lt;p&gt;比如输入内容是：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;hello 123 world 456&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;想要把其中的数字部分，都加上111，变成：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;hello 234 world 567&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;那么就可以写成：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;Function:&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;【整理】详解Python中re.sub&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+ 
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pythonReSubDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        demo Pyton re.sub&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello 123 world 456&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_add111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matched&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;intStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matched&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#123&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;intValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;addedValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;intValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#234&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;addedValueStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addedValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addedValueStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+         
+    &lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;(?P&amp;lt;number&amp;gt;\d+)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_add111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#hello 234 world 567&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;###############################################################################&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pythonReSubDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;第三个参数：string&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;string，即表示要被处理，要被替换的那个string字符串。&lt;/p&gt;
+
+&lt;p&gt;没什么特殊要说明。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第四个参数：count&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;举例说明：&lt;/p&gt;
+
+&lt;p&gt;继续之前的例子，假如对于匹配到的内容，只处理其中一部分。&lt;/p&gt;
+
+&lt;p&gt;比如对于：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;hello 123 world 456 nihao 789&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;只是像要处理前面两个数字：123,456，分别给他们加111，而不处理789，&lt;/p&gt;
+
+&lt;p&gt;那么就可以写成：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pythonReSubDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        demo Pyton re.sub&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello 123 world 456 nihao 789&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_add111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matched&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;intStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matched&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#123&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;intValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;addedValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;intValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#234&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;addedValueStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addedValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addedValueStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+         
+    &lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;(?P&amp;lt;number&amp;gt;\d+)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_add111&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#hello 234 world 567 nihao 789&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;###############################################################################&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pythonReSubDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;第五个参数：flags&lt;/strong&gt;
+此处没有什么可以特别讲的&lt;/p&gt;
+
+&lt;p&gt;要注意，被替换的字符串，即参数repl，是普通的字符串，不是pattern&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;即，对应的第二个参数是repl。&lt;/p&gt;
+
+&lt;p&gt;需要你指定对应的r前缀，才是pattern：&lt;/p&gt;
+
+&lt;p&gt;r&quot;xxxx&quot;&lt;/p&gt;
+
+&lt;p&gt;不要误把第四个参数flag的值，传递到第三个参数count中了
+遇到的问题：&lt;/p&gt;
+
+&lt;p&gt;当传递第三个参数，原以为是flag的值是，&lt;/p&gt;
+
+&lt;p&gt;结果实际上是count的值&lt;/p&gt;
+
+&lt;p&gt;所以导致re.sub不功能，&lt;/p&gt;
+
+&lt;p&gt;所以要参数指定清楚了：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacePattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orignialStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacedPartStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# can omit count parameter&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacePattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orignialStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacedPartStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# must designate count parameter&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;才可以正常工作。&lt;/p&gt;
+
+&lt;h2&gt;延伸阅读：&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.crifan.com/python_re_sub_detailed_introduction/&quot;&gt;详解Python中的re.sub&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python正则表达式</title>
+      <link>http://yangchao.me/2014/03/python-regular-expression</link>
+      <pubDate>03 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/python-regular-expression</guid>
+      <description>&lt;p&gt;因为自然语言处理（nltk）和最近的网页抓取都需要用到正则表达式&lt;/p&gt;
+
+&lt;p&gt;所以在这里整理一下&lt;/p&gt;
+
+&lt;p&gt;转载注明出处：&lt;a href=&quot;http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html&quot;&gt;Python正则表达式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;正则为匹配字符的强大工具。我觉得学过之后对人整个的思维过程都有显著的提高。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/regular-expression/re1.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/images/regular-expression/re2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们学习正则表达式其实无非是想完成两件事情&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;匹配&lt;/li&gt;
+&lt;li&gt;替换&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;当然其中还包括编译等等比较复杂的过程。在平时中最常用的就是我以上的理解。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式&quot;ab&lt;em&gt;&quot;如果用于查找&quot;abbbc&quot;，将找到&quot;abbb&quot;。而如果使用非贪婪的数量词&quot;ab&lt;/em&gt;?&quot;，将找到&quot;a&quot;。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;与大多数编程语言相同，正则表达式里使用&quot;\&quot;作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符&quot;\&quot;，那么使用编程语言表示的正则表达式里将需要4个反斜杠&quot;\\&quot;：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r&quot;\&quot;表示。同样，匹配一个数字的&quot;\d&quot;可以写成r&quot;\d&quot;。有了原生字符串，你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观。&lt;/p&gt;
+
+&lt;p&gt;正则表达式提供了一些可用的匹配模式，比如忽略大小写、多行匹配等。&lt;/p&gt;
+
+&lt;p&gt;Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# encoding: UTF-8&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;# 将正则表达式编译成Pattern对象&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;# 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# 使用Match获得分组信息&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### 输出 ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# hello   &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;re.compile(strPattern[, flag]):&lt;/h4&gt;
+
+&lt;p&gt;这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符&#39;|&#39;表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如&lt;code&gt;re.compile(&#39;pattern&#39;, re.I | re.M)&lt;/code&gt;与&lt;code&gt;re.compile(&#39;(?im)pattern&#39;)&lt;/code&gt;是等价的。
+可选值有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）&lt;/li&gt;
+&lt;li&gt;M(MULTILINE): 多行模式，改变&#39;^&#39;和&#39;$&#39;的行为（参见上图）&lt;/li&gt;
+&lt;li&gt;S(DOTALL): 点任意匹配模式，改变&#39;.&#39;的行为&lt;/li&gt;
+&lt;li&gt;L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定&lt;/li&gt;
+&lt;li&gt;U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性&lt;/li&gt;
+&lt;li&gt;X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;&amp;quot;&amp;quot;\d +  # the integral part&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;                   \.    # the decimal point&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;                   \d *  # some fractional digits&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;\d+\.\d*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;re提供了众多模块方法用于完成正则表达式的功能。这些方法可以使用Pattern实例的相应方法替代，唯一的好处是少写一行re.compile()代码，但同时也无法复用编译后的Pattern对象。这些方法将在Pattern类的实例方法部分一起介绍。如上面这个例子可以简写为：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;re模块还提供了一个方法escape(string)，用于将string中的正则表达式元字符如*/+/?等之前加上转义符再返回，在需要大量匹配元字符时有那么一点用。&lt;/p&gt;
+
+&lt;h4&gt;Match&lt;/h4&gt;
+
+&lt;p&gt;Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;属性&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;string: 匹配时使用的文本。&lt;/li&gt;
+&lt;li&gt;re: 匹配时使用的Pattern对象。&lt;/li&gt;
+&lt;li&gt;pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/li&gt;
+&lt;li&gt;endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/li&gt;
+&lt;li&gt;lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。&lt;/li&gt;
+&lt;li&gt;lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt; 
+&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;方法&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+&lt;span class=&quot;mf&quot;&gt;1.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;获得一个或多个分组截获的字符串；指定多个参数时将以元组形式返回。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;可以使用编号也可以使用别名；编号&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;代表整个匹配的子串；不填写参数时，返回&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;；没有截获字符串的组返回&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;；截获了多次的组返回最后一次截获的子串。&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;2.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;以元组形式返回全部分组截获的字符串。相当于调用&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;表示没有截获字符串的组以这个值替代，默认为&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;3.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;groupdict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;返回以有别名的组的别名为键、以该组截获的子串为值的字典，没有别名的组不包含在内。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;含义同上。&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;4.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;返回指定的组截获的子串在&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中的起始索引（子串第一个字符的索引）。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;默认值为&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;5.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;返回指定的组截获的子串在&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中的结束索引（子串最后一个字符的索引&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;）。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;默认值为&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;6.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;返回&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;7.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;将匹配到的分组代入&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中然后返回。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中可以使用&lt;/span&gt;\&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;或&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;、&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;引用分组，但不能使用编号&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;\&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;与&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;是等价的；但&lt;/span&gt;\&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;将被认为是第&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;个分组，如果你想表达&lt;/span&gt;\&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;之后是字符&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;，只能使用&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;(\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.string:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.re:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.pos:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.endpos:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endpos&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.lastindex:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastindex&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.lastgroup:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastgroup&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.group(1,2):&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.groups():&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.groupdict():&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groupdict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.start(2):&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.end(2):&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;m.span(2):&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&amp;quot;m.expand(r&amp;#39;\2 \1\3&amp;#39;):&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\2 \1\3&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.string: hello world!&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.re: &amp;lt;_sre.SRE_Pattern object at 0x016E1A38&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.pos: 0&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.endpos: 12&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.lastindex: 3&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.lastgroup: sign&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.group(1,2): (&amp;#39;hello&amp;#39;, &amp;#39;world&amp;#39;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.groups(): (&amp;#39;hello&amp;#39;, &amp;#39;world&amp;#39;, &amp;#39;!&amp;#39;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.groupdict(): {&amp;#39;sign&amp;#39;: &amp;#39;!&amp;#39;}&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.start(2): 6&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.end(2): 11&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.span(2): (6, 11)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# m.expand(r&amp;#39;\2 \1\3&amp;#39;): world hello!    &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Pattern&lt;/h4&gt;
+
+&lt;p&gt;Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。&lt;/p&gt;
+
+&lt;p&gt;Pattern不能直接实例化，必须使用&lt;code&gt;re.compile()&lt;/code&gt;进行构造。&lt;/p&gt;
+
+&lt;p&gt;Pattern提供了几个可读属性用于获取表达式的相关信息：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;pattern: 编译时用的表达式字符串。&lt;/li&gt;
+&lt;li&gt;flags: 编译时用的匹配模式。数字形式。&lt;/li&gt;
+&lt;li&gt;groups: 表达式中分组的数量。&lt;/li&gt;
+&lt;li&gt;groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;(\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOTALL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;p.pattern:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;p.flags:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;p.groups:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groups&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;p.groupindex:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groupindex&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# p.pattern: (\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# p.flags: 16&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# p.groups: 3&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# p.groupindex: {&amp;#39;sign&amp;#39;: 3}    &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;实例方法[ | re模块方法]：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
+这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。
+pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
+注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符&#39;$&#39;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
+这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
+pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# encoding: UTF-8 &lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt; 
+ 
+&lt;span class=&quot;c&quot;&gt;# 将正则表达式编译成Pattern对象 &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;world&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+ 
+&lt;span class=&quot;c&quot;&gt;# 使用search()查找匹配的子串，不存在能匹配的子串时将返回None &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 这个例子中使用match()无法成功匹配 &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+ 
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+    &lt;span class=&quot;c&quot;&gt;# 使用Match获得分组信息 &lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+ 
+&lt;span class=&quot;c&quot;&gt;### 输出 ### &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# world    &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
+按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;one1two2three3four4&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [&amp;#39;one&amp;#39;, &amp;#39;two&amp;#39;, &amp;#39;three&amp;#39;, &amp;#39;four&amp;#39;, &amp;#39;&amp;#39;]    &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
+搜索string，以列表形式返回全部能匹配的子串。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;one1two2three3four4&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;]   &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
+搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;finditer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;one1two2three3four4&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 1 2 3 4   &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;import re&lt;/p&gt;
+
+&lt;p&gt;p = re.compile(r&#39;\d+&#39;)
+for m in p.finditer(&#39;one1two2three3four4&#39;):
+    print m.group(),&lt;/p&gt;
+
+&lt;h3&gt;output&lt;/h3&gt;
+
+&lt;h1&gt;1 2 3 4&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
+使用repl替换string中每一个匹配的子串后返回替换后的字符串。
+当repl是一个字符串时，可以使用\id或\g&lt;id&gt;、\g&lt;name&gt;引用分组，但不能使用编号0。
+当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。
+count用于指定最多替换次数，不指定时全部替换。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;(\w+) (\w+)&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;i say, hello world!&amp;#39;&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\2 \1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# say i, world hello!&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# I Say, Hello World!   &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
+返回 (sub(repl, string[, count]), 替换次数)。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;(\w+) (\w+)&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;i say, hello world!&amp;#39;&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\2 \1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# (&amp;#39;say i, world hello!&amp;#39;, 2)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# (&amp;#39;I Say, Hello World!&amp;#39;, 2)   &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;大概就是这么多啦~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>scrapy初探-安装和简单操作</title>
+      <link>http://yangchao.me/2014/03/install-scrapy</link>
+      <pubDate>03 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/install-scrapy</guid>
+      <description>&lt;p&gt;最近因为要抓取一些网页，所以搜索一些工具来实现。当然最熟悉的R也可以胜任这个事儿，比如Rcurl和XML的包都行。但是其功能还是挺受局限的，尤其和Python相比，就差的比较多了。&lt;/p&gt;
+
+&lt;p&gt;Python的beautiful soup库其实也很不错。但是Scrapy似乎很炫的样子，不少人和我推荐了。所以就趁着项目之前的筹备期先学起来。&lt;/p&gt;
+
+&lt;p&gt;首先是安装。&lt;/p&gt;
+
+&lt;p&gt;-- Windows&lt;/p&gt;
+
+&lt;p&gt;我的电脑是windows8.1, 安装的时候我参考了多个网上的版本。用了将近两天时间，最后宣告失败。就是装不上。&lt;/p&gt;
+
+&lt;p&gt;要说现在留在windows的最重要理由就是SAS了。&lt;/p&gt;
+
+&lt;p&gt;-- Mac&lt;/p&gt;
+
+&lt;p&gt;Mac上安装其实则方便很多。&lt;/p&gt;
+
+&lt;p&gt;但是事情没有我想象的那么简单，在Mac上安装也耗费了我不少的时间。一度情绪相当低落相当崩溃。&lt;/p&gt;
+
+&lt;p&gt;因为Mac自带了Python2.7.5所以当时我就直接用这个版本的python了。然后安装了pip，然后按照&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;   &lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;就可以了。就不是不行。&lt;/p&gt;
+
+&lt;p&gt;后来出现了其他诸多问题。&lt;/p&gt;
+
+&lt;p&gt;最后的办法就是所有都推到重新来，&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;安装了Homebrew，开始homebrew都安装不了，一度非常崩溃，更新了Xcode最新版之后可以了&lt;/li&gt;
+&lt;li&gt;brew python&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;然后一点点就可以了。&lt;/p&gt;
+
+&lt;p&gt;安装过程整整花了我两天时间，当最后可以使用的时候已经身心俱疲了。&lt;/p&gt;
+
+&lt;p&gt;下面就是使用过程。&lt;/p&gt;
+
+&lt;p&gt;整个的scrapy的构架和Django有点像，有人更是说其中的机制是模仿了Django。先建立一个工程然后把要提取的放到不同的文件里。代码量并不大。而且很方便。&lt;/p&gt;
+
+&lt;p&gt;下面简单走一个流程，看看scrapy是怎么运作的？&lt;/p&gt;
+
+&lt;h3&gt;找一个要抓取的网站&lt;/h3&gt;
+
+&lt;p&gt;按照官方放的教程，我就以&lt;code&gt;mininova&lt;/code&gt;为例&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;http://www.mininova.org/today&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;定义我们要抓取的内容&lt;/h3&gt;
+
+&lt;p&gt;我们想文件的url，名称，描述，和大小。所以在项目文件夹下的&lt;code&gt;item.py&lt;/code&gt;中添加以下内容&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.item&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TorrentItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;定义爬虫&lt;/h3&gt;
+
+&lt;p&gt;定制爬虫就是定义如何搜索链接和如何选取其中的数据。其中需要用到Xpath和正则的知识。&lt;/p&gt;
+
+&lt;p&gt;首先分析页面内容：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;http://www.mininova.org/tor/2676093&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;比如这个网站&lt;/p&gt;
+
+&lt;p&gt;Chrom可以直接观源代码&lt;/p&gt;
+
+&lt;h5&gt;文件名称在tag h1 中&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Darwin - The Evolution Of An Exhibition&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;提取应该这样：
+&lt;code&gt;//h1/text()&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5&gt;描述在 &lt;div&gt; tag with id=&quot;description&quot;:&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Description:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;description&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+Short documentary made for Plymouth City Museum and Art Gallery regarding the setup of an exhibit about Charles Darwin in conjunction with the 200th anniversary of his birth.
+
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;所以Xpath就应该是这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;//div[@id=&#39;description&#39;]&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5&gt;最后，有关文件大小&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;specifications&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Category:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/cat/4&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Movies&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; &lt;span class=&quot;ni&quot;&gt;&amp;amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/sub/35&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Documentary&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Total size:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
+150.62&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;megabyte&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Xpath提取就应该是这样的：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;//div[@id=&#39;specifications&#39;]/p[2]/text()[2]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;最后爬虫文件应该长这个样子：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.contrib.spiders&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CrawlSpider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Rule&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.contrib.linkextractors.sgml&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SgmlLinkExtractor&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.selector&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Selector&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MininovaSpider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CrawlSpider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;mininova&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;allowed_domains&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;mininova.org&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;start_urls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;http://www.mininova.org/today&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rules&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SgmlLinkExtractor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;/tor/\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;parse_torrent&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parse_torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TorrentItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//h1/text()&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;description&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//div[@id=&amp;#39;description&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;size&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//div[@id=&amp;#39;info-left&amp;#39;]/p[2]/text()[2]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crawl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mininova&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scraped_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;最后保存的数据为jason格式。&lt;/p&gt;
+
+&lt;p&gt;[{&quot;url&quot;: &quot;http://www.mininova.org/tor/2676093&quot;, &quot;name&quot;: [&quot;Darwin - The Evolution Of An Exhibition&quot;], &quot;description&quot;: [&quot;Short documentary made for Plymouth ...&quot;], &quot;size&quot;: [&quot;150.62 megabyte&quot;]},&lt;/p&gt;
+
+&lt;h1&gt;... other items ...&lt;/h1&gt;
+
+&lt;p&gt;]&lt;/p&gt;
+
+&lt;h2&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://scrapy.org/&quot;&gt;scrapy&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>时间都去哪儿了</title>
+      <link>http://yangchao.me/2014/02/where-is-data</link>
+      <pubDate>24 Feb 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/02/where-is-data</guid>
+      <description>&lt;p&gt;在开始介绍数据分析之前，我们要了解为什么要数据分析。这就是通常说的原点思想。&lt;/p&gt;
+
+&lt;p&gt;以学术界的经济学为例，超一流是搞思想的，用的平实精炼的语言总结经济发展规律。一流的人搞模型，用建模的数学方法来诠释经济发展规律。低一流的人用实证，也就是通常的计量经济学模型来验证。&lt;/p&gt;
+
+&lt;p&gt;这样的解释其实不算严谨。这里虽然说低一流，但是其涉及的经济学知识，数据推导也是非常复杂。总结下来就是通常在计量经济学是为了验证理论。&lt;/p&gt;
+
+&lt;p&gt;在业界就更加直观，首先有个总体目标，其次是有个技术目标。商业的核心就是创造价值，创造利润。技术在不断迭代，而主旋律似乎从来没有变过。所以技术是为了真正的商业目的而服务的。这里稍微跑了题，所以对于大多数技术团队，需要和其他的团队进行配合为了整体用户的体验而努力，不可太过纠结于技术。&lt;/p&gt;
+
+&lt;p&gt;回到数据分析，刚介绍了数据分析的目的。&lt;/p&gt;
+
+&lt;p&gt;下面简单介绍下数据分析的基本步骤。&lt;/p&gt;
+
+&lt;p&gt;最最重要的是，对数据的整体把握和感觉。这个有点玄虚的感觉，但确实如此。我们可以理解为经过时间磨砺的高手在看到数据的时候往往可以知道这个数据感觉是对的还是不对的，如果不对哪里不对。我了解到那些资深的首席经济分析师，精算师通常可以有这种感觉。当然，我们在初期的时候容易拘泥于技术，如何把领导交给的任务完成好，但是这种感觉的培养是必不可少的。比如，我是经济学出身，从业于商业智能，技术还可以。有时候我的同学或者同事请我帮我处理分析一些数据，其实这些基本步骤大抵差不多。就算当我得到一些结果的时候我不会解读，不知道是不是哪儿出问题了。所以，我们在处理自己行业数据的时候应避免出现这样的问题：得到了结果不会解读。&lt;/p&gt;
+
+&lt;p&gt;数据挖掘和数据仓库的大牛Herb Edelstein说过这样一句话:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;“If you’ve got terabytes of data, and you’re relying on data mining to find interesting things in
+there for you, you’ve lost before you’ve even begun. You really need people who understand what
+it is they are looking for – and what they can do with it once they find it.”&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;大意是说，如果你有TB量级的数据，你想依靠数据挖掘来找到你想要的有意思的东西，你在开始前就已经迷失了。&lt;/p&gt;
+
+&lt;p&gt;这个是我希望大家可以时刻记住的。&lt;/p&gt;
+
+&lt;p&gt;其次，数据分析都是从最基础最底层的描述性分析开始。&lt;/p&gt;
+
+&lt;p&gt;这个很简单，这个很重要。&lt;/p&gt;
+
+&lt;p&gt;了解大概的数据分布情况，基本特征，对于继续分析是很有必要的。在这个基础上再进行更加深化的分析。&lt;/p&gt;
+
+&lt;p&gt;以淘宝为例，我现在想研究双十一促销对商家和淘宝平台的影响。应该怎么办？&lt;/p&gt;
+
+&lt;p&gt;起码先把11月每天的销量统计一遍，肯定不难发现11月11日销量特别高。然后分地域，分商家，分淘宝和天猫再做一遍。这相当于比较高层级的。&lt;/p&gt;
+
+&lt;p&gt;这个时候会看出数据的基本趋势，再选取平均值作为基准，按比例进行同样的运算。这样一点点进行深入分析。&lt;/p&gt;
+
+&lt;p&gt;我发现增长了或者下降了，再有针对性的深入分析。一步步都有条理，很严谨。&lt;/p&gt;
+
+&lt;p&gt;再次，就是进行回归分析，基于机器学习的预测等等稍微高难一点的。&lt;/p&gt;
+
+&lt;p&gt;总结下来：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;数据的把握&lt;/li&gt;
+&lt;li&gt;统计描述性分析&lt;/li&gt;
+&lt;li&gt;进一步深度分析&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;大概是这样。&lt;/p&gt;
+
+&lt;p&gt;下面进入动手阶段。&lt;/p&gt;
+
+&lt;p&gt;我提到过，这个专栏会讲到用R，但是不会从头来讲。所以这里我会给出一些推荐教材和推荐文章。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;有关国外的，还是最推荐&lt;a href=&quot;http://www.r-bloggers.com/&quot;&gt;R-blogger&lt;/a&gt;,有关业界学界用R的最新动态，可以说内容丰富。每次看过之后都觉得很通透很爽快。通过这个网站自然可以发掘到其他很多牛人的博客。点进去看就可以了。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.statmethods.net/&quot;&gt;Quick-R&lt;/a&gt; 这个特别推荐。尤其是初学者，可以把整个网站都过一遍，干活非常的多。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ats.ucla.edu/stat/r/&quot;&gt;UCLA的idre&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;肖凯老师的博客可以说是一个启蒙非常好的地方。&lt;a href=&quot;http://xccds1977.blogspot.hk&quot;&gt;http://xccds1977.blogspot.hk&lt;/a&gt;。但是据说这个在国内被墙掉了，不知道为什么。有心人需要想想办法了。&lt;/li&gt;
+&lt;li&gt;关于书籍。我看过讲R的书多多少少也有10多本了，对于初学者我还是最推荐《The Art of R Programming》，思路相当清晰，我觉得比《R in Action》，《R in nutshell》都要好。所以大家可以搜一下这本书。其中可以不看讲多线程的部分，前边的内容一点一点跟着来。这个配合着Quick-R足够了。然后就配合着我这本专栏。有什么问题，特别欢迎留言，我收到后会跟大家有一个充分的交流和答疑。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;这里做一个小小的广告，因为想学习交互D3的数据可视化，我自己用jekyll在github上托管了一个轻量级博客。域名是:&lt;a href=&quot;yangchao.me&quot;&gt;yangchao.me&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;上面会介绍一些我平时技术上遇到问题的总结，自己写的ggplot的简单教程等等，可能工具和内容更加丰富但是更加散漫。大家有兴趣可以去看下。有同学能注意到，我在这面写过了一些关于R的博客，所有东西是不会出现在这个专栏的，因为我不是那种偷懒的人。&lt;/p&gt;
+
+&lt;p&gt;我发现自己平时看豆瓣阅读都是在晚上上床睡觉之前，所以这样动手的技术博客可能本身并不适合。为了达到可以和大家更好的交流，我希望大家踊跃提出自己平时数据分析遇到的问题，我们来一个充分的互动。这样效果也许是最好的。&lt;/p&gt;
+
+&lt;p&gt;如果你现在连问题也都还提不出来，处于瞎逛的状态，我来给你提个问题。大家都来看看怎么弄，谁的代码最简洁，最方便。&lt;/p&gt;
+
+&lt;p&gt;现在数据是这样的。&lt;/p&gt;
+
+&lt;pre&gt;
+#    id       date      value
+# 1: 27 2014-01-09 0.20597457
+# 2: 27 2014-01-26 0.62911404
+# 3: 27 2014-02-07 0.68702285
+# 4: 37 2014-02-06 0.17655675
+# 5: 37 2014-02-09 0.06178627
+# 6: 37 2014-02-13 0.38410372
+&lt;/pre&gt;
+
+
+&lt;p&gt;有两个ID，三个日期。我先算出来对于每个ID，在最靠近的两个日期中，value的平均值。&lt;/p&gt;
+
+&lt;p&gt;实际的数据有500万行，id有3000个，日期400多天。所以用excel估计是够呛了，其他的方法大家可以想一下~
+好了，这个就是这一期的作业。&lt;/p&gt;
+
+&lt;p&gt;不会不要紧，下一节我们就要讲啦~&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>烟波至爽，数据为王</title>
@@ -158,13 +1023,14 @@
 
 &lt;p&gt;每一列其实是有名字的，我们要重新命名&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;library（data.table) 
-#  我们今后主要介绍的就是这个包，因为它是在太强大了！
-column_names &amp;lt;- c(&quot;ID&quot;,&quot;date&quot;,&quot;uid&quot;,&quot;origin&quot;,&quot;fwd&quot;,&quot;cmts&quot;,&quot;reply&quot;, &quot;fwded&quot;, &quot;ignore&quot;,&quot;cmted&quot;,&quot;liked&quot;,&quot;favorate&quot;)
-# 把新的列明起好， 因为防止中文乱码，所以我干脆用了英文来代替。分别表示ID，日期，用户ID，发帖量，评论量，回复量，转发量等等。
-setnames(DT, paste0(&quot;V&quot;,c(1:12)), column_names)
-# 把原来的列名 v1 - v12 全部换掉
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library（data.table&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;#  我们今后主要介绍的就是这个包，因为它是在太强大了！&lt;/span&gt;
+    column_names &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ID&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;uid&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;origin&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fwd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cmts&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reply&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;fwded&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;ignore&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cmted&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;liked&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;favorate&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 把新的列明起好， 因为防止中文乱码，所以我干脆用了英文来代替。分别表示ID，日期，用户ID，发帖量，评论量，回复量，转发量等等。&lt;/span&gt;
+    setnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; paste0&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;V&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; column_names&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 把原来的列名 v1 - v12 全部换掉&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;现在数据已经是这个样子了&lt;/p&gt;
 
@@ -203,9 +1069,10 @@ setnames(DT, paste0(&quot;V&quot;,c(1:12)), column_names)
 
 &lt;p&gt;这一部也就是说我像知道2012年2月每天的加总情况是怎样的&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sum &amp;lt;- DT[, lapply(.SD, sum), by = date, .SDcols = 4:12 ]
-# 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; sum &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; lapply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;.SD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sum&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; date&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .SDcols &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;这里data.table 包里的简洁代码对我这种代码洁癖简直就是太适合了！
 之所以选择data.table， 原因有三点&lt;/p&gt;
@@ -750,375 +1617,6 @@ Year   Anomaly10y Unc10y
 &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1gRnnX&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title>再次纪念MJ</title>
-      <link>http://yangchao.me/2013/06/mj-memory</link>
-      <pubDate>25 Jun 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/06/mj-memory</guid>
-      <description>&lt;p&gt;MJ去世第四年了，又翻出来了几首经典的歌听了一天。觉得特别想写点什么。&lt;/p&gt;
-
-&lt;p&gt;还是先把经典的那个视频翻出来吧&lt;/p&gt;
-
-&lt;p&gt;&lt;embed src=&quot;http://player.youku.com/player.php/sid/XMTQ3ODIzOTU2/v.swf&quot; allowFullScreen=&quot;true&quot; quality=&quot;high&quot; width=&quot;480&quot; height=&quot;400&quot; align=&quot;middle&quot; allowScriptAccess=&quot;always&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
-
-&lt;p&gt;不得不说，优酷的广告简直太恶心了, 而且加载的很慢。&lt;/p&gt;
-
-&lt;p&gt;就像麦当娜在2009MTV颁奖典礼上为MJ的致词一样，她重复最多的一句话莫过于“ He is a super star, but he’s also a human being.”是啊，“他是个超级巨星，但同时他也是个凡人。”这样一位多年来饱受媒体负面报道影响的巨星，可以在公众视线之外如此谦逊、温和、低调地为人处事，他的心里要承载多少对人间的爱。他最缺少的，其实就是关爱，但他付出最多的，恰恰也是关爱。We&#39;re the World. They don&#39;t Care About Us. Earth Song. Heal the World. 我列举的都还只是那些关于和平关于孩子关于爱的歌曲，那些听了让我们会心平气和会感到柔软的歌曲。&lt;/p&gt;
-
-&lt;p&gt;Michael Jackson离开的几年来，我们亲眼目睹了他的离去带来的一切纷争和改变。死因谜团，是谋杀还是病逝；分给三个孩子的遗产，没有得到的人虎视眈眈；娈童的丑闻终于翻案，始作俑者饮弹自尽；漂白的谣言被澄清。。等等等等。令人悲哀的是，一世伟大改变音乐历史的他，在死后的今天，才得到这迟来的清白。无论他得到了什么解释，无论他得到了什么追誉，都已经不再存有真正的意义——他已经离开了，一如那撕破旧日诽谤的真实，唯有支持者和歌迷流泪的欣慰，他终于清白了，伟大的精神支柱。&lt;/p&gt;
-
-&lt;p&gt;你刚看到了Michael在格莱美颁奖礼上面的他，多么可爱纯真。所有歌迷大喊“I love you” 他都会腼腆的微笑回应 “ I Love You too” 那是一种渗入人心的力量。但是正是这样的一个人，在被“皮肤漂白”“娈童”谣言控诉，他为自己的话人们不会听，他付出的关爱有人质疑动机。可以想象他的内心应该是多么挣扎多么痛苦。&lt;/p&gt;
-
-&lt;p&gt;惊异于美国洛杉矶的追悼仪式，这时才能理解什么叫做精神支柱。70万人，把现场外围的街头塞得没有移动之地，本只能容纳一万人的追悼现场，没有门票的支持者流着眼泪乞求看他最后一眼。各种年龄层的群众，小孩，妈妈，老人，各种肤色的，各种国籍的歌迷，有人已经嚎啕大哭，有些神情严肃但已然崩溃。你能感受得到，什么才叫做不分国界、不分种族、不分性别、不分地位的爱。他把爱用音乐传播到世界的每个角落，救助数不尽的贫困儿童，而传讹者却抓住那似是而非的一瞬间，将它永远涂上黑色。&lt;/p&gt;
-
-&lt;p&gt;当事者理当反省，而大众世人是否更要反省？十多年来，每每有人说起他的皮肤，他的鼻子，他的猥亵儿童案，人们都会突然抬高声调，素不相识的人也会一唱一和，脸上都一如既往地带着摒弃和厌恶，语气里充满了事无巨细的自信。这气氛总是统一而整齐的，多少年来不可动摇。也许我们并没有对他诋毁和诽谤，但在深层的心里，可否对这些人云亦云有过逐流和漠视？未必是对待Michael Jackson，他毕竟——毕竟离我们太过遥远，不管我们声称自己到底有多爱他。只是想一想自己对待身边的人与事，是否有过那些传讹者般恶劣的心态呢。对待身边的每一个人，都足够真诚吗？对待身边的每一件事，都可曾用客观的理智心态去看待么？如果不曾，那么，理当反省。就像他的歌 Man In The Mirror里面说的：If You Wanna Make The World A Better Place. Take A Look At Yourself, And Then Make A Change.&lt;/p&gt;
-
-&lt;p&gt;这也是我自己反思最多的地方。我原来不喜欢MJ，而且在纪念MJ系列头一篇说到他只不过是饭后的谈资。这谈资其实也包含着不敬的调侃。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Never Judge Too Quickly.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;是不是应该更加有爱的对待自己对待别人。这也是我为什么很感谢静静把我带入了Michael的世界，很早之前静静在我的寝室看有关MJ的视频，说到他真的是没有皮肤漂白，就是白癜风。我还调侃呢，“他干啥你又不知道。”但是静静很坚定的说“我相信”。这句话在当时就给了我很大的力量和震撼。当时我理解的角度是在这个现在大家都缺少信任的时候能有一个完全相信的偶像或者朋友是多么幸福的事情。&lt;/p&gt;
-
-&lt;p&gt;可惜我没有听过他很多的歌曲，可惜我没有看过他很多的MV。&lt;/p&gt;
-
-&lt;p&gt;在所有的谣言都不攻自破之后，又多了一帮狂粉他的歌迷。我算是其中的狂热度稍低的一位。并不是追赶潮流或者标榜自己品味。&lt;/p&gt;
-
-&lt;p&gt;现在的我看人更加平和，而多去发现美。不轻易去啐人一口，更多相信美好，对这个世界也对自己的内心。&lt;/p&gt;
-
-&lt;p&gt;这么一个独特的日子，没有人冠以它堂皇的意义，而在喜欢他的人心里，却泛滥着难以忘却的思念。他永远不会再回来了。看着[Heal The World]的MV，想到他一生投身慈善事业，获得无数人道主义奖、诺贝尔和平主义奖提名，也正是因为他如此传播爱，才使得他除了闪耀绝伦的音乐成就之外，还有着无数人心灵寄托的伟岸像形。他开创了一个音乐的历史，还把爱带到每一个他能去到的地方。&lt;/p&gt;
-
-&lt;p&gt;最后向真正默默喜欢和支持MJ的静静粉丝表示致敬，这种默默的支持和相信是一种力量，鼓舞了我也去相信点什么。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Plyr- 多因子整合</title>
-      <link>http://yangchao.me/2013/06/plyr-advanced</link>
-      <pubDate>18 Jun 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/06/plyr-advanced</guid>
-      <description>&lt;p&gt;在上次我们看到的例子，Iris数据集中只有Species一个是因子 （factor），其实plyr更加适合于在多因子的数据集中进行操作&lt;/p&gt;
-
-&lt;p&gt;今天我们用一个稍微复杂一点的数据集来详细讲解&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/hadley/data-baby-names/blob/master/baby-names.csv&quot;&gt;babynames&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;原数据大约2万5千行，包括四个字段year，name，pecent，sex。其中year是从1880到2008&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    options&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;stringsAsFactors &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    babyname &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.csv&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;bnames.csv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;数据就是这个样子的&lt;/p&gt;
-
-&lt;pre&gt;
-  year    name      percent     sex
-1 1880    John      0.081541    boy
-2 1880 William      0.080511    boy
-3 1880   James      0.050057    boy
-4 1880 Charles      0.045167    boy
-5 1880  George      0.043292    boy
-6 1880   Frank      0.027380    boy
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;问题1&lt;/strong&gt;： 找到每一年，每种性别中最受欢迎的名字&lt;/p&gt;
-
-&lt;p&gt;还是按照我们的SAC思想&lt;/p&gt;
-
-&lt;p&gt;S：把原数据按照sex和year两个因子进行切片&lt;/p&gt;
-
-&lt;p&gt;A：每个切片中得到最受欢迎的名字&lt;/p&gt;
-
-&lt;p&gt;C：把结果整合&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sex&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?????&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;前两部份我们都已经很熟悉了，原数据切片。但是后面得到最受欢迎的名字应该怎么办？&lt;/p&gt;
-
-&lt;p&gt;我们要自定义一个函数，来求出最受欢迎的人名，然后再把它加到ddply中的function里面&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    mostPopular &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    x&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;which.max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;percent&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sex&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; mostPopular&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;结果一下就出来了（截取）&lt;/p&gt;
-
-&lt;pre&gt;
-   year  sex       V1
-1   1880  boy     John
-2   1880 girl     Mary
-3   1881  boy     John
-4   1881 girl     Mary
-5   1882  boy     John
-6   1882 girl     Mary
-7   1883  boy     John
-8   1883 girl     Mary
-9   1884  boy     John
-10  1884 girl     Mary
-11  1885  boy     John
-12  1885 girl     Mary
-13  1886  boy     John
-14  1886 girl     Mary
-15  1887  boy     John
-16  1887 girl     Mary
-17  1888  boy     John
-18  1888 girl     Mary
-19  1889  boy     John
-20  1889 girl     Mary
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
-
-&lt;p&gt;可以看出，1889年，都是男的叫John最多，女的叫Mary最多。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;问题2&lt;/strong&gt;：每一年，每种性别中 （ 作者注： 这就是告诉你怎么切片呢 ）， 名字的首字母所占比例是多少？&lt;/p&gt;
-
-&lt;p&gt;解释下问题： Get the total percentage of the first character of the baby names by year and gender&lt;/p&gt;
-
-&lt;p&gt;就比如2000年一共15个男孩出生，5个叫杨超，5个叫贾超，5个叫牛超&lt;/p&gt;
-
-&lt;p&gt;那Y（Yang）的首字母占比是 1/3
-同理 J （Jia ） 和 N （Niu ）也是 1/3&lt;/p&gt;
-
-&lt;p&gt;还是SAC思想&lt;/p&gt;
-
-&lt;p&gt;S： 按照性别、年份选出进行切片。
-&lt;strong&gt;注意！&lt;/strong&gt; 这里不仅仅是要对这两个变量进行切片，还有自定义一个新的变量 &lt;code&gt;姓名的首字母&lt;/code&gt;！&lt;/p&gt;
-
-&lt;p&gt;请在反思上面的简单引例。&lt;/p&gt;
-
-&lt;p&gt;A： 对同样的首字母百分比进行加和&lt;/p&gt;
-
-&lt;p&gt;C： 数据整合&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;#首先提取名字的首字母&lt;/span&gt;
-    firstletter &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    tolower&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;substr&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 根据ddply可以得出结果&lt;/span&gt;
-    letterFreq &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;babyname&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sex&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; first&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;firstletter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; summarize&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sumPer &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;percent&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;最后的结果就是这样的&lt;/p&gt;
-
-&lt;pre&gt;
-  year sex  first   sumPer
-1 1880 boy     a    0.062543
-2 1880 boy     b    0.017858
-3 1880 boy     c    0.084047
-4 1880 boy     d    0.021010
-5 1880 boy     e    0.058219
-6 1880 boy     f    0.055142
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/br&gt;
-最后我们可以可视化一下，用到ggplot2&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;letterFreq&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sumPer&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; group&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;color&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sex&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; facet_wrap&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; first&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; nrow&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/plyr-advanced/eQloL6A.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在Hadley的官网上，有不少这样的例子，大家一定要多去看看，多感受就更有感觉了。&lt;/p&gt;
-
-&lt;p&gt;原文的数据，代码，最后的图在&lt;a href=&quot;http://pan.baidu.com/s/19r800&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ggplot2 - Stacked Area Graph</title>
-      <link>http://yangchao.me/2013/05/stack-area-ggplot2</link>
-      <pubDate>31 May 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/05/stack-area-ggplot2</guid>
-      <description>&lt;p&gt;这一节重点介绍ggplot2中，关于堆积图的制作方法。
-提纲挈领记住最重要的！&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Geom_area()&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;接下来的步骤大家可以想到了吧。
-在拎清这个主题之后，我们就会慢慢来对图形进行微调即可&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Base Plot&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_area&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/ZAghMVD.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;改图例：通过改变Scale中的breaks值&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;levels&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;#rev 表示将图例倒转&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/G1umci8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;改数据：引用Plyr中desc函数&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the desc() function&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; order&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;desc&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/xS9aP30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题2&lt;/strong&gt;
-我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Geom_area 中的颜色设为NA&lt;/li&gt;
-&lt;li&gt;使用 &lt;strong&gt;Geom_line&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; order&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;desc&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stack&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/JUEp6T8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸问题3&lt;/strong&gt;
-如果想制作成比例的堆积图，应该怎么办？&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;只需要在Plyr拓展包稍微改变下数据即可，和成比例柱形图的道理完全一样&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-    library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;plyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# For the ddply() function&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Convert Thousands to Percent&lt;/span&gt;
-    uspopage_prop &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Year&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;transform&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Percent &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Thousands &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;sum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Thousands&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 在uspopage数据中，把Year中对应的Thousands值除以同一个Year中所有Thousands的总和。&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;下面的做法就和之间的完全一样了&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage_prop&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Percent&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_area&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      scale_fill_brewer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;palette&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Blues&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;levels&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;uspopage&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;AgeGroup&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-stack/dSxIwAu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1nCMPq&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Sublime Text 2学习过程</title>
-      <link>http://yangchao.me/2013/05/Sublime-text-2</link>
-      <pubDate>23 May 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/05/Sublime-text-2</guid>
-      <description>&lt;p&gt;在金炎的大力推荐和成果展示炫耀下，今天准备开始配置一下ST2。
-Sbulime Text是一个跨平台的文本编辑器。收费，但是可以无限期免费试用，提醒交费的频率也非常低。
-我使用的是Ubuntu12.04系统。
-安装过程详见&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.technoreply.com/how-to-install-sublime-text-2-on-ubuntu-12-04-unity/&quot;&gt;1&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;安装好，通常第二个就安装插件package control&lt;/p&gt;
-
-&lt;p&gt;这个插件的官方网址是&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://wbond.net/sublime_packages/package_control&quot;&gt;2&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;可以自动输入代码安装。
-可能是因为学校网关的限制，通过命令行安装失败。所以我选择了用手动安装。
-安装过程大致如下&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;先下载，然后解压缩&lt;/li&gt;
-&lt;li&gt;在sublime中Preferences找到installed packages所在的文件夹。&lt;/li&gt;
-&lt;li&gt;拷贝进去即可。
-但是不知到为什么我这里也反复出现几个问题，都是有关权限的。&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;a href=&quot;http://ruby-china.org/topics/7144&quot;&gt;3&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;RubyChina提到了一个权限的问题&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/12284166/cant-install-package-control-in-sublime-text-2&quot;&gt;4&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;stackflow 也提到了一个解决方案。反正就是在跌跌撞撞中装好了Packages Control&lt;/p&gt;
-
-&lt;p&gt;找到的几个比较好的网上教程&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://net.tutsplus.com/tutorials/tools-and-tips/sublime-text-2-tips-and-tricks/&quot;&gt;5&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;这个是基于Mac来写的。安装好package control之后我装了一个allignment，用来对齐等号的。但是因为快捷键冲突失败了。&lt;/p&gt;
-
-&lt;p&gt;下面就是把ST设置成为VIM格式&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.sublimetext.com/docs/2/vintage.html&quot;&gt;6&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;因为太多的热键冲突。。我感觉已经很崩溃了。&lt;/p&gt;
-
-&lt;p&gt;但是不得不说，这个风骚的小GUI确实看上去舒服极了， 让人写代码的心情一下就舒畅了起来。 或者说就起码没有那么憋屈啦。 网上有不同插件和不同的主题图案，现在我用的比较少。主要是一些基本功能， 支持vim格式等等。像前端人用的那些现在基本用的比较少呢。&lt;/p&gt;
 </description>
     </item>
     

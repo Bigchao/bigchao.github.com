@@ -58,7 +58,7 @@
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/heat-map</loc>
-        <lastmod>2013-12-30T22:33:17-08:00</lastmod>
+        <lastmod>2014-03-06T04:20:08-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2013/04/Wilkinson-Dot-Plot</loc>
@@ -106,7 +106,23 @@
     </url>
     <url>
         <loc>http://yangchao.me/2014/02/douban</loc>
-        <lastmod>2014-02-11T05:00:02-08:00</lastmod>
+        <lastmod>2014-03-06T04:21:29-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2014/02/where-is-data</loc>
+        <lastmod>2014-03-06T04:23:53-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2014/03/install-scrapy</loc>
+        <lastmod>2014-03-06T05:35:28-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2014/03/python-regular-expression</loc>
+        <lastmod>2014-03-06T06:47:29-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2014/03/python-re-sub</loc>
+        <lastmod>2014-03-06T23:03:50-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/rss.xml</loc>
@@ -114,6 +130,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2014-02-11T07:17:02-08:00</lastmod>
+        <lastmod>2014-03-06T23:03:50-08:00</lastmod>
     </url>
 </urlset>

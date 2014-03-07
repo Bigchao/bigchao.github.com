@@ -48,6 +48,14 @@
 
 			<div id="post_list">
 			
+				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/install-scrapy"><span class="circle_icon"></span>scrapy初探-安装和简单操作<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>时间都去哪儿了<span class="date">Feb 2014</span></a>
+			
 				<a class="related cate1" href="/2014/02/douban"><span class="circle_icon"></span>烟波至爽，数据为王<span class="date">Feb 2014</span></a>
 			
 				<a class="life cate1" href="/2013/12/happy-new-year"><span class="circle_icon"></span>Happy New Year<span class="date">Dec 2013</span></a>
@@ -257,13 +265,14 @@
 
 <p>每一列其实是有名字的，我们要重新命名</p>
 
-<pre><code>library（data.table) 
-#  我们今后主要介绍的就是这个包，因为它是在太强大了！
-column_names &lt;- c("ID","date","uid","origin","fwd","cmts","reply", "fwded", "ignore","cmted","liked","favorate")
-# 把新的列明起好， 因为防止中文乱码，所以我干脆用了英文来代替。分别表示ID，日期，用户ID，发帖量，评论量，回复量，转发量等等。
-setnames(DT, paste0("V",c(1:12)), column_names)
-# 把原来的列名 v1 - v12 全部换掉
-</code></pre>
+<div class="highlight"><pre><code class="r">    library（data.table<span class="p">)</span> 
+    <span class="c1">#  我们今后主要介绍的就是这个包，因为它是在太强大了！</span>
+    column_names <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span><span class="s">&quot;date&quot;</span><span class="p">,</span><span class="s">&quot;uid&quot;</span><span class="p">,</span><span class="s">&quot;origin&quot;</span><span class="p">,</span><span class="s">&quot;fwd&quot;</span><span class="p">,</span><span class="s">&quot;cmts&quot;</span><span class="p">,</span><span class="s">&quot;reply&quot;</span><span class="p">,</span> <span class="s">&quot;fwded&quot;</span><span class="p">,</span> <span class="s">&quot;ignore&quot;</span><span class="p">,</span><span class="s">&quot;cmted&quot;</span><span class="p">,</span><span class="s">&quot;liked&quot;</span><span class="p">,</span><span class="s">&quot;favorate&quot;</span><span class="p">)</span>
+    <span class="c1"># 把新的列明起好， 因为防止中文乱码，所以我干脆用了英文来代替。分别表示ID，日期，用户ID，发帖量，评论量，回复量，转发量等等。</span>
+    setnames<span class="p">(</span>DT<span class="p">,</span> paste0<span class="p">(</span><span class="s">&quot;V&quot;</span><span class="p">,</span>c<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">)),</span> column_names<span class="p">)</span>
+    <span class="c1"># 把原来的列名 v1 - v12 全部换掉</span>
+</code></pre></div>
+
 
 <p>现在数据已经是这个样子了</p>
 
@@ -302,9 +311,10 @@ setnames(DT, paste0("V",c(1:12)), column_names)
 
 <p>这一部也就是说我像知道2012年2月每天的加总情况是怎样的</p>
 
-<pre><code>sum &lt;- DT[, lapply(.SD, sum), by = date, .SDcols = 4:12 ]
-# 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。
-</code></pre>
+<div class="highlight"><pre><code class="r"> sum <span class="o">&lt;-</span> DT<span class="p">[,</span> lapply<span class="p">(</span>.SD<span class="p">,</span> sum<span class="p">),</span> by <span class="o">=</span> date<span class="p">,</span> .SDcols <span class="o">=</span> <span class="m">4</span><span class="o">:</span><span class="m">12</span> <span class="p">]</span>
+    <span class="c1"># 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。</span>
+</code></pre></div>
+
 
 <p>这里data.table 包里的简洁代码对我这种代码洁癖简直就是太适合了！
 之所以选择data.table， 原因有三点</p>
