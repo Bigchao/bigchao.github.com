@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Thu, 06 Mar 2014 23:13:54 -0800</pubDate>
-    <lastBuildDate>Thu, 06 Mar 2014 23:13:54 -0800</lastBuildDate>
+    <pubDate>Thu, 06 Mar 2014 23:29:01 -0800</pubDate>
+    <lastBuildDate>Thu, 06 Mar 2014 23:29:01 -0800</lastBuildDate>
 
     
     <item>
@@ -460,16 +460,14 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 
 &lt;p&gt;实例方法[ | re模块方法]：&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
+&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt; match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
 这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。
 pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
-注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符&#39;$&#39;。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
-这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
-pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符&#39;$&#39;。&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt;  search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
+这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
+pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# encoding: UTF-8 &lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt; 
@@ -490,11 +488,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
-按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。&lt;/li&gt;
-&lt;/ol&gt;
-
+&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt; split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
+按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -506,11 +501,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
-搜索string，以列表形式返回全部能匹配的子串。&lt;/li&gt;
-&lt;/ol&gt;
-
+&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
+搜索string，以列表形式返回全部能匹配的子串。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -522,11 +514,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
-搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。&lt;/li&gt;
-&lt;/ol&gt;
-
+&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt; finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
+搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -539,24 +528,24 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;import re&lt;/p&gt;
 
-&lt;p&gt;p = re.compile(r&#39;\d+&#39;)
-for m in p.finditer(&#39;one1two2three3four4&#39;):
-    print m.group(),&lt;/p&gt;
 
-&lt;h3&gt;output&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;finditer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;one1two2three3four4&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;### output ###&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 1 2 3 4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;1 2 3 4&lt;/h1&gt;
 
-&lt;ol&gt;
-&lt;li&gt;sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
+&lt;p&gt;&lt;strong&gt;6&lt;/strong&gt; sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
 使用repl替换string中每一个匹配的子串后返回替换后的字符串。
 当repl是一个字符串时，可以使用\id或\g&lt;id&gt;、\g&lt;name&gt;引用分组，但不能使用编号0。
 当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。
-count用于指定最多替换次数，不指定时全部替换。&lt;/li&gt;
-&lt;/ol&gt;
-
+count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -576,11 +565,8 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/li&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
-返回 (sub(repl, string[, count]), 替换次数)。&lt;/li&gt;
-&lt;/ol&gt;
-
+&lt;p&gt;&lt;strong&gt;7&lt;/strong&gt; subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
+返回 (sub(repl, string[, count]), 替换次数)。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -776,7 +762,7 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
     </item>
     
     <item>
-      <title>时间都去哪儿了</title>
+      <title>数据都去哪儿了</title>
       <link>http://yangchao.me/2014/02/where-is-data</link>
       <pubDate>24 Feb 2014</pubDate>
       <author>Peter</author>

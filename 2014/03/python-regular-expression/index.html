@@ -54,7 +54,7 @@
 			
 				<a class="datamining cate1" href="/2014/03/install-scrapy"><span class="circle_icon"></span>scrapy初探-安装和简单操作<span class="date">Mar 2014</span></a>
 			
-				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>时间都去哪儿了<span class="date">Feb 2014</span></a>
+				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>数据都去哪儿了<span class="date">Feb 2014</span></a>
 			
 				<a class="related cate1" href="/2014/02/douban"><span class="circle_icon"></span>烟波至爽，数据为王<span class="date">Feb 2014</span></a>
 			
@@ -312,16 +312,14 @@
 
 <p>实例方法[ | re模块方法]：</p>
 
-<ol>
-<li><p>match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
+<p><strong>1</strong> match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
 这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。
 pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
-注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符'$'。</p></li>
-<li><p>search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
-这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
-pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。</p></li>
-</ol>
+注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符'$'。</p>
 
+<p><strong>2</strong>  search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
+这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
+pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。</p>
 
 <div class="highlight"><pre><code class="python"><span class="c"># encoding: UTF-8 </span>
 <span class="kn">import</span> <span class="nn">re</span> 
@@ -342,11 +340,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 </code></pre></div>
 
 
-<ol>
-<li>split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
-按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。</li>
-</ol>
-
+<p><strong>3</strong> split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
+按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -358,11 +353,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 </code></pre></div>
 
 
-<ol>
-<li>findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
-搜索string，以列表形式返回全部能匹配的子串。</li>
-</ol>
-
+<p><strong>4</strong> findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
+搜索string，以列表形式返回全部能匹配的子串。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -374,11 +366,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 </code></pre></div>
 
 
-<ol>
-<li>finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
-搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。</li>
-</ol>
-
+<p><strong>5</strong> finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
+搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -391,24 +380,24 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 </code></pre></div>
 
 
-<p>import re</p>
 
-<p>p = re.compile(r'\d+')
-for m in p.finditer('one1two2three3four4'):
-    print m.group(),</p>
 
-<h3>output</h3>
+<div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
+ 
+<span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;\d+&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="s">&#39;one1two2three3four4&#39;</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span>
+ 
+<span class="c">### output ###</span>
+<span class="c"># 1 2 3 4</span>
+</code></pre></div>
 
-<h1>1 2 3 4</h1>
 
-<ol>
-<li>sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
+<p><strong>6</strong> sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
 使用repl替换string中每一个匹配的子串后返回替换后的字符串。
 当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。
 当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。
-count用于指定最多替换次数，不指定时全部替换。</li>
-</ol>
-
+count用于指定最多替换次数，不指定时全部替换。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -428,11 +417,8 @@ count用于指定最多替换次数，不指定时全部替换。</li>
 </code></pre></div>
 
 
-<ol>
-<li>subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
-返回 (sub(repl, string[, count]), 替换次数)。</li>
-</ol>
-
+<p><strong>7</strong> subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
+返回 (sub(repl, string[, count]), 替换次数)。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
