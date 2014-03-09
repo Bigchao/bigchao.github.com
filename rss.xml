@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Sat, 08 Mar 2014 22:45:50 -0800</pubDate>
-    <lastBuildDate>Sat, 08 Mar 2014 22:45:50 -0800</lastBuildDate>
+    <pubDate>Sat, 08 Mar 2014 22:58:33 -0800</pubDate>
+    <lastBuildDate>Sat, 08 Mar 2014 22:58:33 -0800</lastBuildDate>
 
     
     <item>
@@ -93,20 +93,23 @@ $$
 $$
 &lt;/pre&gt;
 
-&lt;p&gt;\begin{align&lt;em&gt;}
-  &amp;amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = &lt;br /&gt;
-  &amp;amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) &amp;amp; \cdots &amp;amp; \phi(e_1, e_n) &lt;br /&gt;
-      \vdots &amp;amp; \ddots &amp;amp; \vdots &lt;br /&gt;
-      \phi(e_n, e_1) &amp;amp; \cdots &amp;amp; \phi(e_n, e_n)
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+
+\begin{align*}
+  &amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) &amp; \cdots &amp; \phi(e_1, e_n) \\
+      \vdots &amp; \ddots &amp; \vdots \\
+      \phi(e_n, e_1) &amp; \cdots &amp; \phi(e_n, e_n)
     \end{array} \right)
   \left( \begin{array}{c}
-      y_1 &lt;br /&gt;
-      \vdots &lt;br /&gt;
+      y_1 \\
+      \vdots \\
       y_n
     \end{array} \right)
-\end{align&lt;/em&gt;}&lt;/p&gt;
+\end{align*}
+ %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。&lt;/p&gt;
 
