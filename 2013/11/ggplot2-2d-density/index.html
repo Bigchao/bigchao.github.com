@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -126,57 +130,50 @@
 		<p>地理课上，我们经常会看到等高线。在ggplot2中，也有实现一个和等高线差不多的利器</p>
 
 <ul>
-<li><strong>stat_density2d()</strong></li>
+  <li><strong>stat_density2d()</strong></li>
 </ul>
-
 
 <p>看个例子先</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># The base plot</span>
-    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>eruptions<span class="p">,</span> y<span class="o">=</span>waiting<span class="p">))</span>
-    p <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span> stat_density2d<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># The base plot</span>
+	p <span class="o">&lt;-</span> ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>eruptions<span class="p">,</span> y<span class="o">=</span>waiting<span class="p">))</span>
+	p <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span> stat_density2d<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-density/nE3VPUs.png" alt="" /></p>
 
 <p>我们可以在原始图中添加类似登高线的表示，用以标记密集程度。</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># Contour lines, with &quot;height&quot; mapped to color</span>
-    p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>colour<span class="o">=</span>..level..<span class="p">))</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># Contour lines, with &quot;height&quot; mapped to color</span>
+	p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>colour<span class="o">=</span>..level..<span class="p">))</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-density/nghFH1z.png" alt="" /></p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># Map density estimate to fill color</span>
-    p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>fill<span class="o">=</span>..density..<span class="p">),</span> geom<span class="o">=</span><span class="s">&quot;raster&quot;</span><span class="p">,</span> contour<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># Map density estimate to fill color</span>
+	p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>fill<span class="o">=</span>..density..<span class="p">),</span> geom<span class="o">=</span><span class="s">&quot;raster&quot;</span><span class="p">,</span> contour<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-density/bnGh3DC.png" alt="" /></p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># With points, and map density estimate to alpha</span>
-    p <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># With points, and map density estimate to alpha</span>
+	p <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span>
     stat_density2d<span class="p">(</span>aes<span class="p">(</span>alpha<span class="o">=</span>..density..<span class="p">),</span> geom<span class="o">=</span><span class="s">&quot;tile&quot;</span><span class="p">,</span> contour<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-density/j1b0kxp.png" alt="" /></p>
 
 <p>同一维的密度曲线一样，stat_density2d也可以调整binwidth用h()函数即可
 体会下下面的这个例子</p>
 
-<div class="highlight"><pre><code class="r">    p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>fill<span class="o">=</span>..density..<span class="p">),</span> geom<span class="o">=</span><span class="s">&quot;raster&quot;</span><span class="p">,</span> contour<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> h<span class="o">=</span>c<span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">5</span><span class="p">))</span>
+<div class="highlight"><pre><code class="r">	p <span class="o">+</span> stat_density2d<span class="p">(</span>aes<span class="p">(</span>fill<span class="o">=</span>..density..<span class="p">),</span> geom<span class="o">=</span><span class="s">&quot;raster&quot;</span><span class="p">,</span> contour<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> h<span class="o">=</span>c<span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">5</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-density/aDAgAtw.png" alt="" /></p>
 
 <ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1sw5uP">这里</a></li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1sw5uP">这里</a></li>
 </ul>
-
 
 		
 		<div id="donation">
@@ -203,6 +200,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -143,6 +147,7 @@
 
 <p>谣言大概是这样的：“日本震后三得利免费发放食品饮料，而我国云南地震震后却要让灾区先交钱才能领取救灾帐篷。”同时夹杂了对中国的各种不满。 后来这样的谣言攻破了。日本没有免费发送食品饮料，我们云南也没有办出这么丧尽天良的事情。我不知道传播这样谣言的动机什么。 日本人的素质确实很高，在面对灾难的那种秩序和镇定值得我们学习。但是以此来无中生有捏造让我感到非常反感。</p>
 
+
 		
 		<div id="donation">
 		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
@@ -168,6 +173,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

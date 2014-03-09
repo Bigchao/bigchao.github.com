@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -142,7 +146,6 @@ Return the string obtained by replacing the leftmost non-overlapping occurrences
 <span class="s">&#39;static PyObject*</span><span class="se">\n</span><span class="s">py_myfunc(void)</span><span class="se">\n</span><span class="s">{&#39;</span>
 </code></pre></div>
 
-
 <p>If repl is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single match object argument, and returns the replacement string. For example:</p>
 
 <div class="highlight"><pre><code class="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">dashrepl</span><span class="p">(</span><span class="n">matchobj</span><span class="p">):</span>
@@ -154,10 +157,9 @@ Return the string obtained by replacing the leftmost non-overlapping occurrences
 <span class="s">&#39;Baked Beans &amp; Spam&#39;</span>
 </code></pre></div>
 
-
 <p>The pattern may be a string or an RE object.
-The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous match, so sub('x*', '-', 'abc') returns '-a-b-c-'.
-In addition to character escapes and backreferences as described above, \g<name> will use the substring matched by the group named name, as defined by the (?P<name>...) syntax. \g<number> uses the corresponding group number; \g<2> is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g<2>0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character '0'. The backreference \g<0> substitutes in the entire substring matched by the RE.</p>
+The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous match, so sub(‘x*’, ‘-‘, ‘abc’) returns ‘-a-b-c-‘.
+In addition to character escapes and backreferences as described above, \g<name> will use the substring matched by the group named name, as defined by the (?P<name>...) syntax. \g<number> uses the corresponding group number; \g&lt;2&gt; is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g&lt;2&gt;0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character '0'. The backreference \g&lt;0&gt; substitutes in the entire substring matched by the RE.</number></name></name></p>
 
 <p>下面详细介绍一下这5个参数的基本配置</p>
 
@@ -170,15 +172,16 @@ In addition to character escapes and backreferences as described above, \g<name>
 <p>反斜杠加数字（\N），则对应着匹配的组（matched group）</p>
 
 <ul>
-<li>比如\6，表示匹配前面pattern中的第6个group</li>
-<li>意味着，pattern中，前面肯定是存在对应的，第6个group，然后你后面也才能去引用</li>
+  <li>比如\6，表示匹配前面pattern中的第6个group</li>
+  <li>意味着，pattern中，前面肯定是存在对应的，第6个group，然后你后面也才能去引用</li>
 </ul>
-
 
 <p>比如，想要处理：</p>
 
-<blockquote><p>hello
-, nihao crifan</p></blockquote>
+<blockquote>
+  <p>hello 
+, nihao crifan</p>
+</blockquote>
 
 <p>且此处的，前后的crifan，肯定是一样的。</p>
 
@@ -191,7 +194,6 @@ In addition to character escapes and backreferences as described above, \g<name>
 <span class="k">print</span> <span class="s">&quot;replacedStr=&quot;</span><span class="p">,</span><span class="n">replacedStr</span><span class="p">;</span> <span class="c">#crifanli</span>
 </code></pre></div>
 
-
 <p><strong>第二个参数：repl</strong></p>
 
 <p>repl，就是replacement，被替换，的字符串的意思。</p>
@@ -203,22 +205,25 @@ In addition to character escapes and backreferences as described above, \g<name>
 <p>即：</p>
 
 <ul>
-<li>\n：会被处理为对应的换行符；</li>
-<li>\r：会被处理为回车符；
+  <li>\n：会被处理为对应的换行符；</li>
+  <li>\r：会被处理为回车符；
 其他不能识别的转移字符，则只是被识别为普通的字符：
 比如\j，会被处理为j这个字母本身；</li>
-<li>反斜杠加g以及中括号内一个名字，即：\g<name>，对应着命了名的组，named group
-接着上面的举例：</li>
+  <li>反斜杠加g以及中括号内一个名字，即：\g<name>，对应着命了名的组，named group
+接着上面的举例：</name></li>
 </ul>
-
 
 <p>想要把对应的：</p>
 
-<blockquote><p>hello crifan, nihao crifan</p></blockquote>
+<blockquote>
+  <p>hello crifan, nihao crifan</p>
+</blockquote>
 
 <p>中的crifan提取出来，只剩：</p>
 
-<blockquote><p>crifan</p></blockquote>
+<blockquote>
+  <p>crifan</p>
+</blockquote>
 
 <p>就可以写成：</p>
 
@@ -227,7 +232,6 @@ In addition to character escapes and backreferences as described above, \g<name>
 <span class="k">print</span> <span class="s">&quot;replacedStr=&quot;</span><span class="p">,</span><span class="n">replacedStr</span><span class="p">;</span> <span class="c">#crifan</span>
 </code></pre></div>
 
-
 <p>对应的带命名的组（named group）的版本是：</p>
 
 <div class="highlight"><pre><code class="python"><span class="n">inputStr</span> <span class="o">=</span> <span class="s">&quot;hello crifan, nihao crifan&quot;</span><span class="p">;</span>
@@ -235,18 +239,21 @@ In addition to character escapes and backreferences as described above, \g<name>
 <span class="k">print</span> <span class="s">&quot;replacedStr=&quot;</span><span class="p">,</span><span class="n">replacedStr</span><span class="p">;</span> <span class="c">#crifan</span>
 </code></pre></div>
 
-
 <p>当然repl也可以是函数</p>
 
 <p>举例说明：</p>
 
 <p>比如输入内容是：</p>
 
-<blockquote><p>hello 123 world 456</p></blockquote>
+<blockquote>
+  <p>hello 123 world 456</p>
+</blockquote>
 
 <p>想要把其中的数字部分，都加上111，变成：</p>
 
-<blockquote><p>hello 234 world 567</p></blockquote>
+<blockquote>
+  <p>hello 234 world 567</p>
+</blockquote>
 
 <p>那么就可以写成：</p>
 
@@ -281,7 +288,6 @@ In addition to character escapes and backreferences as described above, \g<name>
     <span class="n">pythonReSubDemo</span><span class="p">();</span>
 </code></pre></div>
 
-
 <p><strong>第三个参数：string</strong></p>
 
 <p>string，即表示要被处理，要被替换的那个string字符串。</p>
@@ -296,7 +302,9 @@ In addition to character escapes and backreferences as described above, \g<name>
 
 <p>比如对于：</p>
 
-<blockquote><p>hello 123 world 456 nihao 789</p></blockquote>
+<blockquote>
+  <p>hello 123 world 456 nihao 789</p>
+</blockquote>
 
 <p>只是像要处理前面两个数字：123,456，分别给他们加111，而不处理789，</p>
 
@@ -327,7 +335,6 @@ In addition to character escapes and backreferences as described above, \g<name>
     <span class="n">pythonReSubDemo</span><span class="p">();</span>
 </code></pre></div>
 
-
 <p><strong>第五个参数：flags</strong>
 此处没有什么可以特别讲的</p>
 
@@ -336,12 +343,11 @@ In addition to character escapes and backreferences as described above, \g<name>
 <div class="highlight"><pre><code class="python"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>即，对应的第二个参数是repl。</p>
 
 <p>需要你指定对应的r前缀，才是pattern：</p>
 
-<p>r"xxxx"</p>
+<p>r”xxxx”</p>
 
 <p>不要误把第四个参数flag的值，传递到第三个参数count中了
 遇到的问题：</p>
@@ -357,17 +363,14 @@ In addition to character escapes and backreferences as described above, \g<name>
 <div class="highlight"><pre><code class="python"><span class="n">replacedStr</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">replacePattern</span><span class="p">,</span> <span class="n">orignialStr</span><span class="p">,</span> <span class="n">replacedPartStr</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">);</span> <span class="c"># can omit count parameter</span>
 </code></pre></div>
 
-
 <p>或者：</p>
 
 <div class="highlight"><pre><code class="python"><span class="n">replacedStr</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">replacePattern</span><span class="p">,</span> <span class="n">orignialStr</span><span class="p">,</span> <span class="n">replacedPartStr</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">);</span> <span class="c"># must designate count parameter</span>
 </code></pre></div>
 
-
 <p>才可以正常工作。</p>
 
-<h2>延伸阅读：</h2>
-
+<h2 id="section">延伸阅读：</h2>
 <p><a href="http://www.crifan.com/python_re_sub_detailed_introduction/">详解Python中的re.sub</a></p>
 
 		
@@ -395,6 +398,14 @@ In addition to character escapes and backreferences as described above, \g<name>
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

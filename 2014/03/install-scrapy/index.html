@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -129,13 +133,13 @@
 
 <p>首先是安装。</p>
 
-<p>-- Windows</p>
+<p>– Windows</p>
 
 <p>我的电脑是windows8.1, 安装的时候我参考了多个网上的版本。用了将近两天时间，最后宣告失败。就是装不上。</p>
 
 <p>要说现在留在windows的最重要理由就是SAS了。</p>
 
-<p>-- Mac</p>
+<p>– Mac</p>
 
 <p>Mac上安装其实则方便很多。</p>
 
@@ -143,9 +147,8 @@
 
 <p>因为Mac自带了Python2.7.5所以当时我就直接用这个版本的python了。然后安装了pip，然后按照</p>
 
-<div class="highlight"><pre><code class="python">   <span class="n">pip</span> <span class="n">install</span> <span class="n">scrapy</span>
+<div class="highlight"><pre><code class="python">	<span class="n">pip</span> <span class="n">install</span> <span class="n">scrapy</span>
 </code></pre></div>
-
 
 <p>就可以了。就不是不行。</p>
 
@@ -154,10 +157,9 @@
 <p>最后的办法就是所有都推到重新来，</p>
 
 <ol>
-<li>安装了Homebrew，开始homebrew都安装不了，一度非常崩溃，更新了Xcode最新版之后可以了</li>
-<li>brew python</li>
+  <li>安装了Homebrew，开始homebrew都安装不了，一度非常崩溃，更新了Xcode最新版之后可以了</li>
+  <li>brew python</li>
 </ol>
-
 
 <p>然后一点点就可以了。</p>
 
@@ -169,13 +171,13 @@
 
 <p>下面简单走一个流程，看看scrapy是怎么运作的？</p>
 
-<h3>找一个要抓取的网站</h3>
+<h3 id="section">找一个要抓取的网站</h3>
 
 <p>按照官方放的教程，我就以<code>mininova</code>为例</p>
 
 <p><a href="">http://www.mininova.org/today</a></p>
 
-<h3>定义我们要抓取的内容</h3>
+<h3 id="section-1">定义我们要抓取的内容</h3>
 
 <p>我们想文件的url，名称，描述，和大小。所以在项目文件夹下的<code>item.py</code>中添加以下内容</p>
 
@@ -188,9 +190,7 @@
     <span class="n">size</span> <span class="o">=</span> <span class="n">Field</span><span class="p">()</span>
 </code></pre></div>
 
-
-<h3>定义爬虫</h3>
-
+<h3 id="section-2">定义爬虫</h3>
 <p>定制爬虫就是定义如何搜索链接和如何选取其中的数据。其中需要用到Xpath和正则的知识。</p>
 
 <p>首先分析页面内容：</p>
@@ -201,16 +201,15 @@
 
 <p>Chrom可以直接观源代码</p>
 
-<h5>文件名称在tag h1 中</h5>
+<h5 id="tag-h1-">文件名称在tag h1 中</h5>
 
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;h1&gt;</span>Darwin - The Evolution Of An Exhibition<span class="nt">&lt;/h1&gt;</span>
 </code></pre></div>
 
-
 <p>提取应该这样：
 <code>//h1/text()</code></p>
 
-<h5>描述在 <div> tag with id="description":</h5>
+<h5 id="div-tag-with-iddescription">描述在 &lt;div&gt; tag with id=”description”:</h5>
 
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;h2&gt;</span>Description:<span class="nt">&lt;/h2&gt;</span>
 
@@ -220,12 +219,11 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 ...
 </code></pre></div>
 
-
 <p>所以Xpath就应该是这样：</p>
 
 <p><code>//div[@id='description']</code></p>
 
-<h5>最后，有关文件大小</h5>
+<h5 id="section-3">最后，有关文件大小</h5>
 
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;specifications&quot;</span><span class="nt">&gt;</span>
 
@@ -238,7 +236,6 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 <span class="nt">&lt;strong&gt;</span>Total size:<span class="nt">&lt;/strong&gt;</span>
 150.62<span class="ni">&amp;nbsp;</span>megabyte<span class="nt">&lt;/p&gt;</span>
 </code></pre></div>
-
 
 <p>Xpath提取就应该是这样的：</p>
 
@@ -267,12 +264,8 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
         <span class="k">return</span> <span class="n">torrent</span>
 </code></pre></div>
 
-
-
-
 <div class="highlight"><pre><code class="python"><span class="n">scrapy</span> <span class="n">crawl</span> <span class="n">mininova</span> <span class="o">-</span><span class="n">o</span> <span class="n">scraped_data</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">t</span> <span class="n">json</span>
 </code></pre></div>
-
 
 <p>最后保存的数据为jason格式。</p>
 
@@ -281,9 +274,7 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 ]
 </code></pre></div>
 
-
-<h2>参考</h2>
-
+<h2 id="section-4">参考</h2>
 <p><a href="http://scrapy.org/">scrapy</a></p>
 
 		
@@ -311,6 +302,14 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

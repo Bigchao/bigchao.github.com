@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -127,11 +131,12 @@
 
 <p>还是先把经典的那个视频翻出来吧</p>
 
-<p><embed src="http://player.youku.com/player.php/sid/XMTQ3ODIzOTU2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></p>
+<embed src="http://player.youku.com/player.php/sid/XMTQ3ODIzOTU2/v.swf" allowfullscreen="true" quality="high" width="480" height="400" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" />
+<p>&lt;/embed&gt;</p>
 
 <p>不得不说，优酷的广告简直太恶心了, 而且加载的很慢。</p>
 
-<p>就像麦当娜在2009MTV颁奖典礼上为MJ的致词一样，她重复最多的一句话莫过于“ He is a super star, but he’s also a human being.”是啊，“他是个超级巨星，但同时他也是个凡人。”这样一位多年来饱受媒体负面报道影响的巨星，可以在公众视线之外如此谦逊、温和、低调地为人处事，他的心里要承载多少对人间的爱。他最缺少的，其实就是关爱，但他付出最多的，恰恰也是关爱。We're the World. They don't Care About Us. Earth Song. Heal the World. 我列举的都还只是那些关于和平关于孩子关于爱的歌曲，那些听了让我们会心平气和会感到柔软的歌曲。</p>
+<p>就像麦当娜在2009MTV颁奖典礼上为MJ的致词一样，她重复最多的一句话莫过于“ He is a super star, but he’s also a human being.”是啊，“他是个超级巨星，但同时他也是个凡人。”这样一位多年来饱受媒体负面报道影响的巨星，可以在公众视线之外如此谦逊、温和、低调地为人处事，他的心里要承载多少对人间的爱。他最缺少的，其实就是关爱，但他付出最多的，恰恰也是关爱。We’re the World. They don’t Care About Us. Earth Song. Heal the World. 我列举的都还只是那些关于和平关于孩子关于爱的歌曲，那些听了让我们会心平气和会感到柔软的歌曲。</p>
 
 <p>Michael Jackson离开的几年来，我们亲眼目睹了他的离去带来的一切纷争和改变。死因谜团，是谋杀还是病逝；分给三个孩子的遗产，没有得到的人虎视眈眈；娈童的丑闻终于翻案，始作俑者饮弹自尽；漂白的谣言被澄清。。等等等等。令人悲哀的是，一世伟大改变音乐历史的他，在死后的今天，才得到这迟来的清白。无论他得到了什么解释，无论他得到了什么追誉，都已经不再存有真正的意义——他已经离开了，一如那撕破旧日诽谤的真实，唯有支持者和歌迷流泪的欣慰，他终于清白了，伟大的精神支柱。</p>
 
@@ -143,7 +148,7 @@
 
 <p>这也是我自己反思最多的地方。我原来不喜欢MJ，而且在纪念MJ系列头一篇说到他只不过是饭后的谈资。这谈资其实也包含着不敬的调侃。</p>
 
-<p><strong>Never Judge Too Quickly.</strong></p>
+<p><strong>Never Judge Too Quickly.</strong> </p>
 
 <p>是不是应该更加有爱的对待自己对待别人。这也是我为什么很感谢静静把我带入了Michael的世界，很早之前静静在我的寝室看有关MJ的视频，说到他真的是没有皮肤漂白，就是白癜风。我还调侃呢，“他干啥你又不知道。”但是静静很坚定的说“我相信”。这句话在当时就给了我很大的力量和震撼。当时我理解的角度是在这个现在大家都缺少信任的时候能有一个完全相信的偶像或者朋友是多么幸福的事情。</p>
 
@@ -182,6 +187,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

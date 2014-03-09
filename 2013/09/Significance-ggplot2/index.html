@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -128,19 +132,16 @@
 <p>答案很简单：</p>
 
 <ul>
-<li><strong>geom_ribbon()</strong></li>
+  <li><strong>geom_ribbon()</strong></li>
 </ul>
 
-
 <div class="highlight"><pre><code class="r">     library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-     <span class="c1"># Grab a subset of the climate data</span>
-     clim <span class="o">&lt;-</span> subset<span class="p">(</span>climate<span class="p">,</span> Source <span class="o">==</span> <span class="s">&quot;Berkeley&quot;</span><span class="p">,</span> select<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="s">&quot;Anomaly10y&quot;</span><span class="p">,</span> <span class="s">&quot;Unc10y&quot;</span><span class="p">))</span>
+	 <span class="c1"># Grab a subset of the climate data</span>
+	 clim <span class="o">&lt;-</span> subset<span class="p">(</span>climate<span class="p">,</span> Source <span class="o">==</span> <span class="s">&quot;Berkeley&quot;</span><span class="p">,</span> select<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="s">&quot;Anomaly10y&quot;</span><span class="p">,</span> <span class="s">&quot;Unc10y&quot;</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>这时数据是泽个样子滴:
 其中Unc10y是置信空间，Anomaly10y是我们关注的变量</p>
-
 <pre>
 Year   Anomaly10y Unc10y
 1800     -0.435  0.505
@@ -150,35 +151,31 @@ Year   Anomaly10y Unc10y
 2003      0.869  0.028
 2004      0.884  0.029
 </pre>
-
-
-<p><br></br></p>
+<p><br />&lt;/br&gt;</p>
 
 <p>下面就可以作图啦~带上我们的geom_ribbon</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>clim<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>clim<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">))</span> <span class="o">+</span>
       geom_ribbon<span class="p">(</span>aes<span class="p">(</span>ymin<span class="o">=</span>Anomaly10y<span class="o">-</span>Unc10y<span class="p">,</span> ymax<span class="o">=</span>Anomaly10y<span class="o">+</span>Unc10y<span class="p">),</span> alpha<span class="o">=</span><span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
       geom_line<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-significance/1g0JO13.png" alt="" /></p>
 
 <p>当然了，我们可以把置信空间设置为曲线
 代码如下：</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># With a dotted line for upper and lower bounds</span>
-    ggplot<span class="p">(</span>clim<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># With a dotted line for upper and lower bounds</span>
+	ggplot<span class="p">(</span>clim<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">))</span> <span class="o">+</span>
       geom_line<span class="p">(</span>aes<span class="p">(</span>y<span class="o">=</span>Anomaly10y<span class="o">-</span>Unc10y<span class="p">),</span> colour<span class="o">=</span><span class="s">&quot;grey50&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
       geom_line<span class="p">(</span>aes<span class="p">(</span>y<span class="o">=</span>Anomaly10y<span class="o">+</span>Unc10y<span class="p">),</span> colour<span class="o">=</span><span class="s">&quot;grey50&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
       geom_line<span class="p">()</span>
 </code></pre></div>
 
-
 <p><img src="/assets/images/ggplot2-significance/syubzvU.png" alt="" /></p>
 
 <ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1gRnnX">这里</a></li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1gRnnX">这里</a></li>
 </ul>
 
 
@@ -207,6 +204,14 @@ Year   Anomaly10y Unc10y
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

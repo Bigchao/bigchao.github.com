@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -133,32 +137,27 @@
 
 <p>并对代码进行详细注释。</p>
 
-<div class="highlight"><pre><code class="r">    
-    require<span class="p">(</span>latticeExtra<span class="p">)</span>
-    <span class="c1">## 产生数据集</span>
-    set.seed<span class="p">(</span><span class="m">1</span><span class="p">)</span>
-    dat <span class="o">&lt;-</span> ts<span class="p">(</span>matrix<span class="p">(</span>cumsum<span class="p">(</span>rnorm<span class="p">(</span><span class="m">200</span> <span class="o">*</span> <span class="m">12</span><span class="p">)),</span> ncol <span class="o">=</span> <span class="m">12</span><span class="p">))</span>
-    colnames<span class="p">(</span>dat<span class="p">)</span> <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;series&quot;</span><span class="p">,</span> LETTERS<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">])</span>
+<div class="highlight"><pre><code class="r">	
+ 	require<span class="p">(</span>latticeExtra<span class="p">)</span>
+	<span class="c1">## 产生数据集</span>
+	set.seed<span class="p">(</span><span class="m">1</span><span class="p">)</span>
+	dat <span class="o">&lt;-</span> ts<span class="p">(</span>matrix<span class="p">(</span>cumsum<span class="p">(</span>rnorm<span class="p">(</span><span class="m">200</span> <span class="o">*</span> <span class="m">12</span><span class="p">)),</span> ncol <span class="o">=</span> <span class="m">12</span><span class="p">))</span>
+	colnames<span class="p">(</span>dat<span class="p">)</span> <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;series&quot;</span><span class="p">,</span> LETTERS<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">])</span>
 </code></pre></div>
-
 
 <p>在安装latticeExtra的时候如果遇到问题，请参见一下代码重新安装</p>
 
-<div class="highlight"><pre><code class="r">    
-    install.packages<span class="p">(</span><span class="s">&quot;xtsExtra&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://R-Forge.R-project.org&quot;</span><span class="p">)</span>    
+<div class="highlight"><pre><code class="r">	
+	install.packages<span class="p">(</span><span class="s">&quot;xtsExtra&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://R-Forge.R-project.org&quot;</span><span class="p">)</span> 	
 </code></pre></div>
-
 
 <p>horizon plot是将时间序列的数据可视化。所以我们需要将原来随机出来的数据转变成为随机数列， 用到的就是 <code>ts</code>命令</p>
 
 <p>产生之后的数据是大概是这个样子</p>
 
-<div class="highlight"><pre><code class="r">    
-    head<span class="p">(</span>dat<span class="p">,</span>n<span class="o">=</span><span class="m">20</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+ 	head<span class="p">(</span>dat<span class="p">,</span>n<span class="o">=</span><span class="m">20</span><span class="p">)</span>
 </code></pre></div>
-
-
-
 
 <pre>
 
@@ -207,8 +206,7 @@
 
 </pre>
 
-
-<p><br></p>
+<p><br /></p>
 
 <p>我们可以基本认定这个就是一个时间序列的数据了。</p>
 
@@ -216,11 +214,10 @@
 
 <p>首先我们可以将数据简单的可视化一下子。</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1">## show simple line plot first, for reference.</span>
-    xyplot<span class="p">(</span>dat<span class="p">,</span> scales <span class="o">=</span> list<span class="p">(</span>y <span class="o">=</span> <span class="s">&quot;same&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><code class="r">	
+ 	<span class="c1">## show simple line plot first, for reference.</span>
+	xyplot<span class="p">(</span>dat<span class="p">,</span> scales <span class="o">=</span> list<span class="p">(</span>y <span class="o">=</span> <span class="s">&quot;same&quot;</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/horizon-latticeextra/zvu0wfQ.png" alt="" /></p>
 
@@ -228,25 +225,23 @@
 
 <p>下面开始我们的<strong>Horizon Plot</strong></p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1">## 先设定基本的图层设置</span>
-    infolayers <span class="o">&lt;-</span>
-    layer<span class="p">(</span>panel.scaleArrow<span class="p">(</span>x <span class="o">=</span> <span class="m">0.99</span><span class="p">,</span> digits <span class="o">=</span> <span class="m">1</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;grey&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><code class="r">	
+ 	<span class="c1">## 先设定基本的图层设置</span>
+	infolayers <span class="o">&lt;-</span>
+  	layer<span class="p">(</span>panel.scaleArrow<span class="p">(</span>x <span class="o">=</span> <span class="m">0.99</span><span class="p">,</span> digits <span class="o">=</span> <span class="m">1</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;grey&quot;</span><span class="p">,</span>
                          srt <span class="o">=</span> <span class="m">90</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.7</span><span class="p">))</span> <span class="o">+</span>
-    layer<span class="p">(</span>lim <span class="o">&lt;-</span> current.panel.limits<span class="p">(),</span>
+  	layer<span class="p">(</span>lim <span class="o">&lt;-</span> current.panel.limits<span class="p">(),</span>
         panel.text<span class="p">(</span>lim<span class="o">$</span>x<span class="p">[</span><span class="m">1</span><span class="p">],</span> lim<span class="o">$</span>y<span class="p">[</span><span class="m">1</span><span class="p">],</span> round<span class="p">(</span>lim<span class="o">$</span>y<span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="m">1</span><span class="p">),</span> font <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
                    cex <span class="o">=</span> <span class="m">0.7</span><span class="p">,</span> adj <span class="o">=</span> c<span class="p">(</span><span class="m">-0.5</span><span class="p">,</span><span class="m">-0.5</span><span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;#9FC8DC&quot;</span><span class="p">))</span>
 </code></pre></div>
 
-
 <p>这两个图层的大概意思是</p>
 
 <ul>
-<li>第一个图层： 在右侧画出每个空间，然后箭头</li>
-<li>第二个图层： 计算出每个不同的变量的Horizon Plot中的基准值，并标图形的左边</li>
-<li>有关颜色的编码信息可以参照这个网站，并推荐之。<a href="http://www.colorhexa.com/9fc8dc">颜色信息</a></li>
+  <li>第一个图层： 在右侧画出每个空间，然后箭头</li>
+  <li>第二个图层： 计算出每个不同的变量的Horizon Plot中的基准值，并标图形的左边</li>
+  <li>有关颜色的编码信息可以参照这个网站，并推荐之。<a href="http://www.colorhexa.com/9fc8dc">颜色信息</a></li>
 </ul>
-
 
 <p>如果大家对基准值的这个概念还不是很熟悉的话，可以快速看看我之前的这篇博客 <a href="http://yangchao.me/2013/10/horizon-plot">《Horizon Chart - 惊艳到爆的哲学》</a></p>
 
@@ -255,102 +250,95 @@
 
 <p><strong>Case 1</strong>：each panel has a different origin and scale:</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1">## (&#39;origin&#39; default is the first data value in each series).</span>
-    horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
-      infolayers
+<div class="highlight"><pre><code class="r">	
+ 	<span class="c1">## (&#39;origin&#39; default is the first data value in each series).</span>
+	horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+  	  infolayers
 </code></pre></div>
-
 
 <p><img src="/assets/images/horizon-latticeextra/2i7atuA.png" alt="" /></p>
 
 <p>短短一行代码，已经把Horizon Plot画出来了。</p>
 
 <ul>
-<li>colorky = TRUE 的意思是最右面是否把表明色阶的注释标出。大家可以试一试如果改成<code>FALSE</code>会怎样</li>
-<li>每一个Panel的初始值和范围变化都是不一样的。</li>
+  <li>colorky = TRUE 的意思是最右面是否把表明色阶的注释标出。大家可以试一试如果改成<code>FALSE</code>会怎样</li>
+  <li>每一个Panel的初始值和范围变化都是不一样的。</li>
 </ul>
-
 
 <p><strong>Case 2</strong>: fixed scale but different origin (baseline):</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1">## (similar in concept to scales = &quot;sliced&quot;)</span>
-    horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> horizonscale <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
-      infolayers
+<div class="highlight"><pre><code class="r">	
+ 	<span class="c1">## (similar in concept to scales = &quot;sliced&quot;)</span>
+	horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> horizonscale <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+  	  infolayers
 </code></pre></div>
-
 
 <p><img src="/assets/images/horizon-latticeextra/q3TGAps.png" alt="" /></p>
 
 <ul>
-<li>通过<code>horizonscale=10</code>, 所有的变化范围都变成了相同的值</li>
+  <li>通过<code>horizonscale=10</code>, 所有的变化范围都变成了相同的值</li>
 </ul>
-
 
 <p><strong>Case 3</strong>: fixed scale and constant origin (all same scales):</p>
 
-<div class="highlight"><pre><code class="r">        
-    horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> origin <span class="o">=</span> <span class="m">0</span><span class="p">,</span> horizonscale <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">		
+	horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> origin <span class="o">=</span> <span class="m">0</span><span class="p">,</span> horizonscale <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
       infolayers
 </code></pre></div>
-
 
 <p><img src="/assets/images/horizon-latticeextra/0Rs2hLj.png" alt="" /></p>
 
 <ul>
-<li>通过<code>origin=0</code>把所有的初始值都设为0</li>
+  <li>通过<code>origin=0</code>把所有的初始值都设为0</li>
 </ul>
-
 
 <p><strong>Case 4</strong>：same scales with full coverage of color scale:</p>
 
-<div class="highlight"><pre><code class="r">        
-    horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> origin <span class="o">=</span> <span class="m">0</span><span class="p">,</span>
+<div class="highlight"><pre><code class="r">		
+	horizonplot<span class="p">(</span>dat<span class="p">,</span> layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> origin <span class="o">=</span> <span class="m">0</span><span class="p">,</span>
             scales <span class="o">=</span> list<span class="p">(</span>y <span class="o">=</span> list<span class="p">(</span>relation <span class="o">=</span> <span class="s">&quot;same&quot;</span><span class="p">)),</span>
             colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> colorkey.digits <span class="o">=</span> <span class="m">1</span><span class="p">)</span> <span class="o">+</span>
       infolayers
 </code></pre></div>
 
-
 <p><img src="/assets/images/horizon-latticeextra/8CwVN62.png" alt="" /></p>
 
 <ul>
-<li>通过<code>scales = list(y = list(relation = "same"))</code>将右边的scales显示为绝对值, 而不是变化值。</li>
+  <li>通过<code>scales = list(y = list(relation = "same"))</code>将右边的scales显示为绝对值, 而不是变化值。</li>
 </ul>
-
 
 <p><strong>Case 5</strong>: use ylab rather than strip.left, for readability.</p>
 
-<div class="highlight"><pre><code class="r">        
-    horizonplot<span class="p">(</span>dat<span class="p">,</span> horizonscale <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
-                layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> strip.left <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
-                ylab <span class="o">=</span> list<span class="p">(</span>rev<span class="p">(</span>colnames<span class="p">(</span>dat<span class="p">)),</span> rot <span class="o">=</span> <span class="m">0</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.7</span><span class="p">))</span> <span class="o">+</span>
-      layer_<span class="p">(</span>panel.fill<span class="p">(</span>col <span class="o">=</span> <span class="s">&quot;gray90&quot;</span><span class="p">),</span> panel.xblocks<span class="p">(</span><span class="kc">...</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><code class="r">		
+	horizonplot<span class="p">(</span>dat<span class="p">,</span> horizonscale <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colorkey <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+            	layout <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> strip.left <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
+            	ylab <span class="o">=</span> list<span class="p">(</span>rev<span class="p">(</span>colnames<span class="p">(</span>dat<span class="p">)),</span> rot <span class="o">=</span> <span class="m">0</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.7</span><span class="p">))</span> <span class="o">+</span>
+  	  layer_<span class="p">(</span>panel.fill<span class="p">(</span>col <span class="o">=</span> <span class="s">&quot;gray90&quot;</span><span class="p">),</span> panel.xblocks<span class="p">(</span><span class="kc">...</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/horizon-latticeextra/F0tqAw5.png" alt="" /></p>
 
 <ul>
-<li>通过<code>strip.left = FALSE</code>把原来竖起来的图例去掉</li>
-<li>再通过<code>ylab = list(rev(colnames(dat)), rot = 0, cex = 0.7))</code>把原来的加上</li>
+  <li>通过<code>strip.left = FALSE</code>把原来竖起来的图例去掉</li>
+  <li>再通过<code>ylab = list(rev(colnames(dat)), rot = 0, cex = 0.7))</code>把原来的加上</li>
 </ul>
 
-
-<p><br></p>
+<p><br /></p>
 
 <p>Horizon Plot基本上常用的就是这一些用法。当然还有不少应用到实际中的，特别是在表现在股票价格变化中的时候，就可以明显感觉它的强大之处。我们会在之后介绍具体的特别应用</p>
 
 <p>相关文章：</p>
 
 <ul>
-<li><p><a href="http://www.colorhexa.com/9fc8dc">颜色信息</a></p></li>
-<li><p><a href="http://latticeextra.r-forge.r-project.org/#segplot&amp;theme=default">LatticeExtra: R Forger</a></p></li>
-<li><p><a href="http://cran.r-project.org/web/packages/latticeExtra/latticeExtra.pdf">官方Manual</a></p></li>
-<li>文中代码和图片在: <a href="http://pan.baidu.com/s/1DvW29">这里</a></li>
+  <li>
+    <p><a href="http://www.colorhexa.com/9fc8dc">颜色信息</a></p>
+  </li>
+  <li>
+    <p><a href="http://latticeextra.r-forge.r-project.org/#segplot&amp;theme=default">LatticeExtra: R Forger</a></p>
+  </li>
+  <li><a href="http://cran.r-project.org/web/packages/latticeExtra/latticeExtra.pdf">官方Manual</a></li>
+  <li>文中代码和图片在: <a href="http://pan.baidu.com/s/1DvW29">这里</a></li>
 </ul>
-
 
 		
 		<div id="donation">
@@ -377,6 +365,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

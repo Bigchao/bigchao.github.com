@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -126,27 +130,24 @@
 		<p><strong>基本问题</strong>：想做直方图</p>
 
 <ul>
-<li><strong>geom_histogram</strong></li>
+  <li><strong>geom_histogram</strong></li>
 </ul>
-
 
 <p><strong>Basic Plot</strong></p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>ggplot2<span class="p">)</span>
     library<span class="p">(</span>gcookbook<span class="p">)</span>
-    ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">()</span>
+	ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/wMSbdnr.png" alt="" /></p>
 
 <p>geom_histogram可以对数据框和单一向量做处理，如果想快速看看一个变量的分布是什么样子的可以用下面的代码：</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># Store the values in a simple vector</span>
-    w <span class="o">&lt;-</span> faithful<span class="o">$</span>waiting
-    ggplot<span class="p">(</span><span class="kc">NULL</span><span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>w<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># Store the values in a simple vector</span>
+	w <span class="o">&lt;-</span> faithful<span class="o">$</span>waiting
+	ggplot<span class="p">(</span><span class="kc">NULL</span><span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>w<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">()</span>
 </code></pre></div>
-
 
 <p>即把数据框位置设为NULL即可。</p>
 
@@ -156,12 +157,11 @@
 默认中，默认的bin个数是30。
 - geom_histogram(binwidth)中修改</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># Divide the x range into 15 bins</span>
-    binsize <span class="o">&lt;-</span> diff<span class="p">(</span>range<span class="p">(</span>faithful<span class="o">$</span>waiting<span class="p">))</span><span class="o">/</span><span class="m">15</span>
-    ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># Divide the x range into 15 bins</span>
+	binsize <span class="o">&lt;-</span> diff<span class="p">(</span>range<span class="p">(</span>faithful<span class="o">$</span>waiting<span class="p">))</span><span class="o">/</span><span class="m">15</span>
+	ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span>
       geom_histogram<span class="p">(</span>binwidth<span class="o">=</span>binsize<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/wh9T1UM.png" alt="" /></p>
 
@@ -172,33 +172,29 @@
 <p>如果想观察多变量直方图</p>
 
 <ul>
-<li>facet_grid()</li>
-<li>map the grouping variable to fill</li>
+  <li>facet_grid()</li>
+  <li>map the grouping variable to fill</li>
 </ul>
-
 
 <p><strong>1.facet_grid</strong></p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>MASS<span class="p">)</span> <span class="c1"># For the data set</span>
-    <span class="c1"># Use smoke as the faceting variable</span>
-    ggplot<span class="p">(</span>birthwt<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>bwt<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>MASS<span class="p">)</span> <span class="c1"># For the data set</span>
+	<span class="c1"># Use smoke as the faceting variable</span>
+	ggplot<span class="p">(</span>birthwt<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>bwt<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
       facet_grid<span class="p">(</span>smoke <span class="o">~</span> .<span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/DXoLuNH.png" alt="" /></p>
 
 <p>注意这里有一个小问题，就是Y轴的坐标上限都是一样的。有时会出现如果不同类别的变量绝对值相差很大，图看起来就不够清爽。</p>
 
 <ul>
-<li>facet_grid(,scales="free")来修改</li>
+  <li>facet_grid(,scales=”free”)来修改</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>birthwt<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>bwt<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>birthwt<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>bwt<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span>
       facet_grid<span class="p">(</span>race <span class="o">~</span> .<span class="p">,</span> scales<span class="o">=</span><span class="s">&quot;free&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/2pU3Wiv.png" alt="" /></p>
 
@@ -206,57 +202,53 @@
 
 <p>把变量放在aes（,fill=)中</p>
 
-<div class="highlight"><pre><code class="r">    birthwt1 <span class="o">&lt;-</span>birthwt <span class="c1"># Make a copy of the data</span>
-    <span class="c1"># Convert smoke to a factor</span>
-    birthwt1<span class="o">$</span>smoke <span class="o">&lt;-</span> factor<span class="p">(</span>birthwt1<span class="o">$</span>smoke<span class="p">)</span>
-    <span class="c1"># Map smoke to fill, make the bars NOT stacked, and make them semitransparent</span>
-    ggplot<span class="p">(</span>birthwt1<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>bwt<span class="p">,</span> fill<span class="o">=</span>smoke<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	birthwt1 <span class="o">&lt;-</span>birthwt <span class="c1"># Make a copy of the data</span>
+	<span class="c1"># Convert smoke to a factor</span>
+	birthwt1<span class="o">$</span>smoke <span class="o">&lt;-</span> factor<span class="p">(</span>birthwt1<span class="o">$</span>smoke<span class="p">)</span>
+	<span class="c1"># Map smoke to fill, make the bars NOT stacked, and make them semitransparent</span>
+	ggplot<span class="p">(</span>birthwt1<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>bwt<span class="p">,</span> fill<span class="o">=</span>smoke<span class="p">))</span> <span class="o">+</span>
       geom_histogram<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">0.4</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/wn5suUY.png" alt="" /></p>
 
 <hr />
-
 <p><strong>延伸问题3</strong>： 为直方图上加密度曲线</p>
 
 <ul>
-<li>geom_density()</li>
-<li>geom_line(stat="density")</li>
+  <li>geom_density()</li>
+  <li>geom_line(stat=”density”)</li>
 </ul>
-
 
 <p>首先看看geom_density()的用法</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span> geom_density<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span> geom_density<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/fp2Ng9T.png" alt="" /></p>
 
 <p>但是发现在侧边和底部也有黑框包围，不好看。这时候就用到了geom_line()</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># The expand_limits() increases the y range to include the value 0</span>
-    ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;density&quot;</span><span class="p">)</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># The expand_limits() increases the y range to include the value 0</span>
+	ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;density&quot;</span><span class="p">)</span> <span class="o">+</span>
       expand_limits<span class="p">(</span>y<span class="o">=</span><span class="m">0</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/VG10TJ6.png" alt="" /></p>
 
 <p>但是援引原书中原句</p>
 
-<blockquote><p>A kernel density curve is an estimate of the population distribution, based on the sample data. The amount of smoothing depends on the kernel bandwidth: the larger the band‐width, the more smoothing there is. The bandwidth can be set with the adjust parameter, which has a default value of 1.</p></blockquote>
+<blockquote>
+  <p>A kernel density curve is an estimate of the population distribution, based on the sample data. The amount of smoothing depends on the kernel bandwidth: the larger the band‐width, the more smoothing there is. The bandwidth can be set with the adjust parameter, which has a default value of 1.</p>
+</blockquote>
 
 <p>感受如下代码</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">))</span> <span class="o">+</span>
     geom_line<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;density&quot;</span><span class="p">,</span> adjust<span class="o">=</span><span class="m">.25</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span> <span class="o">+</span>
     geom_line<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;density&quot;</span><span class="p">)</span> <span class="o">+</span>
     geom_line<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;density&quot;</span><span class="p">,</span> adjust<span class="o">=</span><span class="m">2</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-histogram/NMIwC4u.png" alt="" /></p>
 
@@ -265,19 +257,17 @@
 - geom_histogram() + geom_density
 就可以啦</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">,</span> y<span class="o">=</span>..density..<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>faithful<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>waiting<span class="p">,</span> y<span class="o">=</span>..density..<span class="p">))</span> <span class="o">+</span>
       geom_histogram<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;cornsilk&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;grey60&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">)</span> <span class="o">+</span>
       geom_density<span class="p">()</span> <span class="o">+</span>
       xlim<span class="p">(</span><span class="m">35</span><span class="p">,</span> <span class="m">105</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p><img src="/assets/images/ggplot2-histogram/Q6wvUTN.png" alt="" /></p>
 
 <ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1pEGo8">这里</a></li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1pEGo8">这里</a></li>
 </ul>
-
 
 		
 		<div id="donation">
@@ -304,6 +294,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

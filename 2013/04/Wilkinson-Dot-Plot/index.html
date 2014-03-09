@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -126,57 +130,50 @@
 		<p>有别于之前我们看过的Cleveland dot plot, Wilknson Dot Plot可以观察一组变量的分布情况，在数据量不是很大的时候，这种形式较为新颖，也显得比较专业。入手不难，是一个好的选择。</p>
 
 <ul>
-<li><strong>geom_dotplot()</strong></li>
+  <li><strong>geom_dotplot()</strong></li>
 </ul>
-
 
 <p>首先看一个例子</p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    countries2009 <span class="o">&lt;-</span> subset<span class="p">(</span>countries<span class="p">,</span> Year<span class="o">==</span><span class="m">2009</span> <span class="o">&amp;</span> healthexp<span class="o">&gt;</span><span class="m">2000</span><span class="p">)</span>
-    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>countries2009<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>infmortality<span class="p">))</span>
-    p <span class="o">+</span> geom_dotplot<span class="p">()</span>
-        
+	countries2009 <span class="o">&lt;-</span> subset<span class="p">(</span>countries<span class="p">,</span> Year<span class="o">==</span><span class="m">2009</span> <span class="o">&amp;</span> healthexp<span class="o">&gt;</span><span class="m">2000</span><span class="p">)</span>
+	p <span class="o">&lt;-</span> ggplot<span class="p">(</span>countries2009<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>infmortality<span class="p">))</span>
+	p <span class="o">+</span> geom_dotplot<span class="p">()</span>
+		
 </code></pre></div>
 
-
-<p><img src="/assets/images/ggplot2-wdp/X8gxtci.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-wdp/X8gxtci.png" alt="" />	</p>
 
 <p>我们发现其实图并不是很好看</p>
 
 <ul>
-<li>Y轴没有意义 用scale_y_continuous来调整</li>
-<li>bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</li>
+  <li>Y轴没有意义 用scale_y_continuous来调整</li>
+  <li>bin size 默认为数据范围的1/30, 可以进行调整 binwidth 调整</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	p <span class="o">+</span> geom_dotplot<span class="p">(</span>binwidth<span class="o">=</span><span class="m">.25</span><span class="p">)</span> <span class="o">+</span> geom_rug<span class="p">()</span> <span class="o">+</span>
     scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span>   <span class="c1"># Remove tick markers</span>
     theme<span class="p">(</span>axis.title.y<span class="o">=</span>element_blank<span class="p">())</span> <span class="c1"># Remove axis label</span>
 </code></pre></div>
 
-
-<h2><img src="/assets/images/ggplot2-wdp/Tw1MtH7.png" alt="" /></h2>
+<h2 id="assetsimagesggplot2-wdptw1mth7png"><img src="/assets/images/ggplot2-wdp/Tw1MtH7.png" alt="" /></h2>
 
 <p><strong>延伸问题</strong>：不同变量出现在一个图上</p>
 
 <ul>
-<li>设置<code>binaxis</code></li>
+  <li>设置<code>binaxis</code></li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+	ggplot<span class="p">(</span>heightweight<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>sex<span class="p">,</span> y<span class="o">=</span>heightIn<span class="p">))</span> <span class="o">+</span>
       geom_dotplot<span class="p">(</span>binaxis<span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> binwidth<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stackdir<span class="o">=</span><span class="s">&quot;center&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-wdp/QgEY7D0.png" alt="" /></p>
 
 <ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1mWQc5">这里</a></li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1mWQc5">这里</a></li>
 </ul>
-
 
 		
 		<div id="donation">
@@ -203,6 +200,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

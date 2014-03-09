@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -129,10 +133,9 @@
 <p>在GGPLOT2中，热力学图也并不是那么复杂，起点并不高。主要用的元素只有两个</p>
 
 <ul>
-<li><strong>geom_tile()</strong></li>
-<li><strong>geom_raster()</strong></li>
+  <li><strong>geom_tile()</strong></li>
+  <li><strong>geom_raster()</strong></li>
 </ul>
-
 
 <p>做好热力学图并不是那么简单，需要很多微调，不过有一个固定的套路我们来一点一点实现</p>
 
@@ -158,45 +161,41 @@
 .
 </pre>
 
-
 <p>但是我们想要的格式是这样的</p>
 
 <pre>
-    rating  year    quarter
-1   NA      1945    1
-2   87      1945    2
-3   82      1945    3
-4   75      1945    4
-5   63      1946    1
-6   50      1946    2
+ 	rating	year	quarter
+1   NA	    1945	1
+2	87		1945	2
+3	82		1945	3
+4	75		1945	4
+5	63		1946	1
+6	50		1946	2
  </pre>
-
 
 <p>这里用到了一个比较投机的方法</p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>ggplot2<span class="p">)</span>
-    library<span class="p">(</span>gcookbook<span class="p">)</span>
-    pres_rating <span class="o">&lt;-</span> data.frame<span class="p">(</span>
+	library<span class="p">(</span>gcookbook<span class="p">)</span>
+	pres_rating <span class="o">&lt;-</span> data.frame<span class="p">(</span>
     rating  <span class="o">=</span> as.numeric<span class="p">(</span>presidents<span class="p">),</span>
     year    <span class="o">=</span> as.numeric<span class="p">(</span>floor<span class="p">(</span>time<span class="p">(</span>presidents<span class="p">))),</span>
     quarter <span class="o">=</span> as.numeric<span class="p">(</span>cycle<span class="p">(</span>presidents<span class="p">))</span>
     <span class="p">)</span>
 </code></pre></div>
 
-
 <p>在数据整合上，有R内置的reshape函数，但是我不太推荐，因为语法比较复杂
 推荐：reshape拓展包和pylr拓展包，我写了两个快速教程讲解这两个包，推荐大家看下。</p>
 
 <p>接着用GGPlot2来做热力学图</p>
 
-<div class="highlight"><pre><code class="r">    <span class="c1"># Base plot</span>
-    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>pres_rating<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>year<span class="p">,</span> y<span class="o">=</span>quarter<span class="p">,</span> fill<span class="o">=</span>rating<span class="p">))</span>
-    <span class="c1"># Using geom_tile()</span>
-    p <span class="o">+</span> geom_tile<span class="p">()</span>
-    <span class="c1"># Using geom_raster() - looks the same, but a little more efficient</span>
-    p <span class="o">+</span> geom_raster<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	<span class="c1"># Base plot</span>
+	p <span class="o">&lt;-</span> ggplot<span class="p">(</span>pres_rating<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>year<span class="p">,</span> y<span class="o">=</span>quarter<span class="p">,</span> fill<span class="o">=</span>rating<span class="p">))</span>
+	<span class="c1"># Using geom_tile()</span>
+	p <span class="o">+</span> geom_tile<span class="p">()</span>
+	<span class="c1"># Using geom_raster() - looks the same, but a little more efficient</span>
+	p <span class="o">+</span> geom_raster<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-heatmap/KfWUIzx.png" alt="" /></p>
 
@@ -205,25 +204,23 @@
 <p>我们对此热力学图进行微调</p>
 
 <ul>
-<li><code>scale_y_reverse</code>:  倒转Y轴</li>
-<li><code>scale_x_continuous</code>:  修改X轴标记</li>
-<li><code>scale_fill_gradient2</code>:  增加中间点的色阶</li>
+  <li><code>scale_y_reverse</code>:  倒转Y轴</li>
+  <li><code>scale_x_continuous</code>:  修改X轴标记</li>
+  <li><code>scale_fill_gradient2</code>:  增加中间点的色阶</li>
 </ul>
-
 
 <p>代码如下</p>
 
-<div class="highlight"><pre><code class="r">    p <span class="o">+</span> geom_tile<span class="p">()</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	p <span class="o">+</span> geom_tile<span class="p">()</span> <span class="o">+</span>
     scale_x_continuous<span class="p">(</span>breaks <span class="o">=</span> seq<span class="p">(</span><span class="m">1940</span><span class="p">,</span> <span class="m">1976</span><span class="p">,</span> by <span class="o">=</span> <span class="m">4</span><span class="p">))</span> <span class="o">+</span>
     scale_y_reverse<span class="p">()</span> <span class="o">+</span>
     scale_fill_gradient2<span class="p">(</span>midpoint<span class="o">=</span><span class="m">50</span><span class="p">,</span> mid<span class="o">=</span><span class="s">&quot;grey70&quot;</span><span class="p">,</span> limits<span class="o">=</span>c<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">100</span><span class="p">))</span>
 </code></pre></div>
 
-
 <p><img src="/assets/images/ggplot2-heatmap/UYiPmd0.png" alt="" /></p>
 
 <ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1tc26g">这里</a></li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1tc26g">这里</a></li>
 </ul>
 
 
@@ -252,6 +249,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

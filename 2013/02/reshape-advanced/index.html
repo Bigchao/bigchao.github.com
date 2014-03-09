@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -128,40 +132,37 @@
 <p>先看下面的一个例子体会一下</p>
 
 <div class="highlight"><pre><code class="r">    library<span class="p">(</span>reshape<span class="p">)</span>
-    <span class="c1"># example table with non-unique row-names</span>
-    tab <span class="o">&lt;-</span> data.frame<span class="p">(</span>gene<span class="o">=</span>rep<span class="p">(</span>letters<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> each<span class="o">=</span><span class="m">3</span><span class="p">),</span> s1<span class="o">=</span>runif<span class="p">(</span><span class="m">9</span><span class="p">),</span> s2<span class="o">=</span>runif<span class="p">(</span><span class="m">9</span><span class="p">))</span>
-    <span class="c1"># melt</span>
-    tab.melt <span class="o">&lt;-</span> melt<span class="p">(</span>tab<span class="p">,</span> id<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-    <span class="c1"># function to summarize with logic: </span>
-    <span class="c1"># mean if max/min &lt; 1.5, else median</span>
+	<span class="c1"># example table with non-unique row-names</span>
+	tab <span class="o">&lt;-</span> data.frame<span class="p">(</span>gene<span class="o">=</span>rep<span class="p">(</span>letters<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span> each<span class="o">=</span><span class="m">3</span><span class="p">),</span> s1<span class="o">=</span>runif<span class="p">(</span><span class="m">9</span><span class="p">),</span> s2<span class="o">=</span>runif<span class="p">(</span><span class="m">9</span><span class="p">))</span>
+	<span class="c1"># melt</span>
+	tab.melt <span class="o">&lt;-</span> melt<span class="p">(</span>tab<span class="p">,</span> id<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+	<span class="c1"># function to summarize with logic: </span>
+	<span class="c1"># mean if max/min &lt; 1.5, else median</span>
     <span class="c1"># 在max/min 小于1.5的时候取均值，而其他情况去中位数</span>
-    summarize <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">){</span>ifelse<span class="p">(</span>max<span class="p">(</span>x<span class="p">)</span><span class="o">/</span>min<span class="p">(</span>x<span class="p">)</span><span class="o">&lt;</span><span class="m">1.5</span><span class="p">,</span> mean<span class="p">(</span>x<span class="p">),</span> median<span class="p">(</span>x<span class="p">))}</span>
-    <span class="c1"># ifelse函数的通用用法： ifelse（test, yes,no)</span>
-    <span class="c1"># cast with summarized values</span>
-    dcast<span class="p">(</span>tab.melt<span class="p">,</span> gene<span class="o">~</span>variable<span class="p">,</span> summarize<span class="p">)</span>
+	summarize <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">){</span>ifelse<span class="p">(</span>max<span class="p">(</span>x<span class="p">)</span><span class="o">/</span>min<span class="p">(</span>x<span class="p">)</span><span class="o">&lt;</span><span class="m">1.5</span><span class="p">,</span> mean<span class="p">(</span>x<span class="p">),</span> median<span class="p">(</span>x<span class="p">))}</span>
+	<span class="c1"># ifelse函数的通用用法： ifelse（test, yes,no)</span>
+	<span class="c1"># cast with summarized values</span>
+	dcast<span class="p">(</span>tab.melt<span class="p">,</span> gene<span class="o">~</span>variable<span class="p">,</span> summarize<span class="p">)</span>
 </code></pre></div>
-
 
 <p>这里强大之处在于，在最后dcast的时候，我们自定义了一个统计函数，而没有用到原来比较简单的mean,max等等。</p>
 
 <p>但是注意这样一个情况，在运行的时候会出现这样的报错</p>
 
-<div class="highlight"><pre><code class="html"> Error in vapply(indices, fun, .default) : 
-    values must be type &#39;logical&#39;,
-     but FUN(X[[1]]) result is type &#39;double&#39;
-    In addition: Warning messages:
-    1: In max(x) : no non-missing arguments to max; returning -Inf
-    2: In min(x) : no non-missing arguments to min; returning Inf
+<div class="highlight"><pre><code class="html">	Error in vapply(indices, fun, .default) : 
+  	values must be type &#39;logical&#39;,
+	 but FUN(X[[1]]) result is type &#39;double&#39;
+	In addition: Warning messages:
+	1: In max(x) : no non-missing arguments to max; returning -Inf
+	2: In min(x) : no non-missing arguments to min; returning Inf
 </code></pre></div>
-
 
 <p>这里讲到了<code>fill</code>的情况，原帖在<a href="http://stackoverflow.com/questions/4835202/error-with-custom-aggregate-function-for-a-cast-call-in-r-reshape2/4835804#4835804?s=7400121f-cdc1-4f76-8bf3-1fc020e44d48">这里</a></p>
 
 <p>注意把代码改为</p>
 
-<div class="highlight"><pre><code class="r">    dcast<span class="p">(</span>tab.melt<span class="p">,</span> gene<span class="o">~</span>variable<span class="p">,</span> summarize<span class="p">,</span> fill<span class="o">=</span><span class="kc">NaN</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	dcast<span class="p">(</span>tab.melt<span class="p">,</span> gene<span class="o">~</span>variable<span class="p">,</span> summarize<span class="p">,</span> fill<span class="o">=</span><span class="kc">NaN</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>其实说的道理就是要提供给fill一个参数，原来default的参数是不行的，不一定fill=NaN，我试了下fill=o，fill=1，等等任意一个情况都是可行的。</p>
 
@@ -173,36 +174,30 @@
 
 <p><strong>colsplit</strong>：把变量分开到不同的列</p>
 
-<div class="highlight"><pre><code class="r">    
-    x <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;a_1&quot;</span><span class="p">,</span> <span class="s">&quot;a_2&quot;</span><span class="p">,</span> <span class="s">&quot;b_2&quot;</span><span class="p">,</span> <span class="s">&quot;c_3&quot;</span><span class="p">)</span>
-    vars <span class="o">&lt;-</span> colsplit<span class="p">(</span>x<span class="p">,</span> <span class="s">&quot;_&quot;</span><span class="p">,</span> c<span class="p">(</span><span class="s">&quot;trt&quot;</span><span class="p">,</span> <span class="s">&quot;time&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><code class="r">	
+	x <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;a_1&quot;</span><span class="p">,</span> <span class="s">&quot;a_2&quot;</span><span class="p">,</span> <span class="s">&quot;b_2&quot;</span><span class="p">,</span> <span class="s">&quot;c_3&quot;</span><span class="p">)</span>
+	vars <span class="o">&lt;-</span> colsplit<span class="p">(</span>x<span class="p">,</span> <span class="s">&quot;_&quot;</span><span class="p">,</span> c<span class="p">(</span><span class="s">&quot;trt&quot;</span><span class="p">,</span> <span class="s">&quot;time&quot;</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>运行之后就出现了如下结果，是不是很炫？！</p>
-
 <pre>
-    trt time
-1   a   1
-2   a   2
-3   b   2
-4   c   3
+ 	trt	time
+1	a	1
+2	a	2
+3	b	2
+4	c	3
 </pre>
 
-
-<p><br></br>
+<p><br />&lt;/br&gt;
 <strong>Recast</strong>： 在一步中实现melt和cast功能</p>
 
-<div class="highlight"><pre><code class="r">    recast<span class="p">(</span>data<span class="p">,</span> formula<span class="p">,</span> <span class="kc">...</span><span class="p">,</span> id.var<span class="p">,</span> measure.var<span class="p">)</span>
+<div class="highlight"><pre><code class="r">	recast<span class="p">(</span>data<span class="p">,</span> formula<span class="p">,</span> <span class="kc">...</span><span class="p">,</span> id.var<span class="p">,</span> measure.var<span class="p">)</span>
 </code></pre></div>
-
 
 <p>例子</p>
 
-<div class="highlight"><pre><code class="r">    recast<span class="p">(</span>french_fries<span class="p">,</span> time <span class="o">~</span> variable<span class="p">,</span> id.var <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	recast<span class="p">(</span>french_fries<span class="p">,</span> time <span class="o">~</span> variable<span class="p">,</span> id.var <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span>
 </code></pre></div>
-
-
 
 
 		
@@ -230,6 +225,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

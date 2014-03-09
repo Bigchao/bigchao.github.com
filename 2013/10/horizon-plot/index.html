@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -144,9 +148,9 @@
 
 <p>原理比较简单：</p>
 
-<p><strong>1</strong></p>
+<p><strong>1</strong> </p>
 
-<p>首先有一个最传统的折线图</p>
+<p>首先有一个最传统的折线图 </p>
 
 <p><img src="/assets/images/horizon-intro/ZexplPb.png" alt="" /></p>
 
@@ -154,7 +158,7 @@
 
 <p>分别用不同的颜色标记正值和负值，同时在一个色调里用颜色深浅来表明绝对值的大小</p>
 
-<p><img src="/assets/images/horizon-intro/uL1yC0Q.png" alt="" /></p>
+<p><img src="/assets/images/horizon-intro/uL1yC0Q.png" alt="" /> </p>
 
 <p><strong>3</strong></p>
 
@@ -183,10 +187,16 @@
 <p>相关文章：</p>
 
 <ul>
-<li><p><a href="http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf">The Development of the Horizon Graph</a></p></li>
-<li><p><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/time_on_the_horizon.pdf">Time on the Horizon</a></p></li>
-<li><p><a href="http://vis.berkeley.edu/papers/horizon/2009-TimeSeries-CHI.pdf">Sizing the Horizon: The Effects of Chart Size and Layering
-on the Graphical Perception of Time Series Visualizations</a></p></li>
+  <li>
+    <p><a href="http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf">The Development of the Horizon Graph</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/time_on_the_horizon.pdf">Time on the Horizon</a></p>
+  </li>
+  <li>
+    <p><a href="http://vis.berkeley.edu/papers/horizon/2009-TimeSeries-CHI.pdf">Sizing the Horizon: The Effects of Chart Size and Layering 
+on the Graphical Perception of Time Series Visualizations</a> </p>
+  </li>
 </ul>
 
 
@@ -215,6 +225,14 @@ on the Graphical Perception of Time Series Visualizations</a></p></li>
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

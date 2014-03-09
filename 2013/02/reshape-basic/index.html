@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -133,17 +137,16 @@ Reshape2可谓非常强大，用到的最多的Melt(),和Cast() 两个函数</p>
 <p>首先介绍下Melt()函数，通俗易懂的理解就是，如果不加任何参数，就是把原来的data.frame只变成三列，id，variable，value.</p>
 
 <p>举个例子理解下
-Smiths数据集原来是这样的
- <pre> subject time    age    weight  height
+Smiths数据集原来是这样的</p>
+<pre> subject time    age    weight  height
 1 John Smith    1       33     90   1.87
-2 Mary Smith    1       NA     NA   1.54</pre></p>
+2 Mary Smith    1   	NA     NA   1.54</pre>
 
 <p>我们来melt一下</p>
 
-<div class="highlight"><pre><code class="r">    
+<div class="highlight"><pre><code class="r">	
     melt<span class="p">(</span>smiths<span class="p">)</span>
 </code></pre></div>
-
 
 <p>出来的结果就是这样的了</p>
 
@@ -158,8 +161,7 @@ Smiths数据集原来是这样的
 8 Mary Smith   height  1.54
 </pre>
 
-
-<p><br></br></p>
+<p><br />&lt;/br&gt;</p>
 
 <p>大家发现了什么？是不是就是先按住第一列不要动，然后第二列的列名变成了新建变量variabe的值，然后原来第二列的值变成了第三列新建变量value的值，然后后边的列都以此类推？</p>
 
@@ -171,23 +173,20 @@ Smiths数据集原来是这样的
     value.name <span class="o">=</span> <span class="s">&quot;value&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>注意上面，</p>
 
 <ul>
-<li>id.vars是说指定id的，用id可以代替id.vars，也就是例子中的subject这一列</li>
-<li>measure.vars是指所有原数据中，除了id.vars的所有列, 可以用measured代替measure.vars</li>
-<li>variable.name是指定新建variable这一列的列名的</li>
-<li>na.rm = TRUE 的用法是原来数据中如包含空值，新建数据集将NA的行全部删除</li>
-<li>value.name是指定新建变量value这一列的列名</li>
+  <li>id.vars是说指定id的，用id可以代替id.vars，也就是例子中的subject这一列</li>
+  <li>measure.vars是指所有原数据中，除了id.vars的所有列, 可以用measured代替measure.vars</li>
+  <li>variable.name是指定新建variable这一列的列名的</li>
+  <li>na.rm = TRUE 的用法是原来数据中如包含空值，新建数据集将NA的行全部删除</li>
+  <li>value.name是指定新建变量value这一列的列名</li>
 </ul>
-
 
 <p>感受下下面一段代码</p>
 
-<div class="highlight"><pre><code class="r">    melt1 <span class="o">&lt;-</span> melt<span class="p">(</span>smiths<span class="p">,</span>id<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="s">&quot;time&quot;</span><span class="p">),</span>variable.name<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;newvar&quot;</span><span class="p">),</span>value.name<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;newval&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><code class="r">	melt1 <span class="o">&lt;-</span> melt<span class="p">(</span>smiths<span class="p">,</span>id<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="s">&quot;time&quot;</span><span class="p">),</span>variable.name<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;newvar&quot;</span><span class="p">),</span>value.name<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;newval&quot;</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>我们重新指定了id为subject和time两个。</p>
 
@@ -199,89 +198,80 @@ Smiths数据集原来是这样的
 5 John Smith    1 height   1.87
 6 Mary Smith    1 height   1.54</pre>
 
-
-<p><br></br>
+<p><br />&lt;/br&gt;
 这样是不是非常方便把数据揉来揉去了？：）</p>
 
 <p>下面介绍下cast()函数
 如果说melt把数据变长，那么cast就把数据变宽。在Reshape2 Package中显而易见的一点不同是cast()函数变成了</p>
 
 <ul>
-<li>dcast，针对data.frame</li>
-<li>acast()，针对array</li>
-<li>因为我们用的最多的就是data.frame,所以推荐这个。 array可以提高更多的维度。</li>
+  <li>dcast，针对data.frame</li>
+  <li>acast()，针对array</li>
+  <li>因为我们用的最多的就是data.frame,所以推荐这个。 array可以提高更多的维度。</li>
 </ul>
-
 
 <p>下面给出cast的用法，用英文原文更能保留其中的原汁原味，我也懒得再绞尽脑汁想如何翻译了。</p>
 
 <ul>
-<li>data： the molten data set to reshape</li>
-<li>formula: the casting formula which describes the shape of the output format (if you omit this argument, cast will return the data frame in the classic form with measured variables in the columns, and all other id variables in the rows)</li>
-<li>fun.aggregate: aggregation function to use, if necessary</li>
-<li>margins: what marginal values should be computed</li>
+  <li>data： the molten data set to reshape</li>
+  <li>formula: the casting formula which describes the shape of the output format (if you omit this argument, cast will return the data frame in the classic form with measured variables in the columns, and all other id variables in the rows) </li>
+  <li>fun.aggregate: aggregation function to use, if necessary</li>
+  <li>margins: what marginal values should be computed</li>
 </ul>
-
 
 <p>其中的第二段太难理解了，说白了就是你想怎么molten data重新整成什么样。 所谓的fomula其实就是这样的：col_var_1 + col_var_2 ~ row_var_1 + row_var_2</p>
 
 <ul>
-<li>大家现在可以停下来想一想，cast的过程就是把原来的melt的逆过程，</li>
-<li>其中“~” 这个符号就是分隔符</li>
-<li>也就是说在 ~ 之前是留着不懂的，~之后指示为在原来“row_var_1”这一列所有的值都变成了单独列。</li>
-<li>有时候于遇到 "..."符号，表示fomula中所有没有用到的vector都在此。"."表示在后面没有任何的数据列</li>
+  <li>大家现在可以停下来想一想，cast的过程就是把原来的melt的逆过程，</li>
+  <li>其中“~” 这个符号就是分隔符</li>
+  <li>也就是说在 ~ 之前是留着不懂的，~之后指示为在原来“row_var_1”这一列所有的值都变成了单独列。</li>
+  <li>有时候于遇到 “…“符号，表示fomula中所有没有用到的vector都在此。”.”表示在后面没有任何的数据列</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    cast<span class="p">(</span>ffm<span class="p">,</span> treatment <span class="o">+</span> rep <span class="o">~</span> .<span class="p">,</span> length<span class="p">)</span>
-    <span class="c1">#表示在分别统计treatment，和rep两个变量的频度</span>
-    <span class="c1">#主要感受下 &quot;.&quot; 的用法 </span>
-    相当于SQL语句里面的
-    select treatment，rep count（<span class="o">*</span>） as length
-    from ffm    
-    group by treatment<span class="p">,</span> rep<span class="p">;</span>
+<div class="highlight"><pre><code class="r">	cast<span class="p">(</span>ffm<span class="p">,</span> treatment <span class="o">+</span> rep <span class="o">~</span> .<span class="p">,</span> length<span class="p">)</span>
+	<span class="c1">#表示在分别统计treatment，和rep两个变量的频度</span>
+	<span class="c1">#主要感受下 &quot;.&quot; 的用法 </span>
+	相当于SQL语句里面的
+	select treatment，rep count（<span class="o">*</span>） as length
+	from ffm	
+	group by treatment<span class="p">,</span> rep<span class="p">;</span>
 </code></pre></div>
-
 
 <p>举个例子！
 刚才已经建立了一个melt1的数据集，现在我们想把它还原</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="o">&gt;</span> dcast<span class="p">(</span>melt1<span class="p">,</span> time <span class="o">+</span> subject <span class="o">~</span> newvar<span class="p">)</span>    
-    
+<div class="highlight"><pre><code class="r">	
+	<span class="o">&gt;</span> dcast<span class="p">(</span>melt1<span class="p">,</span> time <span class="o">+</span> subject <span class="o">~</span> newvar<span class="p">)</span>	
+	
 </code></pre></div>
-
 
 <p>这样就可以还原到了，在逗号后面的就是所谓的fomula。
 看第二个例子</p>
 
-<div class="highlight"><pre><code class="r">    <span class="o">&gt;</span> dcast<span class="p">(</span>melt1<span class="p">,</span> <span class="kc">...</span> <span class="o">~</span> subject<span class="p">)</span>
-    <span class="c1"># 感受下&quot;...&quot; 的用法</span>
+<div class="highlight"><pre><code class="r">	<span class="o">&gt;</span> dcast<span class="p">(</span>melt1<span class="p">,</span> <span class="kc">...</span> <span class="o">~</span> subject<span class="p">)</span>
+	<span class="c1"># 感受下&quot;...&quot; 的用法</span>
 </code></pre></div>
 
-
-<p>这回用到了...的用法，另外还有把数据框</p>
+<p>这回用到了…的用法，另外还有把数据框</p>
 
 <pre>  time newvar John Smith Mary Smith
 1    1    age      33.00         NA
 2    1 weight      90.00         NA
 3    1 height       1.87       1.54 </pre>
 
-
-<p><br></br>
+<p><br />&lt;/br&gt;
 关于第一二点，不知道这样大家是否可以理解了呢？</p>
 
 <p>其中第三点和第四点稍微举了例子大家就能理解了</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1">#用到airquality数据集</span>
-    names<span class="p">(</span>airquality<span class="p">)</span> <span class="o">&lt;-</span> tolower<span class="p">(</span>names<span class="p">(</span>airquality<span class="p">))</span>
-    因为列名中包含大小写，所以为了书写方便全部用tolower<span class="p">()</span>函数改成小写
-    aqm <span class="o">&lt;-</span> melt<span class="p">(</span>airquality<span class="p">,</span> id<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;month&quot;</span><span class="p">,</span> <span class="s">&quot;day&quot;</span><span class="p">),</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-    dcast<span class="p">(</span>aqm<span class="p">,</span> month <span class="o">~</span> variable<span class="p">,</span> mean<span class="p">,</span> 
-    <span class="o">+</span> margins <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;month&quot;</span><span class="p">,</span> <span class="s">&quot;variable&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><code class="r">	
+	<span class="c1">#用到airquality数据集</span>
+	names<span class="p">(</span>airquality<span class="p">)</span> <span class="o">&lt;-</span> tolower<span class="p">(</span>names<span class="p">(</span>airquality<span class="p">))</span>
+	因为列名中包含大小写，所以为了书写方便全部用tolower<span class="p">()</span>函数改成小写
+	aqm <span class="o">&lt;-</span> melt<span class="p">(</span>airquality<span class="p">,</span> id<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;month&quot;</span><span class="p">,</span> <span class="s">&quot;day&quot;</span><span class="p">),</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+	dcast<span class="p">(</span>aqm<span class="p">,</span> month <span class="o">~</span> variable<span class="p">,</span> mean<span class="p">,</span> 
+	<span class="o">+</span> margins <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;month&quot;</span><span class="p">,</span> <span class="s">&quot;variable&quot;</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>其实就是根据每月的各个variable求了个平均值，特别像数据透视表</p>
 
@@ -294,14 +284,17 @@ Smiths数据集原来是这样的
 5     9 31.44828 167.4333 10.180000 76.90000 71.82689
 6 (all) 42.12931 185.9315  9.957516 77.88235 80.05722</pre>
 
-
-<p><br></br></p>
+<p><br />&lt;/br&gt;</p>
 
 <p>当然这个拓展包中还有其他若干好用的函数，有兴趣的话可以看看下面两个文档</p>
 
 <ul>
-<li><p>官方的文档链接在: <a href="cran.r-project.org/web/packages/reshape2/reshape2.pdf%E2%80%8E">这里</a></p></li>
-<li><p>作者同样写过一篇发表在Journal of Statistical Software的论文，比官方文档写的更加清楚一点。链接在: <a href="http://www.jstatsoft.org/v21/i12/paper">这里</a> 强烈推荐这篇论文，看完之后就会觉得通透了！</p></li>
+  <li>
+    <p>官方的文档链接在: <a href="cran.r-project.org/web/packages/reshape2/reshape2.pdf‎">这里</a></p>
+  </li>
+  <li>
+    <p>作者同样写过一篇发表在Journal of Statistical Software的论文，比官方文档写的更加清楚一点。链接在: <a href="http://www.jstatsoft.org/v21/i12/paper">这里</a> 强烈推荐这篇论文，看完之后就会觉得通透了！</p>
+  </li>
 </ul>
 
 
@@ -330,6 +323,14 @@ Smiths数据集原来是这样的
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -141,12 +145,11 @@ Sbulime Text是一个跨平台的文本编辑器。收费，但是可以无限�
 安装过程大致如下</p>
 
 <ol>
-<li>先下载，然后解压缩</li>
-<li>在sublime中Preferences找到installed packages所在的文件夹。</li>
-<li>拷贝进去即可。
+  <li>先下载，然后解压缩</li>
+  <li>在sublime中Preferences找到installed packages所在的文件夹。</li>
+  <li>拷贝进去即可。
 但是不知到为什么我这里也反复出现几个问题，都是有关权限的。</li>
 </ol>
-
 
 <p><a href="http://ruby-china.org/topics/7144">3</a></p>
 
@@ -169,6 +172,7 @@ Sbulime Text是一个跨平台的文本编辑器。收费，但是可以无限�
 <p>因为太多的热键冲突。。我感觉已经很崩溃了。</p>
 
 <p>但是不得不说，这个风骚的小GUI确实看上去舒服极了， 让人写代码的心情一下就舒畅了起来。 或者说就起码没有那么憋屈啦。 网上有不同插件和不同的主题图案，现在我用的比较少。主要是一些基本功能， 支持vim格式等等。像前端人用的那些现在基本用的比较少呢。</p>
+
 
 		
 		<div id="donation">
@@ -195,6 +199,14 @@ Sbulime Text是一个跨平台的文本编辑器。收费，但是可以无限�
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

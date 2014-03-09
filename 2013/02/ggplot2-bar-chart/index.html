@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -126,24 +130,22 @@
 		<p>本章主要介绍有关条形图在GGPLOT2中的实现，代码来自
 <a href="http://www.amazon.com/R-Graphics-Cookbook-Winston-Chang/dp/1449316956">R Graphics Cookbook</a> 第三章</p>
 
-<p><strong>Base Problem</strong>：Basic Bar Chart</p>
+<p><strong>Base Problem</strong>：Basic Bar Chart </p>
 
 <p><strong>Solution</strong> ：</p>
 
 <ul>
-<li>ggplot()</li>
-<li>geom_bar(stat="identity")</li>
+  <li>ggplot()</li>
+  <li>geom_bar(stat=”identity”)</li>
 </ul>
-
 
 <p>以上是固定搭配,记住即可</p>
 
-<div class="highlight"><pre><code class="r">    library（ggplot2）
-    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    ggplot<span class="p">(</span>pg_mean<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>group<span class="p">,</span> y<span class="o">=</span>weight<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
-    <span class="c1"># aes 表示x轴和y轴对应的映射，Geom_bar表示显示为柱状图</span>
+<div class="highlight"><pre><code class="r">	library（ggplot2）
+	library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+	ggplot<span class="p">(</span>pg_mean<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>group<span class="p">,</span> y<span class="o">=</span>weight<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+	<span class="c1"># aes 表示x轴和y轴对应的映射，Geom_bar表示显示为柱状图</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/VhPMUx7.png" alt="" /></p>
 
@@ -151,37 +153,32 @@
 可以换成自定义颜色
 在fill中改，注意对比上下代码差别，同时可以修改自定义的柱状图外框颜色</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>pg_mean<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>group<span class="p">,</span> y<span class="o">=</span>weight<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>pg_mean<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>group<span class="p">,</span> y<span class="o">=</span>weight<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;lightblue&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/buxnSKT.png" alt="" /></p>
 
 <hr />
-
 <p><strong>延伸问题 1</strong> ：Grouping Bars Together</p>
 
 <p><strong>Solution</strong> ： 在aes中，把第三个变量映射到fill中，同时把<code>postion</code>换成 <strong>dodge</strong></p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/CxRfugY.png" alt="" /></p>
 
 <ul>
-<li>如果要修改外框颜色，在<code>geom_bar()</code>中修改 <code>colour='black'</code></li>
-<li>修改柱子的颜色可以用<code>scale_fill_brewer()</code>或者<code>scale_fill_manual()</code>.</li>
+  <li>如果要修改外框颜色，在<code>geom_bar() </code>中修改 <code>colour='black'</code></li>
+  <li>修改柱子的颜色可以用<code>scale_fill_brewer() </code>或者<code>scale_fill_manual()</code>. </li>
 </ul>
-
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span> 
       geom_bar<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span> <span class="o">+</span> 
       scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Pastel1&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/84MFCnj.png" alt="" /></p>
 
@@ -193,113 +190,108 @@
 
 <p>首先数据源是这样的</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    upc <span class="o">&lt;-</span>subset<span class="p">(</span>uspopchange<span class="p">,</span>rank<span class="p">(</span>Change<span class="p">)</span><span class="o">&gt;</span><span class="m">40</span><span class="p">)</span>
-    upc
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+	upc <span class="o">&lt;-</span>subset<span class="p">(</span>uspopchange<span class="p">,</span>rank<span class="p">(</span>Change<span class="p">)</span><span class="o">&gt;</span><span class="m">40</span><span class="p">)</span>
+	upc
 </code></pre></div>
 
-
 <table>
-<thead>
-<tr>
-<th>State </th>
-<th> Abb </th>
-<th> Region    </th>
-<th> Change</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Arizona </td>
-<td> AZ </td>
-<td>  West </td>
-<td>  24.6</td>
-</tr>
-<tr>
-<td>Colorado </td>
-<td>  CO </td>
-<td>    West </td>
-<td>  16.9</td>
-</tr>
-<tr>
-<td>Florida </td>
-<td>FL </td>
-<td> South</td>
-<td>    17.6</td>
-</tr>
-<tr>
-<td>Georgia </td>
-<td>GA</td>
-<td>    South</td>
-<td>  18.3</td>
-</tr>
-<tr>
-<td>Idaho   </td>
-<td>ID</td>
-<td>    West</td>
-<td>   21.1</td>
-</tr>
-<tr>
-<td>Nevada  </td>
-<td>NV</td>
-<td>    West    </td>
-<td>35.1</td>
-</tr>
-<tr>
-<td>North Carolina</td>
-<td> NC</td>
-<td> South</td>
-<td>  18.5</td>
-</tr>
-<tr>
-<td>South Carolina</td>
-<td> SC</td>
-<td> South</td>
-<td>  15.3</td>
-</tr>
-<tr>
-<td>Texas</td>
-<td>  TX</td>
-<td> South</td>
-<td>  20.6</td>
-</tr>
-<tr>
-<td>Utah</td>
-<td>   UT</td>
-<td> West</td>
-<td>   23.8</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Abb</th>
+      <th>Region</th>
+      <th>Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Arizona</td>
+      <td>AZ</td>
+      <td>West</td>
+      <td>24.6</td>
+    </tr>
+    <tr>
+      <td>Colorado</td>
+      <td>CO</td>
+      <td>West</td>
+      <td>16.9</td>
+    </tr>
+    <tr>
+      <td>Florida</td>
+      <td>FL</td>
+      <td>South</td>
+      <td>17.6</td>
+    </tr>
+    <tr>
+      <td>Georgia</td>
+      <td>GA</td>
+      <td>South</td>
+      <td>18.3</td>
+    </tr>
+    <tr>
+      <td>Idaho</td>
+      <td>ID</td>
+      <td>West</td>
+      <td>21.1</td>
+    </tr>
+    <tr>
+      <td>Nevada</td>
+      <td>NV</td>
+      <td>West</td>
+      <td>35.1</td>
+    </tr>
+    <tr>
+      <td>North Carolina</td>
+      <td>NC</td>
+      <td>South</td>
+      <td>18.5</td>
+    </tr>
+    <tr>
+      <td>South Carolina</td>
+      <td>SC</td>
+      <td>South</td>
+      <td>15.3</td>
+    </tr>
+    <tr>
+      <td>Texas</td>
+      <td>TX</td>
+      <td>South</td>
+      <td>20.6</td>
+    </tr>
+    <tr>
+      <td>Utah</td>
+      <td>UT</td>
+      <td>West</td>
+      <td>23.8</td>
+    </tr>
+  </tbody>
 </table>
 
-
-<p><br></br>
+<p><br />&lt;/br&gt;
 在<code>fill</code>中加上<code>region</code>，就会映射过来</p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Abb<span class="p">,</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
-    geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+	geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
 
  
 </code></pre></div>
 
-
-<p><img src="/assets/images/ggplot2-barchart/piTTpmj.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-barchart/piTTpmj.png" alt="" /> </p>
 
 <ul>
-<li>用<code>reorder</code>函数，把柱状图按照大小排列会显得更专业</li>
-<li>复习修改颜色的<code>scale_fill_manual</code></li>
-<li>对x轴修改坐标轴注释</li>
+  <li>用<code>reorder</code>函数，把柱状图按照大小排列会显得更专业</li>
+  <li>复习修改颜色的<code>scale_fill_manual</code></li>
+  <li>对x轴修改坐标轴注释</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>Abb<span class="p">,</span> Change<span class="p">),</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
-      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>  <span class="o">+</span>
-      scale_fill_manual<span class="p">(</span>values<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;#669933&quot;</span><span class="p">,</span> <span class="s">&quot;#FFCC66&quot;</span><span class="p">))</span> <span class="o">+</span> 
-      xlab<span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>upc<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>Abb<span class="p">,</span> Change<span class="p">),</span> y<span class="o">=</span>Change<span class="p">,</span> fill<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
+	  geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>  <span class="o">+</span>
+	  scale_fill_manual<span class="p">(</span>values<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;#669933&quot;</span><span class="p">,</span> <span class="s">&quot;#FFCC66&quot;</span><span class="p">))</span> <span class="o">+</span> 
+	  xlab<span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
 
  
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/IFu6DAK.png" alt="" /></p>
 
@@ -311,14 +303,13 @@
 
 <p>其实这个方法很常见，在以后讲坐标轴的时候还会再次提到，方法比较简单就是根据subset函数新建一个符合要求的函数，然后只要在GGPLOT的时候把新建函数映射即可，其他都一样</p>
 
-<div class="highlight"><pre><code class="r">    csub <span class="o">&lt;-</span> subset<span class="p">(</span>climate<span class="p">,</span> Source<span class="o">==</span><span class="s">&quot;Berkeley&quot;</span> <span class="o">&amp;</span> Year <span class="o">&gt;=</span> <span class="m">1900</span><span class="p">)</span>
-    csub<span class="o">$</span>pos <span class="o">&lt;-</span> csub<span class="o">$</span>Anomaly10y <span class="o">&gt;=</span> <span class="m">0</span>
-    ggplot<span class="p">(</span>csub<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">,</span> fill<span class="o">=</span>pos<span class="p">))</span> <span class="o">+</span>
-      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	csub <span class="o">&lt;-</span> subset<span class="p">(</span>climate<span class="p">,</span> Source<span class="o">==</span><span class="s">&quot;Berkeley&quot;</span> <span class="o">&amp;</span> Year <span class="o">&gt;=</span> <span class="m">1900</span><span class="p">)</span>
+	csub<span class="o">$</span>pos <span class="o">&lt;-</span> csub<span class="o">$</span>Anomaly10y <span class="o">&gt;=</span> <span class="m">0</span>
+	ggplot<span class="p">(</span>csub<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">,</span> fill<span class="o">=</span>pos<span class="p">))</span> <span class="o">+</span>
+  	  geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
 
  
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/gS0niDp.png" alt="" /></p>
 
@@ -328,56 +319,51 @@
 - 改变柱子外框黑线的厚度，通过设定size</p>
 
 <div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>csub<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Anomaly10y<span class="p">,</span> fill<span class="o">=</span>pos<span class="p">))</span> <span class="o">+</span> 
-      geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.25</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_manual<span class="p">(</span>values<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;#CCEEFF&quot;</span><span class="p">,</span> <span class="s">&quot;#FFDDDD&quot;</span><span class="p">),</span> guide<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+	  geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">0.25</span><span class="p">)</span> <span class="o">+</span>
+	  scale_fill_manual<span class="p">(</span>values<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;#CCEEFF&quot;</span><span class="p">,</span> <span class="s">&quot;#FFDDDD&quot;</span><span class="p">),</span> guide<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 
  
 </code></pre></div>
 
-
-<h2><img src="/assets/images/ggplot2-barchart/gLFTMbs.png" alt="" /></h2>
+<h2 id="assetsimagesggplot2-barchartglftmbspng"><img src="/assets/images/ggplot2-barchart/gLFTMbs.png" alt="" /></h2>
 
 <p><strong>延伸问题 4</strong>： Adjusting Bar Width and Spacing</p>
 
 <p><strong>Solution</strong>： 在<code>geom_bar</code>中调整width参数</p>
 
 <ul>
-<li>在geom_bar中调整width改变柱子宽度，也就是改变了柱子之间的距离</li>
-<li>如果用dodge方法做的图，可以用<code>position_dodge（）</code>参数来改，默认的参数设置是0.9，如果不写则为两个贴在一起</li>
+  <li>在geom_bar中调整width改变柱子宽度，也就是改变了柱子之间的距离</li>
+  <li>如果用dodge方法做的图，可以用<code>position_dodge（）</code>参数来改，默认的参数设置是0.9，如果不写则为两个贴在一起</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
     geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> position<span class="o">=</span><span class="s">&quot;dodge&quot;</span><span class="p">)</span>
 
  
 </code></pre></div>
 
-
 <p><img src="/assets/images/ggplot2-barchart/FPaVWds.png" alt="" /></p>
 
 <p>以下设置了在<code>geom_bar</code>中设置了<code>width，postion_dodge()</code></p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
       geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.7</span><span class="p">))</span>
 
  
 </code></pre></div>
 
-
-<h2><img src="/assets/images/ggplot2-barchart/iqy952E.png" alt="" /></h2>
+<h2 id="assetsimagesggplot2-barchartiqy952epng"><img src="/assets/images/ggplot2-barchart/iqy952E.png" alt="" /></h2>
 
 <p><strong>延伸问题 5</strong> ：Making a Stacked Bar Graph</p>
 
 <p><strong>Solution</strong> ： 用<code>geom_bar</code>，同时映射到<code>fill</code>中</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+	ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
       geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
 
  
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/opTysNC.png" alt="" /></p>
 
@@ -385,20 +371,18 @@
 ()中</p>
 
 <ul>
-<li>堆积图：<code>stat="indentity"</code></li>
-<li>聚集图：<code>position="dodge"</code></li>
+  <li>堆积图：<code>stat="indentity"</code></li>
+  <li>聚集图：<code>position="dodge"</code></li>
 </ul>
-
 
 <p>我们看到图和图例中的是反的，要修正这个问题，用如下代码</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
       geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
       guides<span class="p">(</span>fill<span class="o">=</span>guide_legend<span class="p">(</span>reverse<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
 
  
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/52ChlFe.png" alt="" /></p>
 
@@ -407,61 +391,58 @@
 <p>具体做法</p>
 
 <ul>
-<li>用order指令</li>
-<li>desc函数</li>
+  <li>用order指令</li>
+  <li>desc函数</li>
 </ul>
 
+<div class="highlight"><pre><code class="r">	
 
-<div class="highlight"><pre><code class="r">    
-
-    library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># Needed for desc()</span>
-    ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>Cultivar<span class="p">)))</span> <span class="o">+</span>
+	library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># Needed for desc()</span>
+	ggplot<span class="p">(</span>cabbage_exp<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>Weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>Cultivar<span class="p">)))</span> <span class="o">+</span>
       geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-
-<p><img src="/assets/images/ggplot2-barchart/9k0Y2le.png" alt="" /></p>
+<p><img src="/assets/images/ggplot2-barchart/9k0Y2le.png" alt="" />    </p>
 
 <hr />
-
-<p><strong>延伸问题 6</strong>：Making a Propotional Stacked Bar Graph</p>
+<p><strong>延伸问题 6</strong>：Making a Propotional Stacked Bar Graph </p>
 
 <p><strong>Solution</strong>：用到Pylr拓展包</p>
 
 <p>其实这个问题可以转化为另外一个问题</p>
 
 <ol>
-<li>新建一个函数，算出比例</li>
-<li>根据比例在作图</li>
+  <li>新建一个函数，算出比例</li>
+  <li>根据比例在作图</li>
 </ol>
-
 
 <p>其实这本身和GGPLOT2没有特别关系了，就是我之前提到的数据预处理的问题</p>
 
 <p>用Plyr比较简单，当然用其他工具也都可以胜任，技术难度不高</p>
 
-<div class="highlight"><pre><code class="r">    
+<div class="highlight"><pre><code class="r">	
 
-    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    library<span class="p">(</span>plyr<span class="p">)</span>
-    <span class="c1"># Do a group-wise transform(), splitting on &quot;Date&quot;</span>
-    ce <span class="o">&lt;-</span> ddply<span class="p">(</span>cabbage_exp<span class="p">,</span> <span class="s">&quot;Date&quot;</span><span class="p">,</span> transform<span class="p">,</span>
+	library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
+	library<span class="p">(</span>plyr<span class="p">)</span>
+	<span class="c1"># Do a group-wise transform(), splitting on &quot;Date&quot;</span>
+	ce <span class="o">&lt;-</span> ddply<span class="p">(</span>cabbage_exp<span class="p">,</span> <span class="s">&quot;Date&quot;</span><span class="p">,</span> transform<span class="p">,</span>
             percent_weight <span class="o">=</span> Weight <span class="o">/</span> sum<span class="p">(</span>Weight<span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">)</span>
-    ggplot<span class="p">(</span>ce<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>percent_weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
+	ggplot<span class="p">(</span>ce<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Date<span class="p">,</span> y<span class="o">=</span>percent_weight<span class="p">,</span> fill<span class="o">=</span>Cultivar<span class="p">))</span> <span class="o">+</span>
       geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-barchart/pZAfWxF.png" alt="" /></p>
 
 <p>着重解析下plyr里ddply的语法</p>
 
 <ul>
-<li>cabbage是数据集</li>
-<li>"Date" 通俗来说就是x轴的变量</li>
-<li>transform是要做的变形，在ddply中还有summarize等</li>
-<li><p>最后一项是是新建的变量和变型方法</p></li>
-<li><p>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1ch4sr">这里</a></p></li>
+  <li>cabbage是数据集</li>
+  <li>“Date” 通俗来说就是x轴的变量</li>
+  <li>transform是要做的变形，在ddply中还有summarize等</li>
+  <li>
+    <p>最后一项是是新建的变量和变型方法</p>
+  </li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1ch4sr">这里</a></li>
 </ul>
 
 
@@ -490,6 +471,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

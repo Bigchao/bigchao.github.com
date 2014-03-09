@@ -1,0 +1,139 @@
+<h1 id="section">数据预处理</h1>
+
+<p>在数据分析中，基本一半的时间都是在对原始数据进行清洗，提取，分层等相关的预处理工作。所以快速有效的对数据进行预处理，对于时间的节省，效率的提升都能起到事半功倍的效果。</p>
+
+<p>上一期专栏最后给大家留了一个小问题</p>
+
+<pre>
+#    id       date      value
+# 1: 27 2014-01-09 0.20597457
+# 2: 27 2014-01-26 0.62911404
+# 3: 27 2014-02-07 0.68702285
+# 4: 37 2014-02-06 0.17655675
+# 5: 37 2014-02-09 0.06178627
+# 6: 37 2014-02-13 0.38410372
+</pre>
+
+<p>有两个ID，三个日期。先算出来对于每个ID，在最靠近的两个日期中，value的平均值。</p>
+
+<p>问题其实不算复杂，其实懂得其中的原理之后可以触类旁通。</p>
+
+<p>在进入更加技术化的细节之前，先介绍下有关数据分析特别有名“S-A-C”思想。</p>
+
+<p>在今后的所有类似的数据处理问题中，我们都会反复提到这个思想，并反复运用。</p>
+
+<p>有关S-A-C思想</p>
+
+<p>是指R界的大牛Hadley在他发表的文章 </p>
+
+<p><a href="http://www.jstatsoft.org/v40/i01">The Split-Apply-Combine Strategy for Data Analysis</a></p>
+
+<p>这篇文章主要介绍了如何将数据进行分层（split）-应用（Apply）-结合（Combine）的思想。</p>
+
+<p>稍微对R有点点了解的都应该知道Hadley，他可以说是创造了R数据分析到可视化的一个生态系统，写过的拓展包包括非常有名的plyr，dplyr，ggplot2，reshape2，lubridate，devtools，ggvis等等。</p>
+
+<p>上面我所提的文章就是他介绍S-A-C的思想的经典论文，实现方法是用他自己写的plyr完成的。</p>
+
+<p>不想看原文的，我这里通俗简单给大家介绍下文章的中心思想。</p>
+
+<p>其实这里有两张图可以很好的说明这一切</p>
+
+<p><img src="/assets/images/sac/sac-1.png" alt="" />
+<img src="/assets/images/sac/sac-2.png" alt="" /></p>
+
+<p>其实也应该也是大家在平时数据分析中经常用到的。
+我们看到原数据首先对年龄进行分层，然后进行统计，然后进行加总。</p>
+
+<p>其实很简单，但这个就是SAC思想。</p>
+
+<p>但是实际应用起来可以非常复杂，</p>
+
+<p>因为在Apply这一个层面，可以是非常简单的简单计数统计，可以是求平均值等等描述性分析，也可以是回归，自己定义任意函数等等。</p>
+
+<p>所以以后我们遇到数据分析相关问题的时候，要时刻牢记SAC思想。</p>
+
+<p>这个思想也为我们的数据分析提供了更加清晰的思路和框架。</p>
+
+<p>我之前写过一个简单的plyr拓展包和相关思想的博客，大家可以去看下，算是当作补充阅读了。</p>
+
+<p><a href="">http://yangchao.me/2013/03/plyr-dataming</a></p>
+
+<p><a href="">http://yangchao.me/2013/06/plyr-advanced</a></p>
+
+<p>好，回到专栏开头的引例</p>
+
+<pre>
+#    id       date      value
+# 1: 27 2014-01-09 0.20597457
+# 2: 27 2014-01-26 0.62911404
+# 3: 27 2014-02-07 0.68702285
+# 4: 37 2014-02-06 0.17655675
+# 5: 37 2014-02-09 0.06178627
+# 6: 37 2014-02-13 0.38410372
+</pre>
+
+<p>数据字段其实并不多，要处理的也非常简单。</p>
+
+<p>首先我们利用SAC思想进行分析。</p>
+
+<p>题目要求为： 有两个ID，三个日期。先算出来对于每个ID，在最靠近的两个日期中，value的平均值。</p>
+
+<p><strong>分层：Split</strong></p>
+
+<p>因为我要计算每一个id对应的一个平均值，所以分层的第一类显然是ID</p>
+
+<p><strong>计算： Apply</strong></p>
+
+<p>对应每一个ID，我要计算一个平均值。不管中间的描述有多复杂，我们最后要得到的只是一个平均值。所以这个就是Apply的核心内容。</p>
+
+<p><strong>整合： Combine</strong></p>
+
+<p>就是把所有的ID和对应的平均值合并到一起。这一部可以说是最简单的。</p>
+
+<p>上面就是分析的思路，可以看出不管出现什么样的问题，只要按照这个套路就都能把问题逐一细化。也更加有方向。</p>
+
+<p>关于实现方法，可以说各个统计软件各个方法。</p>
+
+<p>我在专栏的导读已经提到了，我更多的使用data.table这个拓展包。</p>
+
+<p>有关选择data.table的原因在导读部分已经介绍的比较详尽了。</p>
+
+<p>比如这个问题。</p>
+
+<p>我们用data.table的解决代码</p>
+
+<p>首先构造模拟的数据集。大家把我下面这段代码复制粘贴再运行就好，不必纠结具体什么意思。</p>
+
+<div class="highlight"><pre><code class="r">require<span class="p">(</span>data.table<span class="p">)</span>
+set.seed<span class="p">(</span><span class="m">1</span><span class="p">)</span>
+sample_frame <span class="o">=</span> data.frame<span class="p">(</span><span class="s">&quot;id&quot;</span> <span class="o">=</span> rep<span class="p">(</span>sample<span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,</span><span class="m">2</span><span class="p">,</span>replace<span class="o">=</span><span class="k-Variable">F</span><span class="p">),</span><span class="m">3</span><span class="p">),</span>
+                          <span class="s">&quot;date&quot;</span> <span class="o">=</span> sample<span class="p">(</span>seq<span class="p">(</span>as.Date<span class="p">(</span><span class="s">&quot;2014-01-01&quot;</span><span class="p">),</span>
+                                              as.Date<span class="p">(</span><span class="s">&quot;2014-02-13&quot;</span><span class="p">),</span>by<span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="m">6</span><span class="p">),</span>
+                          <span class="s">&quot;value&quot;</span> <span class="o">=</span> runif<span class="p">(</span><span class="m">6</span><span class="p">))</span>
+
+DT <span class="o">&lt;-</span> data.table<span class="p">(</span>sample_frame<span class="p">,</span> key <span class="o">=</span> <span class="s">&quot;id,date&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>上面的过程是构造模拟数据</p>
+
+<div class="highlight"><pre><code class="r">require<span class="p">(</span>data.table<span class="p">)</span>
+DT<span class="p">[,</span> mean<span class="p">(</span>tail<span class="p">(</span>value<span class="p">,</span> <span class="m">2</span><span class="p">)),</span> by <span class="o">=</span> id<span class="p">]</span>
+</code></pre></div>
+
+<p>整个分析过程代码只有一行。
+大致的代码的解释：</p>
+
+<p><code>by = id</code>: 就是分层(Split)这一步</p>
+
+<p><code>mean(tail(value, 2))</code>: 为计算（Apply）这一步。mean()这个函数指的是求平均值，tail()函数意思为在value这一列中，取倒数两个。即为tail(value,2)</p>
+
+<p>所以就是这样。</p>
+
+<p>有关data.table</p>
+
+<p>希望大家还是多看看官方住的帮助文档。</p>
+
+<p>我在接下来的专栏中还会反复的提到和用到。</p>
+
+<p>下一篇也会更加深入的讲解这个拓展包的用法。</p>
+

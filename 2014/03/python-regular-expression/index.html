@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -137,19 +141,17 @@
 <p>我们学习正则表达式其实无非是想完成两件事情</p>
 
 <ol>
-<li>匹配</li>
-<li>替换</li>
+  <li>匹配</li>
+  <li>替换</li>
 </ol>
-
 
 <p>当然其中还包括编译等等比较复杂的过程。在平时中最常用的就是我以上的理解。</p>
 
 <ul>
-<li>正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式"ab<em>"如果用于查找"abbbc"，将找到"abbb"。而如果使用非贪婪的数量词"ab</em>?"，将找到"a"。</li>
+  <li>正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式”ab<em>“如果用于查找”abbbc”，将找到”abbb”。而如果使用非贪婪的数量词”ab</em>?”，将找到”a”。</li>
 </ul>
 
-
-<p>与大多数编程语言相同，正则表达式里使用"\"作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符"\"，那么使用编程语言表示的正则表达式里将需要4个反斜杠"\\"：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r"\"表示。同样，匹配一个数字的"\d"可以写成r"\d"。有了原生字符串，你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观。</p>
+<p>与大多数编程语言相同，正则表达式里使用”"作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符”"，那么使用编程语言表示的正则表达式里将需要4个反斜杠”\\“：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r”\“表示。同样，匹配一个数字的”\d”可以写成r”\d”。有了原生字符串，你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观。</p>
 
 <p>正则表达式提供了一些可用的匹配模式，比如忽略大小写、多行匹配等。</p>
 
@@ -172,21 +174,19 @@
 <span class="c"># hello   </span>
 </code></pre></div>
 
+<h4 id="recompilestrpattern-flag">re.compile(strPattern[, flag]):</h4>
 
-<h4>re.compile(strPattern[, flag]):</h4>
-
-<p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符'|'表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如<code>re.compile('pattern', re.I | re.M)</code>与<code>re.compile('(?im)pattern')</code>是等价的。
+<p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如<code>re.compile('pattern', re.I | re.M)</code>与<code>re.compile('(?im)pattern')</code>是等价的。 
 可选值有：</p>
 
 <ul>
-<li>re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）</li>
-<li>M(MULTILINE): 多行模式，改变'^'和'$'的行为（参见上图）</li>
-<li>S(DOTALL): 点任意匹配模式，改变'.'的行为</li>
-<li>L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定</li>
-<li>U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</li>
-<li>X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：</li>
+  <li>re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）</li>
+  <li>M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）</li>
+  <li>S(DOTALL): 点任意匹配模式，改变’.’的行为</li>
+  <li>L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定</li>
+  <li>U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</li>
+  <li>X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：</li>
 </ul>
-
 
 <div class="highlight"><pre><code class="python"><span class="n">a</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;&quot;&quot;\d +  # the integral part</span>
 <span class="s">                   \.    # the decimal point</span>
@@ -194,31 +194,28 @@
 <span class="n">b</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;\d+\.\d*&quot;</span><span class="p">)</span>    
 </code></pre></div>
 
-
 <p>re提供了众多模块方法用于完成正则表达式的功能。这些方法可以使用Pattern实例的相应方法替代，唯一的好处是少写一行re.compile()代码，但同时也无法复用编译后的Pattern对象。这些方法将在Pattern类的实例方法部分一起介绍。如上面这个例子可以简写为：</p>
 
 <div class="highlight"><pre><code class="python"><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;hello&#39;</span><span class="p">,</span> <span class="s">&#39;hello world!&#39;</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>re模块还提供了一个方法escape(string)，用于将string中的正则表达式元字符如*/+/?等之前加上转义符再返回，在需要大量匹配元字符时有那么一点用。</p>
 
-<h4>Match</h4>
+<h4 id="match">Match</h4>
 
 <p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
 
 <p><strong>属性</strong>：</p>
 
 <ol>
-<li>string: 匹配时使用的文本。</li>
-<li>re: 匹配时使用的Pattern对象。</li>
-<li>pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</li>
-<li>endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</li>
-<li>lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。</li>
-<li>lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。</li>
+  <li>string: 匹配时使用的文本。</li>
+  <li>re: 匹配时使用的Pattern对象。</li>
+  <li>pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</li>
+  <li>endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</li>
+  <li>lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。</li>
+  <li>lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。</li>
 </ol>
-
 
 <div class="highlight"><pre><code class="python"> 
 <span class="o">**</span><span class="err">方法</span><span class="o">**</span><span class="p">:</span>
@@ -239,9 +236,6 @@
 <span class="err">将匹配到的分组代入</span><span class="n">template</span><span class="err">中然后返回。</span><span class="n">template</span><span class="err">中可以使用</span>\<span class="nb">id</span><span class="err">或</span>\<span class="n">g</span><span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;</span><span class="err">、</span>\<span class="n">g</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="err">引用分组，但不能使用编号</span><span class="mi">0</span><span class="err">。</span>\<span class="nb">id</span><span class="err">与</span>\<span class="n">g</span><span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;</span><span class="err">是等价的；但</span>\<span class="mi">10</span><span class="err">将被认为是第</span><span class="mi">10</span><span class="err">个分组，如果你想表达</span>\<span class="mi">1</span><span class="err">之后是字符</span><span class="s">&#39;0&#39;</span><span class="err">，只能使用</span>\<span class="n">g</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="mi">0</span><span class="err">。</span>
    
 </code></pre></div>
-
-
-
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;</span><span class="p">,</span> <span class="s">&#39;hello world!&#39;</span><span class="p">)</span>
@@ -277,8 +271,7 @@
 <span class="c"># m.expand(r&#39;\2 \1\3&#39;): world hello!    </span>
 </code></pre></div>
 
-
-<h4>Pattern</h4>
+<h4 id="pattern">Pattern</h4>
 
 <p>Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。</p>
 
@@ -287,12 +280,11 @@
 <p>Pattern提供了几个可读属性用于获取表达式的相关信息：</p>
 
 <ol>
-<li>pattern: 编译时用的表达式字符串。</li>
-<li>flags: 编译时用的匹配模式。数字形式。</li>
-<li>groups: 表达式中分组的数量。</li>
-<li>groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。</li>
+  <li>pattern: 编译时用的表达式字符串。</li>
+  <li>flags: 编译时用的匹配模式。数字形式。</li>
+  <li>groups: 表达式中分组的数量。</li>
+  <li>groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。</li>
 </ol>
-
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
@@ -309,17 +301,23 @@
 <span class="c"># p.groupindex: {&#39;sign&#39;: 3}    </span>
 </code></pre></div>
 
+<table>
+  <tbody>
+    <tr>
+      <td>实例方法[</td>
+      <td>re模块方法]：</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>实例方法[ | re模块方法]：</p>
+<p><strong>1</strong> match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]): 
+这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。 
+pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 
+注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符’$’。 </p>
 
-<p><strong>1</strong> match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
-这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。
-pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
-注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符'$'。</p>
-
-<p><strong>2</strong>  search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
-这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
-pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。</p>
+<p><strong>2</strong>  search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]): 
+这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。 
+pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 </p>
 
 <div class="highlight"><pre><code class="python"><span class="c"># encoding: UTF-8 </span>
 <span class="kn">import</span> <span class="nn">re</span> 
@@ -339,9 +337,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 <span class="c"># world    </span>
 </code></pre></div>
 
-
-<p><strong>3</strong> split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
-按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。</p>
+<p><strong>3</strong> split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]): 
+按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。 </p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -352,8 +349,7 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 <span class="c"># [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;&#39;]    </span>
 </code></pre></div>
 
-
-<p><strong>4</strong> findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
+<p><strong>4</strong> findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]): 
 搜索string，以列表形式返回全部能匹配的子串。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
@@ -365,8 +361,7 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 <span class="c"># [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]   </span>
 </code></pre></div>
 
-
-<p><strong>5</strong> finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
+<p><strong>5</strong> finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]): 
 搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。</p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
@@ -379,9 +374,6 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 <span class="c"># 1 2 3 4   </span>
 </code></pre></div>
 
-
-
-
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
 <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;\d+&#39;</span><span class="p">)</span>
@@ -392,12 +384,11 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 <span class="c"># 1 2 3 4</span>
 </code></pre></div>
 
-
-<p><strong>6</strong> sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
-使用repl替换string中每一个匹配的子串后返回替换后的字符串。
-当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。
-当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。
-count用于指定最多替换次数，不指定时全部替换。</p>
+<p><strong>6</strong> sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]): 
+使用repl替换string中每一个匹配的子串后返回替换后的字符串。 
+当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。 
+当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。 
+count用于指定最多替换次数，不指定时全部替换。 </name></id></p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -416,9 +407,8 @@ count用于指定最多替换次数，不指定时全部替换。</p>
 <span class="c"># I Say, Hello World!   </span>
 </code></pre></div>
 
-
-<p><strong>7</strong> subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
-返回 (sub(repl, string[, count]), 替换次数)。</p>
+<p><strong>7</strong> subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]): 
+返回 (sub(repl, string[, count]), 替换次数)。 </p>
 
 <div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">re</span>
  
@@ -436,7 +426,6 @@ count用于指定最多替换次数，不指定时全部替换。</p>
 <span class="c"># (&#39;say i, world hello!&#39;, 2)</span>
 <span class="c"># (&#39;I Say, Hello World!&#39;, 2)   </span>
 </code></pre></div>
-
 
 <p>大概就是这么多啦~</p>
 
@@ -465,6 +454,14 @@ count用于指定最多替换次数，不指定时全部替换。</p>
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -123,8 +127,7 @@
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<h4>Hadoop配置</h4>
-
+		<h4 id="hadoop">Hadoop配置</h4>
 <p>最近开始学习Hadoop。走了不少弯路，也有很多收获。现在把我从linux完全小白到安装成功的过程和大家分享一下。</p>
 
 <p><a href="http://weixiaolu.iteye.com/blog/1401931">1</a></p>
@@ -132,14 +135,13 @@
 <p><a href="http://weixiaolu.iteye.com/blog/1401786">2</a></p>
 
 <hr />
-
 <p>这篇文章还是讲的很好的。但是唯一有一点遗憾的是我没有实现在hadoop用户组完成无密码登录。也就是ssh那一步完成的有些问题，不过目前看来不是很影响。
 在安装Hadoop之前有一点很重要，就是一定要安装好JDK，也就是Java的运行环境。
 我在这部浪费了很长时间，因为网上有不同的安装方法，每次到运行的时候却总说没有安装。
 最后我还是采取了最笨的安装方法</p>
 
 <p>所有的安装路径都在 root权限下
-    <code>/usr/local</code></p>
+	<code>/usr/local</code></p>
 
 <p>因为保险起见，实在失败次数太多而无法找到原因，我连下载的JDK都和原来的作者是一模一样的。没有下载后缀名是.tar.gz 或者 .rfm的文件。</p>
 
@@ -172,10 +174,8 @@ hadoop的启动路径 <code>/usr/local/hadoop/bin/all-star.sh</code>
 <p>我在装完之后还缺少一个依赖库bitops，文中没有提到
 在r中安装即可</p>
 
-<h3>Hive配置</h3>
-
+<h3 id="hive">Hive配置</h3>
 <hr />
-
 <p><a href="http://blog.csdn.net/gudaoqianfu/article/details/7319287">1</a></p>
 
 <p>有了Hadoop的基础，其他就相对简单。
@@ -189,6 +189,7 @@ WARNING: org.apache.hadoop.metrics.jvm.EventCounter is deprecated. Please use or
 
 <p>但是有个小问题就是
 用Mysql来代替dery数据源的设置还没有做，留着以后再搞。</p>
+
 
 		
 		<div id="donation">
@@ -215,6 +216,14 @@ WARNING: org.apache.hadoop.metrics.jvm.EventCounter is deprecated. Please use or
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

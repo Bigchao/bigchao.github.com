@@ -6,9 +6,262 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Thu, 06 Mar 2014 23:37:20 -0800</pubDate>
-    <lastBuildDate>Thu, 06 Mar 2014 23:37:20 -0800</lastBuildDate>
+    <pubDate>Sat, 08 Mar 2014 22:11:26 -0800</pubDate>
+    <lastBuildDate>Sat, 08 Mar 2014 22:11:26 -0800</lastBuildDate>
 
+    
+    <item>
+      <title>在Github中使用MathJax编辑公式</title>
+      <link>http://yangchao.me/2014/03/mathjax-github</link>
+      <pubDate>10 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/mathjax-github</guid>
+      <description>&lt;p&gt;因为近期想写一点关于数据挖掘，机器学习的东西时要用到公式，所以就寻思着在自己github上的博客上加上公式编辑的功能。&lt;/p&gt;
+
+&lt;p&gt;找了网上相关的资料，其实实现起来并不难。&lt;/p&gt;
+
+&lt;p&gt;主要步骤：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1 在html加入指向MathJax的命令&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;
+ &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;注意通常情况下，我们把这段话放在Jekyll默认的html头文件下面。这样就省得再今后每次使用都继续修改了。&lt;/p&gt;
+
+&lt;p&gt;一般这个文件的位置是在&lt;code&gt;/_layout/index.html&lt;/code&gt; 中。&lt;/p&gt;
+
+&lt;p&gt;如果想稍微折腾下的话，其实Mathjax有一些设定的参数可以调整&lt;/p&gt;
+
+&lt;p&gt;比如我想让Mathjax支持公式的编号和引用，就在还是上面的文件中加上了如下代码。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/x-mathjax-config&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nx&quot;&gt;MathJax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Hub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+ &lt;span class=&quot;nx&quot;&gt;TeX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;equationNumbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;autoNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;AMS&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;useLabelIds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}},&lt;/span&gt;
+ &lt;span class=&quot;s2&quot;&gt;&amp;quot;HTML-CSS&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;linebreaks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;automatic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}},&lt;/span&gt;
+ &lt;span class=&quot;nx&quot;&gt;SVG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;linebreaks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;automatic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;2 安装kramdown解析器&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一般默认的rdiscount会出现一些问题。所以用kramdown比较方便。有网友给出了rdiscount相关问题的解决方法，我也懒得折腾了，直接改成了kramdown。&lt;/p&gt;
+
+&lt;p&gt;安装过程非常简单&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kramdown&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;3 修改默认值&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;修改_config.yml，把markdown选项修改为:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;markdown: kramdown&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;安装就应该没有问题了。&lt;/p&gt;
+
+&lt;p&gt;测试：&lt;/p&gt;
+&lt;pre&gt;
+$$
+a^2 + b^2 = c^2
+$$
+&lt;/pre&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+a^2 + b^2 = c^2
+&lt;/script&gt;
+
+&lt;pre&gt;
+$$
+\begin{align*}
+  &amp;amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  &amp;amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) &amp;amp; \cdots &amp;amp; \phi(e_1, e_n) \\
+      \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+      \phi(e_n, e_1) &amp;amp; \cdots &amp;amp; \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+$$
+&lt;/pre&gt;
+
+&lt;p&gt;\begin{align&lt;em&gt;}
+  &amp;amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = &lt;br /&gt;
+  &amp;amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) &amp;amp; \cdots &amp;amp; \phi(e_1, e_n) &lt;br /&gt;
+      \vdots &amp;amp; \ddots &amp;amp; \vdots &lt;br /&gt;
+      \phi(e_n, e_1) &amp;amp; \cdots &amp;amp; \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 &lt;br /&gt;
+      \vdots &lt;br /&gt;
+      y_n
+    \end{array} \right)
+\end{align&lt;/em&gt;}&lt;/p&gt;
+
+&lt;p&gt;有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;有用链接：&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://kramdown.gettalong.org/syntax.html#math-blocks&quot;&gt;kramdown官网的相关链接&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Table</title>
+      <link>http://yangchao.me/2014/03/data-table</link>
+      <pubDate>08 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/data-table</guid>
+      <description>&lt;h1 id=&quot;section&quot;&gt;数据预处理&lt;/h1&gt;
+
+&lt;p&gt;在数据分析中，基本一半的时间都是在对原始数据进行清洗，提取，分层等相关的预处理工作。所以快速有效的对数据进行预处理，对于时间的节省，效率的提升都能起到事半功倍的效果。&lt;/p&gt;
+
+&lt;p&gt;上一期专栏最后给大家留了一个小问题&lt;/p&gt;
+
+&lt;pre&gt;
+#    id       date      value
+# 1: 27 2014-01-09 0.20597457
+# 2: 27 2014-01-26 0.62911404
+# 3: 27 2014-02-07 0.68702285
+# 4: 37 2014-02-06 0.17655675
+# 5: 37 2014-02-09 0.06178627
+# 6: 37 2014-02-13 0.38410372
+&lt;/pre&gt;
+
+&lt;p&gt;有两个ID，三个日期。先算出来对于每个ID，在最靠近的两个日期中，value的平均值。&lt;/p&gt;
+
+&lt;p&gt;问题其实不算复杂，其实懂得其中的原理之后可以触类旁通。&lt;/p&gt;
+
+&lt;p&gt;在进入更加技术化的细节之前，先介绍下有关数据分析特别有名“S-A-C”思想。&lt;/p&gt;
+
+&lt;p&gt;在今后的所有类似的数据处理问题中，我们都会反复提到这个思想，并反复运用。&lt;/p&gt;
+
+&lt;p&gt;有关S-A-C思想&lt;/p&gt;
+
+&lt;p&gt;是指R界的大牛Hadley在他发表的文章 &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.jstatsoft.org/v40/i01&quot;&gt;The Split-Apply-Combine Strategy for Data Analysis&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这篇文章主要介绍了如何将数据进行分层（split）-应用（Apply）-结合（Combine）的思想。&lt;/p&gt;
+
+&lt;p&gt;稍微对R有点点了解的都应该知道Hadley，他可以说是创造了R数据分析到可视化的一个生态系统，写过的拓展包包括非常有名的plyr，dplyr，ggplot2，reshape2，lubridate，devtools，ggvis等等。&lt;/p&gt;
+
+&lt;p&gt;上面我所提的文章就是他介绍S-A-C的思想的经典论文，实现方法是用他自己写的plyr完成的。&lt;/p&gt;
+
+&lt;p&gt;不想看原文的，我这里通俗简单给大家介绍下文章的中心思想。&lt;/p&gt;
+
+&lt;p&gt;其实这里有两张图可以很好的说明这一切&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/sac/sac-1.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/images/sac/sac-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其实也应该也是大家在平时数据分析中经常用到的。
+我们看到原数据首先对年龄进行分层，然后进行统计，然后进行加总。&lt;/p&gt;
+
+&lt;p&gt;其实很简单，但这个就是SAC思想。&lt;/p&gt;
+
+&lt;p&gt;但是实际应用起来可以非常复杂，&lt;/p&gt;
+
+&lt;p&gt;因为在Apply这一个层面，可以是非常简单的简单计数统计，可以是求平均值等等描述性分析，也可以是回归，自己定义任意函数等等。&lt;/p&gt;
+
+&lt;p&gt;所以以后我们遇到数据分析相关问题的时候，要时刻牢记SAC思想。&lt;/p&gt;
+
+&lt;p&gt;这个思想也为我们的数据分析提供了更加清晰的思路和框架。&lt;/p&gt;
+
+&lt;p&gt;我之前写过一个简单的plyr拓展包和相关思想的博客，大家可以去看下，算是当作补充阅读了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;http://yangchao.me/2013/03/plyr-dataming&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;http://yangchao.me/2013/06/plyr-advanced&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;好，回到专栏开头的引例&lt;/p&gt;
+
+&lt;pre&gt;
+#    id       date      value
+# 1: 27 2014-01-09 0.20597457
+# 2: 27 2014-01-26 0.62911404
+# 3: 27 2014-02-07 0.68702285
+# 4: 37 2014-02-06 0.17655675
+# 5: 37 2014-02-09 0.06178627
+# 6: 37 2014-02-13 0.38410372
+&lt;/pre&gt;
+
+&lt;p&gt;数据字段其实并不多，要处理的也非常简单。&lt;/p&gt;
+
+&lt;p&gt;首先我们利用SAC思想进行分析。&lt;/p&gt;
+
+&lt;p&gt;题目要求为： 有两个ID，三个日期。先算出来对于每个ID，在最靠近的两个日期中，value的平均值。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;分层：Split&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因为我要计算每一个id对应的一个平均值，所以分层的第一类显然是ID&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;计算： Apply&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;对应每一个ID，我要计算一个平均值。不管中间的描述有多复杂，我们最后要得到的只是一个平均值。所以这个就是Apply的核心内容。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;整合： Combine&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;就是把所有的ID和对应的平均值合并到一起。这一部可以说是最简单的。&lt;/p&gt;
+
+&lt;p&gt;上面就是分析的思路，可以看出不管出现什么样的问题，只要按照这个套路就都能把问题逐一细化。也更加有方向。&lt;/p&gt;
+
+&lt;p&gt;关于实现方法，可以说各个统计软件各个方法。&lt;/p&gt;
+
+&lt;p&gt;我在专栏的导读已经提到了，我更多的使用data.table这个拓展包。&lt;/p&gt;
+
+&lt;p&gt;有关选择data.table的原因在导读部分已经介绍的比较详尽了。&lt;/p&gt;
+
+&lt;p&gt;比如这个问题。&lt;/p&gt;
+
+&lt;p&gt;我们用data.table的解决代码&lt;/p&gt;
+
+&lt;p&gt;首先构造模拟的数据集。大家把我下面这段代码复制粘贴再运行就好，不必纠结具体什么意思。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data.table&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+sample_frame &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; data.frame&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sample&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;replace&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k-Variable&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                          &lt;span class=&quot;s&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; sample&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;seq&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;as.Date&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-01-01&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                                              as.Date&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-02-13&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                          &lt;span class=&quot;s&quot;&gt;&amp;quot;value&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; runif&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+DT &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.table&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sample_frame&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; key &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;id,date&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;上面的过程是构造模拟数据&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data.table&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; mean&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tail&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; id&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;整个分析过程代码只有一行。
+大致的代码的解释：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;by = id&lt;/code&gt;: 就是分层(Split)这一步&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;mean(tail(value, 2))&lt;/code&gt;: 为计算（Apply）这一步。mean()这个函数指的是求平均值，tail()函数意思为在value这一列中，取倒数两个。即为tail(value,2)&lt;/p&gt;
+
+&lt;p&gt;所以就是这样。&lt;/p&gt;
+
+&lt;p&gt;有关data.table&lt;/p&gt;
+
+&lt;p&gt;希望大家还是多看看官方住的帮助文档。&lt;/p&gt;
+
+&lt;p&gt;我在接下来的专栏中还会反复的提到和用到。&lt;/p&gt;
+
+&lt;p&gt;下一篇也会更加深入的讲解这个拓展包的用法。&lt;/p&gt;
+
+</description>
+    </item>
     
     <item>
       <title>python正则表达式：re.sub</title>
@@ -35,7 +288,6 @@ Return the string obtained by replacing the leftmost non-overlapping occurrences
 &lt;span class=&quot;s&quot;&gt;&amp;#39;static PyObject*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;py_myfunc(void)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;If repl is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single match object argument, and returns the replacement string. For example:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dashrepl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matchobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
@@ -47,10 +299,9 @@ Return the string obtained by replacing the leftmost non-overlapping occurrences
 &lt;span class=&quot;s&quot;&gt;&amp;#39;Baked Beans &amp;amp; Spam&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;The pattern may be a string or an RE object.
-The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous match, so sub(&#39;x*&#39;, &#39;-&#39;, &#39;abc&#39;) returns &#39;-a-b-c-&#39;.
-In addition to character escapes and backreferences as described above, \g&lt;name&gt; will use the substring matched by the group named name, as defined by the (?P&lt;name&gt;...) syntax. \g&lt;number&gt; uses the corresponding group number; \g&lt;2&gt; is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g&lt;2&gt;0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character &#39;0&#39;. The backreference \g&lt;0&gt; substitutes in the entire substring matched by the RE.&lt;/p&gt;
+The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous match, so sub(‘x*’, ‘-‘, ‘abc’) returns ‘-a-b-c-‘.
+In addition to character escapes and backreferences as described above, \g&lt;name&gt; will use the substring matched by the group named name, as defined by the (?P&lt;name&gt;...) syntax. \g&lt;number&gt; uses the corresponding group number; \g&amp;lt;2&amp;gt; is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g&amp;lt;2&amp;gt;0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character &#39;0&#39;. The backreference \g&amp;lt;0&amp;gt; substitutes in the entire substring matched by the RE.&lt;/number&gt;&lt;/name&gt;&lt;/name&gt;&lt;/p&gt;
 
 &lt;p&gt;下面详细介绍一下这5个参数的基本配置&lt;/p&gt;
 
@@ -63,15 +314,16 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;p&gt;反斜杠加数字（\N），则对应着匹配的组（matched group）&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;比如\6，表示匹配前面pattern中的第6个group&lt;/li&gt;
-&lt;li&gt;意味着，pattern中，前面肯定是存在对应的，第6个group，然后你后面也才能去引用&lt;/li&gt;
+  &lt;li&gt;比如\6，表示匹配前面pattern中的第6个group&lt;/li&gt;
+  &lt;li&gt;意味着，pattern中，前面肯定是存在对应的，第6个group，然后你后面也才能去引用&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;比如，想要处理：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;hello
-, nihao crifan&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hello 
+, nihao crifan&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;且此处的，前后的crifan，肯定是一样的。&lt;/p&gt;
 
@@ -84,7 +336,6 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#crifanli&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;&lt;strong&gt;第二个参数：repl&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;repl，就是replacement，被替换，的字符串的意思。&lt;/p&gt;
@@ -96,22 +347,25 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;p&gt;即：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;\n：会被处理为对应的换行符；&lt;/li&gt;
-&lt;li&gt;\r：会被处理为回车符；
+  &lt;li&gt;\n：会被处理为对应的换行符；&lt;/li&gt;
+  &lt;li&gt;\r：会被处理为回车符；
 其他不能识别的转移字符，则只是被识别为普通的字符：
 比如\j，会被处理为j这个字母本身；&lt;/li&gt;
-&lt;li&gt;反斜杠加g以及中括号内一个名字，即：\g&lt;name&gt;，对应着命了名的组，named group
-接着上面的举例：&lt;/li&gt;
+  &lt;li&gt;反斜杠加g以及中括号内一个名字，即：\g&lt;name&gt;，对应着命了名的组，named group
+接着上面的举例：&lt;/name&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;想要把对应的：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;hello crifan, nihao crifan&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hello crifan, nihao crifan&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;中的crifan提取出来，只剩：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;crifan&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;crifan&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;就可以写成：&lt;/p&gt;
 
@@ -120,7 +374,6 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#crifan&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;对应的带命名的组（named group）的版本是：&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;inputStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello crifan, nihao crifan&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -128,18 +381,21 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;replacedStr=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#crifan&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;当然repl也可以是函数&lt;/p&gt;
 
 &lt;p&gt;举例说明：&lt;/p&gt;
 
 &lt;p&gt;比如输入内容是：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;hello 123 world 456&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hello 123 world 456&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;想要把其中的数字部分，都加上111，变成：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;hello 234 world 567&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hello 234 world 567&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;那么就可以写成：&lt;/p&gt;
 
@@ -174,7 +430,6 @@ In addition to character escapes and backreferences as described above, \g&lt;na
     &lt;span class=&quot;n&quot;&gt;pythonReSubDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;&lt;strong&gt;第三个参数：string&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;string，即表示要被处理，要被替换的那个string字符串。&lt;/p&gt;
@@ -189,7 +444,9 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 
 &lt;p&gt;比如对于：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;hello 123 world 456 nihao 789&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hello 123 world 456 nihao 789&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;只是像要处理前面两个数字：123,456，分别给他们加111，而不处理789，&lt;/p&gt;
 
@@ -220,7 +477,6 @@ In addition to character escapes and backreferences as described above, \g&lt;na
     &lt;span class=&quot;n&quot;&gt;pythonReSubDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;&lt;strong&gt;第五个参数：flags&lt;/strong&gt;
 此处没有什么可以特别讲的&lt;/p&gt;
 
@@ -229,12 +485,11 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;即，对应的第二个参数是repl。&lt;/p&gt;
 
 &lt;p&gt;需要你指定对应的r前缀，才是pattern：&lt;/p&gt;
 
-&lt;p&gt;r&quot;xxxx&quot;&lt;/p&gt;
+&lt;p&gt;r”xxxx”&lt;/p&gt;
 
 &lt;p&gt;不要误把第四个参数flag的值，传递到第三个参数count中了
 遇到的问题：&lt;/p&gt;
@@ -250,17 +505,14 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacePattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orignialStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacedPartStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# can omit count parameter&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;或者：&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;replacedStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replacePattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orignialStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacedPartStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# must designate count parameter&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;才可以正常工作。&lt;/p&gt;
 
-&lt;h2&gt;延伸阅读：&lt;/h2&gt;
-
+&lt;h2 id=&quot;section&quot;&gt;延伸阅读：&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.crifan.com/python_re_sub_detailed_introduction/&quot;&gt;详解Python中的re.sub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
@@ -285,19 +537,17 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;p&gt;我们学习正则表达式其实无非是想完成两件事情&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;匹配&lt;/li&gt;
-&lt;li&gt;替换&lt;/li&gt;
+  &lt;li&gt;匹配&lt;/li&gt;
+  &lt;li&gt;替换&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;当然其中还包括编译等等比较复杂的过程。在平时中最常用的就是我以上的理解。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式&quot;ab&lt;em&gt;&quot;如果用于查找&quot;abbbc&quot;，将找到&quot;abbb&quot;。而如果使用非贪婪的数量词&quot;ab&lt;/em&gt;?&quot;，将找到&quot;a&quot;。&lt;/li&gt;
+  &lt;li&gt;正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式”ab&lt;em&gt;“如果用于查找”abbbc”，将找到”abbb”。而如果使用非贪婪的数量词”ab&lt;/em&gt;?”，将找到”a”。&lt;/li&gt;
 &lt;/ul&gt;
 
-
-&lt;p&gt;与大多数编程语言相同，正则表达式里使用&quot;\&quot;作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符&quot;\&quot;，那么使用编程语言表示的正则表达式里将需要4个反斜杠&quot;\\&quot;：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r&quot;\&quot;表示。同样，匹配一个数字的&quot;\d&quot;可以写成r&quot;\d&quot;。有了原生字符串，你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观。&lt;/p&gt;
+&lt;p&gt;与大多数编程语言相同，正则表达式里使用”&quot;作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符”&quot;，那么使用编程语言表示的正则表达式里将需要4个反斜杠”\\“：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r”\“表示。同样，匹配一个数字的”\d”可以写成r”\d”。有了原生字符串，你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观。&lt;/p&gt;
 
 &lt;p&gt;正则表达式提供了一些可用的匹配模式，比如忽略大小写、多行匹配等。&lt;/p&gt;
 
@@ -320,21 +570,19 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;c&quot;&gt;# hello   &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;h4 id=&quot;recompilestrpattern-flag&quot;&gt;re.compile(strPattern[, flag]):&lt;/h4&gt;
 
-&lt;h4&gt;re.compile(strPattern[, flag]):&lt;/h4&gt;
-
-&lt;p&gt;这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符&#39;|&#39;表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如&lt;code&gt;re.compile(&#39;pattern&#39;, re.I | re.M)&lt;/code&gt;与&lt;code&gt;re.compile(&#39;(?im)pattern&#39;)&lt;/code&gt;是等价的。
+&lt;p&gt;这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如&lt;code&gt;re.compile(&#39;pattern&#39;, re.I | re.M)&lt;/code&gt;与&lt;code&gt;re.compile(&#39;(?im)pattern&#39;)&lt;/code&gt;是等价的。 
 可选值有：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）&lt;/li&gt;
-&lt;li&gt;M(MULTILINE): 多行模式，改变&#39;^&#39;和&#39;$&#39;的行为（参见上图）&lt;/li&gt;
-&lt;li&gt;S(DOTALL): 点任意匹配模式，改变&#39;.&#39;的行为&lt;/li&gt;
-&lt;li&gt;L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定&lt;/li&gt;
-&lt;li&gt;U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性&lt;/li&gt;
-&lt;li&gt;X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：&lt;/li&gt;
+  &lt;li&gt;re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）&lt;/li&gt;
+  &lt;li&gt;M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）&lt;/li&gt;
+  &lt;li&gt;S(DOTALL): 点任意匹配模式，改变’.’的行为&lt;/li&gt;
+  &lt;li&gt;L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定&lt;/li&gt;
+  &lt;li&gt;U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性&lt;/li&gt;
+  &lt;li&gt;X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;&amp;quot;&amp;quot;\d +  # the integral part&lt;/span&gt;
 &lt;span class=&quot;s&quot;&gt;                   \.    # the decimal point&lt;/span&gt;
@@ -342,31 +590,28 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;quot;\d+\.\d*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;re提供了众多模块方法用于完成正则表达式的功能。这些方法可以使用Pattern实例的相应方法替代，唯一的好处是少写一行re.compile()代码，但同时也无法复用编译后的Pattern对象。这些方法将在Pattern类的实例方法部分一起介绍。如上面这个例子可以简写为：&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;re模块还提供了一个方法escape(string)，用于将string中的正则表达式元字符如*/+/?等之前加上转义符再返回，在需要大量匹配元字符时有那么一点用。&lt;/p&gt;
 
-&lt;h4&gt;Match&lt;/h4&gt;
+&lt;h4 id=&quot;match&quot;&gt;Match&lt;/h4&gt;
 
 &lt;p&gt;Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;属性&lt;/strong&gt;：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;string: 匹配时使用的文本。&lt;/li&gt;
-&lt;li&gt;re: 匹配时使用的Pattern对象。&lt;/li&gt;
-&lt;li&gt;pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/li&gt;
-&lt;li&gt;endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/li&gt;
-&lt;li&gt;lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。&lt;/li&gt;
-&lt;li&gt;lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。&lt;/li&gt;
+  &lt;li&gt;string: 匹配时使用的文本。&lt;/li&gt;
+  &lt;li&gt;re: 匹配时使用的Pattern对象。&lt;/li&gt;
+  &lt;li&gt;pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/li&gt;
+  &lt;li&gt;endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/li&gt;
+  &lt;li&gt;lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。&lt;/li&gt;
+  &lt;li&gt;lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt; 
 &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;方法&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -387,9 +632,6 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;err&quot;&gt;将匹配到的分组代入&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中然后返回。&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中可以使用&lt;/span&gt;\&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;或&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;、&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;引用分组，但不能使用编号&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;\&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;与&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;是等价的；但&lt;/span&gt;\&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;将被认为是第&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;个分组，如果你想表达&lt;/span&gt;\&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;之后是字符&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;，只能使用&lt;/span&gt;\&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;(\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -425,8 +667,7 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;c&quot;&gt;# m.expand(r&amp;#39;\2 \1\3&amp;#39;): world hello!    &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;h4&gt;Pattern&lt;/h4&gt;
+&lt;h4 id=&quot;pattern&quot;&gt;Pattern&lt;/h4&gt;
 
 &lt;p&gt;Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。&lt;/p&gt;
 
@@ -435,12 +676,11 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;p&gt;Pattern提供了几个可读属性用于获取表达式的相关信息：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;pattern: 编译时用的表达式字符串。&lt;/li&gt;
-&lt;li&gt;flags: 编译时用的匹配模式。数字形式。&lt;/li&gt;
-&lt;li&gt;groups: 表达式中分组的数量。&lt;/li&gt;
-&lt;li&gt;groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。&lt;/li&gt;
+  &lt;li&gt;pattern: 编译时用的表达式字符串。&lt;/li&gt;
+  &lt;li&gt;flags: 编译时用的匹配模式。数字形式。&lt;/li&gt;
+  &lt;li&gt;groups: 表达式中分组的数量。&lt;/li&gt;
+  &lt;li&gt;groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;(\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOTALL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -457,17 +697,23 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 &lt;span class=&quot;c&quot;&gt;# p.groupindex: {&amp;#39;sign&amp;#39;: 3}    &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;实例方法[&lt;/td&gt;
+      &lt;td&gt;re模块方法]：&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;p&gt;实例方法[ | re模块方法]：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt; match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]): 
+这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。 
+pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 
+注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符’$’。 &lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt; match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
-这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。
-pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
-注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符&#39;$&#39;。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt;  search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
-这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。
-pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt;  search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]): 
+这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。 
+pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# encoding: UTF-8 &lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt; 
@@ -487,9 +733,8 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;span class=&quot;c&quot;&gt;# world    &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt; split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
-按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt; split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]): 
+按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。 &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -500,8 +745,7 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;span class=&quot;c&quot;&gt;# [&amp;#39;one&amp;#39;, &amp;#39;two&amp;#39;, &amp;#39;three&amp;#39;, &amp;#39;four&amp;#39;, &amp;#39;&amp;#39;]    &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
+&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]): 
 搜索string，以列表形式返回全部能匹配的子串。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
@@ -513,8 +757,7 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;span class=&quot;c&quot;&gt;# [&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;]   &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt; finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
+&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt; finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]): 
 搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
@@ -527,9 +770,6 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;span class=&quot;c&quot;&gt;# 1 2 3 4   &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-
-
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
 &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -540,12 +780,11 @@ pos和endpos的默认值分别为0和len(string))；re.search()无法指定这�
 &lt;span class=&quot;c&quot;&gt;# 1 2 3 4&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;&lt;strong&gt;6&lt;/strong&gt; sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
-使用repl替换string中每一个匹配的子串后返回替换后的字符串。
-当repl是一个字符串时，可以使用\id或\g&lt;id&gt;、\g&lt;name&gt;引用分组，但不能使用编号0。
-当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。
-count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6&lt;/strong&gt; sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]): 
+使用repl替换string中每一个匹配的子串后返回替换后的字符串。 
+当repl是一个字符串时，可以使用\id或\g&lt;id&gt;、\g&lt;name&gt;引用分组，但不能使用编号0。 
+当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。 
+count用于指定最多替换次数，不指定时全部替换。 &lt;/name&gt;&lt;/id&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -564,9 +803,8 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 &lt;span class=&quot;c&quot;&gt;# I Say, Hello World!   &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;&lt;strong&gt;7&lt;/strong&gt; subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
-返回 (sub(repl, string[, count]), 替换次数)。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7&lt;/strong&gt; subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]): 
+返回 (sub(repl, string[, count]), 替换次数)。 &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
  
@@ -585,7 +823,6 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 &lt;span class=&quot;c&quot;&gt;# (&amp;#39;I Say, Hello World!&amp;#39;, 2)   &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;大概就是这么多啦~&lt;/p&gt;
 </description>
     </item>
@@ -602,13 +839,13 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 
 &lt;p&gt;首先是安装。&lt;/p&gt;
 
-&lt;p&gt;-- Windows&lt;/p&gt;
+&lt;p&gt;– Windows&lt;/p&gt;
 
 &lt;p&gt;我的电脑是windows8.1, 安装的时候我参考了多个网上的版本。用了将近两天时间，最后宣告失败。就是装不上。&lt;/p&gt;
 
 &lt;p&gt;要说现在留在windows的最重要理由就是SAS了。&lt;/p&gt;
 
-&lt;p&gt;-- Mac&lt;/p&gt;
+&lt;p&gt;– Mac&lt;/p&gt;
 
 &lt;p&gt;Mac上安装其实则方便很多。&lt;/p&gt;
 
@@ -616,9 +853,8 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 
 &lt;p&gt;因为Mac自带了Python2.7.5所以当时我就直接用这个版本的python了。然后安装了pip，然后按照&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;   &lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;	&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;就可以了。就不是不行。&lt;/p&gt;
 
@@ -627,10 +863,9 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 &lt;p&gt;最后的办法就是所有都推到重新来，&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;安装了Homebrew，开始homebrew都安装不了，一度非常崩溃，更新了Xcode最新版之后可以了&lt;/li&gt;
-&lt;li&gt;brew python&lt;/li&gt;
+  &lt;li&gt;安装了Homebrew，开始homebrew都安装不了，一度非常崩溃，更新了Xcode最新版之后可以了&lt;/li&gt;
+  &lt;li&gt;brew python&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;然后一点点就可以了。&lt;/p&gt;
 
@@ -642,13 +877,13 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 
 &lt;p&gt;下面简单走一个流程，看看scrapy是怎么运作的？&lt;/p&gt;
 
-&lt;h3&gt;找一个要抓取的网站&lt;/h3&gt;
+&lt;h3 id=&quot;section&quot;&gt;找一个要抓取的网站&lt;/h3&gt;
 
 &lt;p&gt;按照官方放的教程，我就以&lt;code&gt;mininova&lt;/code&gt;为例&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;&quot;&gt;http://www.mininova.org/today&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3&gt;定义我们要抓取的内容&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;定义我们要抓取的内容&lt;/h3&gt;
 
 &lt;p&gt;我们想文件的url，名称，描述，和大小。所以在项目文件夹下的&lt;code&gt;item.py&lt;/code&gt;中添加以下内容&lt;/p&gt;
 
@@ -661,9 +896,7 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
     &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;h3&gt;定义爬虫&lt;/h3&gt;
-
+&lt;h3 id=&quot;section-2&quot;&gt;定义爬虫&lt;/h3&gt;
 &lt;p&gt;定制爬虫就是定义如何搜索链接和如何选取其中的数据。其中需要用到Xpath和正则的知识。&lt;/p&gt;
 
 &lt;p&gt;首先分析页面内容：&lt;/p&gt;
@@ -674,16 +907,15 @@ count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
 
 &lt;p&gt;Chrom可以直接观源代码&lt;/p&gt;
 
-&lt;h5&gt;文件名称在tag h1 中&lt;/h5&gt;
+&lt;h5 id=&quot;tag-h1-&quot;&gt;文件名称在tag h1 中&lt;/h5&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Darwin - The Evolution Of An Exhibition&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;提取应该这样：
 &lt;code&gt;//h1/text()&lt;/code&gt;&lt;/p&gt;
 
-&lt;h5&gt;描述在 &lt;div&gt; tag with id=&quot;description&quot;:&lt;/h5&gt;
+&lt;h5 id=&quot;div-tag-with-iddescription&quot;&gt;描述在 &amp;lt;div&amp;gt; tag with id=”description”:&lt;/h5&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Description:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
 
@@ -693,12 +925,11 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;所以Xpath就应该是这样：&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;//div[@id=&#39;description&#39;]&lt;/code&gt;&lt;/p&gt;
 
-&lt;h5&gt;最后，有关文件大小&lt;/h5&gt;
+&lt;h5 id=&quot;section-3&quot;&gt;最后，有关文件大小&lt;/h5&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;specifications&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 
@@ -711,7 +942,6 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Total size:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
 150.62&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;megabyte&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;Xpath提取就应该是这样的：&lt;/p&gt;
 
@@ -740,12 +970,8 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-
-
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crawl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mininova&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scraped_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;最后保存的数据为jason格式。&lt;/p&gt;
 
@@ -754,9 +980,7 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 ]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;h2&gt;参考&lt;/h2&gt;
-
+&lt;h2 id=&quot;section-4&quot;&gt;参考&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;http://scrapy.org/&quot;&gt;scrapy&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
@@ -775,7 +999,7 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 
 &lt;p&gt;在业界就更加直观，首先有个总体目标，其次是有个技术目标。商业的核心就是创造价值，创造利润。技术在不断迭代，而主旋律似乎从来没有变过。所以技术是为了真正的商业目的而服务的。这里稍微跑了题，所以对于大多数技术团队，需要和其他的团队进行配合为了整体用户的体验而努力，不可太过纠结于技术。&lt;/p&gt;
 
-&lt;p&gt;回到数据分析，刚介绍了数据分析的目的。&lt;/p&gt;
+&lt;p&gt;回到数据分析，刚介绍了数据分析的目的。 &lt;/p&gt;
 
 &lt;p&gt;下面简单介绍下数据分析的基本步骤。&lt;/p&gt;
 
@@ -783,9 +1007,11 @@ Short documentary made for Plymouth City Museum and Art Gallery regarding the se
 
 &lt;p&gt;数据挖掘和数据仓库的大牛Herb Edelstein说过这样一句话:&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;“If you’ve got terabytes of data, and you’re relying on data mining to find interesting things in
-there for you, you’ve lost before you’ve even begun. You really need people who understand what
-it is they are looking for – and what they can do with it once they find it.”&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“If you’ve got terabytes of data, and you’re relying on data mining to find interesting things in 
+there for you, you’ve lost before you’ve even begun. You really need people who understand what 
+it is they are looking for – and what they can do with it once they find it.” &lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;大意是说，如果你有TB量级的数据，你想依靠数据挖掘来找到你想要的有意思的东西，你在开始前就已经迷失了。&lt;/p&gt;
 
@@ -810,11 +1036,10 @@ it is they are looking for – and what they can do with it once they find it.�
 &lt;p&gt;总结下来：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;数据的把握&lt;/li&gt;
-&lt;li&gt;统计描述性分析&lt;/li&gt;
-&lt;li&gt;进一步深度分析&lt;/li&gt;
+  &lt;li&gt;数据的把握&lt;/li&gt;
+  &lt;li&gt;统计描述性分析&lt;/li&gt;
+  &lt;li&gt;进一步深度分析&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;大概是这样。&lt;/p&gt;
 
@@ -823,13 +1048,12 @@ it is they are looking for – and what they can do with it once they find it.�
 &lt;p&gt;我提到过，这个专栏会讲到用R，但是不会从头来讲。所以这里我会给出一些推荐教材和推荐文章。&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;有关国外的，还是最推荐&lt;a href=&quot;http://www.r-bloggers.com/&quot;&gt;R-blogger&lt;/a&gt;,有关业界学界用R的最新动态，可以说内容丰富。每次看过之后都觉得很通透很爽快。通过这个网站自然可以发掘到其他很多牛人的博客。点进去看就可以了。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.statmethods.net/&quot;&gt;Quick-R&lt;/a&gt; 这个特别推荐。尤其是初学者，可以把整个网站都过一遍，干活非常的多。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.ats.ucla.edu/stat/r/&quot;&gt;UCLA的idre&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;肖凯老师的博客可以说是一个启蒙非常好的地方。&lt;a href=&quot;http://xccds1977.blogspot.hk&quot;&gt;http://xccds1977.blogspot.hk&lt;/a&gt;。但是据说这个在国内被墙掉了，不知道为什么。有心人需要想想办法了。&lt;/li&gt;
-&lt;li&gt;关于书籍。我看过讲R的书多多少少也有10多本了，对于初学者我还是最推荐《The Art of R Programming》，思路相当清晰，我觉得比《R in Action》，《R in nutshell》都要好。所以大家可以搜一下这本书。其中可以不看讲多线程的部分，前边的内容一点一点跟着来。这个配合着Quick-R足够了。然后就配合着我这本专栏。有什么问题，特别欢迎留言，我收到后会跟大家有一个充分的交流和答疑。&lt;/li&gt;
+  &lt;li&gt;有关国外的，还是最推荐&lt;a href=&quot;http://www.r-bloggers.com/&quot;&gt;R-blogger&lt;/a&gt;,有关业界学界用R的最新动态，可以说内容丰富。每次看过之后都觉得很通透很爽快。通过这个网站自然可以发掘到其他很多牛人的博客。点进去看就可以了。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.statmethods.net/&quot;&gt;Quick-R&lt;/a&gt; 这个特别推荐。尤其是初学者，可以把整个网站都过一遍，干活非常的多。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ats.ucla.edu/stat/r/&quot;&gt;UCLA的idre&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;肖凯老师的博客可以说是一个启蒙非常好的地方。&lt;a href=&quot;http://xccds1977.blogspot.hk&quot;&gt;http://xccds1977.blogspot.hk&lt;/a&gt;。但是据说这个在国内被墙掉了，不知道为什么。有心人需要想想办法了。&lt;/li&gt;
+  &lt;li&gt;关于书籍。我看过讲R的书多多少少也有10多本了，对于初学者我还是最推荐《The Art of R Programming》，思路相当清晰，我觉得比《R in Action》，《R in nutshell》都要好。所以大家可以搜一下这本书。其中可以不看讲多线程的部分，前边的内容一点一点跟着来。这个配合着Quick-R足够了。然后就配合着我这本专栏。有什么问题，特别欢迎留言，我收到后会跟大家有一个充分的交流和答疑。&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;这里做一个小小的广告，因为想学习交互D3的数据可视化，我自己用jekyll在github上托管了一个轻量级博客。域名是:&lt;a href=&quot;yangchao.me&quot;&gt;yangchao.me&lt;/a&gt;&lt;/p&gt;
 
@@ -851,13 +1075,13 @@ it is they are looking for – and what they can do with it once they find it.�
 # 6: 37 2014-02-13 0.38410372
 &lt;/pre&gt;
 
-
 &lt;p&gt;有两个ID，三个日期。我先算出来对于每个ID，在最靠近的两个日期中，value的平均值。&lt;/p&gt;
 
 &lt;p&gt;实际的数据有500万行，id有3000个，日期400多天。所以用excel估计是够呛了，其他的方法大家可以想一下~
 好了，这个就是这一期的作业。&lt;/p&gt;
 
 &lt;p&gt;不会不要紧，下一节我们就要讲啦~&lt;/p&gt;
+
 </description>
     </item>
     
@@ -871,7 +1095,7 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;前两天和Guy聊天，讲到我们香港的R用户现在人数已经在Dim Sum Lab放不下啦，想让我帮忙从城大定一个教室，我欣然答应。毕竟从成立的不到10个人，每次来的人都一点一点增加，心里真是高兴。下次我会做一个专门针对于&lt;strong&gt;data.table&lt;/strong&gt;的tutorial，这两天赶紧准备下。上次的&lt;code&gt;ggplot2&lt;/code&gt;的tutorial还是挺受欢迎的，当然还有&lt;code&gt;knitr&lt;/code&gt;的, Fuk的几次tutorial讲Rcurl, plyr也都非常棒。靠我们这帮子人刚开始的热情终于让越来越多的人加入到这个社区来。写《The Art of pragramming R》的老爷爷，Norm还是我们香港R用户的一员呢。&lt;/p&gt;
 
-&lt;p&gt;现在的技术路线就是facebook上面的信息用Rcurl发布，展示的内容用knitr写Rmarkdown文件，用slidefy做presentation。 感觉活在R里边了。&lt;/p&gt;
+&lt;p&gt;现在的技术路线就是facebook上面的信息用Rcurl发布，展示的内容用knitr写Rmarkdown文件，用slidefy做presentation。 感觉活在R里边了。 &lt;/p&gt;
 
 &lt;p&gt;最近另外一个着迷的就是emacs。 虽然我算是半个vim党，但是emacs的org mode确实太强大了，所以想好好学学。&lt;/p&gt;
 
@@ -880,26 +1104,25 @@ it is they are looking for – and what they can do with it once they find it.�
 &lt;p&gt;所有的专栏内容都会从新写，不会从现在博客的ggplot2的教程中直接复制过去。更加面向实际操作一点， 而不是一点点的搞起。
 下面大家先一睹为快我的专栏导读把，不是吹， 以后可全是干货啊。都是我平时工作中遇到的实际问题，一点一点总结的经验呢。&lt;/p&gt;
 
-&lt;h3&gt;第一篇 ： 导读&lt;/h3&gt;
+&lt;h3 id=&quot;section&quot;&gt;第一篇 ： 导读&lt;/h3&gt;
 
-&lt;p&gt;在为自己的专栏想一个特别霸气的名字的时候， 我和室友正在纪录片《故宫》， 里边讲到了承德避暑山庄的烟波至爽殿，于是名字也就脱口而出。觉得很满意，显得很有底蕴，特别适合豆瓣文青聚集地。 说到数据为王，这两年有关“大数据”的概念可以说是火的不行， 可以听到大家张口闭口就大数据，都知道这是一个“大数据时代”， 都知道了有的书中提到的”相关性比因果关系更加重要“等等的观点。&lt;/p&gt;
+&lt;p&gt;在为自己的专栏想一个特别霸气的名字的时候， 我和室友正在纪录片《故宫》， 里边讲到了承德避暑山庄的烟波至爽殿，于是名字也就脱口而出。觉得很满意，显得很有底蕴，特别适合豆瓣文青聚集地。 说到数据为王，这两年有关“大数据”的概念可以说是火的不行， 可以听到大家张口闭口就大数据，都知道这是一个“大数据时代”， 都知道了有的书中提到的”相关性比因果关系更加重要“等等的观点。 &lt;/p&gt;
 
 &lt;p&gt;很遗憾，我可能有个特立独行的毛病，一个东西一旦太过炒作太多我就不太喜欢。但是为了照顾大家的兴致， 我会在专栏最后的部分给大家分享一个大家可能认为还算是一个大数据的数据分析的例子。&lt;/p&gt;
 
-&lt;h5&gt;那么我们讲什么呢？&lt;/h5&gt;
+&lt;h5 id=&quot;section-1&quot;&gt;那么我们讲什么呢？&lt;/h5&gt;
 
 &lt;p&gt;按照章节来分类&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;数据处理&lt;/li&gt;
-&lt;li&gt;数据分析 （篇幅最少）&lt;/li&gt;
-&lt;li&gt;数据可视化&lt;/li&gt;
+  &lt;li&gt;数据处理&lt;/li&gt;
+  &lt;li&gt;数据分析 （篇幅最少）&lt;/li&gt;
+  &lt;li&gt;数据可视化 &lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;专栏主要讲解利用R语言进行数据的处理、分析、可视化的具体细节和基本要点。主要想和大家分享一下我在平时工作中最常用、也最容易上手的一些基本思路和基本技巧。尤其是关于数据可视化的部分。我非常喜欢像Economicst，New York Times刊登出来那种的图表。看过很多介绍可视化的文章和书籍， 里边分享的很多， 但是当我看到这些图表的时候，我不想只是欣赏，也想自己做出来。但是我们不管是数据分析，还是数据可视化，其中接近百分之五十的经历都是在做一些数据的预处理。把原始数据转变为我们想要的数据进而在分析或者可视化。如果跳过这一部，在我可视化的过程中对数据的操作部分，大家可能看起来就会一知半解。 所以我们会用相当大量的篇幅来介绍数据的预处理。 对数据的预处理，却也是也就包含了一些简单基本的对数据的描述性分析。&lt;/p&gt;
 
-&lt;h5&gt;为什么用R语言？&lt;/h5&gt;
+&lt;h5 id=&quot;r&quot;&gt;为什么用R语言？&lt;/h5&gt;
 
 &lt;p&gt;是的，开始这个专栏意味着你要开始学习编程了。虽然其他一些工具，像Excel可以胜任部分工作，为什么要学习一种编程语言呢？
 因为我们要开始学编程了！这难道还不是一个非常充分的理由么？&lt;/p&gt;
@@ -908,9 +1131,11 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;我们想要完成一件事情，越快越好，越不费事费力越好。现在电脑可以帮我们完成的很多，只要我们会用命令指挥他们即可。在Excel中我们可以完成很多事情，但是一旦涉及到数据类型比较复杂，或是要重复性操作的时候Excel就显得有点力不从心了。&lt;/p&gt;
 
-&lt;p&gt;借用《Learn Python the Hard Way》中的一句话，&lt;/p&gt;
+&lt;p&gt;借用《Learn Python the Hard Way》中的一句话， &lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;You can code. They cannot. That is pretty damn cool.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;You can code. They cannot. That is pretty damn cool.  &lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;这里不太需要再介绍R语言的优越之处，大家上网搜下即可。我的感受是R语言作为一种统计学家发明出来的语言，在数据分析方面有着比较大的优质。近来越来越受到人们的关注和重视，其开源社区的活跃程度让我们看到这个语言的生机勃勃的特性。其拥有大量的工具包，你想完成的事情已经有很多人搞定了。（这也使许多其他开源软件的好处，比如我的挚爱大GNU的Emacs。） 可谓站在了巨人的肩膀上。&lt;/p&gt;
 
@@ -920,67 +1145,64 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;同时我也有另外一个感触，相比于C，C++等更偏向于底层的语言，学习R好比是练钢琴，开始学习的可以唱到甜头， 不用好久可以弹出比较简单但是也很好听的曲子，像”一闪一闪亮晶晶“之类的。不像小提琴， 学了两年可能还跟拉锯一样。 但是像真正精通， 后期的学习曲线还是挺陡峭的，不可避免要学习数据结构， 面向对象等知识， 而且到后来就觉得R在运算的时候很慢， 对内存的管理并不到位等等。 但是现在， 对于大多人来说， R已经足够了，我们不需要做到 “Perfect”， 到“Fairly Good” 对于大多数人就已经足够了。&lt;/p&gt;
 
-&lt;h5&gt;目标读者是哪些人？&lt;/h5&gt;
+&lt;h5 id=&quot;section-2&quot;&gt;目标读者是哪些人？&lt;/h5&gt;
 
 &lt;p&gt;本专栏绝对倾情奉献， 目标读者是包括但不限于&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;喜爱玩数据，喜欢可视化的人！&lt;/li&gt;
-&lt;li&gt;对编程有点兴趣，也知道这个很有用应该学，但是一直以没时间懒得学年龄大了学不动了为借口拖延症患者！！&lt;/li&gt;
-&lt;li&gt;想对自己生活有些改变的朋友，并且需要即刻行动起来的人！！！&lt;/li&gt;
+  &lt;li&gt;喜爱玩数据，喜欢可视化的人！&lt;/li&gt;
+  &lt;li&gt;对编程有点兴趣，也知道这个很有用应该学，但是一直以没时间懒得学年龄大了学不动了为借口拖延症患者！！&lt;/li&gt;
+  &lt;li&gt;想对自己生活有些改变的朋友，并且需要即刻行动起来的人！！！&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;尤其对于第三点， 这也是我决心开设这样一个专栏的目的。这里不想心灵鸡汤， 不想拽成功学， 我是那种什么都喜欢折腾， 这么都愿意去学， 也觉得什么都有用的人。 正所谓乔布斯的“Connecting Dots”。 如果我们知道这个对于数据的处理确实有用， 想利用点时间学习下，而不只是逛逛微博， 看看韩剧， 日子这样一天天过去。 那么确实学点数据分析， 从功利主义的角度还是实用主义的角度都是高收益的。 因为我的工作现在是以数据处理为主， 过了大概一年当初的新鲜期感觉已经逐渐褪去， 自己学习的意愿也再减退。 所以这个时候我觉得有必要把我之前看过的那些书籍，走过的弯路，自己学校里比较受欢迎的讲座全都拿出来，温故而知新。 所谓教学相长， 大家一起交流。&lt;/p&gt;
 
 &lt;p&gt;同样，对于那些编程大牛们什么都知道的人， 可能觉得这篇专栏过于幼稚，我所写太过简单简直是在侮辱他们的智商。 首先，本系列倾情奉献， 绝对不能被理解为侮辱智商。我只是可能比我的目标读者们懂得这方面的知识多一点，想一起分享让他们少走弯路。如果你们发现我这个专栏里的每一个句子每一个知识点你已经了如指掌， 还是像《Learn Python the hard way》 里的忠告&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;ol&gt;
-&lt;li&gt;不要再阅读此专栏， 这不是为你们而写， 我是写给那些并不是什么都知道的人&lt;/li&gt;
-&lt;li&gt;倒空自己， 如果你已经什么都会了，就很难再向其他人学习任何东西&lt;/li&gt;
-&lt;li&gt;去学Lisp语言， 通常什么都会的人会喜欢Lisp&lt;/li&gt;
-&lt;/ol&gt;
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;不要再阅读此专栏， 这不是为你们而写， 我是写给那些并不是什么都知道的人&lt;/li&gt;
+    &lt;li&gt;倒空自己， 如果你已经什么都会了，就很难再向其他人学习任何东西&lt;/li&gt;
+    &lt;li&gt;去学Lisp语言， 通常什么都会的人会喜欢Lisp&lt;/li&gt;
+  &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;h5&gt;专栏主要特色是什么？&lt;/h5&gt;
+&lt;h5 id=&quot;section-3&quot;&gt;专栏主要特色是什么？&lt;/h5&gt;
 
 &lt;p&gt;我自己想到的专栏的特色可能为三个字：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;接地气&lt;/li&gt;
+  &lt;li&gt;接地气&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;因为这个专栏有一个很重要的读者： 我的女朋友。她作为一个纯文科生，学新闻在Marketing从业的绝对文青。 热爱电影，喜欢看小说。 经常觉得我看的讲程序的书都是那种特别“有用但是枯燥“的书，缺少了一种浪漫主义色彩。 这个专栏的存在就是想证明，其实这个这个数据的世界并不枯燥， 而且相当有趣！ 这篇专栏应该看起来满满的都是爱啊！&lt;/p&gt;
 
 &lt;p&gt;所以这个专栏算是手把手来教， 诚意十足。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;我觉得哪些部分在书籍或网上的资料已经相关帖子讨论的相当详尽， 我会给出相关链接， 不会拾人牙慧。&lt;/li&gt;
-&lt;li&gt;并不会面面俱到，我会着重于数据的整理和可视化。 会将一些琐碎的小案例经过自己的整理，呈现一条主线给大家。&lt;/li&gt;
-&lt;li&gt;主要以案例学习为主， 以平时工作马上就能用的到为主要目的。 不会像一般介绍R语言从赋值， array， list， dataframe一点点讲起。并不是说这个不重要，为什么如此参见第一条。 这样的写法带来的一个缺陷就是不够系统， 但是希望可以做到一个领进门的作用。刚开始大家对于code可能什么都不动，会做出非常详尽的讲解。&lt;/li&gt;
+  &lt;li&gt;我觉得哪些部分在书籍或网上的资料已经相关帖子讨论的相当详尽， 我会给出相关链接， 不会拾人牙慧。&lt;/li&gt;
+  &lt;li&gt;并不会面面俱到，我会着重于数据的整理和可视化。 会将一些琐碎的小案例经过自己的整理，呈现一条主线给大家。&lt;/li&gt;
+  &lt;li&gt;主要以案例学习为主， 以平时工作马上就能用的到为主要目的。 不会像一般介绍R语言从赋值， array， list， dataframe一点点讲起。并不是说这个不重要，为什么如此参见第一条。 这样的写法带来的一个缺陷就是不够系统， 但是希望可以做到一个领进门的作用。刚开始大家对于code可能什么都不动，会做出非常详尽的讲解。&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;但是我觉得相比于与其他的网上的教程， 我希望在如下方面可以有所胜出&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;阅读体验&lt;/li&gt;
-&lt;li&gt;互动性&lt;/li&gt;
+  &lt;li&gt;阅读体验 &lt;/li&gt;
+  &lt;li&gt;互动性&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;如果你遇到什么问题，我会尽可能为您讲解，或是给您相关资料的链接。 遇到最基本的问题解决不了这是我们开始学习编程最容易泄气的地方。当时我一个人想学习Hadoop的相关知识，但是对于linux系统的不熟悉安装时候处处碰壁， 当时心里那种无助的感觉记忆深刻。 所以这个专栏的存在就是为了让大家减轻这方面的痛苦， 更加享受编程的过程。&lt;/p&gt;
 
-&lt;p&gt;我会根据读者的回馈来调整更新自己的内容，把大家普遍反映的问题着重讲。&lt;/p&gt;
+&lt;p&gt;我会根据读者的回馈来调整更新自己的内容，把大家普遍反映的问题着重讲。 &lt;/p&gt;
 
-&lt;p&gt;但是不欢迎那些不经任何思考， 光光po问题的人。这点请参考《提问的艺术》。 请认真对待你的问题， 就像你期望大家可以认真的回答一样。在提问之前先思考下， 独立解决问题也是一种能力。提问的时候要表述清楚。&lt;/p&gt;
+&lt;p&gt;但是不欢迎那些不经任何思考， 光光po问题的人。这点请参考《提问的艺术》。 请认真对待你的问题， 就像你期望大家可以认真的回答一样。在提问之前先思考下， 独立解决问题也是一种能力。提问的时候要表述清楚。 &lt;/p&gt;
 
 &lt;p&gt;我会留作业， 也会判作业。 希望可以交到朋友， 因为和数据打交道了太久， 也想和人打打交道：）。 当然了，写了专栏，还是希望更多人看更多人喜欢！ 街坊邻居觉得好的多替我宣传哈！&lt;/p&gt;
 
 &lt;p&gt;其实我这个人还是挺扯淡的，后期的时候大家可以看到我稍微真实可爱的一面。不过开始还是要严谨， 严肃！&lt;/p&gt;
 
-&lt;h5&gt;一个例子&lt;/h5&gt;
+&lt;h5 id=&quot;section-4&quot;&gt;一个例子&lt;/h5&gt;
 
 &lt;p&gt;现在给大家一个例子， 这个例子看不懂怎么实现的不要紧。 到后来的学习中我们还会提到。主要是让大家感受下，这个专栏中我们反复见到的数据分析的一般流程。&lt;/p&gt;
 
@@ -1004,7 +1226,6 @@ it is they are looking for – and what they can do with it once they find it.�
 835357: 835357 20120206  283149150  0  0  0  0  0 \\N   0   0   0
 &lt;/pre&gt;
 
-
 &lt;p&gt;可以看到，一共是83万行。12列&lt;/p&gt;
 
 &lt;p&gt;每一列其实是有名字的，我们要重新命名&lt;/p&gt;
@@ -1016,7 +1237,6 @@ it is they are looking for – and what they can do with it once they find it.�
     setnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; paste0&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;V&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; column_names&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;# 把原来的列名 v1 - v12 全部换掉&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;现在数据已经是这个样子了&lt;/p&gt;
 
@@ -1048,7 +1268,6 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;/pre&gt;
 
-
 &lt;p&gt;这是一个月的数据，我们想对每一天所有用户的发帖量，等所有除了ID，date， uid这三个加总。&lt;/p&gt;
 
 &lt;p&gt;在所有数据分析的开始，先要进行大概的描述性分析。虽然很简单，但是很重要&lt;/p&gt;
@@ -1059,22 +1278,20 @@ it is they are looking for – and what they can do with it once they find it.�
     &lt;span class=&quot;c1&quot;&gt;# 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;这里data.table 包里的简洁代码对我这种代码洁癖简直就是太适合了！
 之所以选择data.table， 原因有三点&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;速度快&lt;/li&gt;
-&lt;li&gt;代码简洁&lt;/li&gt;
-&lt;li&gt;但是代码不太容易懂，而且官方阅读材料比较少。这也就使得我这个专栏有了最直接的意义！&lt;/li&gt;
+  &lt;li&gt;速度快&lt;/li&gt;
+  &lt;li&gt;代码简洁&lt;/li&gt;
+  &lt;li&gt;但是代码不太容易懂，而且官方阅读材料比较少。这也就使得我这个专栏有了最直接的意义！&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;然后我就可以接着做一些可视化的工作了，比如二月有春节，我想知道春节时候的情况&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cp6Bmzy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;这个图完全是用R做出的，用的是非常著名的ggplot2包。网上关于这些包的教程有不少。大家可以搜搜看看，我在这个专栏里会对一些我感兴趣的图形做出针对性的讲解。&lt;/p&gt;
+&lt;p&gt;这个图完全是用R做出的，用的是非常著名的ggplot2包。网上关于这些包的教程有不少。大家可以搜搜看看，我在这个专栏里会对一些我感兴趣的图形做出针对性的讲解。 &lt;/p&gt;
 
 &lt;p&gt;我现在有大概16个月的微博数据，那我想看看所有这些天的8个指标变化情况应该怎办呢？可以用热力学图。&lt;/p&gt;
 
@@ -1087,6 +1304,7 @@ it is they are looking for – and what they can do with it once they find it.�
 &lt;p&gt;玩数据！&lt;/p&gt;
 
 &lt;p&gt;这次的作业： 安装好R， 初学者建议用Rstudio，简单学习R语法。我们下次再见！&lt;/p&gt;
+
 </description>
     </item>
     
@@ -1096,7 +1314,8 @@ it is they are looking for – and what they can do with it once they find it.�
       <pubDate>30 Dec 2013</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2013/12/happy-new-year</guid>
-      <description>&lt;p&gt;&lt;embed src=&quot;http://tzttxx.com/ttxx080617bak/Article/UploadFiles/200812/2008120509284409.mp3&quot; autostart=&quot;true&quot; hidden=&quot;true&quot; loop=&quot;true&quot;&gt;&lt;/embed&gt;&lt;/p&gt;
+      <description>&lt;embed src=&quot;http://tzttxx.com/ttxx080617bak/Article/UploadFiles/200812/2008120509284409.mp3&quot; autostart=&quot;true&quot; hidden=&quot;true&quot; loop=&quot;true&quot; /&gt;
+&lt;p&gt;&amp;lt;/embed&amp;gt;&lt;/p&gt;
 
 &lt;p&gt;转眼一年，又到了写年终总结的时候了。2013年，和过去的每一年都基本相同。但又有那么一点不一样。相同的是年年有欢笑，年年有成长。不同的是就是下面要写的。总结下来这一年有收获，总评4星。&lt;/p&gt;
 
@@ -1116,39 +1335,64 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;第二大收获就是学习调节，更加爱惜身体。李开复老师罹患癌症确实对我的冲击挺大的，可以说我非常热爱生活，所以想一直健健康康的这么一直生活下去。所以熬夜平时压力大不懂得调节这种生活方式是存在隐患的，虽然这都是个概率并不必然，但是个人遇到了就是百分之百。于是要加强锻炼，平和心态。作为李开复那样级别的人物，我们看来是有房有车家庭美满， 依然熬夜多压力大。可见生活就不是一劳永逸的，自己逼自己给自己点动力并无可厚非，但是基本要有个度。看到复旦于娟老师的博客，也有好多感悟。&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;“在生死临界点的时候，你会发现，任何的加班，给自己太多的压力，买房买车的需求，这些都是浮云，如果有时间，好好陪陪你的孩子，把买车的钱给父母亲买双鞋子，不要拼命去换什么大房子，和相爱的人在一起，蜗居也温暖。癌症是我人生的分水岭。别人看来我人生尽毁。其实，我很奇怪为什么反而癌症这半年，除却病痛，自己居然如此容易快乐。我不是高僧，若不是这病患，自然放不下尘世。这场癌症却让我不得不放下一切。如此一来，索性简单了，索性真的很容易快乐。名利权情，没有一样不辛苦，却没有一样可以带去。”&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“在生死临界点的时候，你会发现，任何的加班，给自己太多的压力，买房买车的需求，这些都是浮云，如果有时间，好好陪陪你的孩子，把买车的钱给父母亲买双鞋子，不要拼命去换什么大房子，和相爱的人在一起，蜗居也温暖。癌症是我人生的分水岭。别人看来我人生尽毁。其实，我很奇怪为什么反而癌症这半年，除却病痛，自己居然如此容易快乐。我不是高僧，若不是这病患，自然放不下尘世。这场癌症却让我不得不放下一切。如此一来，索性简单了，索性真的很容易快乐。名利权情，没有一样不辛苦，却没有一样可以带去。”&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;“若天有定数，我过好我的每一天就是。若天不绝我，那么癌症却真是个警钟：我何苦像之前的三十年那样辛勤地做蝂捊。名利权情，没有一样是不辛苦的，却没有一样可以带去。”&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“若天有定数，我过好我的每一天就是。若天不绝我，那么癌症却真是个警钟：我何苦像之前的三十年那样辛勤地做蝂捊。名利权情，没有一样是不辛苦的，却没有一样可以带去。”&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;“活着就是王道，如是记之。”&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“活着就是王道，如是记之。”&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;看起来那么平实，又让人警醒。看到乔布斯的演讲，&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;“No one wants to die. Even people who want to go to heaven don&#39;t want to die to get there. And yet death is the destination we all share. No one has ever escaped it. And that is as it should be, because Death is very likely the single best invention of Life. It is Life&#39;s change agent. It clears out the old to make way for the new. Right now the new is you, but someday not too long from now, you will gradually become the old and be cleared away. Sorry to be so dramatic, but it is quite true.”&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“No one wants to die. Even people who want to go to heaven don’t want to die to get there. And yet death is the destination we all share. No one has ever escaped it. And that is as it should be, because Death is very likely the single best invention of Life. It is Life’s change agent. It clears out the old to make way for the new. Right now the new is you, but someday not too long from now, you will gradually become the old and be cleared away. Sorry to be so dramatic, but it is quite true.”&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;“Your time is limited, so don&#39;t waste it living someone else&#39;s life. Don&#39;t be trapped by dogma — which is living with the results of other people&#39;s thinking. Don&#39;t let the noise of others&#39; opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary.”&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“Your time is limited, so don’t waste it living someone else’s life. Don’t be trapped by dogma — which is living with the results of other people’s thinking. Don’t let the noise of others’ opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary.”&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;这里稍微提一句，因为我的同学们多是2013年开始工作，所以在聊天的时候明显感觉大家的侧重点已经更加实际更加生活。学生时期的稚嫩褪去，理想主义也褪去了。我的感觉是上班自己赚钱之后才感到生活的艰辛了，确实不容易。在这个时候容易迷茫，看不到希望，感到痛苦以及想拿刀插自己，这都是正常现象，我也经历过，现在也时不时经历一下。我个人的建议是： 1.要知足。虽然我看到好多同学现在事业有成，赚的比我多，住的比我好，玩的比我爽。感到有不少落差。但是又不能否认的是我的生活也是多少人比较羡慕的。人贵有自知之明，自己心里大概知道自己能到达的位置。自己的才华和努力达到最大化大概能什么样，徒有羡鱼情也没用。2.看看自己从原来到现在生活轨迹的变化，短短10年时间带给我们怎么的不同。所以未来的10年或是20年也一定是这样。前些天和江浩聊天，他当时从我们家乡一个充斥着各种小混混的小学也想不到自己几年后可以考去清华大学。宫照恒北大本科成绩实在太烂没法保本部，也估计想不到3年后去去哈佛读博士。从我自身来讲，现在想想从一个小地方自己出来上海上学，然后来到香港打拼。所以这个角度上我已经挺厉害了，而且可以预见当我们跳出最难得开始的几步，后面的天地一定会越走越宽了。&lt;/p&gt;
 
 &lt;p&gt;这里稍微跑题一下： 有关拼搏，自己的定位。看到知乎有一个挺有名的问答。&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;问 ： 如果兔子都在拼命奔跑，是什么给了作为乌龟的你前进的动力？
-在这个世界上永远存在一些比你更加牛的人，无论什么方面。如果把人生比作攀登，也许你穷其一生可以达到一定的高度，但对某些人来说珠峰都不成问题。对此，有的人选择退出竞争，泰然处之，在半山腰悠闲度日；但也有人不断向上。如果你是后者，当你明知道爬不到最顶端的时候，你攀爬的动力和意义是什么？你是如何保证动力持续不断的？&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;问 ： 如果兔子都在拼命奔跑，是什么给了作为乌龟的你前进的动力？
+在这个世界上永远存在一些比你更加牛的人，无论什么方面。如果把人生比作攀登，也许你穷其一生可以达到一定的高度，但对某些人来说珠峰都不成问题。对此，有的人选择退出竞争，泰然处之，在半山腰悠闲度日；但也有人不断向上。如果你是后者，当你明知道爬不到最顶端的时候，你攀爬的动力和意义是什么？你是如何保证动力持续不断的？&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;后面的回答我觉得挺实在，而且挺有借鉴价值的。&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;就像@talich 老师在我去斯坦福念书以前赠我的那句话：“到了那儿，不用指望成为牛人，但至少你知道大海有多宽，能看到牛人在做什么，就够了。” 对乌龟来讲，兔子存在的意义在于，至少让它知道这世界还有“兔子”的存在，以及兔子跑得有多快。盗用知乎的slogan，让你看到更大的世界，这本身就是最大的意义。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;兔子的存在，能够让乌龟直面自己就是一只乌龟这个事实。有勇气面对真实的自己，才能准确的定位自己的位置，也才能冷静的思考最适合自己的人生规划。而这，很多时候恰恰是最知易行难的事。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;其实人越往后走，越会深刻体会到“阶级”的不可逾越性。愤青的时候会咒骂：“操他妈这世界为什么这么不公平。” 可当你不再被荷尔蒙冲昏头脑时，也许你会开始思考：既然现在是这种情况，那我应该做点什么呢？当你绞尽心机让自己变得更好的同时，也许你也在让这个世界变得更好哦。：）&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;就像@talich 老师在我去斯坦福念书以前赠我的那句话：“到了那儿，不用指望成为牛人，但至少你知道大海有多宽，能看到牛人在做什么，就够了。” 对乌龟来讲，兔子存在的意义在于，至少让它知道这世界还有“兔子”的存在，以及兔子跑得有多快。盗用知乎的slogan，让你看到更大的世界，这本身就是最大的意义。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;兔子的存在，能够让乌龟直面自己就是一只乌龟这个事实。有勇气面对真实的自己，才能准确的定位自己的位置，也才能冷静的思考最适合自己的人生规划。而这，很多时候恰恰是最知易行难的事。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;其实人越往后走，越会深刻体会到“阶级”的不可逾越性。愤青的时候会咒骂：“操他妈这世界为什么这么不公平。” 可当你不再被荷尔蒙冲昏头脑时，也许你会开始思考：既然现在是这种情况，那我应该做点什么呢？当你绞尽心机让自己变得更好的同时，也许你也在让这个世界变得更好哦。：）&lt;/li&gt;
+  &lt;/ol&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;生活不是偶像剧和成功学案例，很难给彼此出身理想各不同的人带上乌龟还是兔子的帽子。我们对生活的感悟，感知也不断深化。就比如前些天又拿出朱自清的《背影》来读，边读的时候自己也开始眼泪打转：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;我說道，“爸爸，你走吧。”他往車外看了看，說，“我買幾個桔子去。你就在此地，不要走動。”我看那邊月台的柵欄外有幾個賣東西的等著顧客。走到那邊月台，須穿過鐵道，須跳下去又爬上去。父親是一個胖子，走過去自然要費事些。我本來要去的，他不肯，只好讓他去。我看見他戴著黑布小帽，穿著黑布大馬褂，深青布棉袍，蹣跚地走到鐵道邊，慢慢探身下去，尚不大難。可是他穿過鐵道，要爬上那邊月台，就不容易了。他用兩手攀著上面，兩腳再向上縮；他肥胖的身子向左微傾，顯出努力的樣子。這時我看見他的背影，我的淚很快地流下來了。我趕緊拭乾了淚，怕他看見，也怕別人看見。我再向外看時，他已抱了朱紅的桔子往回走了。過鐵道時，他先將桔子散放在地上，自己慢慢爬下，再抱起桔子走。到這邊時，我趕緊去攙他。他和我走到車上，將桔子一股腦兒放在我的皮大衣上。於是撲撲衣上的泥土，心裏很輕鬆似的，過一會說，“我走了，到那邊來信！”我望著他走出去。他走了幾步，回過頭看見我，說，“進去吧，裏邊沒人。”等他的背影混入來來往往的人裏，再找不著了，我便進來坐下，我的眼淚又來了。&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;我說道，“爸爸，你走吧。”他往車外看了看，說，“我買幾個桔子去。你就在此地，不要走動。”我看那邊月台的柵欄外有幾個賣東西的等著顧客。走到那邊月台，須穿過鐵道，須跳下去又爬上去。父親是一個胖子，走過去自然要費事些。我本來要去的，他不肯，只好讓他去。我看見他戴著黑布小帽，穿著黑布大馬褂，深青布棉袍，蹣跚地走到鐵道邊，慢慢探身下去，尚不大難。可是他穿過鐵道，要爬上那邊月台，就不容易了。他用兩手攀著上面，兩腳再向上縮；他肥胖的身子向左微傾，顯出努力的樣子。這時我看見他的背影，我的淚很快地流下來了。我趕緊拭乾了淚，怕他看見，也怕別人看見。我再向外看時，他已抱了朱紅的桔子往回走了。過鐵道時，他先將桔子散放在地上，自己慢慢爬下，再抱起桔子走。到這邊時，我趕緊去攙他。他和我走到車上，將桔子一股腦兒放在我的皮大衣上。於是撲撲衣上的泥土，心裏很輕鬆似的，過一會說，“我走了，到那邊來信！”我望著他走出去。他走了幾步，回過頭看見我，說，“進去吧，裏邊沒人。”等他的背影混入來來往往的人裏，再找不著了，我便進來坐下，我的眼淚又來了。&lt;/p&gt;
 
-&lt;p&gt;近幾年來，父親和我都是東奔西走，家中光景是一日不如一日。他少年出外謀生，獨立支持，做了許多大事。哪知老境卻如此頹唐！他觸目傷懷，自然情不能自已。情鬱於中，自然要發之於外；家庭瑣屑便往往觸他之怒。他待我漸漸不同往日。但最近兩年不見，他終於忘卻我的不好，只是惦記著我，惦記著我的兒子。我北來後，他寫了一封信給我，信中說道，“我身體平安，惟膀子疼痛利害，舉箸提筆，諸多不便，大約大去之期不遠矣。”我讀到此處，在晶瑩的淚光中，又看見那肥胖的，青布棉袍，黑布馬褂的背影。唉！我不知何時再能與他相見！&lt;/p&gt;&lt;/blockquote&gt;
+  &lt;p&gt;近幾年來，父親和我都是東奔西走，家中光景是一日不如一日。他少年出外謀生，獨立支持，做了許多大事。哪知老境卻如此頹唐！他觸目傷懷，自然情不能自已。情鬱於中，自然要發之於外；家庭瑣屑便往往觸他之怒。他待我漸漸不同往日。但最近兩年不見，他終於忘卻我的不好，只是惦記著我，惦記著我的兒子。我北來後，他寫了一封信給我，信中說道，“我身體平安，惟膀子疼痛利害，舉箸提筆，諸多不便，大約大去之期不遠矣。”我讀到此處，在晶瑩的淚光中，又看見那肥胖的，青布棉袍，黑布馬褂的背影。唉！我不知何時再能與他相見！&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;初中学的时候知道背诵全文，却完全无法体会其中的感情。随着自己出门在外，这些感悟越来越深。&lt;/p&gt;
 
@@ -1158,9 +1402,10 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;祝大家新年快乐，新的一年万事如意！&lt;/p&gt;
 
-&lt;p&gt;I&#39;m loving life, hope you same.&lt;/p&gt;
+&lt;p&gt;I’m loving life, hope you same. &lt;/p&gt;
 
-&lt;p&gt;---大超哥&lt;/p&gt;
+&lt;p&gt;—大超哥&lt;/p&gt;
+
 </description>
     </item>
     
@@ -1173,57 +1418,50 @@ it is they are looking for – and what they can do with it once they find it.�
       <description>&lt;p&gt;地理课上，我们经常会看到等高线。在ggplot2中，也有实现一个和等高线差不多的利器&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;stat_density2d()&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;stat_density2d()&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;看个例子先&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# The base plot&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eruptions&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	&lt;span class=&quot;c1&quot;&gt;# The base plot&lt;/span&gt;
+	p &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;faithful&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eruptions&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;waiting&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/nE3VPUs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们可以在原始图中添加类似登高线的表示，用以标记密集程度。&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Contour lines, with &amp;quot;height&amp;quot; mapped to color&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..level..&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	&lt;span class=&quot;c1&quot;&gt;# Contour lines, with &amp;quot;height&amp;quot; mapped to color&lt;/span&gt;
+	p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..level..&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/nghFH1z.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# Map density estimate to fill color&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	&lt;span class=&quot;c1&quot;&gt;# Map density estimate to fill color&lt;/span&gt;
+	p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/bnGh3DC.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# With points, and map density estimate to alpha&lt;/span&gt;
-    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	&lt;span class=&quot;c1&quot;&gt;# With points, and map density estimate to alpha&lt;/span&gt;
+	p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
     stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tile&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/j1b0kxp.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;同一维的密度曲线一样，stat_density2d也可以调整binwidth用h()函数即可
 体会下下面的这个例子&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; h&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	p &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; stat_density2d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;..density..&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; geom&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;raster&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; contour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; h&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-density/aDAgAtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 </description>
     </item>
     
@@ -1243,32 +1481,27 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;并对代码进行详细注释。&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;latticeExtra&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;## 产生数据集&lt;/span&gt;
-    set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    dat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ts&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;matrix&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cumsum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; ncol &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; paste&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;series&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; LETTERS&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+ 	require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;latticeExtra&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;## 产生数据集&lt;/span&gt;
+	set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	dat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ts&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;matrix&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cumsum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; ncol &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; paste&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;series&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; LETTERS&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;在安装latticeExtra的时候如果遇到问题，请参见一下代码重新安装&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xtsExtra&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://R-Forge.R-project.org&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+	install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xtsExtra&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://R-Forge.R-project.org&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 	
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;horizon plot是将时间序列的数据可视化。所以我们需要将原来随机出来的数据转变成为随机数列， 用到的就是 &lt;code&gt;ts&lt;/code&gt;命令&lt;/p&gt;
 
 &lt;p&gt;产生之后的数据是大概是这个样子&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;n&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+ 	head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;n&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
 
 &lt;pre&gt;
 
@@ -1317,8 +1550,7 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;/pre&gt;
 
-
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们可以基本认定这个就是一个时间序列的数据了。&lt;/p&gt;
 
@@ -1326,11 +1558,10 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;首先我们可以将数据简单的可视化一下子。&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;## show simple line plot first, for reference.&lt;/span&gt;
-    xyplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+ 	&lt;span class=&quot;c1&quot;&gt;## show simple line plot first, for reference.&lt;/span&gt;
+	xyplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/zvu0wfQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -1338,25 +1569,23 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;下面开始我们的&lt;strong&gt;Horizon Plot&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;## 先设定基本的图层设置&lt;/span&gt;
-    infolayers &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;
-    layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.scaleArrow&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;grey&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+ 	&lt;span class=&quot;c1&quot;&gt;## 先设定基本的图层设置&lt;/span&gt;
+	infolayers &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;
+  	layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.scaleArrow&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;grey&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                          srt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-    layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; current.panel.limits&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+  	layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; current.panel.limits&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
         panel.text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; round&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; font &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                    cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;#9FC8DC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;这两个图层的大概意思是&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;第一个图层： 在右侧画出每个空间，然后箭头&lt;/li&gt;
-&lt;li&gt;第二个图层： 计算出每个不同的变量的Horizon Plot中的基准值，并标图形的左边&lt;/li&gt;
-&lt;li&gt;有关颜色的编码信息可以参照这个网站，并推荐之。&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;第一个图层： 在右侧画出每个空间，然后箭头&lt;/li&gt;
+  &lt;li&gt;第二个图层： 计算出每个不同的变量的Horizon Plot中的基准值，并标图形的左边&lt;/li&gt;
+  &lt;li&gt;有关颜色的编码信息可以参照这个网站，并推荐之。&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;如果大家对基准值的这个概念还不是很熟悉的话，可以快速看看我之前的这篇博客 &lt;a href=&quot;http://yangchao.me/2013/10/horizon-plot&quot;&gt;《Horizon Chart - 惊艳到爆的哲学》&lt;/a&gt;&lt;/p&gt;
 
@@ -1365,244 +1594,95 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;p&gt;&lt;strong&gt;Case 1&lt;/strong&gt;：each panel has a different origin and scale:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;## (&amp;#39;origin&amp;#39; default is the first data value in each series).&lt;/span&gt;
-    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      infolayers
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+ 	&lt;span class=&quot;c1&quot;&gt;## (&amp;#39;origin&amp;#39; default is the first data value in each series).&lt;/span&gt;
+	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  	  infolayers
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/2i7atuA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;短短一行代码，已经把Horizon Plot画出来了。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;colorky = TRUE 的意思是最右面是否把表明色阶的注释标出。大家可以试一试如果改成&lt;code&gt;FALSE&lt;/code&gt;会怎样&lt;/li&gt;
-&lt;li&gt;每一个Panel的初始值和范围变化都是不一样的。&lt;/li&gt;
+  &lt;li&gt;colorky = TRUE 的意思是最右面是否把表明色阶的注释标出。大家可以试一试如果改成&lt;code&gt;FALSE&lt;/code&gt;会怎样&lt;/li&gt;
+  &lt;li&gt;每一个Panel的初始值和范围变化都是不一样的。&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;&lt;strong&gt;Case 2&lt;/strong&gt;: fixed scale but different origin (baseline):&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    
-    &lt;span class=&quot;c1&quot;&gt;## (similar in concept to scales = &amp;quot;sliced&amp;quot;)&lt;/span&gt;
-    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      infolayers
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+ 	&lt;span class=&quot;c1&quot;&gt;## (similar in concept to scales = &amp;quot;sliced&amp;quot;)&lt;/span&gt;
+	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  	  infolayers
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/q3TGAps.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;通过&lt;code&gt;horizonscale=10&lt;/code&gt;, 所有的变化范围都变成了相同的值&lt;/li&gt;
+  &lt;li&gt;通过&lt;code&gt;horizonscale=10&lt;/code&gt;, 所有的变化范围都变成了相同的值&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;&lt;strong&gt;Case 3&lt;/strong&gt;: fixed scale and constant origin (all same scales):&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        
-    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;		
+	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
       infolayers
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/0Rs2hLj.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;通过&lt;code&gt;origin=0&lt;/code&gt;把所有的初始值都设为0&lt;/li&gt;
+  &lt;li&gt;通过&lt;code&gt;origin=0&lt;/code&gt;把所有的初始值都设为0&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;&lt;strong&gt;Case 4&lt;/strong&gt;：same scales with full coverage of color scale:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        
-    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;		
+	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
             scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;relation &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
             colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey.digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
       infolayers
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/8CwVN62.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;通过&lt;code&gt;scales = list(y = list(relation = &quot;same&quot;))&lt;/code&gt;将右边的scales显示为绝对值, 而不是变化值。&lt;/li&gt;
+  &lt;li&gt;通过&lt;code&gt;scales = list(y = list(relation = &quot;same&quot;))&lt;/code&gt;将右边的scales显示为绝对值, 而不是变化值。&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;&lt;strong&gt;Case 5&lt;/strong&gt;: use ylab rather than strip.left, for readability.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;        
-    horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; strip.left &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; rot &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      layer_&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.fill&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gray90&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; panel.xblocks&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;		
+	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            	layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; strip.left &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            	ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; rot &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  	  layer_&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.fill&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gray90&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; panel.xblocks&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/F0tqAw5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;通过&lt;code&gt;strip.left = FALSE&lt;/code&gt;把原来竖起来的图例去掉&lt;/li&gt;
-&lt;li&gt;再通过&lt;code&gt;ylab = list(rev(colnames(dat)), rot = 0, cex = 0.7))&lt;/code&gt;把原来的加上&lt;/li&gt;
+  &lt;li&gt;通过&lt;code&gt;strip.left = FALSE&lt;/code&gt;把原来竖起来的图例去掉&lt;/li&gt;
+  &lt;li&gt;再通过&lt;code&gt;ylab = list(rev(colnames(dat)), rot = 0, cex = 0.7))&lt;/code&gt;把原来的加上&lt;/li&gt;
 &lt;/ul&gt;
 
-
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Horizon Plot基本上常用的就是这一些用法。当然还有不少应用到实际中的，特别是在表现在股票价格变化中的时候，就可以明显感觉它的强大之处。我们会在之后介绍具体的特别应用&lt;/p&gt;
 
 &lt;p&gt;相关文章：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://latticeextra.r-forge.r-project.org/#segplot&amp;amp;theme=default&quot;&gt;LatticeExtra: R Forger&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://cran.r-project.org/web/packages/latticeExtra/latticeExtra.pdf&quot;&gt;官方Manual&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;文中代码和图片在: &lt;a href=&quot;http://pan.baidu.com/s/1DvW29&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://latticeextra.r-forge.r-project.org/#segplot&amp;amp;theme=default&quot;&gt;LatticeExtra: R Forger&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cran.r-project.org/web/packages/latticeExtra/latticeExtra.pdf&quot;&gt;官方Manual&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;文中代码和图片在: &lt;a href=&quot;http://pan.baidu.com/s/1DvW29&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Horizon Chart - 惊艳到爆的哲学</title>
-      <link>http://yangchao.me/2013/10/horizon-plot</link>
-      <pubDate>20 Oct 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/10/horizon-plot</guid>
-      <description>&lt;p&gt;对于Horizon Chart，可能大家还都比较陌生。
-先来看一个比较经典的&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/qSF60Mo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们在日后的ggplot2的教程里会详细讲解这样一个Horizon Chart 是如何做出来的。&lt;/p&gt;
-
-&lt;p&gt;但是大家应该和我差不多，第一次看到这个图的时候感觉是虽然看不太懂，但是觉得很绚丽。&lt;/p&gt;
-
-&lt;p&gt;时髦的词叫作“不明觉厉”。&lt;/p&gt;
-
-&lt;p&gt;想要做出一个漂亮的Horizon Chart 第一点就是要看懂它&lt;/p&gt;
-
-&lt;p&gt;这个商业做Horizon Chart 的软件里，介绍了它的作图方法 ：&lt;/p&gt;
-
-&lt;p&gt;原文在：&lt;a href=&quot;http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Horizon Chart主要应用在时间序列的数据里，尤其在金融，物流等等领域可以说应用非常广泛。&lt;/p&gt;
-
-&lt;p&gt;原理比较简单：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;首先有一个最传统的折线图&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/ZexplPb.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;分别用不同的颜色标记正值和负值，同时在一个色调里用颜色深浅来表明绝对值的大小&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/uL1yC0Q.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;取负值的镜像，都画在正向的坐标里。这样一来就可以省去不少空间。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/p0O7zku.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/SDsgxgQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;按照图层的不同，在几个不同的图层再次重叠到一起，这样可以再次节省不少空间。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-intro/6GoZEHS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;当同时看不同类别时间序列的变化时，这种可视化的方法就显得非常有效。易懂信息量也够大。&lt;/p&gt;
-
-&lt;p&gt;比如上图，可以轻松看到50种股票价格的变化趋势。&lt;/p&gt;
-
-&lt;p&gt;关于Horizon Plot的具体实现方法，主要是ggplot2和LatticeExtra，&lt;/p&gt;
-
-&lt;p&gt;在这篇博客中，我们会讲到horizon plot 的具体实现方法： &lt;a href=&quot;http://yangchao.me/2013/10/horizon-lattice-extra&quot;&gt;Go&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;相关文章：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.stonesc.com/Vis08_Workshop/DVD/Reijner_submission.pdf&quot;&gt;The Development of the Horizon Graph&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.perceptualedge.com/articles/visual_business_intelligence/time_on_the_horizon.pdf&quot;&gt;Time on the Horizon&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://vis.berkeley.edu/papers/horizon/2009-TimeSeries-CHI.pdf&quot;&gt;Sizing the Horizon: The Effects of Chart Size and Layering
-on the Graphical Perception of Time Series Visualizations&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>ggplot2 - 为拟合曲线加置信空间</title>
-      <link>http://yangchao.me/2013/09/Significance-ggplot2</link>
-      <pubDate>24 Sep 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/09/Significance-ggplot2</guid>
-      <description>&lt;p&gt;如何在拟合曲线图中增加置信空间呢？&lt;/p&gt;
-
-&lt;p&gt;答案很简单：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;geom_ribbon()&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;     library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;gcookbook&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# For the data set&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;# Grab a subset of the climate data&lt;/span&gt;
-     clim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; subset&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;climate&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Source &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Berkeley&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; select&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Year&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Anomaly10y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Unc10y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;这时数据是泽个样子滴:
-其中Unc10y是置信空间，Anomaly10y是我们关注的变量&lt;/p&gt;
-
-&lt;pre&gt;
-Year   Anomaly10y Unc10y
-1800     -0.435  0.505
-1801     -0.453  0.493
-1802     -0.460  0.486
-...
-2003      0.869  0.028
-2004      0.884  0.029
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;br&gt;&lt;/br&gt;&lt;/p&gt;
-
-&lt;p&gt;下面就可以作图啦~带上我们的geom_ribbon&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;clim&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Anomaly10y&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_ribbon&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ymin&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Anomaly10y&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;Unc10y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ymax&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Anomaly10y&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;Unc10y&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-significance/1g0JO13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;当然了，我们可以把置信空间设置为曲线
-代码如下：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    &lt;span class=&quot;c1&quot;&gt;# With a dotted line for upper and lower bounds&lt;/span&gt;
-    ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;clim&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Year&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Anomaly10y&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Anomaly10y&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;Unc10y&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey50&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dotted&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Anomaly10y&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;Unc10y&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey50&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; linetype&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dotted&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      geom_line&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ggplot2-significance/syubzvU.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1gRnnX&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
 </description>
     </item>
     

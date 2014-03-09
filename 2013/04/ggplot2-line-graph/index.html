@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -129,15 +133,13 @@
 
 <p><strong>Base Plot</strong></p>
 
-<div class="highlight"><pre><code class="r">    
-    ggplot <span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span> geom_line
+<div class="highlight"><pre><code class="r">	
+	ggplot <span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span> geom_line
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/GTtCqKV.png" alt="" /></p>
 
 <p>我们查看BOD的原数据</p>
-
 <pre>
 Time demand
     1    8.3
@@ -146,28 +148,23 @@ Time demand
     4   16.0
     5   15.6
     7   19.8</pre>
-
-
-<p><br></br></p>
+<p><br />&lt;/br&gt;</p>
 
 <p>这个时候用到Factor函数，将Time进行因子化</p>
 
-<div class="highlight"><pre><code class="r">    BOD1 <span class="o">&lt;-</span> BOD <span class="c1"># Make a copy of the data</span>
-    BOD1<span class="o">$</span>Time <span class="o">&lt;-</span> factor<span class="p">(</span>BOD1<span class="o">$</span>Time<span class="p">)</span>
-    ggplot<span class="p">(</span>BOD1<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">,</span> group<span class="o">=</span><span class="m">1</span><span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	BOD1 <span class="o">&lt;-</span> BOD <span class="c1"># Make a copy of the data</span>
+	BOD1<span class="o">$</span>Time <span class="o">&lt;-</span> factor<span class="p">(</span>BOD1<span class="o">$</span>Time<span class="p">)</span>
+	ggplot<span class="p">(</span>BOD1<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">,</span> group<span class="o">=</span><span class="m">1</span><span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
 </code></pre></div>
-
 
 <ul>
-<li>尤其要注意，因子化之后必须用到aes(group=1),才能正常画出图来。</li>
-<li>若想改变坐标的上下限可以用到如下代码，放在之前代码的后面。具体的用法我们以后会专门讲</li>
+  <li>尤其要注意，因子化之后必须用到aes(group=1),才能正常画出图来。</li>
+  <li>若想改变坐标的上下限可以用到如下代码，放在之前代码的后面。具体的用法我们以后会专门讲</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    ylim<span class="p">(</span><span class="m">0</span><span class="p">,</span>max<span class="p">(</span>BOD<span class="o">$</span>demand<span class="p">)</span>
-    expand_limits<span class="p">(</span>y<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	ylim<span class="p">(</span><span class="m">0</span><span class="p">,</span>max<span class="p">(</span>BOD<span class="o">$</span>demand<span class="p">)</span>
+	expand_limits<span class="p">(</span>y<span class="o">=</span><span class="m">0</span><span class="p">)</span>
 </code></pre></div>
-
 
 <hr />
 
@@ -175,50 +172,43 @@ Time demand
 
 <p>其实也很简单！</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span><span class="o">+</span>geom_line<span class="p">()</span><span class="o">+</span>geom_point<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>BOD<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span>y<span class="o">=</span>demand<span class="p">))</span><span class="o">+</span>geom_line<span class="p">()</span><span class="o">+</span>geom_point<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/p25J3mB.png" alt="" /></p>
 
 <p>同样，个人觉得，这个图做出来尚且没有Excel方便，也没有Excel好看。 LOL</p>
 
 <hr />
-
 <p><strong>延伸问题2</strong> ：如果想用Log Y的坐标轴的话，其实也很简单，还稍微可以体现点GGPLOT2的价值了。</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span>
-    ggplot<span class="p">(</span>worldpop<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span>y<span class="o">=</span>Population<span class="p">)</span> <span class="o">+</span> geom_line<span class="p">()</span>
-     <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span> scale_y_log10<span class="p">()</span>
-        
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span>
+	ggplot<span class="p">(</span>worldpop<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span>y<span class="o">=</span>Population<span class="p">)</span> <span class="o">+</span> geom_line<span class="p">()</span>
+	 <span class="o">+</span> geom_point<span class="p">()</span> <span class="o">+</span> scale_y_log10<span class="p">()</span>
+		
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/E0c7o7t.png" alt="" /></p>
 
 <ul>
-<li>最后的一行代码用处就是把Y轴设为log10形式的，大家感受下</li>
+  <li>最后的一行代码用处就是把Y轴设为log10形式的，大家感受下</li>
 </ul>
 
-
 <hr />
-
 <p><strong>延伸问题3</strong>： 如果想一图多线怎么办？</p>
 
 <p>其实随着上次的bar图中，我们已经大致了解了GGPLOT的思路，想一图多线，其实就是在aes的映射过程中多加一个变量即可。可谓思想方法非常明了，有法可依。</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>plyr<span class="p">)</span>
-    <span class="c1"># 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看</span>
-    tg <span class="o">&lt;-</span> ddply<span class="p">(</span>ToothGrowth<span class="p">,</span> c<span class="p">(</span><span class="s">&quot;supp&quot;</span><span class="p">,</span> <span class="s">&quot;dose&quot;</span><span class="p">),</span> summarise<span class="p">,</span> length<span class="o">=</span>mean<span class="p">(</span>len<span class="p">))</span>
-    <span class="c1"># 对ToothGrowth数据集中的supp，dose两个求len变量的平均</span>
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>plyr<span class="p">)</span>
+	<span class="c1"># 要用Plyr拓展包做数据的预处理。关于这个包，我写了另一篇教程，建议大家看看</span>
+	tg <span class="o">&lt;-</span> ddply<span class="p">(</span>ToothGrowth<span class="p">,</span> c<span class="p">(</span><span class="s">&quot;supp&quot;</span><span class="p">,</span> <span class="s">&quot;dose&quot;</span><span class="p">),</span> summarise<span class="p">,</span> length<span class="o">=</span>mean<span class="p">(</span>len<span class="p">))</span>
+	<span class="c1"># 对ToothGrowth数据集中的supp，dose两个求len变量的平均</span>
 </code></pre></div>
-
 
 <p>在这个例子中，dose应该被因子化：0.5,1.0,1.5 只包含这三个剂量。</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>factor<span class="p">(</span>dose<span class="p">),</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">,</span> group<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>factor<span class="p">(</span>dose<span class="p">),</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">,</span> group<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/VCyTzUO.png" alt="" /></p>
 
@@ -239,7 +229,6 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 <p>有关这个问题的最好解答：<a href="http://kohske.wordpress.com/2010/12/27/faq-geom_line-doesnt-draw-lines/">这里</a></p>
 
 <hr />
-
 <p><strong>延伸问题4</strong>： 改变线中散点的颜色</p>
 
 <p>改变其中的这两个参数即可
@@ -248,59 +237,52 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 
 <p>体会如下语句</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
     geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">4</span><span class="p">)</span>           
-    <span class="c1"># Make the points a little larger</span>
+	<span class="c1"># Make the points a little larger</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/JrojSxN.png" alt="" /></p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> fill<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> fill<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span> <span class="o">+</span>
     geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">4</span><span class="p">,</span> shape<span class="o">=</span><span class="m">21</span><span class="p">)</span> 
-    <span class="c1"># Also use a point with a color fill</span>
+	<span class="c1"># Also use a point with a color fill</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/cAvavrJ.png" alt="" /></p>
 
 <p>我们发现上面的作图方法会出现点重合的情况
 所以要可以稍稍微调下</p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> shape<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
       geom_line<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">))</span> <span class="o">+</span>         
-      <span class="c1"># Dodge lines by 0.2</span>
+	  <span class="c1"># Dodge lines by 0.2</span>
       geom_point<span class="p">(</span>position<span class="o">=</span>position_dodge<span class="p">(</span><span class="m">0.2</span><span class="p">),</span> size<span class="o">=</span><span class="m">4</span><span class="p">)</span> 
-      <span class="c1"># Dodge points by 0.2</span>
+	  <span class="c1"># Dodge points by 0.2</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/BqSaXvs.png" alt="" /></p>
 
 <hr />
-
 <p><strong>延伸问题5</strong>： 如果想改变折线和散点的颜色和类型怎么办？</p>
 
 <p>修改下列括号中的参数即可</p>
 
 <ul>
-<li><strong>geom_line()</strong></li>
-<li><strong>geom_point()</strong></li>
+  <li><strong>geom_line()</strong></li>
+  <li><strong>geom_point()</strong></li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>BOD<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>BOD<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Time<span class="p">,</span> y<span class="o">=</span>demand<span class="p">))</span> <span class="o">+</span>
       geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p><img src="/assets/images/ggplot2-line/wXPFtXP.png" alt="" /></p>
 
-<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tg<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>dose<span class="p">,</span> y<span class="o">=</span>length<span class="p">,</span> colour<span class="o">=</span>supp<span class="p">))</span> <span class="o">+</span>
       geom_line<span class="p">(</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span> <span class="o">+</span>
-      geom_point<span class="p">(</span>shape<span class="o">=</span><span class="m">22</span><span class="p">,</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>    
+      geom_point<span class="p">(</span>shape<span class="o">=</span><span class="m">22</span><span class="p">,</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>	
 </code></pre></div>
-
 
 <p><img src="/assets/images/ggplot2-line/KRXvejA.png" alt="" /></p>
 
@@ -308,7 +290,7 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 但是，在R作图有个好处是可以自定义的东西很多，可以精雕细琢的很多，尤其通常在数据分析之后直接出图很是方便。写成代码可以重复使用。而Excel如果不用VBA，或者其他插件，相比R还是有不少差距的。建议大家还是学学ggplot。</p>
 
 <ul>
-<li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1mqTOL">这里</a></li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1mqTOL">这里</a></li>
 </ul>
 
 
@@ -337,6 +319,14 @@ observation. Do you need to adjust the group aesthetic?</strong></p>
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

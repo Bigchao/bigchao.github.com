@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -128,33 +132,29 @@
 <p>今天我们用一个稍微复杂一点的数据集来详细讲解</p>
 
 <ul>
-<li><a href="https://github.com/hadley/data-baby-names/blob/master/baby-names.csv">babynames</a></li>
+  <li><a href="https://github.com/hadley/data-baby-names/blob/master/baby-names.csv">babynames</a></li>
 </ul>
-
 
 <p>原数据大约2万5千行，包括四个字段year，name，pecent，sex。其中year是从1880到2008</p>
 
-<div class="highlight"><pre><code class="r">    
-    options<span class="p">(</span>stringsAsFactors <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
-    babyname <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;bnames.csv&quot;</span><span class="p">)</span>
-    head<span class="p">(</span>babyname<span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+	options<span class="p">(</span>stringsAsFactors <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+	babyname <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;bnames.csv&quot;</span><span class="p">)</span>
+	head<span class="p">(</span>babyname<span class="p">)</span>
 </code></pre></div>
-
 
 <p>数据就是这个样子的</p>
 
 <pre>
-  year    name      percent     sex
-1 1880    John      0.081541    boy
-2 1880 William      0.080511    boy
-3 1880   James      0.050057    boy
-4 1880 Charles      0.045167    boy
-5 1880  George      0.043292    boy
-6 1880   Frank      0.027380    boy
+  year    name  	percent 	sex
+1 1880    John 		0.081541 	boy
+2 1880 William 		0.080511 	boy
+3 1880   James 		0.050057 	boy
+4 1880 Charles 		0.045167 	boy
+5 1880  George 		0.043292 	boy
+6 1880   Frank 		0.027380 	boy
 </pre>
-
-
-<p><br></br></p>
+<p><br />&lt;/br&gt;</p>
 
 <p><strong>问题1</strong>： 找到每一年，每种性别中最受欢迎的名字</p>
 
@@ -166,25 +166,22 @@
 
 <p>C：把结果整合</p>
 
-<div class="highlight"><pre><code class="r">    
-    ddply<span class="p">(</span>babyname<span class="p">,</span> .<span class="p">(</span>year<span class="p">,</span> sex<span class="p">),</span> <span class="o">?????</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+	ddply<span class="p">(</span>babyname<span class="p">,</span> .<span class="p">(</span>year<span class="p">,</span> sex<span class="p">),</span> <span class="o">?????</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>前两部份我们都已经很熟悉了，原数据切片。但是后面得到最受欢迎的名字应该怎么办？</p>
 
 <p>我们要自定义一个函数，来求出最受欢迎的人名，然后再把它加到ddply中的function里面</p>
 
-<div class="highlight"><pre><code class="r">    
-    mostPopular <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
-    x<span class="o">$</span>name<span class="p">[</span>which.max<span class="p">(</span>x<span class="o">$</span>percent<span class="p">)]</span>
-    <span class="p">}</span>
-    ddply<span class="p">(</span>babyname<span class="p">,</span> .<span class="p">(</span>year<span class="p">,</span> sex<span class="p">),</span> mostPopular<span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+	mostPopular <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+	x<span class="o">$</span>name<span class="p">[</span>which.max<span class="p">(</span>x<span class="o">$</span>percent<span class="p">)]</span>
+	<span class="p">}</span>
+	ddply<span class="p">(</span>babyname<span class="p">,</span> .<span class="p">(</span>year<span class="p">,</span> sex<span class="p">),</span> mostPopular<span class="p">)</span>
 </code></pre></div>
 
-
 <p>结果一下就出来了（截取）</p>
-
 <pre>
    year  sex       V1
 1   1880  boy     John
@@ -208,13 +205,11 @@
 19  1889  boy     John
 20  1889 girl     Mary
 </pre>
-
-
-<p><br></br></p>
+<p><br />&lt;/br&gt;</p>
 
 <p>可以看出，1889年，都是男的叫John最多，女的叫Mary最多。</p>
 
-<p><strong>问题2</strong>：每一年，每种性别中 （ 作者注： 这就是告诉你怎么切片呢 ）， 名字的首字母所占比例是多少？</p>
+<p><strong>问题2</strong>：每一年，每种性别中 （ 作者注： 这就是告诉你怎么切片呢 ）， 名字的首字母所占比例是多少？ </p>
 
 <p>解释下问题： Get the total percentage of the first character of the baby names by year and gender</p>
 
@@ -234,43 +229,40 @@
 
 <p>C： 数据整合</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1">#首先提取名字的首字母</span>
-    firstletter <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
-    tolower<span class="p">(</span>substr<span class="p">(</span>x<span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-    <span class="p">}</span>
-    <span class="c1"># 根据ddply可以得出结果</span>
-    letterFreq <span class="o">&lt;-</span> ddply<span class="p">(</span>babyname<span class="p">,</span> .<span class="p">(</span>year<span class="p">,</span> sex<span class="p">,</span> first<span class="o">=</span>firstletter<span class="p">(</span>name<span class="p">)),</span> summarize<span class="p">,</span> sumPer <span class="o">=</span> sum<span class="p">(</span>percent<span class="p">))</span>
+<div class="highlight"><pre><code class="r">	
+	<span class="c1">#首先提取名字的首字母</span>
+	firstletter <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+	tolower<span class="p">(</span>substr<span class="p">(</span>x<span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+	<span class="p">}</span>
+	<span class="c1"># 根据ddply可以得出结果</span>
+	letterFreq <span class="o">&lt;-</span> ddply<span class="p">(</span>babyname<span class="p">,</span> .<span class="p">(</span>year<span class="p">,</span> sex<span class="p">,</span> first<span class="o">=</span>firstletter<span class="p">(</span>name<span class="p">)),</span> summarize<span class="p">,</span> sumPer <span class="o">=</span> sum<span class="p">(</span>percent<span class="p">))</span>
 </code></pre></div>
-
 
 <p>最后的结果就是这样的</p>
 
 <pre>
-  year sex  first   sumPer
-1 1880 boy     a    0.062543
-2 1880 boy     b    0.017858
-3 1880 boy     c    0.084047
-4 1880 boy     d    0.021010
-5 1880 boy     e    0.058219
-6 1880 boy     f    0.055142
+  year sex 	first   sumPer
+1 1880 boy     a 	0.062543
+2 1880 boy     b 	0.017858
+3 1880 boy     c 	0.084047
+4 1880 boy     d 	0.021010
+5 1880 boy     e 	0.058219
+6 1880 boy     f 	0.055142
 </pre>
-
-
-<p><br></br>
+<p><br />&lt;/br&gt;
 最后我们可以可视化一下，用到ggplot2</p>
 
-<div class="highlight"><pre><code class="r">    
-    require<span class="p">(</span>ggplot2<span class="p">)</span>
-    ggplot<span class="p">(</span>letterFreq<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>year<span class="p">,</span> y<span class="o">=</span>sumPer<span class="p">,</span> group<span class="o">=</span>sex<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">(</span>aes<span class="p">(</span>color<span class="o">=</span>sex<span class="p">))</span> <span class="o">+</span> facet_wrap<span class="p">(</span><span class="o">~</span> first<span class="p">,</span> nrow<span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+	require<span class="p">(</span>ggplot2<span class="p">)</span>
+	ggplot<span class="p">(</span>letterFreq<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>year<span class="p">,</span> y<span class="o">=</span>sumPer<span class="p">,</span> group<span class="o">=</span>sex<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">(</span>aes<span class="p">(</span>color<span class="o">=</span>sex<span class="p">))</span> <span class="o">+</span> facet_wrap<span class="p">(</span><span class="o">~</span> first<span class="p">,</span> nrow<span class="o">=</span><span class="m">3</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p><img src="/assets/images/plyr-advanced/eQloL6A.png" alt="" /></p>
 
 <p>在Hadley的官网上，有不少这样的例子，大家一定要多去看看，多感受就更有感觉了。</p>
 
 <p>原文的数据，代码，最后的图在<a href="http://pan.baidu.com/s/19r800">这里</a></p>
+
 
 		
 		<div id="donation">
@@ -297,6 +289,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){

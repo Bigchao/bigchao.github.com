@@ -48,6 +48,10 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class=" cate1" href="/2014/03/data-table"><span class="circle_icon"></span>Data Table<span class="date">Mar 2014</span></a>
+			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
@@ -128,8 +132,7 @@
 <p>在开始介绍plyr拓展包之前，先简单介绍一种数据预处理和数据清洁的思想</p>
 
 <hr />
-
-<h3>S-A-C</h3>
+<p>###S-A-C</p>
 
 <p>S： Split 即为把数据切片等待处理</p>
 
@@ -141,12 +144,9 @@
 
 <p>用到的是R自带的Iris数据集</p>
 
-<div class="highlight"><pre><code class="r">    
-    head<span class="p">(</span>iris<span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+	head<span class="p">(</span>iris<span class="p">)</span>
 </code></pre></div>
-
-
-
 
 <pre>
   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -157,10 +157,8 @@
 5          5.0         3.6          1.4         0.2  setosa
 6          5.4         3.9          1.7         0.4  setosa
 </pre>
-
-
-<p><br>
-<br></p>
+<p><br />
+<br /></p>
 
 <p>原数据有150行，有5个字段，其中Species中有setosa,virginica,versicolor三种。</p>
 
@@ -180,9 +178,7 @@
 2 versicolor  5.936 
 3  virginica  6.588 
 </pre>
-
-
-<p><br></p>
+<p><br /></p>
 
 <p><strong>这个思想很重要，切片，计算，整合。</strong></p>
 
@@ -190,33 +186,31 @@
 
 <p>我们先来看一种最简单粗暴的实现方法。</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1"># Split the data according to Species</span>
-    splitedIris <span class="o">&lt;-</span> split<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">)</span>
-    <span class="c1"># Apply the mean function to each  individual pieces</span>
-    m1 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
-    m2 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
-    m3 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">3</span><span class="p">]])</span>
-    <span class="c1"># 注意上面，是用两个方括号，单个方括号返回列表，而两个方括号返回列表的提取对象</span>
-    <span class="c1"># Combine the results</span>
-    c<span class="p">(</span>m1<span class="p">,</span> m2<span class="p">,</span> m3<span class="p">)</span>
+<div class="highlight"><pre><code class="r">	
+	<span class="c1"># Split the data according to Species</span>
+	splitedIris <span class="o">&lt;-</span> split<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">)</span>
+	<span class="c1"># Apply the mean function to each  individual pieces</span>
+	m1 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+	m2 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
+	m3 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">3</span><span class="p">]])</span>
+	<span class="c1"># 注意上面，是用两个方括号，单个方括号返回列表，而两个方括号返回列表的提取对象</span>
+	<span class="c1"># Combine the results</span>
+	c<span class="p">(</span>m1<span class="p">,</span> m2<span class="p">,</span> m3<span class="p">)</span>
     
 </code></pre></div>
-
 
 <p>上面就是最直观的运用这种思想来实现的方法。</p>
 
 <p>当然我们可以进行小小的改进，用一个循环来稍微简化下，看如下代码</p>
 
-<div class="highlight"><pre><code class="r">    
-    splitedIris <span class="o">&lt;-</span> split<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">)</span>
-    res <span class="o">&lt;-</span> c<span class="p">()</span>
-    <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>length<span class="p">(</span>splitedIris<span class="p">))</span> <span class="p">{</span>
-    res<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span>i<span class="p">]])</span>
-    <span class="p">}</span>
+<div class="highlight"><pre><code class="r">	
+	splitedIris <span class="o">&lt;-</span> split<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">)</span>
+	res <span class="o">&lt;-</span> c<span class="p">()</span>
+	<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>length<span class="p">(</span>splitedIris<span class="p">))</span> <span class="p">{</span>
+	res<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span>i<span class="p">]])</span>
+	<span class="p">}</span>
    
 </code></pre></div>
-
 
 <p>在我们开始学习R的时候，就有一句<strong>懒人法则</strong></p>
 
@@ -226,20 +220,19 @@
 
 <p>我们可以用到的高阶函数如 <code>by</code>,<code>aggregate</code>,<code>tapply</code>等等吧</p>
 
-<div class="highlight"><pre><code class="r">    
-    <span class="c1"># 用by函数来实现</span>
-    by<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">,</span> mean<span class="p">)</span>
-    <span class="c1"># 用tapply函数实现</span>
-    tapply<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">,</span> mean<span class="p">)</span>
-    
+<div class="highlight"><pre><code class="r">	
+	<span class="c1"># 用by函数来实现</span>
+	by<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">,</span> mean<span class="p">)</span>
+	<span class="c1"># 用tapply函数实现</span>
+ 	tapply<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">,</span> mean<span class="p">)</span>
+	
 </code></pre></div>
-
 
 <p>当然实现的方法很多种，还有不少package可以实现</p>
 
 <p>但是我们的主角终于要登场了！</p>
 
-<h3><a href="http://plyr.had.co.nz/">Plyr</a></h3>
+<h3 id="plyrhttpplyrhadconz"><a href="http://plyr.had.co.nz/">Plyr</a></h3>
 
 <p>此包一出，其他都可以洗洗睡了。</p>
 
@@ -250,35 +243,31 @@
 <p><strong>ddply(.data, .variables, .fun = NULL,…)</strong></p>
 
 <ul>
-<li>.data ： 原来的数据集</li>
-<li>.variables : 如何对原数据进行切片</li>
-<li>.fun : 对切片的数据如何进行再操作</li>
+  <li>.data ： 原来的数据集</li>
+  <li>.variables : 如何对原数据进行切片</li>
+  <li>.fun : 对切片的数据如何进行再操作</li>
 </ul>
 
-
-<div class="highlight"><pre><code class="r">    
-    ddply<span class="p">(</span>iris<span class="p">,</span> .<span class="p">(</span>Species<span class="p">),</span> summarize<span class="p">,</span> meanSL <span class="o">=</span> mean<span class="p">(</span>Sepal.Length<span class="p">),</span> sdSL <span class="o">=</span> sd<span class="p">(</span>Sepal.Length<span class="p">))</span>
-    
+<div class="highlight"><pre><code class="r">	
+	ddply<span class="p">(</span>iris<span class="p">,</span> .<span class="p">(</span>Species<span class="p">),</span> summarize<span class="p">,</span> meanSL <span class="o">=</span> mean<span class="p">(</span>Sepal.Length<span class="p">),</span> sdSL <span class="o">=</span> sd<span class="p">(</span>Sepal.Length<span class="p">))</span>
+	
 </code></pre></div>
-
 
 <p>这里边我们可以分解看下，</p>
 
 <ul>
-<li>iris是原数据集</li>
-<li>.(Species) 是对Species这个字段进行切片</li>
-<li>summarize 是一个函数关键字，表示新建一个新的data.frame。 在plyr里与之相对的是<code>transform</code>，表示在原有数据集中进行修改</li>
-<li>meanSL，sdSL就是如何计算产生新的字段并最后整合</li>
+  <li>iris是原数据集</li>
+  <li>.(Species) 是对Species这个字段进行切片</li>
+  <li>summarize 是一个函数关键字，表示新建一个新的data.frame。 在plyr里与之相对的是<code>transform</code>，表示在原有数据集中进行修改</li>
+  <li>meanSL，sdSL就是如何计算产生新的字段并最后整合</li>
 </ul>
-
 
 <p>不仅可以这样，还可以在<code>Apply</code>这一部自定义函数</p>
 
-<div class="highlight"><pre><code class="r">    
-    ddply<span class="p">(</span>iris<span class="p">,</span> .<span class="p">(</span>Species<span class="p">),</span> transform<span class="p">,</span> SLZ <span class="o">=</span> <span class="p">(</span>Sepal.Length <span class="o">-</span> mean<span class="p">(</span>Sepal.Length<span class="p">))</span> <span class="o">/</span> sd<span class="p">(</span>Sepal.Length<span class="p">))</span>
-    
+<div class="highlight"><pre><code class="r">	
+	ddply<span class="p">(</span>iris<span class="p">,</span> .<span class="p">(</span>Species<span class="p">),</span> transform<span class="p">,</span> SLZ <span class="o">=</span> <span class="p">(</span>Sepal.Length <span class="o">-</span> mean<span class="p">(</span>Sepal.Length<span class="p">))</span> <span class="o">/</span> sd<span class="p">(</span>Sepal.Length<span class="p">))</span>
+	
 </code></pre></div>
-
 
 <p>上面我就自己造了一个函数 来计算Z-Score。</p>
 
@@ -287,27 +276,26 @@
 <pre>
       Sepal.Length Sepal.Width Petal.Length Petal.Width    Species         SLZ
 1            5.1         3.5          1.4         0.2     setosa     0.26667447
-2            4.9         3.0          1.4         0.2     setosa    -0.30071802
-3            4.7         3.2          1.3         0.2     setosa    -0.86811050
-4            4.6         3.1          1.5         0.2     setosa    -1.15180675
-5            5.0         3.6          1.4         0.2     setosa    -0.01702177
-6            5.4         3.9          1.7         0.4     setosa     1.11776320
-7            4.6         3.4          1.4         0.3     setosa    -1.15180675
-8            5.0         3.4          1.5         0.2     setosa    -0.01702177
-9            4.4         2.9          1.4         0.2     setosa    -1.71919923
-10           4.9         3.1          1.5         0.1     setosa    -0.30071802
+2            4.9         3.0          1.4         0.2     setosa 	-0.30071802
+3            4.7         3.2          1.3         0.2     setosa 	-0.86811050
+4            4.6         3.1          1.5         0.2     setosa 	-1.15180675
+5            5.0         3.6          1.4         0.2     setosa 	-0.01702177
+6            5.4         3.9          1.7         0.4     setosa 	 1.11776320
+7            4.6         3.4          1.4         0.3     setosa 	-1.15180675
+8            5.0         3.4          1.5         0.2     setosa 	-0.01702177
+9            4.4         2.9          1.4         0.2     setosa 	-1.71919923
+10           4.9         3.1          1.5         0.1     setosa 	-0.30071802
 
 </pre>
 
-
-<p><br>
+<p><br />
 这样一来也可以直观的看出来<code>Summarize</code>和<code>Transform</code>差别了。</p>
 
 <p>大家先体会一下plyr包的强大之处，我们在下一篇博文里继续介绍一些高阶用法</p>
 
 <ul>
-<li>强烈建议大家读一下原作者的这篇<a href="www.jstatsoft.org/v40/i01/paper%E2%80%8E">Paper</a></li>
-<li>还有这个<a href="http://streaming.stat.iastate.edu/workshops/r-intro/lectures/6-advancedmanipulation.pdf">Tutorial</a></li>
+  <li>强烈建议大家读一下原作者的这篇<a href="www.jstatsoft.org/v40/i01/paper‎">Paper</a></li>
+  <li>还有这个<a href="http://streaming.stat.iastate.edu/workshops/r-intro/lectures/6-advancedmanipulation.pdf">Tutorial</a></li>
 </ul>
 
 
@@ -336,6 +324,14 @@
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
 		<script>
 		$(document).ready(function(){
 		$("#random").on('click','img',function(){
