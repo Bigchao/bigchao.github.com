@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Sat, 08 Mar 2014 22:11:26 -0800</pubDate>
-    <lastBuildDate>Sat, 08 Mar 2014 22:11:26 -0800</lastBuildDate>
+    <pubDate>Sat, 08 Mar 2014 22:45:50 -0800</pubDate>
+    <lastBuildDate>Sat, 08 Mar 2014 22:45:50 -0800</lastBuildDate>
 
     
     <item>
@@ -116,14 +116,12 @@ $$
     </item>
     
     <item>
-      <title>Data Table</title>
+      <title>专栏-SAC思想探索</title>
       <link>http://yangchao.me/2014/03/data-table</link>
       <pubDate>08 Mar 2014</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2014/03/data-table</guid>
-      <description>&lt;h1 id=&quot;section&quot;&gt;数据预处理&lt;/h1&gt;
-
-&lt;p&gt;在数据分析中，基本一半的时间都是在对原始数据进行清洗，提取，分层等相关的预处理工作。所以快速有效的对数据进行预处理，对于时间的节省，效率的提升都能起到事半功倍的效果。&lt;/p&gt;
+      <description>&lt;p&gt;在数据分析中，基本一半的时间都是在对原始数据进行清洗，提取，分层等相关的预处理工作。所以快速有效的对数据进行预处理，对于时间的节省，效率的提升都能起到事半功倍的效果。&lt;/p&gt;
 
 &lt;p&gt;上一期专栏最后给大家留了一个小问题&lt;/p&gt;
 
