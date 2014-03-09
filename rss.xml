@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Sat, 08 Mar 2014 22:58:33 -0800</pubDate>
-    <lastBuildDate>Sat, 08 Mar 2014 22:58:33 -0800</lastBuildDate>
+    <pubDate>Sat, 08 Mar 2014 23:10:45 -0800</pubDate>
+    <lastBuildDate>Sat, 08 Mar 2014 23:10:45 -0800</lastBuildDate>
 
     
     <item>
@@ -73,6 +73,8 @@ $$
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;
 a^2 + b^2 = c^2
 &lt;/script&gt;
+
+&lt;p&gt;\begin{equation}\label{exampleone}r = r_F+ \beta (r_M - r_F) + \epsilon\end{equation}\&lt;/p&gt;
 
 &lt;pre&gt;
 $$
