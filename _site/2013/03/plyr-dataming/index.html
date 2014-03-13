@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                <meta property="wb:webmaster" content="397a4c282ef1bdba" />
+		<meta name="description" content="Plyr- 数据整合利器 | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>Plyr- 数据整合利器</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
+		
+	</head>
+	<body>
+		<nav id="nav">
+		    <a id="random" href="#"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><span>机器学习</span></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>其他技术</span></li>
+				<li id="label6" class="label"><span>生活随笔</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">其他技术</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class="ml cate1" href="/2014/03/distance-similarity"><span class="circle_icon"></span>相似度和距离小结<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/data-table"><span class="circle_icon"></span>SAC思想探索<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/install-scrapy"><span class="circle_icon"></span>scrapy初探-安装和简单操作<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>数据都去哪儿了<span class="date">Feb 2014</span></a>
+			
+				<a class="related cate1" href="/2014/02/douban"><span class="circle_icon"></span>烟波至爽，数据为王<span class="date">Feb 2014</span></a>
+			
+				<a class="life cate1" href="/2013/12/happy-new-year"><span class="circle_icon"></span>Happy New Year<span class="date">Dec 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-lattice-extra"><span class="circle_icon"></span>latticeExtra - Horizon Plot的简单实现<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-plot"><span class="circle_icon"></span>Horizon Chart - 惊艳到爆的哲学<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="life cate1" href="/2013/06/mj-memory"><span class="circle_icon"></span>再次纪念MJ<span class="date">Jun 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/06/plyr-advanced"><span class="circle_icon"></span>Plyr- 多因子整合<span class="date">Jun 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
+			
+				<a class="related cate1" href="/2013/05/Sublime-text-2"><span class="circle_icon"></span>Sublime Text 2学习过程<span class="date">May 2013</span></a>
+			
+				<a class="ml cate1" href="/2013/04/mahout-big-data"><span class="circle_icon"></span>Mahout简单部署备忘<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/Wilkinson-Dot-Plot"><span class="circle_icon"></span>ggplot2 - Wilkinson Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/heat-map"><span class="circle_icon"></span>ggplot2 - Heat Map<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/cleveland-Dotplot"><span class="circle_icon"></span>ggplot2 - Cleveland Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/ggplot2-line-graph"><span class="circle_icon"></span>ggplot2 - Line Graph<span class="date">Apr 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/03/plyr-dataming"><span class="circle_icon"></span>Plyr- 数据整合利器<span class="date">Mar 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>R - Reshape Package II<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>R - Reshape2 Package<span class="date">Feb 2013</span></a>
+			
+				<a class="related cate1" href="/2013/02/hadoop-hive"><span class="circle_icon"></span>大数据体验之Hadoop, Rhadoop, 和Hive<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
+			
+				<a class="life cate1" href="/2012/08/story-vision"><span class="circle_icon"></span>自己的视角，别人的故事<span class="date">Aug 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/memorize-michael-jackson"><span class="circle_icon"></span>纪念 Michael Jackson - This Is It<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/happy-madives"><span class="circle_icon"></span>传说中的马尔代夫<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2011/03/japan-earthquake"><span class="circle_icon"></span>日本地震杂想<span class="date">Mar 2011</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">Plyr- 数据整合利器</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>Hadley Wickham写的Plyr拓展包，是所有拓展包里下载最多的。联合上Reshape2，和ggplot2，devtools已经成为业界口碑最好的。</p>
+
+<p>在开始介绍plyr拓展包之前，先简单介绍一种数据预处理和数据清洁的思想</p>
+
+<hr />
+<p>###S-A-C</p>
+
+<p>S： Split 即为把数据切片等待处理</p>
+
+<p>A： Apply 对于每一个片层进行数据的运算</p>
+
+<p>C： Combine 把结果进行相加</p>
+
+<p>我们先看一个引例:</p>
+
+<p>用到的是R自带的Iris数据集</p>
+
+<div class="highlight"><pre><code class="r">	
+	head<span class="p">(</span>iris<span class="p">)</span>
+</code></pre></div>
+
+<pre>
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+</pre>
+<p><br />
+<br /></p>
+
+<p>原数据有150行，有5个字段，其中Species中有setosa,virginica,versicolor三种。</p>
+
+<p><strong>任务</strong>： 计算在Species字段中，计算每一种物种类别Sepal.Length的平均值</p>
+
+<p>S：把原数据切片，按照Species的三类分为三个子数据集</p>
+
+<p>A：在每一个数据集中计算Sepal.Length的平均值</p>
+
+<p>C：把三个计算后的结果再放回到一起</p>
+
+<p>也就是说我们要的结果是下面这个样子的。</p>
+
+<pre>
+     Species meanSL     
+1     setosa  5.006
+2 versicolor  5.936 
+3  virginica  6.588 
+</pre>
+<p><br /></p>
+
+<p><strong>这个思想很重要，切片，计算，整合。</strong></p>
+
+<p>不管是用到什么方法来具体实现，基本都是遵循这个思想。</p>
+
+<p>我们先来看一种最简单粗暴的实现方法。</p>
+
+<div class="highlight"><pre><code class="r">	
+	<span class="c1"># Split the data according to Species</span>
+	splitedIris <span class="o">&lt;-</span> split<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">)</span>
+	<span class="c1"># Apply the mean function to each  individual pieces</span>
+	m1 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+	m2 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
+	m3 <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span><span class="m">3</span><span class="p">]])</span>
+	<span class="c1"># 注意上面，是用两个方括号，单个方括号返回列表，而两个方括号返回列表的提取对象</span>
+	<span class="c1"># Combine the results</span>
+	c<span class="p">(</span>m1<span class="p">,</span> m2<span class="p">,</span> m3<span class="p">)</span>
+    
+</code></pre></div>
+
+<p>上面就是最直观的运用这种思想来实现的方法。</p>
+
+<p>当然我们可以进行小小的改进，用一个循环来稍微简化下，看如下代码</p>
+
+<div class="highlight"><pre><code class="r">	
+	splitedIris <span class="o">&lt;-</span> split<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">)</span>
+	res <span class="o">&lt;-</span> c<span class="p">()</span>
+	<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>length<span class="p">(</span>splitedIris<span class="p">))</span> <span class="p">{</span>
+	res<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> mean<span class="p">(</span>splitedIris<span class="p">[[</span>i<span class="p">]])</span>
+	<span class="p">}</span>
+   
+</code></pre></div>
+
+<p>在我们开始学习R的时候，就有一句<strong>懒人法则</strong></p>
+
+<p><strong>尽量不要用循环！</strong></p>
+
+<p>因为基本上可以循环的已经被写成拓展包可以直接调用了。</p>
+
+<p>我们可以用到的高阶函数如 <code>by</code>,<code>aggregate</code>,<code>tapply</code>等等吧</p>
+
+<div class="highlight"><pre><code class="r">	
+	<span class="c1"># 用by函数来实现</span>
+	by<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">,</span> mean<span class="p">)</span>
+	<span class="c1"># 用tapply函数实现</span>
+ 	tapply<span class="p">(</span>iris<span class="o">$</span>Sepal.Length<span class="p">,</span> iris<span class="o">$</span>Species<span class="p">,</span> mean<span class="p">)</span>
+	
+</code></pre></div>
+
+<p>当然实现的方法很多种，还有不少package可以实现</p>
+
+<p>但是我们的主角终于要登场了！</p>
+
+<h3 id="plyrhttpplyrhadconz"><a href="http://plyr.had.co.nz/">Plyr</a></h3>
+
+<p>此包一出，其他都可以洗洗睡了。</p>
+
+<p>这个包里有若干函数，但是我们主要讲的就是<code>ddply</code>函数</p>
+
+<p>有关其他函数命名原则可以看<a href="http://xccds1977.blogspot.hk/2012/04/plyrapply.html">肖凯老师的博客</a></p>
+
+<p><strong>ddply(.data, .variables, .fun = NULL,…)</strong></p>
+
+<ul>
+  <li>.data ： 原来的数据集</li>
+  <li>.variables : 如何对原数据进行切片</li>
+  <li>.fun : 对切片的数据如何进行再操作</li>
+</ul>
+
+<div class="highlight"><pre><code class="r">	
+	ddply<span class="p">(</span>iris<span class="p">,</span> .<span class="p">(</span>Species<span class="p">),</span> summarize<span class="p">,</span> meanSL <span class="o">=</span> mean<span class="p">(</span>Sepal.Length<span class="p">),</span> sdSL <span class="o">=</span> sd<span class="p">(</span>Sepal.Length<span class="p">))</span>
+	
+</code></pre></div>
+
+<p>这里边我们可以分解看下，</p>
+
+<ul>
+  <li>iris是原数据集</li>
+  <li>.(Species) 是对Species这个字段进行切片</li>
+  <li>summarize 是一个函数关键字，表示新建一个新的data.frame。 在plyr里与之相对的是<code>transform</code>，表示在原有数据集中进行修改</li>
+  <li>meanSL，sdSL就是如何计算产生新的字段并最后整合</li>
+</ul>
+
+<p>不仅可以这样，还可以在<code>Apply</code>这一部自定义函数</p>
+
+<div class="highlight"><pre><code class="r">	
+	ddply<span class="p">(</span>iris<span class="p">,</span> .<span class="p">(</span>Species<span class="p">),</span> transform<span class="p">,</span> SLZ <span class="o">=</span> <span class="p">(</span>Sepal.Length <span class="o">-</span> mean<span class="p">(</span>Sepal.Length<span class="p">))</span> <span class="o">/</span> sd<span class="p">(</span>Sepal.Length<span class="p">))</span>
+	
+</code></pre></div>
+
+<p>上面我就自己造了一个函数 来计算Z-Score。</p>
+
+<p>最后的结果是这个样子的。</p>
+
+<pre>
+      Sepal.Length Sepal.Width Petal.Length Petal.Width    Species         SLZ
+1            5.1         3.5          1.4         0.2     setosa     0.26667447
+2            4.9         3.0          1.4         0.2     setosa 	-0.30071802
+3            4.7         3.2          1.3         0.2     setosa 	-0.86811050
+4            4.6         3.1          1.5         0.2     setosa 	-1.15180675
+5            5.0         3.6          1.4         0.2     setosa 	-0.01702177
+6            5.4         3.9          1.7         0.4     setosa 	 1.11776320
+7            4.6         3.4          1.4         0.3     setosa 	-1.15180675
+8            5.0         3.4          1.5         0.2     setosa 	-0.01702177
+9            4.4         2.9          1.4         0.2     setosa 	-1.71919923
+10           4.9         3.1          1.5         0.1     setosa 	-0.30071802
+
+</pre>
+
+<p><br />
+这样一来也可以直观的看出来<code>Summarize</code>和<code>Transform</code>差别了。</p>
+
+<p>大家先体会一下plyr包的强大之处，我们在下一篇博文里继续介绍一些高阶用法</p>
+
+<ul>
+  <li>强烈建议大家读一下原作者的这篇<a href="www.jstatsoft.org/v40/i01/paper‎">Paper</a></li>
+  <li>还有这个<a href="http://streaming.stat.iastate.edu/workshops/r-intro/lectures/6-advancedmanipulation.pdf">Tutorial</a></li>
+</ul>
+
+
+		
+		<div id="donation">
+		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
+		</div>
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/03/plyr-dataming&title=Plyr- 数据整合利器"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/03/plyr-dataming&text=Plyr- 数据整合利器"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+		</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+
+
+
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+		
+		<script>
+		$(document).ready(function(){
+		$("#random").on('click','img',function(){
+			$.get("sitemap.xml",function(data){
+			var $xml=$(data);
+			url=$xml.find("url");
+			n = url.size();
+			n = getRandom(n);
+			position=url.get(n);  
+			hello=position.getElementsByTagName("loc")[0].firstChild.nodeValue; 
+			location.href=hello;
+		})
+    
+	})
+  //随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+})
+	</script>
+		
+	</body>
+</html>

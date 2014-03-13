@@ -1,0 +1,41 @@
+---
+layout: post
+categories: ml
+title: Mahout简单部署备忘
+---
+
+最近对机器学习相关的东西真是算上了瘾，像当年我对学习计量经济学一样。这种强大的求知欲真是让人兴奋不已，确实能学到东西总是好的。看来我对数据还真是非常的着迷啊。
+
+和张旭聊了聊，谈到了mahout。准备装了玩一玩，因为对linux系统不熟所以开始难免磕磕碰碰，但是我现在简直对这种操作Teminal的感觉非常着迷了， 玩儿的多了，遇到的问题多了，解决的问题多了自然就熟悉了起来。看来我国的windows盗版确实误事儿啊，linux这么炫酷的东西居然才开始学习。真是太遗憾了。话说现在让我留在windows的唯一理由就是SAS了。 毕竟，SAS在处理大数据方面比R还是要强上不少的。
+
+在安装了Hadoop之后， 准备学的就是Mahout。
+
+要装Mahout，要先安装maven。
+安装maven比较简单，几乎不存在什么错误的可能。
+注意加到环境变量之后maven的执行命令是mvn。
+然后
+
+[1](http://blog.163.com/darkness@yeah/blog/static/131774484201210266154815/
+)
+
+这里稍微注意一下，下一步是要用maven来编译安装mahout，不仅仅是把mahout的压缩包解压。
+刚开始看到的几个网上教程没有说清。
+
+[2](https://cwiki.apache.org/confluence/display/MAHOUT/BuildingMahout)
+
+[3](http://blog.sina.com.cn/s/blog_5fc3f6f901016dwy.html)
+
+[4](http://blog.163.com/darkness@yeah/blog/static/131774484201210266154815/)
+
+这里有两个比较靠谱的教程。
+尤其是官方的那个。大概就是把mahout的压缩包解压（check out directory指的是下载的目录）
+然后进入解压好的目录（core directory）
+
+用命令
+	mvn –Diskip Tests install
+
+跳过测试过程，不建议使用mvn install
+大概安装了两次就可以了。
+然后注意要再加一下环境变量。
+
+具体的链接我在上面都给出了，怕今后忘了。自己也就不在写一遍了。
