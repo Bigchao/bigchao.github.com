@@ -6,14 +6,14 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Sat, 08 Mar 2014 23:10:45 -0800</pubDate>
-    <lastBuildDate>Sat, 08 Mar 2014 23:10:45 -0800</lastBuildDate>
+    <pubDate>Thu, 13 Mar 2014 04:36:38 -0700</pubDate>
+    <lastBuildDate>Thu, 13 Mar 2014 04:36:38 -0700</lastBuildDate>
 
     
     <item>
       <title>在Github中使用MathJax编辑公式</title>
       <link>http://yangchao.me/2014/03/mathjax-github</link>
-      <pubDate>10 Mar 2014</pubDate>
+      <pubDate>09 Mar 2014</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2014/03/mathjax-github</guid>
       <description>&lt;p&gt;因为近期想写一点关于数据挖掘，机器学习的东西时要用到公式，所以就寻思着在自己github上的博客上加上公式编辑的功能。&lt;/p&gt;
@@ -64,36 +64,40 @@
 &lt;p&gt;安装就应该没有问题了。&lt;/p&gt;
 
 &lt;p&gt;测试：&lt;/p&gt;
-&lt;pre&gt;
-$$
-a^2 + b^2 = c^2
-$$
-&lt;/pre&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;latex&quot;&gt;&lt;span class=&quot;sb&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;a^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; b^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; c^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;$$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在想加入公式前后两端加入两个&lt;code&gt;$&lt;/code&gt;符号就可以了。
+最后效果是这个样子的。&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;
 a^2 + b^2 = c^2
 &lt;/script&gt;
 
-&lt;p&gt;\begin{equation}\label{exampleone}r = r_F+ \beta (r_M - r_F) + \epsilon\end{equation}\&lt;/p&gt;
+&lt;p&gt;kramdown还给出了一个稍微复杂一点的例子。关于对齐的。&lt;/p&gt;
 
-&lt;pre&gt;
-$$
-\begin{align*}
-  &amp;amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  &amp;amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) &amp;amp; \cdots &amp;amp; \phi(e_1, e_n) \\
-      \vdots &amp;amp; \ddots &amp;amp; \vdots \\
-      \phi(e_n, e_1) &amp;amp; \cdots &amp;amp; \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{align*}
-$$
-&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;latex&quot;&gt;&lt;span class=&quot;sb&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;\begin&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{align&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;  &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;x,y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;_{i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}^n x_ie_i, &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;_{j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}^n y_je_j &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;_{i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}^n &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;_{j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}^n x_i y_j &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;e_i, e_j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;  &amp;amp; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;x_&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;, &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\ldots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;, x_n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\begin&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{array}{ccc}&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;e_&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;, e_&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\cdots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;e_&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;, e_n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\vdots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\ddots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\vdots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;e_n, e_&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\cdots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &amp;amp; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\phi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;e_n, e_n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\end&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{array} &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\begin&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{array}{c}&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;      y_&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\vdots&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;      y_n&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\end&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{array} &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;\end&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{align&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;$$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;得到的效果是这个样子的：&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 
@@ -113,15 +117,131 @@ $$
 \end{align*}
  %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。&lt;/p&gt;
+&lt;p&gt;刚我加过的小小指令就是可以给公式加入标号。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;latex&quot;&gt;&lt;span class=&quot;k&quot;&gt;\begin&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;equation&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\label&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;exampleone&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;r = r&lt;span class=&quot;nb&quot;&gt;_&lt;/span&gt;F+ &lt;span class=&quot;k&quot;&gt;\beta&lt;/span&gt; (r&lt;span class=&quot;nb&quot;&gt;_&lt;/span&gt;M - r&lt;span class=&quot;nb&quot;&gt;_&lt;/span&gt;F) + &lt;span class=&quot;k&quot;&gt;\epsilon\end&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;{&lt;/span&gt;equation&lt;span class=&quot;nb&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;并且可以引用公式(\ref{exampleone})：&lt;/p&gt;
+
+&lt;p&gt;\begin{equation}\label{exampleone}r = r_F+ \beta (r_M - r_F) + \epsilon\end{equation}\&lt;/p&gt;
+
+&lt;p&gt;有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。和相关的Latex介绍数学公式的书籍。&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;有用链接：&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://kramdown.gettalong.org/syntax.html#math-blocks&quot;&gt;kramdown官网的相关链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://kramdown.gettalong.org/syntax.html#math-blocks&quot;&gt;kramdown官网的相关链接&lt;/a&gt;
+&lt;a href=&quot;www.ctan.org/tex-archive/info/mil/mil.pdf&quot;&gt;Math into LATEX&lt;/a&gt;
+&lt;a href=&quot;http://zhiqiang.org/blog/it/mathjax-make-mathematics-beautiful.html#mjx-eqn-exampleone&quot;&gt;MathJax让你爱上数学公式&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>专栏-SAC思想探索</title>
+      <title>相似度和距离小结</title>
+      <link>http://yangchao.me/2014/03/distance-similarity</link>
+      <pubDate>09 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/distance-similarity</guid>
+      <description>&lt;p&gt;在机器学习中，相似性度量或者距离函数对于像聚类，邻域搜索这样的算法是非常重要的。在做分类时常常需要估算不同样本之间的相似性度量(Similarity Measurement)，这时通常采用的方法就是计算样本间的“距离”(Distance)。采用什么样的方法计算距离是很讲究，甚至关系到分类的正确与否。&lt;/p&gt;
+
+&lt;p&gt;一般而言，定义一个距离函数d(x,y),需要满足以下几个准则：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;$d(x,y) = 0 $;//到自己的距离为0 &lt;/li&gt;
+  &lt;li&gt;$d(x,y)&amp;gt;=0$ // 距离要非负 &lt;/li&gt;
+  &lt;li&gt;对称性，$d(x,y) = d(y,x)$ //如果A到B距离是a，那么B到A的距离也应该是a &lt;/li&gt;
+  &lt;li&gt;三角形法则(两个之和大于第三边） $d(x,k)+ d(k,y) &amp;gt;= d(x,y)$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;1 欧氏距离(Euclidean Distance)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;欧氏距离是最易于理解的一种距离计算方法，源自欧氏空间中两点间的距离公式。这也是我们平时学习用到最多的。&lt;/p&gt;
+
+&lt;p&gt;我们一般用到的是二范数的形式。&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+D(x,y) = (\sum_{i=1}^{n}\left|x_i-y_i \right|)^{\frac{1}{2}}
+&lt;/script&gt;
+
+&lt;p&gt;看起来是不是又熟悉又简单。&lt;/p&gt;
+
+&lt;p&gt;我们熟悉的欧氏距离虽然很有用，但也有明显的缺点。它将样品的不同属性（即各指标或各变量）之间的差别等同看待，这一点有时不能满足实际要求。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2 曼哈顿距离(Manhattan Distance)&lt;/strong&gt;
+&lt;strong&gt;3 切比雪夫距离 ( Chebyshev Distance )&lt;/strong&gt;
+&lt;strong&gt;4 闵可夫斯基距离(Minkowski Distance)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;其实之所以把这些距离放在一起是因为这都差不多，都算是闵氏距离具体实例。&lt;/p&gt;
+
+&lt;p&gt;闵氏距离的定义：&lt;/p&gt;
+
+&lt;p&gt;两个n维变量$X(x_1,x_2,…,x_n)$与 $Y(y_1,y_2,…,y_n)$间的闵可夫斯基距离定义为：
+&lt;script type=&quot;math/tex&quot;&gt;
+D(x,y) = ({\sum_{i=1}^{n}{\left|x_i-y_i \right|^p})^\frac{1}{p}
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;其中$p$是一个变参数。&lt;/p&gt;
+
+&lt;p&gt;根据变参数的不同，闵氏距离可以表示一类的距离。
+当$p=1$时，就是曼哈顿距离&lt;/p&gt;
+
+&lt;p&gt;当$p=2$时，就是欧氏距离&lt;/p&gt;
+
+&lt;p&gt;当$p\to\infty$时，就是切比雪夫距离&lt;/p&gt;
+
+&lt;p&gt;有关曼哈顿和切比雪夫距离的定义大家可以上网自己去查一下。
+简单说来，闵氏距离的缺点主要有两个：(1)将各个分量的量纲(scale)，也就是“单位”当作相同的看待了。(2)没有考虑各个分量的分布（期望，方差等)可能是不同的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5 马氏距离(Mahalanobis Distance)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;马氏距离是由印度统计学家马哈拉诺比斯 (P. C. Mahalanobis)提出的，表示数据的协方差距离。它是一种有效的计算两个未知样本集的相似度的方法。与欧式距离不同的是它考虑到各种特性之间的联系（例如：一条关于身高的信息会带来一条关于体重的信息，因为两者是有关联的），并且是尺度无关的 (scale-invariant)，即独立于测量尺度。&lt;/p&gt;
+
+&lt;p&gt;有$M$个样本向量$X_1~X_m$，协方差矩阵记为$S$，均值记为向量$\mu$，则其中样本向量$X$到$\mu$的马氏距离表示为：&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+Sample_1 = \{3,4,5,6\}
+Sample_2 = \{2,2,8,4\}
+&lt;/script&gt;
+
+&lt;p&gt;它们的均值为：
+&lt;script type=&quot;math/tex&quot;&gt;
+\mu = \{2.5, 3, 6.5, 5\}
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;协方差矩阵为：
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+
+\begin{bmatrix}
+0.25 &amp; 0.50 &amp; -0.75 &amp; 0.50 \\
+0.50 &amp; 1.00 &amp; -1.50 &amp; 1.00 \\
+-0.75 &amp; -1.50 &amp; 2.25 &amp; -1.50 \\
+0.50 &amp; 1.00 &amp; -1.50 &amp; 1.00 
+\end{bmatrix}
+ %]]&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;然后套用我们刚才给出的公式就可以了。&lt;/p&gt;
+
+&lt;p&gt;需要注意的是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;马氏距离的计算是建立在总体样本的基础上的，这一点从上述协方差矩阵的解释中可以得出，也就是说，如果拿同样的两个样本，放入两个不同的总体中，最后计算得出的两个样本间的马氏距离通常是不相同的，除非这两个总体的协方差矩阵碰巧相同；&lt;/li&gt;
+  &lt;li&gt;计算马氏距离过程中，要求总体样本数大于样本的维数，否则得到的总体样本协方差矩阵逆矩阵不存在，这种情况下，用欧式距离来代替马氏距离，也可以理解为，如果样本数小于样本的维数，这种情况下求其中两个样本的距离，采用欧式距离计算即可。&lt;/li&gt;
+  &lt;li&gt;还有一种情况，满足了条件总体样本数大于样本的维数，但是协方差矩阵的逆矩阵仍然不存在，比如 $A（3，4）$， $B（ 5， 6）$； $C（ 7， 8）$，这种情况是 因为这三个样本在其所处的二维空间平面内共线（如果是大于二维的话，比较复杂？？？）。这种情况下，也采用欧式距离计算。&lt;/li&gt;
+  &lt;li&gt;在实际应用中 “总体样本数大于样本的维数 ”这个条件是很容易满足的，而所有样本点出现 3）中所描述的情况是很少出现的，所以在绝大多数情况下，马氏距 离是可以顺利计算的，但是马氏距离的计算是不稳定的，不稳定的来源是协方差矩阵，这也是马氏距离与欧式距离的最大差异之处。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;dist(x,method=”euclidean”)即为计算欧式距离，其余可选的参数还有”maximum”, “manhattan”, “canberra”, “binary” ,”minkowski”&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考链接&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/beta2/article/details/5045020&quot;&gt;机器学习中的相似性度量&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html&quot;&gt;距离和相似性度量&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/v_july_v/article/details/8203674/&quot;&gt;距离、相似度和熵的度量方法总结&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SAC思想探索</title>
       <link>http://yangchao.me/2014/03/data-table</link>
       <pubDate>08 Mar 2014</pubDate>
       <author>Peter</author>
@@ -1464,227 +1584,6 @@ it is they are looking for – and what they can do with it once they find it.�
 
 &lt;ul&gt;
   &lt;li&gt;文中代码和图片下载在： &lt;a href=&quot;http://pan.baidu.com/s/1sw5uP&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>latticeExtra - Horizon Plot的简单实现</title>
-      <link>http://yangchao.me/2013/10/horizon-lattice-extra</link>
-      <pubDate>24 Oct 2013</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2013/10/horizon-lattice-extra</guid>
-      <description>&lt;p&gt;上次给大家介绍了一下Horizon Plot的作图哲学，这次我们尝试着用LatticeExtra 这个包来实现以下。&lt;/p&gt;
-
-&lt;p&gt;基本代码量不大，不过可以自定义的地方不少。&lt;/p&gt;
-
-&lt;p&gt;有关Horizon Plot的作图哲学和一些其它预备知识，请看：&lt;a href=&quot;http://yangchao.me/2013/10/horizon-plot&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;文中实现的是按照原作者的Manual中的源代码, 在: &lt;strong&gt;&lt;a href=&quot;http://latticeextra.r-forge.r-project.org/man/horizonplot.html&quot;&gt;这里&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;并对代码进行详细注释。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
- 	require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;latticeExtra&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;## 产生数据集&lt;/span&gt;
-	set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	dat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ts&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;matrix&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cumsum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; ncol &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-	colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; paste&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;series&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; LETTERS&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;在安装latticeExtra的时候如果遇到问题，请参见一下代码重新安装&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
-	install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;xtsExtra&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://R-Forge.R-project.org&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 	
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;horizon plot是将时间序列的数据可视化。所以我们需要将原来随机出来的数据转变成为随机数列， 用到的就是 &lt;code&gt;ts&lt;/code&gt;命令&lt;/p&gt;
-
-&lt;p&gt;产生之后的数据是大概是这个样子&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
- 	head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;n&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;pre&gt;
-
-        series A  series B series C series D  series E   series F  series G  series H  series I  series J  series K
- [1,] -0.6264538  7.517331 16.30991 6.529042 -14.14928 -10.513177 -29.42972 -19.38421 -14.69748 -32.70429 -28.79620
- [2,] -0.4428105  9.206204 18.20556 8.031466 -15.97536  -9.401245 -27.50656 -19.20529 -14.68476 -32.12291 -30.71846
- [3,] -1.2784391 10.792793 17.60257 8.559774 -14.98008 -10.272023 -29.36339 -19.48783 -15.55821 -32.26963 -29.09876
- [4,]  0.3168417 10.461885 17.21170 9.101965 -14.99194 -10.061291 -31.46951 -20.25513 -15.21541 -30.76265 -28.57949
- [5,]  0.6463495  8.176649 16.79548 8.965292 -15.59157  -9.991895 -30.77186 -20.83154 -15.39280 -31.04218 -28.63534
- [6,] -0.1741189 10.674311 16.41982 7.828558 -15.76952 -11.654544 -29.86441 -21.74639 -14.47136 -29.01444 -27.93892
- [7,]  0.3133101 11.341377 16.05319 6.331931 -16.19550 -10.843704 -30.06040 -21.37648 -14.17042 -30.21018 -27.88540
- [8,]  1.0516348 11.882704 15.75751 6.108545 -15.19884 -12.756050 -30.26722 -22.84417 -13.47703 -28.89786 -29.19569
- [9,]  1.6274162 11.869305 17.19933 8.110265 -14.47118 -14.002804 -29.54218 -24.58953 -13.15156 -29.42187 -31.31875
-[10,]  1.3220278 12.379413 16.50179 8.331968 -16.19781 -13.004649 -28.14346 -25.25691 -12.74351 -29.06762 -31.52683
-[11,]  2.8338090 12.215037 16.11363 8.496341 -15.84441 -13.545522 -29.73402 -24.17263 -11.98367 -29.13930 -31.83962
-[12,]  3.2236522 12.635732 16.76616 8.828965 -15.11760 -13.761898 -28.42952 -24.04980 -14.27082 -29.27244 -32.89785
-[13,]  2.6024116 12.235485 17.89093 8.443757 -14.44934 -15.383835 -28.23351 -24.54405 -13.75298 -29.36052 -32.48063
-[14,]  0.3877118 10.865277 17.11882 7.045003 -16.87365 -16.834799 -28.57285 -23.87446 -15.10022 -28.44273 -32.79608
-[15,]  1.5126427 11.853116 16.61074 9.720744 -17.10901 -16.483889 -27.30771 -24.22594 -14.73706 -28.41129 -31.97053
-[16,]  1.4677091 13.372861 17.13436 9.297058 -15.12938 -16.658436 -26.36793 -24.34092 -13.42231 -27.05236 -30.67926
-[17,]  1.4515188 13.064120 18.15211 8.998456 -14.33258 -17.249865 -25.08998 -24.26793 -13.87061 -26.93886 -31.30437
-[18,]  2.3953550 11.810830 17.90095 7.206114 -16.04186 -18.583892 -25.38114 -23.17916 -14.67878 -26.76456 -32.17951
-[19,]  3.2165762 12.453072 16.47095 6.958106 -17.70553 -19.681190 -24.60497 -21.88659 -14.76505 -26.81804 -32.03616
-[20,]  3.8104775 12.408363 18.18008 6.710802 -17.21442 -17.645087 -24.30924 -20.60408 -13.17962 -27.24280 -30.61097
-       series L
- [1,] -35.67228
- [2,] -34.86300
- [3,] -35.57462
- [4,] -38.26421
- [5,] -38.83126
- [6,] -37.53206
- [7,] -37.72235
- [8,] -38.36040
- [9,] -40.39578
-[10,] -41.00015
-[11,] -41.80832
-[12,] -42.41509
-[13,] -42.32819
-[14,] -42.56248
-[15,] -41.29996
-[16,] -42.86375
-[17,] -44.35723
-[18,] -45.45436
-[19,] -45.48347
-[20,] -43.30978
-
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们可以基本认定这个就是一个时间序列的数据了。&lt;/p&gt;
-
-&lt;p&gt;因为我们是纯介绍这个Horizon Plot 这个图的作图格式，上面的代码只是模拟产生一个数据集。&lt;/p&gt;
-
-&lt;p&gt;首先我们可以将数据简单的可视化一下子。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
- 	&lt;span class=&quot;c1&quot;&gt;## show simple line plot first, for reference.&lt;/span&gt;
-	xyplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/zvu0wfQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;数据的大概变化就是如此吧&lt;/p&gt;
-
-&lt;p&gt;下面开始我们的&lt;strong&gt;Horizon Plot&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
- 	&lt;span class=&quot;c1&quot;&gt;## 先设定基本的图层设置&lt;/span&gt;
-	infolayers &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;
-  	layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.scaleArrow&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;grey&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                         srt &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-  	layer&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; current.panel.limits&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-        panel.text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; round&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;lim&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; font &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                   cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; adj &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;#9FC8DC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;这两个图层的大概意思是&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;第一个图层： 在右侧画出每个空间，然后箭头&lt;/li&gt;
-  &lt;li&gt;第二个图层： 计算出每个不同的变量的Horizon Plot中的基准值，并标图形的左边&lt;/li&gt;
-  &lt;li&gt;有关颜色的编码信息可以参照这个网站，并推荐之。&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果大家对基准值的这个概念还不是很熟悉的话，可以快速看看我之前的这篇博客 &lt;a href=&quot;http://yangchao.me/2013/10/horizon-plot&quot;&gt;《Horizon Chart - 惊艳到爆的哲学》&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;下面我们通过一系列的变通来分别体会下不同的参数的含义。
-命令都接近于自然语言，所以有些很显而易见的就不提了。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Case 1&lt;/strong&gt;：each panel has a different origin and scale:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
- 	&lt;span class=&quot;c1&quot;&gt;## (&amp;#39;origin&amp;#39; default is the first data value in each series).&lt;/span&gt;
-	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-  	  infolayers
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/2i7atuA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;短短一行代码，已经把Horizon Plot画出来了。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;colorky = TRUE 的意思是最右面是否把表明色阶的注释标出。大家可以试一试如果改成&lt;code&gt;FALSE&lt;/code&gt;会怎样&lt;/li&gt;
-  &lt;li&gt;每一个Panel的初始值和范围变化都是不一样的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Case 2&lt;/strong&gt;: fixed scale but different origin (baseline):&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
- 	&lt;span class=&quot;c1&quot;&gt;## (similar in concept to scales = &amp;quot;sliced&amp;quot;)&lt;/span&gt;
-	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-  	  infolayers
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/q3TGAps.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过&lt;code&gt;horizonscale=10&lt;/code&gt;, 所有的变化范围都变成了相同的值&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Case 3&lt;/strong&gt;: fixed scale and constant origin (all same scales):&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;		
-	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      infolayers
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/0Rs2hLj.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过&lt;code&gt;origin=0&lt;/code&gt;把所有的初始值都设为0&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Case 4&lt;/strong&gt;：same scales with full coverage of color scale:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;		
-	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; origin &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            scales &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;relation &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
-            colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey.digits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-      infolayers
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/8CwVN62.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过&lt;code&gt;scales = list(y = list(relation = &quot;same&quot;))&lt;/code&gt;将右边的scales显示为绝对值, 而不是变化值。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Case 5&lt;/strong&gt;: use ylab rather than strip.left, for readability.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;		
-	horizonplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; horizonscale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; colorkey &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            	layout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; strip.left &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            	ylab &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rev&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;colnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dat&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; rot &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-  	  layer_&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;panel.fill&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;gray90&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; panel.xblocks&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;white&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/horizon-latticeextra/F0tqAw5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过&lt;code&gt;strip.left = FALSE&lt;/code&gt;把原来竖起来的图例去掉&lt;/li&gt;
-  &lt;li&gt;再通过&lt;code&gt;ylab = list(rev(colnames(dat)), rot = 0, cex = 0.7))&lt;/code&gt;把原来的加上&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Horizon Plot基本上常用的就是这一些用法。当然还有不少应用到实际中的，特别是在表现在股票价格变化中的时候，就可以明显感觉它的强大之处。我们会在之后介绍具体的特别应用&lt;/p&gt;
-
-&lt;p&gt;相关文章：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://www.colorhexa.com/9fc8dc&quot;&gt;颜色信息&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://latticeextra.r-forge.r-project.org/#segplot&amp;amp;theme=default&quot;&gt;LatticeExtra: R Forger&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cran.r-project.org/web/packages/latticeExtra/latticeExtra.pdf&quot;&gt;官方Manual&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;文中代码和图片在: &lt;a href=&quot;http://pan.baidu.com/s/1DvW29&quot;&gt;这里&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

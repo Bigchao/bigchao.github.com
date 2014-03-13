@@ -58,7 +58,9 @@
 			
 				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
 			
-				<a class="datamining cate1" href="/2014/03/data-table"><span class="circle_icon"></span>专栏-SAC思想探索<span class="date">Mar 2014</span></a>
+				<a class="ml cate1" href="/2014/03/distance-similarity"><span class="circle_icon"></span>相似度和距离小结<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/data-table"><span class="circle_icon"></span>SAC思想探索<span class="date">Mar 2014</span></a>
 			
 				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
 			
@@ -183,36 +185,40 @@
 <p>安装就应该没有问题了。</p>
 
 <p>测试：</p>
-<pre>
-$$
-a^2 + b^2 = c^2
-$$
-</pre>
+
+<div class="highlight"><pre><code class="latex"><span class="sb">$$</span><span class="nb"></span>
+<span class="nb">a^</span><span class="m">2</span><span class="nb"> </span><span class="o">+</span><span class="nb"> b^</span><span class="m">2</span><span class="nb"> </span><span class="o">=</span><span class="nb"> c^</span><span class="m">2</span><span class="nb"></span>
+<span class="s">$$</span>
+</code></pre></div>
+
+<p>在想加入公式前后两端加入两个<code>$</code>符号就可以了。
+最后效果是这个样子的。</p>
 
 <script type="math/tex; mode=display">
 a^2 + b^2 = c^2
 </script>
 
-<p>\begin{equation}\label{exampleone}r = r_F+ \beta (r_M - r_F) + \epsilon\end{equation}\</p>
+<p>kramdown还给出了一个稍微复杂一点的例子。关于对齐的。</p>
 
-<pre>
-$$
-\begin{align*}
-  &amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) &amp; \cdots &amp; \phi(e_1, e_n) \\
-      \vdots &amp; \ddots &amp; \vdots \\
-      \phi(e_n, e_1) &amp; \cdots &amp; \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{align*}
-$$
-</pre>
+<div class="highlight"><pre><code class="latex"><span class="sb">$$</span><span class="nb"></span>
+<span class="nv">\begin</span><span class="nb">{align</span><span class="o">*</span><span class="nb">}</span>
+<span class="nb">  &amp; </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">x,y</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\phi</span><span class="nb"> </span><span class="nv">\left</span><span class="o">(</span><span class="nv">\sum</span><span class="nb">_{i</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n x_ie_i, </span><span class="nv">\sum</span><span class="nb">_{j</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n y_je_j </span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">  </span><span class="o">=</span><span class="nb"> </span><span class="nv">\sum</span><span class="nb">_{i</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n </span><span class="nv">\sum</span><span class="nb">_{j</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n x_i y_j </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_i, e_j</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">  &amp; </span><span class="o">(</span><span class="nb">x_</span><span class="m">1</span><span class="nb">, </span><span class="nv">\ldots</span><span class="nb">, x_n</span><span class="o">)</span><span class="nb"> </span><span class="nv">\left</span><span class="o">(</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{array}{ccc}</span>
+<span class="nb">      </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_</span><span class="m">1</span><span class="nb">, e_</span><span class="m">1</span><span class="o">)</span><span class="nb"> &amp; </span><span class="nv">\cdots</span><span class="nb"> &amp; </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_</span><span class="m">1</span><span class="nb">, e_n</span><span class="o">)</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      </span><span class="nv">\vdots</span><span class="nb"> &amp; </span><span class="nv">\ddots</span><span class="nb"> &amp; </span><span class="nv">\vdots</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_n, e_</span><span class="m">1</span><span class="o">)</span><span class="nb"> &amp; </span><span class="nv">\cdots</span><span class="nb"> &amp; </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_n, e_n</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">    </span><span class="nv">\end</span><span class="nb">{array} </span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">  </span><span class="nv">\left</span><span class="o">(</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{array}{c}</span>
+<span class="nb">      y_</span><span class="m">1</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      </span><span class="nv">\vdots</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      y_n</span>
+<span class="nb">    </span><span class="nv">\end</span><span class="nb">{array} </span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="nv">\end</span><span class="nb">{align</span><span class="o">*</span><span class="nb">}</span>
+<span class="s">$$</span>
+</code></pre></div>
+
+<p>得到的效果是这个样子的：</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 
@@ -232,10 +238,21 @@ $$
 \end{align*}
  %]]></script>
 
-<p>有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。</p>
+<p>刚我加过的小小指令就是可以给公式加入标号。</p>
+
+<div class="highlight"><pre><code class="latex"><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span><span class="k">\label</span><span class="nb">{</span>exampleone<span class="nb">}</span>r = r<span class="nb">_</span>F+ <span class="k">\beta</span> (r<span class="nb">_</span>M - r<span class="nb">_</span>F) + <span class="k">\epsilon\end</span><span class="nb">{</span>equation<span class="nb">}</span><span class="err">\</span>
+</code></pre></div>
+
+<p>并且可以引用公式(\ref{exampleone})：</p>
+
+<p>\begin{equation}\label{exampleone}r = r_F+ \beta (r_M - r_F) + \epsilon\end{equation}\</p>
+
+<p>有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。和相关的Latex介绍数学公式的书籍。</p>
 
 <h2 id="section">有用链接：</h2>
-<p><a href="http://kramdown.gettalong.org/syntax.html#math-blocks">kramdown官网的相关链接</a></p>
+<p><a href="http://kramdown.gettalong.org/syntax.html#math-blocks">kramdown官网的相关链接</a>
+<a href="www.ctan.org/tex-archive/info/mil/mil.pdf">Math into LATEX</a>
+<a href="http://zhiqiang.org/blog/it/mathjax-make-mathematics-beautiful.html#mjx-eqn-exampleone">MathJax让你爱上数学公式</a></p>
 
 		
 		<div id="donation">

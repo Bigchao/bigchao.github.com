@@ -126,11 +126,15 @@
     </url>
     <url>
         <loc>http://yangchao.me/2014/03/data-table</loc>
-        <lastmod>2014-03-08T22:28:39-08:00</lastmod>
+        <lastmod>2014-03-08T23:38:21-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://yangchao.me/2014/03/distance-similarity</loc>
+        <lastmod>2014-03-13T04:36:25-07:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/2014/03/mathjax-github</loc>
-        <lastmod>2014-03-08T23:06:28-08:00</lastmod>
+        <lastmod>2014-03-09T00:42:03-08:00</lastmod>
     </url>
     <url>
         <loc>http://yangchao.me/rss.xml</loc>
@@ -138,6 +142,6 @@
     </url>
     <url>
         <loc>http://yangchao.me/</loc>
-        <lastmod>2014-03-08T23:06:28-08:00</lastmod>
+        <lastmod>2014-03-13T04:36:25-07:00</lastmod>
     </url>
 </urlset>
