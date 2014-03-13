@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Thu, 13 Mar 2014 07:29:36 -0700</pubDate>
-    <lastBuildDate>Thu, 13 Mar 2014 07:29:36 -0700</lastBuildDate>
+    <pubDate>Thu, 13 Mar 2014 07:49:19 -0700</pubDate>
+    <lastBuildDate>Thu, 13 Mar 2014 07:49:19 -0700</lastBuildDate>
 
     
     <item>
@@ -146,8 +146,8 @@ a^2 + b^2 = c^2
 &lt;p&gt;一般而言，定义一个距离函数d(x,y),需要满足以下几个准则：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;$$d(x,y) = 0 $$;//到自己的距离为0 &lt;/li&gt;
-  &lt;li&gt;$$d(x,y)&amp;gt;=0$$ // 距离要非负 &lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;d(x,y) = 0 &lt;/script&gt;;//到自己的距离为0 &lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;d(x,y)&gt;=0&lt;/script&gt; // 距离要非负 &lt;/li&gt;
   &lt;li&gt;对称性，$$d(x,y) = d(y,x)$$ //如果A到B距离是a，那么B到A的距离也应该是a &lt;/li&gt;
   &lt;li&gt;三角形法则(两个之和大于第三边） $$d(x,k)+ d(k,y) &amp;gt;= d(x,y)$$&lt;/li&gt;
 &lt;/ol&gt;
@@ -179,14 +179,14 @@ D(x,y) = (\sum_{i=1}^{n}\left|x_i-y_i \right|)^{\frac{1}{2}}
 &lt;p&gt;两个n维变量$$X(x_1,x_2,…,x_n)&lt;script type=&quot;math/tex&quot;&gt;与 \&lt;/script&gt;Y(y_1,y_2,…,y_n)$$间的闵可夫斯基距离定义为：&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;
-D(x,y) = ({\sum_{i=1}^{n}{\left|x_i-y_i \right|^p})^\frac{1}{p}
+D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
 &lt;/script&gt;
 
 &lt;p&gt;其中$$p$$是一个变参数。&lt;/p&gt;
 
 &lt;p&gt;根据变参数的不同，闵氏距离可以表示一类的距离。&lt;/p&gt;
 
-&lt;p&gt;当$$p=1$$时，就是曼哈顿距离&lt;/p&gt;
+&lt;p&gt;当&lt;script type=&quot;math/tex&quot;&gt;p=1&lt;/script&gt;时，就是曼哈顿距离&lt;/p&gt;
 
 &lt;p&gt;当$$p=2$$时，就是欧氏距离&lt;/p&gt;
 
