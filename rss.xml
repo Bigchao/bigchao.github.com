@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 19 Mar 2014 07:24:00 -0700</pubDate>
-    <lastBuildDate>Wed, 19 Mar 2014 07:24:00 -0700</lastBuildDate>
+    <pubDate>Wed, 19 Mar 2014 08:13:14 -0700</pubDate>
+    <lastBuildDate>Wed, 19 Mar 2014 08:13:14 -0700</lastBuildDate>
 
     
     <item>
@@ -16,15 +16,11 @@
       <pubDate>20 Mar 2014</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2014/03/pdf-insert</guid>
-      <description>&lt;p&gt;It appears you don&#39;t have Adobe Reader or PDF support in this web browser. &lt;a href=&quot;/assets/pdf/data.pdf&quot;&gt;Click here to download the PDF&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;iframe src=&quot;/assets/pdf/data.pdf&quot; width=&quot;1150px&quot; height=&quot;800px&quot;&gt;
 
-&lt;script type=&quot;text/javascript&quot;&gt;
-         window.onload = function (){
-        var myPDF = new PDFObject({ url: &quot;/assets/pdf/data.pdf&quot; }).embed();
-      }; //Add PDFObject code here
-  
-  &lt;/script&gt;
 
+&lt;p&gt;In case you don&#39;t have Adobe Reader or PDF support in this web browser. &lt;a href=&quot;/assets/pdf/data.pdf&quot;&gt;Click here to download the PDF&lt;/a&gt;&lt;/p&gt;
+&lt;/iframe&gt;
 </description>
     </item>
     
