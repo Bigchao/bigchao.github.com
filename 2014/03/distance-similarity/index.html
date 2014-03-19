@@ -56,6 +56,8 @@
 
 			<div id="post_list">
 			
+				<a class="related cate1" href="/2014/03/scrapy-xpath"><span class="circle_icon"></span>Scrapy中Xpath学习小结<span class="date">Mar 2014</span></a>
+			
 				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
 			
 				<a class="ml cate1" href="/2014/03/distance-similarity"><span class="circle_icon"></span>相似度和距离小结<span class="date">Mar 2014</span></a>
@@ -142,10 +144,10 @@
 <p>一般而言，定义一个距离函数d(x,y),需要满足以下几个准则：</p>
 
 <ol>
-  <li><script type="math/tex">d(x,y) = 0 </script>;//到自己的距离为0 </li>
-  <li><script type="math/tex">d(x,y)>=0</script> // 距离要非负 </li>
-  <li>对称性，$$d(x,y) = d(y,x)$$ //如果A到B距离是a，那么B到A的距离也应该是a </li>
-  <li>三角形法则(两个之和大于第三边） $$d(x,k)+ d(k,y) &gt;= d(x,y)$$</li>
+  <li><script type="math/tex">d(x,y) = 0 </script>; //到自己的距离为0 </li>
+  <li><script type="math/tex">d(x,y)>=0</script>    // 距离要非负 </li>
+  <li>对称性，<script type="math/tex">d(x,y) = d(y,x)</script>  //如果A到B距离是a，那么B到A的距离也应该是a </li>
+  <li>三角形法则(两个之和大于第三边） <script type="math/tex">d(x,k)+ d(k,y) >= d(x,y)</script></li>
 </ol>
 
 <p><strong>1 欧氏距离(Euclidean Distance)</strong></p>
@@ -172,7 +174,7 @@ D(x,y) = (\sum_{i=1}^{n}\left|x_i-y_i \right|)^{\frac{1}{2}}
 
 <p>闵氏距离的定义：</p>
 
-<p>两个n维变量$$X(x_1,x_2,…,x_n)<script type="math/tex">与 \</script>Y(y_1,y_2,…,y_n)$$间的闵可夫斯基距离定义为：</p>
+<p>两个n维变量<script type="math/tex">X(x_1,x_2,…,x_n)</script>与 <script type="math/tex">Y(y_1,y_2,…,y_n)</script>间的闵可夫斯基距离定义为：</p>
 
 <script type="math/tex; mode=display">
 D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
@@ -184,9 +186,9 @@ D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
 
 <p>当<script type="math/tex">p=1</script>时，就是曼哈顿距离</p>
 
-<p>当$$p=2$$时，就是欧氏距离</p>
+<p>当<script type="math/tex">p=2</script>时，就是欧氏距离</p>
 
-<p>当$$p\to\infty$$时，就是切比雪夫距离</p>
+<p>当<script type="math/tex">p\to\infty</script>时，就是切比雪夫距离</p>
 
 <p>有关曼哈顿和切比雪夫距离的定义大家可以上网自己去查一下。
 简单说来，闵氏距离的缺点主要有两个：(1)将各个分量的量纲(scale)，也就是“单位”当作相同的看待了。(2)没有考虑各个分量的分布（期望，方差等)可能是不同的。</p>
@@ -195,7 +197,7 @@ D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
 
 <p>马氏距离是由印度统计学家马哈拉诺比斯 (P. C. Mahalanobis)提出的，表示数据的协方差距离。它是一种有效的计算两个未知样本集的相似度的方法。与欧式距离不同的是它考虑到各种特性之间的联系（例如：一条关于身高的信息会带来一条关于体重的信息，因为两者是有关联的），并且是尺度无关的 (scale-invariant)，即独立于测量尺度。</p>
 
-<p>有$$M<script type="math/tex">个样本向量\</script>X_1~X_m<script type="math/tex">，协方差矩阵记为\</script>S<script type="math/tex">，均值记为向量\</script>\mu<script type="math/tex">，则其中样本向量\</script>X<script type="math/tex">到\</script>\mu$$的马氏距离表示为：</p>
+<p>有<script type="math/tex">M</script>个样本向量<script type="math/tex">X_1~X_m</script>，协方差矩阵记为<script type="math/tex">S</script>，均值记为向量<script type="math/tex">\mu</script>，则其中样本向量<script type="math/tex">X</script>到<script type="math/tex">\mu</script>的马氏距离表示为：</p>
 
 <script type="math/tex; mode=display">
 Sample_1 = \{3,4,5,6\}
@@ -226,7 +228,7 @@ Sample_2 = \{2,2,8,4\}
 <ol>
   <li>马氏距离的计算是建立在总体样本的基础上的，这一点从上述协方差矩阵的解释中可以得出，也就是说，如果拿同样的两个样本，放入两个不同的总体中，最后计算得出的两个样本间的马氏距离通常是不相同的，除非这两个总体的协方差矩阵碰巧相同；</li>
   <li>计算马氏距离过程中，要求总体样本数大于样本的维数，否则得到的总体样本协方差矩阵逆矩阵不存在，这种情况下，用欧式距离来代替马氏距离，也可以理解为，如果样本数小于样本的维数，这种情况下求其中两个样本的距离，采用欧式距离计算即可。</li>
-  <li>还有一种情况，满足了条件总体样本数大于样本的维数，但是协方差矩阵的逆矩阵仍然不存在，比如 $$A（3，4）<script type="math/tex">， \</script>B（ 5， 6）<script type="math/tex">； \</script>C（ 7， 8）$$，这种情况是 因为这三个样本在其所处的二维空间平面内共线（如果是大于二维的话，比较复杂？？？）。这种情况下，也采用欧式距离计算。</li>
+  <li>还有一种情况，满足了条件总体样本数大于样本的维数，但是协方差矩阵的逆矩阵仍然不存在，比如 <script type="math/tex">A（3，4）</script>， <script type="math/tex">B（ 5， 6）</script>； <script type="math/tex">C（ 7， 8）</script>，这种情况是 因为这三个样本在其所处的二维空间平面内共线（如果是大于二维的话，比较复杂？）。这种情况下，也采用欧式距离计算。</li>
   <li>在实际应用中 “总体样本数大于样本的维数 ”这个条件是很容易满足的，而所有样本点出现 3）中所描述的情况是很少出现的，所以在绝大多数情况下，马氏距 离是可以顺利计算的，但是马氏距离的计算是不稳定的，不稳定的来源是协方差矩阵，这也是马氏距离与欧式距离的最大差异之处。</li>
 </ol>
 
