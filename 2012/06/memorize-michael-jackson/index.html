@@ -27,6 +27,28 @@
         SVG: {linebreaks: {automatic: true}}
         });
         </script>
+        <script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="/assets/js/pdfobject.js"></script>
+		<script type = "text/javascript">
+		$(document).ready(function(){
+		$("#random").on('click','img',function(){
+			$.get("sitemap.xml",function(data){
+			var $xml=$(data);
+			url=$xml.find("url");
+			n = url.size();
+			n = getRandom(n);
+			position=url.get(n);  
+			hello=position.getElementsByTagName("loc")[0].firstChild.nodeValue; 
+			location.href=hello;
+		})
+    
+	})
+  //随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+})
+	</script>
 		
 	</head>
 	<body>
@@ -55,6 +77,8 @@
 			</div>
 
 			<div id="post_list">
+			
+				<a class="related cate1" href="/2014/03/pdf-insert"><span class="circle_icon"></span>内置pdf<span class="date">Mar 2014</span></a>
 			
 				<a class="related cate1" href="/2014/03/scrapy-xpath"><span class="circle_icon"></span>Scrapy中Xpath学习小结<span class="date">Mar 2014</span></a>
 			
@@ -194,7 +218,7 @@
 
 		
 		<div id="donation">
-		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
+		<b><a href="https://me.alipay.com/bigchao"></a>请我喝一杯</b>
 		</div>
 		<div id="social">
 		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2012/06/memorize-michael-jackson&title=纪念 Michael Jackson - This Is It"></a>
@@ -214,28 +238,9 @@
 		</div>
 
 		<div id="notice">左右滑动</div>
-		<script type="text/javascript" src="/assets/js/jquery.js"></script>
-		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
-		<script type="text/javascript" src="/assets/js/script.js"></script>
 		
-		<script>
-		$(document).ready(function(){
-		$("#random").on('click','img',function(){
-			$.get("sitemap.xml",function(data){
-			var $xml=$(data);
-			url=$xml.find("url");
-			n = url.size();
-			n = getRandom(n);
-			position=url.get(n);  
-			hello=position.getElementsByTagName("loc")[0].firstChild.nodeValue; 
-			location.href=hello;
-		})
-    
-	})
-  //随机数发生器
-       function getRandom(n){return Math.floor(Math.random()*(n+1))}
-})
-	</script>
+		
+		
 		
 	</body>
 </html>
