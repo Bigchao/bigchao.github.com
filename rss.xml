@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 19 Mar 2014 06:06:30 -0700</pubDate>
-    <lastBuildDate>Wed, 19 Mar 2014 06:06:30 -0700</lastBuildDate>
+    <pubDate>Wed, 19 Mar 2014 06:23:01 -0700</pubDate>
+    <lastBuildDate>Wed, 19 Mar 2014 06:23:01 -0700</lastBuildDate>
 
     
     <item>
@@ -316,7 +316,7 @@ D(x,y) = (\sum_{i=1}^{n}\left|x_i-y_i \right|)^{\frac{1}{2}}
 &lt;p&gt;两个&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;维变量&lt;script type=&quot;math/tex&quot;&gt;X(x_1,x_2,…,x_n)&lt;/script&gt;与 &lt;script type=&quot;math/tex&quot;&gt;Y(y_1,y_2,…,y_n)&lt;/script&gt;间的闵可夫斯基距离定义为：&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;
-D(x,y) = ({\sum_{i=1}^{n}{\left|x_i-y_i \right|^p})^\frac{1}{p}
+D(x,y) = ({\sum_{i=1}^{n}{|x_i-y_i|^p})^\frac{1}{p}
 &lt;/script&gt;
 
 &lt;p&gt;其中&lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;是一个变参数。&lt;/p&gt;
