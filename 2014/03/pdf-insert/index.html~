@@ -27,12 +27,6 @@
         SVG: {linebreaks: {automatic: true}}
         });
         </script>
-        <script type="text/javascript">
-         window.onload = function (){
-        var myPDF = new PDFObject({ url: "/assets/pdf/data.pdf" }).embed();
-      }; //Add PDFObject code here
-  
-        </script> 
         <script type="text/javascript" src="/assets/js/jquery.js"></script>
 		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
 		<script type="text/javascript" src="/assets/js/script.js"></script>
@@ -171,7 +165,12 @@
 	<div id="content">
 		<p>It appears you don't have Adobe Reader or PDF support in this web browser. <a href="/assets/pdf/data.pdf">Click here to download the PDF</a></p>
 
-
+<script type="text/javascript">
+         window.onload = function (){
+        var myPDF = new PDFObject({ url: "/assets/pdf/data.pdf" }).embed();
+      }; //Add PDFObject code here
+  
+  </script>
 
 
 		
