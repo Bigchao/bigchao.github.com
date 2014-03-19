@@ -6,8 +6,8 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 19 Mar 2014 05:14:54 -0700</pubDate>
-    <lastBuildDate>Wed, 19 Mar 2014 05:14:54 -0700</lastBuildDate>
+    <pubDate>Wed, 19 Mar 2014 06:06:30 -0700</pubDate>
+    <lastBuildDate>Wed, 19 Mar 2014 06:06:30 -0700</lastBuildDate>
 
     
     <item>
@@ -280,7 +280,7 @@ a^2 + b^2 = c^2
       <guid>http://yangchao.me/2014/03/distance-similarity</guid>
       <description>&lt;p&gt;在机器学习中，相似性度量或者距离函数对于像聚类，邻域搜索这样的算法是非常重要的。在做分类时常常需要估算不同样本之间的相似性度量(Similarity Measurement)，这时通常采用的方法就是计算样本间的“距离”(Distance)。采用什么样的方法计算距离是很讲究，甚至关系到分类的正确与否。&lt;/p&gt;
 
-&lt;p&gt;一般而言，定义一个距离函数d(x,y),需要满足以下几个准则：&lt;/p&gt;
+&lt;p&gt;一般而言，定义一个距离函数&lt;script type=&quot;math/tex&quot;&gt;d(x,y)&lt;/script&gt;,需要满足以下几个准则：&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;d(x,y) = 0 &lt;/script&gt;; //到自己的距离为0 &lt;/li&gt;
@@ -313,13 +313,13 @@ D(x,y) = (\sum_{i=1}^{n}\left|x_i-y_i \right|)^{\frac{1}{2}}
 
 &lt;p&gt;闵氏距离的定义：&lt;/p&gt;
 
-&lt;p&gt;两个n维变量&lt;script type=&quot;math/tex&quot;&gt;X(x_1,x_2,…,x_n)&lt;/script&gt;与 &lt;script type=&quot;math/tex&quot;&gt;Y(y_1,y_2,…,y_n)&lt;/script&gt;间的闵可夫斯基距离定义为：&lt;/p&gt;
+&lt;p&gt;两个&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;维变量&lt;script type=&quot;math/tex&quot;&gt;X(x_1,x_2,…,x_n)&lt;/script&gt;与 &lt;script type=&quot;math/tex&quot;&gt;Y(y_1,y_2,…,y_n)&lt;/script&gt;间的闵可夫斯基距离定义为：&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;
-D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
+D(x,y) = ({\sum_{i=1}^{n}{\left|x_i-y_i \right|^p})^\frac{1}{p}
 &lt;/script&gt;
 
-&lt;p&gt;其中$$p$$是一个变参数。&lt;/p&gt;
+&lt;p&gt;其中&lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;是一个变参数。&lt;/p&gt;
 
 &lt;p&gt;根据变参数的不同，闵氏距离可以表示一类的距离。&lt;/p&gt;
 
@@ -329,8 +329,14 @@ D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
 
 &lt;p&gt;当&lt;script type=&quot;math/tex&quot;&gt;p\to\infty&lt;/script&gt;时，就是切比雪夫距离&lt;/p&gt;
 
-&lt;p&gt;有关曼哈顿和切比雪夫距离的定义大家可以上网自己去查一下。
-简单说来，闵氏距离的缺点主要有两个：(1)将各个分量的量纲(scale)，也就是“单位”当作相同的看待了。(2)没有考虑各个分量的分布（期望，方差等)可能是不同的。&lt;/p&gt;
+&lt;p&gt;有关曼哈顿和切比雪夫距离的定义大家可以上网自己去查一下。&lt;/p&gt;
+
+&lt;p&gt;简单说来，闵氏距离的缺点主要有两个：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将各个分量的量纲(scale)，也就是“单位”当作相同的看待&lt;/li&gt;
+  &lt;li&gt;没有考虑各个分量的分布（期望，方差等)可能是不同的。&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;&lt;strong&gt;5 马氏距离(Mahalanobis Distance)&lt;/strong&gt;&lt;/p&gt;
 
@@ -338,11 +344,9 @@ D(x,y) = {\sum_{i=1}^{n}{\left|x_i-y_i \right|^p}^\frac{1}{p}
 
 &lt;p&gt;有&lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;个样本向量&lt;script type=&quot;math/tex&quot;&gt;X_1~X_m&lt;/script&gt;，协方差矩阵记为&lt;script type=&quot;math/tex&quot;&gt;S&lt;/script&gt;，均值记为向量&lt;script type=&quot;math/tex&quot;&gt;\mu&lt;/script&gt;，则其中样本向量&lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt;到&lt;script type=&quot;math/tex&quot;&gt;\mu&lt;/script&gt;的马氏距离表示为：&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-Sample_1 = \{3,4,5,6\}
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Sample_1 = \{3,4,5,6\}&lt;/script&gt;
 
-Sample_2 = \{2,2,8,4\}
-&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Sample_2 = \{2,2,8,4\}&lt;/script&gt;
 
 &lt;p&gt;它们的均值为：
 &lt;script type=&quot;math/tex&quot;&gt;
@@ -362,6 +366,10 @@ Sample_2 = \{2,2,8,4\}
 
 &lt;p&gt;然后套用我们刚才给出的公式就可以了。&lt;/p&gt;
 
+&lt;p&gt;我们可以发现，如果各个样本向量之间独立同分布，协方差矩阵是单位矩阵。马氏距离也就变成了欧式距离。&lt;/p&gt;
+
+&lt;p&gt;马氏距离不受量纲的影响，两点之间的马氏距离与原始数据的测量单位无关；由标准化数据和中心化数据 (即原始数据与均值之差）计算出的二点之间的马氏距离相同。马氏距离还可以排除变量之间的相关性的干扰。&lt;strong&gt;它的缺点是夸大了变化微小的变量的作用。&lt;/strong&gt;&lt;/p&gt;
+
 &lt;p&gt;需要注意的是：&lt;/p&gt;
 
 &lt;ol&gt;
@@ -371,7 +379,12 @@ Sample_2 = \{2,2,8,4\}
   &lt;li&gt;在实际应用中 “总体样本数大于样本的维数 ”这个条件是很容易满足的，而所有样本点出现 3）中所描述的情况是很少出现的，所以在绝大多数情况下，马氏距 离是可以顺利计算的，但是马氏距离的计算是不稳定的，不稳定的来源是协方差矩阵，这也是马氏距离与欧式距离的最大差异之处。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;dist(x,method=”euclidean”)即为计算欧式距离，其余可选的参数还有”maximum”, “manhattan”, “canberra”, “binary” ,”minkowski”&lt;/p&gt;
+&lt;p&gt;在R中有指令。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dist(x,method=&quot;euclidean&quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;即为计算欧式距离，其余可选的参数还有&lt;code&gt;&quot;maximum&quot;, &quot;manhattan&quot;, &quot;canberra&quot;, &quot;binary&quot; ,&quot;minkowski&quot;&lt;/code&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;参考链接&lt;/h2&gt;
 &lt;ol&gt;
