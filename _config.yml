@@ -1,9 +1,0 @@
-# Custom Settings
-title: Chao
-url: yangchao.me
-author:
-  name: 杨超 
-  email: yangchao.cityu@gmail.com
-permalink: /:year/:month/:title
-markdown: kramdown
-pygments: true
