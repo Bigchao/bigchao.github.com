@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="ggplot2 - Stacked Area Graph | 技术改变世界">
+		<meta name="description" content="天猫推荐算法比赛 | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>ggplot2 - Stacked Area Graph</title>
+		<title>天猫推荐算法比赛</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -164,104 +164,111 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">ggplot2 - Stacked Area Graph</h1>
+		<h1 id="identifier">天猫推荐算法比赛</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>这一节重点介绍ggplot2中，关于堆积图的制作方法。
-提纲挈领记住最重要的！</p>
+		<p>最近天猫举办了一个推荐算法比赛，还是挺有意思的。我们不妨也拿这个数据作为这次的演示。
+注意这里所有的数据只当作教学使用，不涉及任何商业。</p>
+
+<p>我们拿到数据之后，可以大概观察一下。这个数据包含四个字段</p>
 
 <ul>
-  <li><strong>Geom_area()</strong></li>
+  <li>user_id：用户标记，抽样&amp;字段加密</li>
+  <li>Time：	行为时间，精度到天级别&amp;隐藏年份</li>
+  <li>action_type：用户对品牌的行为类型，包括点击、购买、加入购物车、收藏4种行为 (点击：0 购买：1 收藏：2 购物车：3）</li>
+  <li>brand_id：	品牌数字ID，抽样&amp;字段加密</li>
 </ul>
 
-<p>接下来的步骤大家可以想到了吧。
-在拎清这个主题之后，我们就会慢慢来对图形进行微调即可</p>
+<p>我们这篇专栏会以这个数据作为一个案例数据，用原来介绍的data.table进行简单的数据分析，并巩固data.table的用法。不会涉及推荐的算法等等。</p>
 
-<p><strong>Base Plot</strong></p>
+<p>好了，还是想我们之前的那样。 </p>
 
-<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span> 
-	library<span class="p">(</span>ggplot2<span class="p">)</span>
-	<span class="c1"># For the data set</span>
-	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span> geom_area<span class="p">()</span>
+<p>首先对数据进行描述性分析</p>
+
+<div class="highlight"><pre><code class="r">library<span class="p">(</span>data.table<span class="p">)</span>	
+DT <span class="o">&lt;-</span> fread<span class="p">(</span><span class="s">&quot;t_alibaba_data.csv&quot;</span><span class="p">)</span> <span class="c1"># 读入数据</span>
 </code></pre></div>
 
-<p><img src="/assets/images/ggplot2-stack/ZAghMVD.png" alt="" /></p>
+<p>在读入数据之前，我们会发现在visit_datetime这个字段是字符串形式，我们要讲其转为日期格式的，可以使得今后的日期运算更加方便。</p>
 
-<hr />
-<p><strong>延伸问题1</strong></p>
-
-<p>我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案</p>
-
-<ol>
-  <li>改图例：通过改变Scale中的breaks值</li>
-</ol>
-
-<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-	  scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-	<span class="c1">#rev 表示将图例倒转</span>
+<div class="highlight"><pre><code class="r">DT<span class="p">[,</span> visit_datetime <span class="o">:=</span> as.Date<span class="p">(</span>DT<span class="o">$</span>visit_datetime<span class="p">,</span> format <span class="o">=</span> <span class="s">&quot;%mm%dd&quot;</span><span class="p">)]</span>	
 </code></pre></div>
 
-<p><img src="/assets/images/ggplot2-stack/G1umci8.png" alt="" /></p>
+<p>我们首先对数据有一个大致的了解</p>
 
-<ol>
-  <li>改数据：引用Plyr中desc函数</li>
-</ol>
-
-<div class="highlight"><pre><code class="r">	library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># For the desc() function</span>
-	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r">length<span class="p">(</span>unique<span class="p">(</span>DT<span class="o">$</span>user_id<span class="p">))</span> <span class="c1"># 884</span>
+length<span class="p">(</span>unique<span class="p">(</span>DT<span class="o">$</span>brand_id<span class="p">))</span> <span class="c1"># 9531</span>
+max<span class="p">(</span>DT<span class="o">$</span>visit_datetime<span class="p">)</span><span class="o">-</span>min<span class="p">(</span>DT<span class="o">$</span>visit_datetime<span class="p">)</span>
 </code></pre></div>
 
-<p><img src="/assets/images/ggplot2-stack/xS9aP30.png" alt="" /></p>
+<p>不同的用户有884个，商品有9531件， 时间跨度为122天。</p>
 
-<hr />
+<p>继续向下</p>
 
-<p><strong>延伸问题2</strong>
-我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？</p>
-
-<ul>
-  <li>Geom_area 中的颜色设为NA</li>
-  <li>使用 <strong>Geom_line</strong></li>
-</ul>
-
-<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="kc">NA</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span> <span class="o">+</span>
-      geom_line<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;stack&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">)</span>
+<div class="highlight"><pre><code class="r"><span class="c1">## 多少个人买了商品 (748个)</span>
+DT<span class="p">[</span>type <span class="o">==</span><span class="m">1</span><span class="p">,</span> length<span class="p">(</span>unique<span class="p">(</span>user_id<span class="p">))]</span>  	
 </code></pre></div>
 
-<p><img src="/assets/images/ggplot2-stack/JUEp6T8.png" alt="" /></p>
+<p>我们之前介绍过，在data.table中<code>data.table[i,j,]</code> i表示的基于行的处理，j是基于列的。所以上面的那个就是选择出来type =1 的用户个数， 注意这里要用两个等号。</p>
 
-<p><strong>延伸问题3</strong>
-如果想制作成比例的堆积图，应该怎么办？</p>
+<p>大家可以基于这个数据，自己跑一下看看type=0，2，3的情况是什么样的呢？
+有过购买行为用户有748个。</p>
 
-<ul>
-  <li>只需要在Plyr拓展包稍微改变下数据即可，和成比例柱形图的道理完全一样</li>
-</ul>
+<p>好了，我们不止想要这一个简单的数字，比如我现在想知道每个用户都购买了什么。应该怎么办?</p>
 
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    library<span class="p">(</span>plyr<span class="p">)</span>  <span class="c1"># For the ddply() function</span>
-    <span class="c1"># Convert Thousands to Percent</span>
-    uspopage_prop <span class="o">&lt;-</span>ddply<span class="p">(</span>uspopage<span class="p">,</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span>transform<span class="p">,</span> Percent <span class="o">=</span>Thousands <span class="o">/</span>sum<span class="p">(</span>Thousands<span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">)</span>
-	<span class="c1"># 在uspopage数据中，把Year中对应的Thousands值除以同一个Year中所有Thousands的总和。</span>
+<div class="highlight"><pre><code class="r">Associate.rule <span class="o">&lt;-</span> DT<span class="p">[</span>type <span class="o">==</span> <span class="m">1</span><span class="p">,</span> list<span class="p">(</span>brand_id <span class="o">=</span> paste<span class="p">(</span>unique<span class="p">(</span>brand_id<span class="p">),</span> collapse <span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)),</span> by <span class="o">=</span> user_id<span class="p">]</span>	
 </code></pre></div>
 
-<p>下面的做法就和之间的完全一样了</p>
+<p>稍微详细点介绍下这里的用法，上面非常典型的data.table的用法。大家可以体会下。第一个部分<code>type == 1</code> 是基于行操作的，第二部分<code>list(...)</code> 是基于列操作的，这里创建了一个新的列叫<code>brand_id</code>, 在等号后面就是定义的过程，有关<code>paste</code>, <code>unique</code>大家可以去自己查一下。在命令行输入<code>?paste</code>,<code>?unique</code>就可以了。第三部分<code>by = user_id</code>就是负责分层的。</p>
 
-<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>uspopage_prop<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Percent<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
+<p>再举一个例子，也是继续向下分析的过程。</p>
+
+<p>如果我想看下每个用户购买每个商品多少次，应该怎么办？
+我现在想找出在最后一个月出现的购买有哪些呢？</p>
+
+<div class="highlight"><pre><code class="r">setkey<span class="p">(</span>DT<span class="p">,</span> user_id<span class="p">,</span> brand_id<span class="p">)</span>
+Pur.times <span class="o">&lt;-</span> DT<span class="p">[</span>type <span class="o">==</span><span class="m">1</span> <span class="p">,</span> .N<span class="p">,</span> by <span class="o">=</span> key<span class="p">(</span>DT<span class="p">)]</span>
 </code></pre></div>
 
-<p><img src="/assets/images/ggplot2-stack/dSxIwAu.png" alt="" /></p>
+<p>这时候我想把上面Pur.times中N大于5次的记录找出来应该怎么办呢？</p>
 
-<ul>
-  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1nCMPq">这里</a></li>
-</ul>
+<div class="highlight"><pre><code class="r">Pur.times<span class="p">[</span>N <span class="o">&gt;</span> <span class="m">5</span><span class="p">,]</span>	
+</code></pre></div>
+
+<p>现在我想知道2014年8月1号之后才有记录的新用户，这是推荐系统的冷启动问题。看看这样的用户是很有必要的。</p>
+
+<div class="highlight"><pre><code class="r">	
+New_user <span class="o">&lt;-</span> DT<span class="p">[,</span> .SD<span class="p">[</span>min<span class="p">(</span>visit_datetime<span class="p">)</span> <span class="o">&gt;</span> as.Date<span class="p">(</span><span class="s">&quot;2014-08-01&quot;</span><span class="p">)],</span> by <span class="o">=</span> user_id<span class="p">]</span>
+</code></pre></div>
+
+<p>其中<code>.SD</code>是一个算是高级的用法。表示除索引列之外所有的列。有关.SD的用法大家可以参照官方的手册。<code>.SD</code>是subset data的意思。</p>
+
+<p>最后给大家一个稍微复杂一点的例子，大家可以体会一下。</p>
+
+<p>因为数据中是包含时间字段这个信息的，而这个信息又非常有用。我们现在想知道对于每个用户来说，在购买特定产品之前，他点击了这个产品多少次（type = 0）， 收藏了多少次（type = 2）， 加入购物车多少次（type = 3）。</p>
+
+<div class="highlight"><pre><code class="r">DT<span class="p">[,</span> purch.id <span class="o">:=</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span> head<span class="p">(</span>cumsum<span class="p">(</span>type<span class="o">==</span> <span class="m">1</span><span class="p">),</span> <span class="m">-1</span><span class="p">)),</span> by<span class="o">=</span>list<span class="p">(</span>user_id<span class="p">,</span> brand_id<span class="p">)]</span>
+
+Sum_behaviour <span class="o">&lt;-</span> DT<span class="p">[,</span> <span class="kr">if</span><span class="p">(</span><span class="m">1</span> <span class="o">%in%</span> type<span class="p">)</span> .SD<span class="p">,</span> by<span class="o">=</span>list<span class="p">(</span>user_id<span class="p">,</span> brand_id<span class="p">,</span> purch.id<span class="p">)][,</span> list<span class="p">(</span>Click<span class="o">=</span>sum<span class="p">(</span>type<span class="o">==</span><span class="m">0</span><span class="p">),</span> Cart<span class="o">=</span>sum<span class="p">(</span>type<span class="o">==</span><span class="m">2</span><span class="p">)),</span> by<span class="o">=</span>list<span class="p">(</span>user_id<span class="p">,</span> brand_id<span class="p">,</span> purch.id<span class="p">)]</span>
+</code></pre></div>
+
+<p>大家可以体会下这个的用法，和一些列分析的思路。</p>
+
+<p>在数据分析其实就是这么一步步推进的。我们在改进推荐算法之前，这一系列的折腾数据是必不可少的。</p>
+
+<p>大家也可以根据我这给的思路继续往下分析，用data.table。如果有什么实现不了的话，欢迎给我发邮件。</p>
+
+<p>这里给大家一些思路，刚我给出的几个样例都是针对于用户的一系列的操作。</p>
+
+<p>大家可以模仿我的这些代码做出针对商品的一些列的操作。</p>
+
+<p>比如哪些商品被卖出的最多？被卖出的商品通常先被点击收藏多少次再被卖出？哪个月卖出的商品最多？</p>
+
+<p>通过这一系列的问题，我们锻炼了动手能力也同时培养了对数据的感觉。</p>
+
+<p>我的邮箱地址是 yangchao.hk@gmail.com，大家如果自己没有报名这次比赛想得到数据可以给我发邮件我转发大家。</p>
 
 
 		
@@ -269,8 +276,8 @@
 		<b><a href="https://me.alipay.com/bigchao">请我喝一杯</a></b>
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/05/stack-area-ggplot2&title=ggplot2 - Stacked Area Graph"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/05/stack-area-ggplot2&text=ggplot2 - Stacked Area Graph"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2014/03/tmall-algorithm&title=天猫推荐算法比赛"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2014/03/tmall-algorithm&text=天猫推荐算法比赛"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>

@@ -3,9 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
                 <meta property="wb:webmaster" content="397a4c282ef1bdba" />
-		<meta name="description" content="ggplot2 - Stacked Area Graph | 技术改变世界">
+		<meta name="description" content="data.table-案例学习-按条件筛选 | 技术改变世界">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>ggplot2 - Stacked Area Graph</title>
+		<title>data.table-案例学习-按条件筛选</title>
 		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
 		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
@@ -164,104 +164,68 @@
 				
 				<article id="post">
 	<header id="header">
-		<h1 id="identifier">ggplot2 - Stacked Area Graph</h1>
+		<h1 id="identifier">data.table-案例学习-按条件筛选</h1>
 		<button id="fullscreen" class="header_icon"></button>
 		<button id="fontsize" class="header_icon"></button>
 	</header>
 	<div id="content">
-		<p>这一节重点介绍ggplot2中，关于堆积图的制作方法。
-提纲挈领记住最重要的！</p>
+		<p>我们来看一个简单的问题， 下面的数据框有三个字段。SIC，FYEAR，和BIG4.</p>
 
-<ul>
-  <li><strong>Geom_area()</strong></li>
-</ul>
+<p><strong>任务: 找出每个SIC，Fyear大于7年的记录。然后将其他的删除。</strong></p>
 
-<p>接下来的步骤大家可以想到了吧。
-在拎清这个主题之后，我们就会慢慢来对图形进行微调即可</p>
+<pre>
+     SIC FYEAR BIG4
+  1:   1  1999    0
+  2:   1  1999    0
+  3:   1  1999    1
+  4:   1  1999    1
+  5:   1  1999    1
+  6:   1  2000    0
+  7:   1  2000    0
+  8:   1  2000    0
+  9:   1  2000    1
+ 10:   1  2000    1
+ 11:   1  2000    1
+ 12:   1  2000    1
+ 13:   1  2000    1
+ 14:   1  2000    1
+ 15:   1  2000    1
+ 16:   1  2001    0
+ 17:   1  2001    0
+ 18:   1  2001    0
+ 19:   1  2001    1
+ 20:   1  2001    1
 
-<p><strong>Base Plot</strong></p>
+</pre>
 
-<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span> 
-	library<span class="p">(</span>ggplot2<span class="p">)</span>
-	<span class="c1"># For the data set</span>
-	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span> geom_area<span class="p">()</span>
+<p>实现这一目的并不难，对于不同的包深圳相同的包都有不同的方法。这里展示几个例子</p>
+
+<p><strong>1： plyr</strong></p>
+
+<div class="highlight"><pre><code class="r">newdata <span class="o">&lt;-</span> ddply<span class="p">(</span>data<span class="p">,</span> .<span class="p">(</span>SIC<span class="p">,</span>FYEAR<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">){</span><span class="kr">if</span><span class="p">(</span>nrow<span class="p">(</span>x<span class="p">)</span><span class="o">&gt;</span><span class="m">7</span><span class="p">)</span> x <span class="kr">else</span> <span class="kc">NULL</span><span class="p">});</span>
 </code></pre></div>
 
-<p><img src="/assets/images/ggplot2-stack/ZAghMVD.png" alt="" /></p>
+<p><strong>2：data.table</strong></p>
 
-<hr />
-<p><strong>延伸问题1</strong></p>
+<div class="highlight"><pre><code class="r"><span class="c1">#1 using .SD</span>
+<span class="c1">##1.1</span>
+foo.SD <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> .by<span class="p">,</span>.thresh<span class="p">){</span>
+        x<span class="p">[,</span><span class="kr">if</span><span class="p">(</span>.N <span class="o">&gt;</span> .thresh<span class="p">){</span>.SD<span class="p">},</span>by<span class="o">=</span>.by<span class="p">]</span>
+      <span class="p">}</span>
+<span class="c1">##1.2</span>
+foo.SD <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> .by<span class="p">,</span>.thresh<span class="p">){</span>
+        x<span class="p">[,</span>.SD<span class="p">[</span>.N <span class="o">&gt;</span> .thresh<span class="p">],</span> by <span class="o">=</span> .by<span class="p">]</span>
+      <span class="p">}</span>
+<span class="c1">## 注意1.1和1.2思想是非常相似的，在实现的时候有一点点差别。大家要仔细体会下</span>
 
-<p>我们发现了图型和图例中的颜色顺序是相反的。这样很难看。有两种解决方案</p>
+<span class="c1">#2 using .I 这个理解起来稍微有点绕，但是算起来比.SD的方法要快一点</span>
+foo.I <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> .by<span class="p">,</span>.thresh<span class="p">){</span>
+       x<span class="p">[</span>x<span class="p">[,</span><span class="kr">if</span><span class="p">(</span>.N<span class="o">&gt;</span>.thresh<span class="p">){</span>.I<span class="p">},</span>by<span class="o">=</span>.by<span class="p">]</span><span class="o">$</span>V1<span class="p">]</span>
+ <span class="p">}</span>
 
-<ol>
-  <li>改图例：通过改变Scale中的breaks值</li>
-</ol>
-
-<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-	  scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-	<span class="c1">#rev 表示将图例倒转</span>
+foo.SD<span class="p">(</span>data<span class="p">,</span> c<span class="p">(</span><span class="s">&#39;SIC&#39;</span><span class="p">,</span><span class="s">&#39;FYEAR&#39;</span><span class="p">),</span> <span class="m">7</span><span class="p">)</span>
+foo.I<span class="p">(</span>data<span class="p">,</span> c<span class="p">(</span><span class="s">&#39;SIC&#39;</span><span class="p">,</span><span class="s">&#39;FYEAR&#39;</span><span class="p">),</span> <span class="m">7</span><span class="p">)</span>
 </code></pre></div>
-
-<p><img src="/assets/images/ggplot2-stack/G1umci8.png" alt="" /></p>
-
-<ol>
-  <li>改数据：引用Plyr中desc函数</li>
-</ol>
-
-<div class="highlight"><pre><code class="r">	library<span class="p">(</span>plyr<span class="p">)</span> <span class="c1"># For the desc() function</span>
-	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p><img src="/assets/images/ggplot2-stack/xS9aP30.png" alt="" /></p>
-
-<hr />
-
-<p><strong>延伸问题2</strong>
-我们发现上边的图两侧也有黑色框线，不美观，如何设置去掉这些黑色框线？</p>
-
-<ul>
-  <li>Geom_area 中的颜色设为NA</li>
-  <li>使用 <strong>Geom_line</strong></li>
-</ul>
-
-<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>uspopage<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Thousands<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">,</span> order<span class="o">=</span>desc<span class="p">(</span>AgeGroup<span class="p">)))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="kc">NA</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">)</span> <span class="o">+</span>
-      geom_line<span class="p">(</span>position<span class="o">=</span><span class="s">&quot;stack&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">)</span>
-</code></pre></div>
-
-<p><img src="/assets/images/ggplot2-stack/JUEp6T8.png" alt="" /></p>
-
-<p><strong>延伸问题3</strong>
-如果想制作成比例的堆积图，应该怎么办？</p>
-
-<ul>
-  <li>只需要在Plyr拓展包稍微改变下数据即可，和成比例柱形图的道理完全一样</li>
-</ul>
-
-<div class="highlight"><pre><code class="r">    library<span class="p">(</span>gcookbook<span class="p">)</span> <span class="c1"># For the data set</span>
-    library<span class="p">(</span>plyr<span class="p">)</span>  <span class="c1"># For the ddply() function</span>
-    <span class="c1"># Convert Thousands to Percent</span>
-    uspopage_prop <span class="o">&lt;-</span>ddply<span class="p">(</span>uspopage<span class="p">,</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span>transform<span class="p">,</span> Percent <span class="o">=</span>Thousands <span class="o">/</span>sum<span class="p">(</span>Thousands<span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">)</span>
-	<span class="c1"># 在uspopage数据中，把Year中对应的Thousands值除以同一个Year中所有Thousands的总和。</span>
-</code></pre></div>
-
-<p>下面的做法就和之间的完全一样了</p>
-
-<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>uspopage_prop<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Year<span class="p">,</span> y<span class="o">=</span>Percent<span class="p">,</span> fill<span class="o">=</span>AgeGroup<span class="p">))</span> <span class="o">+</span>
-      geom_area<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> size<span class="o">=</span><span class="m">.2</span><span class="p">,</span> alpha<span class="o">=</span><span class="m">.4</span><span class="p">)</span> <span class="o">+</span>
-      scale_fill_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Blues&quot;</span><span class="p">,</span> breaks<span class="o">=</span>rev<span class="p">(</span>levels<span class="p">(</span>uspopage<span class="o">$</span>AgeGroup<span class="p">)))</span>
-</code></pre></div>
-
-<p><img src="/assets/images/ggplot2-stack/dSxIwAu.png" alt="" /></p>
-
-<ul>
-  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1nCMPq">这里</a></li>
-</ul>
 
 
 		
@@ -269,8 +233,8 @@
 		<b><a href="https://me.alipay.com/bigchao">请我喝一杯</a></b>
 		</div>
 		<div id="social">
-		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/05/stack-area-ggplot2&title=ggplot2 - Stacked Area Graph"></a>
-			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/05/stack-area-ggplot2&text=ggplot2 - Stacked Area Graph"></a>
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2014/03/datatable-faq&title=data.table-案例学习-按条件筛选"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2014/03/datatable-faq&text=data.table-案例学习-按条件筛选"></a>
 			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
 		</div>
 	</div>

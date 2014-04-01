@@ -6,21 +6,319 @@
     <atom:link href="http://yangchao.me/rss.xml" rel="self" type="application/rss+xml" />
     <description>阅读塑造人生</description>
     <language>zh_CN</language>
-    <pubDate>Wed, 19 Mar 2014 08:13:14 -0700</pubDate>
-    <lastBuildDate>Wed, 19 Mar 2014 08:13:14 -0700</lastBuildDate>
+    <pubDate>Tue, 01 Apr 2014 15:11:46 -0700</pubDate>
+    <lastBuildDate>Tue, 01 Apr 2014 15:11:46 -0700</lastBuildDate>
 
     
     <item>
-      <title>内置pdf</title>
+      <title>天猫推荐算法比赛</title>
+      <link>http://yangchao.me/2014/03/tmall-algorithm</link>
+      <pubDate>26 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/tmall-algorithm</guid>
+      <description>&lt;p&gt;最近天猫举办了一个推荐算法比赛，还是挺有意思的。我们不妨也拿这个数据作为这次的演示。
+注意这里所有的数据只当作教学使用，不涉及任何商业。&lt;/p&gt;
+
+&lt;p&gt;我们拿到数据之后，可以大概观察一下。这个数据包含四个字段&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user_id：用户标记，抽样&amp;amp;字段加密&lt;/li&gt;
+  &lt;li&gt;Time：	行为时间，精度到天级别&amp;amp;隐藏年份&lt;/li&gt;
+  &lt;li&gt;action_type：用户对品牌的行为类型，包括点击、购买、加入购物车、收藏4种行为 (点击：0 购买：1 收藏：2 购物车：3）&lt;/li&gt;
+  &lt;li&gt;brand_id：	品牌数字ID，抽样&amp;amp;字段加密&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我们这篇专栏会以这个数据作为一个案例数据，用原来介绍的data.table进行简单的数据分析，并巩固data.table的用法。不会涉及推荐的算法等等。&lt;/p&gt;
+
+&lt;p&gt;好了，还是想我们之前的那样。 &lt;/p&gt;
+
+&lt;p&gt;首先对数据进行描述性分析&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;library&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data.table&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;	
+DT &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; fread&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;t_alibaba_data.csv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 读入数据&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在读入数据之前，我们会发现在visit_datetime这个字段是字符串形式，我们要讲其转为日期格式的，可以使得今后的日期运算更加方便。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; visit_datetime &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; as.Date&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;visit_datetime&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; format &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;%mm%dd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;我们首先对数据有一个大致的了解&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;length&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;unique&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;user_id&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 884&lt;/span&gt;
+length&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;unique&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;brand_id&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 9531&lt;/span&gt;
+max&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;visit_datetime&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;min&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;visit_datetime&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;不同的用户有884个，商品有9531件， 时间跨度为122天。&lt;/p&gt;
+
+&lt;p&gt;继续向下&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;## 多少个人买了商品 (748个)&lt;/span&gt;
+DT&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;type &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; length&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;unique&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;user_id&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;  	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;我们之前介绍过，在data.table中&lt;code&gt;data.table[i,j,]&lt;/code&gt; i表示的基于行的处理，j是基于列的。所以上面的那个就是选择出来type =1 的用户个数， 注意这里要用两个等号。&lt;/p&gt;
+
+&lt;p&gt;大家可以基于这个数据，自己跑一下看看type=0，2，3的情况是什么样的呢？
+有过购买行为用户有748个。&lt;/p&gt;
+
+&lt;p&gt;好了，我们不止想要这一个简单的数字，比如我现在想知道每个用户都购买了什么。应该怎么办?&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;Associate.rule &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; DT&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;type &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;brand_id &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; paste&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;unique&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;brand_id&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; collapse &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; user_id&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;稍微详细点介绍下这里的用法，上面非常典型的data.table的用法。大家可以体会下。第一个部分&lt;code&gt;type == 1&lt;/code&gt; 是基于行操作的，第二部分&lt;code&gt;list(...)&lt;/code&gt; 是基于列操作的，这里创建了一个新的列叫&lt;code&gt;brand_id&lt;/code&gt;, 在等号后面就是定义的过程，有关&lt;code&gt;paste&lt;/code&gt;, &lt;code&gt;unique&lt;/code&gt;大家可以去自己查一下。在命令行输入&lt;code&gt;?paste&lt;/code&gt;,&lt;code&gt;?unique&lt;/code&gt;就可以了。第三部分&lt;code&gt;by = user_id&lt;/code&gt;就是负责分层的。&lt;/p&gt;
+
+&lt;p&gt;再举一个例子，也是继续向下分析的过程。&lt;/p&gt;
+
+&lt;p&gt;如果我想看下每个用户购买每个商品多少次，应该怎么办？
+我现在想找出在最后一个月出现的购买有哪些呢？&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;setkey&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; user_id&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; brand_id&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+Pur.times &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; DT&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;type &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .N&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这时候我想把上面Pur.times中N大于5次的记录找出来应该怎么办呢？&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;Pur.times&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;N &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;现在我想知道2014年8月1号之后才有记录的新用户，这是推荐系统的冷启动问题。看看这样的用户是很有必要的。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;	
+New_user &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; .SD&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;min&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;visit_datetime&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; as.Date&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2014-08-01&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; user_id&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;其中&lt;code&gt;.SD&lt;/code&gt;是一个算是高级的用法。表示除索引列之外所有的列。有关.SD的用法大家可以参照官方的手册。&lt;code&gt;.SD&lt;/code&gt;是subset data的意思。&lt;/p&gt;
+
+&lt;p&gt;最后给大家一个稍微复杂一点的例子，大家可以体会一下。&lt;/p&gt;
+
+&lt;p&gt;因为数据中是包含时间字段这个信息的，而这个信息又非常有用。我们现在想知道对于每个用户来说，在购买特定产品之前，他点击了这个产品多少次（type = 0）， 收藏了多少次（type = 2）， 加入购物车多少次（type = 3）。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; purch.id &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; head&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cumsum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;type&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;user_id&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; brand_id&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+Sum_behaviour &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%in%&lt;/span&gt; type&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; .SD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;user_id&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; brand_id&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; purch.id&lt;span class=&quot;p&quot;&gt;)][,&lt;/span&gt; list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Click&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;type&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; Cart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sum&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;type&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;list&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;user_id&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; brand_id&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; purch.id&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;大家可以体会下这个的用法，和一些列分析的思路。&lt;/p&gt;
+
+&lt;p&gt;在数据分析其实就是这么一步步推进的。我们在改进推荐算法之前，这一系列的折腾数据是必不可少的。&lt;/p&gt;
+
+&lt;p&gt;大家也可以根据我这给的思路继续往下分析，用data.table。如果有什么实现不了的话，欢迎给我发邮件。&lt;/p&gt;
+
+&lt;p&gt;这里给大家一些思路，刚我给出的几个样例都是针对于用户的一系列的操作。&lt;/p&gt;
+
+&lt;p&gt;大家可以模仿我的这些代码做出针对商品的一些列的操作。&lt;/p&gt;
+
+&lt;p&gt;比如哪些商品被卖出的最多？被卖出的商品通常先被点击收藏多少次再被卖出？哪个月卖出的商品最多？&lt;/p&gt;
+
+&lt;p&gt;通过这一系列的问题，我们锻炼了动手能力也同时培养了对数据的感觉。&lt;/p&gt;
+
+&lt;p&gt;我的邮箱地址是 yangchao.hk@gmail.com，大家如果自己没有报名这次比赛想得到数据可以给我发邮件我转发大家。&lt;/p&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>在网页中内置pdf文件</title>
       <link>http://yangchao.me/2014/03/pdf-insert</link>
       <pubDate>20 Mar 2014</pubDate>
       <author>Peter</author>
       <guid>http://yangchao.me/2014/03/pdf-insert</guid>
-      <description>&lt;iframe src=&quot;/assets/pdf/data.pdf&quot; width=&quot;1150px&quot; height=&quot;800px&quot;&gt;
+      <description>&lt;div&gt;&lt;iframe src=&quot;/assets/pdf/data.pdf&quot; width=&quot;1150px&quot; height=&quot;800px&quot;&gt;&lt;div&gt;
 
 
-&lt;p&gt;In case you don&#39;t have Adobe Reader or PDF support in this web browser. &lt;a href=&quot;/assets/pdf/data.pdf&quot;&gt;Click here to download the PDF&lt;/a&gt;&lt;/p&gt;
-&lt;/iframe&gt;
+test
+&lt;/div&gt;&lt;/iframe&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>data.table-案例学习-筛选各列特殊值</title>
+      <link>http://yangchao.me/2014/03/datatble-filter-column</link>
+      <pubDate>20 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/datatble-filter-column</guid>
+      <description>&lt;p&gt;这次分享一个稍微有点复杂的问题。 先看模拟的数据长什么样子。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+dt &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.table&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; A&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mean&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; C&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rnorm&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+setkey&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dt&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+dt&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;A &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+dt&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;B &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+dt&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;B &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+dt&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;C &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+dt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;现在的&lt;/p&gt;
+
+&lt;pre&gt;
+   id          A         B           C
+1:  1 -0.6264538  1.179532 -10.0000000
+2:  2  0.1836433 -3.000000  -0.6101568
+3:  3 -5.0000000  2.738325  -1.6212406
+4:  4  1.5952808  2.575781  -3.2146999
+5:  5  0.3295078  7.000000   0.1249309
+&lt;/pre&gt;
+
+&lt;p&gt;我有另外一个表&lt;/p&gt;
+
+&lt;p&gt;表中存着每个变量的上下限。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;limits &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data.table&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;measurement&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;LETTERS&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; lower&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+                     upper&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+setkey&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;limits&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; measurement&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+limits
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;
+   measurement lower upper
+1:           A    -5    NA
+2:           B    -3     7
+3:           C   -10    NA
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;任务：按照第二张表，将原表中的上下限设为NA&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;也就是说最后我想要的是：&lt;/p&gt;
+
+&lt;pre&gt;
+   id          A        B          C
+1:  1 -0.6264538 1.179532         NA
+2:  2  0.1836433       NA -0.6101568
+3:  3         NA 2.738325 -1.6212406
+4:  4  1.5952808 2.575781 -3.2146999
+5:  5  0.3295078       NA  0.1249309
+&lt;/pre&gt;
+
+&lt;p&gt;这里有一点点难度的是，我们需要结合第二张表来设定第一张表。&lt;/p&gt;
+
+&lt;p&gt;我们先不急想如何实现，这里和大家分享一下有一个窍门。&lt;/p&gt;
+
+&lt;p&gt;我们有两张表，想根据某一张表的信息对第二张表进行修改和整理。首先要做的是将两个表的结构搞成一样。&lt;/p&gt;
+
+&lt;p&gt;这里就要用到&lt;code&gt;dcast.data.table&lt;/code&gt; 和 &lt;code&gt;melt&lt;/code&gt; 指令。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;melt&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;limits&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这里的代码和reshape2中几乎是一样的。大家可以参加我之前的日志&lt;a href=&quot;http://yangchao.me/2013/02/reshape-advanced&quot;&gt;《R - Reshape Package II》&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+   measurement variable value
+1:           A    lower    -5
+2:           B    lower    -3
+3:           C    lower   -10
+4:           A    upper    NA
+5:           B    upper     7
+6:           C    upper    NA
+&lt;/pre&gt;
+
+&lt;p&gt;然后再dcast&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;limits &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; dcast.data.table&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;melt&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;limits&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; variable &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; measurement&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;
+   variable  A  B   C
+1:    lower -5 -3 -10
+2:    upper NA  7  NA
+&lt;/pre&gt;
+
+&lt;p&gt;这样我们就把limits变成了我们想要的形式。两个数据框已经统一起来了。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>data.table-案例学习-按条件筛选</title>
+      <link>http://yangchao.me/2014/03/datatable-faq</link>
+      <pubDate>20 Mar 2014</pubDate>
+      <author>Peter</author>
+      <guid>http://yangchao.me/2014/03/datatable-faq</guid>
+      <description>&lt;p&gt;我们来看一个简单的问题， 下面的数据框有三个字段。SIC，FYEAR，和BIG4.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;任务: 找出每个SIC，Fyear大于7年的记录。然后将其他的删除。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+     SIC FYEAR BIG4
+  1:   1  1999    0
+  2:   1  1999    0
+  3:   1  1999    1
+  4:   1  1999    1
+  5:   1  1999    1
+  6:   1  2000    0
+  7:   1  2000    0
+  8:   1  2000    0
+  9:   1  2000    1
+ 10:   1  2000    1
+ 11:   1  2000    1
+ 12:   1  2000    1
+ 13:   1  2000    1
+ 14:   1  2000    1
+ 15:   1  2000    1
+ 16:   1  2001    0
+ 17:   1  2001    0
+ 18:   1  2001    0
+ 19:   1  2001    1
+ 20:   1  2001    1
+
+&lt;/pre&gt;
+
+&lt;p&gt;实现这一目的并不难，对于不同的包深圳相同的包都有不同的方法。这里展示几个例子&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1： plyr&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;newdata &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ddply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;SIC&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;FYEAR&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;nrow&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; x &lt;span class=&quot;kr&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;2：data.table&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#1 using .SD&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;##1.1&lt;/span&gt;
+foo.SD &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .by&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;.thresh&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        x&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;.N &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; .thresh&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;.SD&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;.by&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;##1.2&lt;/span&gt;
+foo.SD &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .by&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;.thresh&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        x&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;.SD&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;.N &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; .thresh&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; .by&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;## 注意1.1和1.2思想是非常相似的，在实现的时候有一点点差别。大家要仔细体会下&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#2 using .I 这个理解起来稍微有点绕，但是算起来比.SD的方法要快一点&lt;/span&gt;
+foo.I &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .by&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;.thresh&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+       x&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;.N&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;.thresh&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;.I&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;by&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;.by&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;V1&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+foo.SD&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;SIC&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;FYEAR&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+foo.I&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;SIC&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;FYEAR&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 </description>
     </item>
     
@@ -593,7 +891,7 @@ Return the string obtained by replacing the leftmost non-overlapping occurrences
 
 &lt;p&gt;The pattern may be a string or an RE object.
 The optional argument count is the maximum number of pattern occurrences to be replaced; count must be a non-negative integer. If omitted or zero, all occurrences will be replaced. Empty matches for the pattern are replaced only when not adjacent to a previous match, so sub(‘x*’, ‘-‘, ‘abc’) returns ‘-a-b-c-‘.
-In addition to character escapes and backreferences as described above, \g&lt;name&gt; will use the substring matched by the group named name, as defined by the (?P&lt;name&gt;...) syntax. \g&lt;number&gt; uses the corresponding group number; \g&amp;lt;2&amp;gt; is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g&amp;lt;2&amp;gt;0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character &#39;0&#39;. The backreference \g&amp;lt;0&amp;gt; substitutes in the entire substring matched by the RE.&lt;/number&gt;&lt;/name&gt;&lt;/name&gt;&lt;/p&gt;
+In addition to character escapes and backreferences as described above, \g&lt;name&gt; will use the substring matched by the group named name, as defined by the (?P&lt;name&gt;...) syntax. \g&lt;number&gt; uses the corresponding group number; \g&amp;lt;2&amp;gt; is therefore equivalent to \2, but isn’t ambiguous in a replacement such as \g&amp;lt;2&amp;gt;0. \20 would be interpreted as a reference to group 20, not a reference to group 2 followed by the literal character '0'. The backreference \g&amp;lt;0&amp;gt; substitutes in the entire substring matched by the RE.&lt;/number&gt;&lt;/name&gt;&lt;/name&gt;&lt;/p&gt;
 
 &lt;p&gt;下面详细介绍一下这5个参数的基本配置&lt;/p&gt;
 
@@ -864,7 +1162,7 @@ In addition to character escapes and backreferences as described above, \g&lt;na
 
 &lt;h4 id=&quot;recompilestrpattern-flag&quot;&gt;re.compile(strPattern[, flag]):&lt;/h4&gt;
 
-&lt;p&gt;这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如&lt;code&gt;re.compile(&#39;pattern&#39;, re.I | re.M)&lt;/code&gt;与&lt;code&gt;re.compile(&#39;(?im)pattern&#39;)&lt;/code&gt;是等价的。 
+&lt;p&gt;这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如&lt;code&gt;re.compile('pattern', re.I | re.M)&lt;/code&gt;与&lt;code&gt;re.compile('(?im)pattern')&lt;/code&gt;是等价的。 
 可选值有：&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1116,487 +1414,6 @@ count用于指定最多替换次数，不指定时全部替换。 &lt;/name&gt;&
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;大概就是这么多啦~&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>scrapy初探-安装和简单操作</title>
-      <link>http://yangchao.me/2014/03/install-scrapy</link>
-      <pubDate>03 Mar 2014</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2014/03/install-scrapy</guid>
-      <description>&lt;p&gt;最近因为要抓取一些网页，所以搜索一些工具来实现。当然最熟悉的R也可以胜任这个事儿，比如Rcurl和XML的包都行。但是其功能还是挺受局限的，尤其和Python相比，就差的比较多了。&lt;/p&gt;
-
-&lt;p&gt;Python的beautiful soup库其实也很不错。但是Scrapy似乎很炫的样子，不少人和我推荐了。所以就趁着项目之前的筹备期先学起来。&lt;/p&gt;
-
-&lt;p&gt;首先是安装。&lt;/p&gt;
-
-&lt;p&gt;– Windows&lt;/p&gt;
-
-&lt;p&gt;我的电脑是windows8.1, 安装的时候我参考了多个网上的版本。用了将近两天时间，最后宣告失败。就是装不上。&lt;/p&gt;
-
-&lt;p&gt;要说现在留在windows的最重要理由就是SAS了。&lt;/p&gt;
-
-&lt;p&gt;– Mac&lt;/p&gt;
-
-&lt;p&gt;Mac上安装其实则方便很多。&lt;/p&gt;
-
-&lt;p&gt;但是事情没有我想象的那么简单，在Mac上安装也耗费了我不少的时间。一度情绪相当低落相当崩溃。&lt;/p&gt;
-
-&lt;p&gt;因为Mac自带了Python2.7.5所以当时我就直接用这个版本的python了。然后安装了pip，然后按照&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;	&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;就可以了。就不是不行。&lt;/p&gt;
-
-&lt;p&gt;后来出现了其他诸多问题。&lt;/p&gt;
-
-&lt;p&gt;最后的办法就是所有都推到重新来，&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;安装了Homebrew，开始homebrew都安装不了，一度非常崩溃，更新了Xcode最新版之后可以了&lt;/li&gt;
-  &lt;li&gt;brew python&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;然后一点点就可以了。&lt;/p&gt;
-
-&lt;p&gt;安装过程整整花了我两天时间，当最后可以使用的时候已经身心俱疲了。&lt;/p&gt;
-
-&lt;p&gt;下面就是使用过程。&lt;/p&gt;
-
-&lt;p&gt;整个的scrapy的构架和Django有点像，有人更是说其中的机制是模仿了Django。先建立一个工程然后把要提取的放到不同的文件里。代码量并不大。而且很方便。&lt;/p&gt;
-
-&lt;p&gt;下面简单走一个流程，看看scrapy是怎么运作的？&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;找一个要抓取的网站&lt;/h3&gt;
-
-&lt;p&gt;按照官方放的教程，我就以&lt;code&gt;mininova&lt;/code&gt;为例&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;&quot;&gt;http://www.mininova.org/today&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;定义我们要抓取的内容&lt;/h3&gt;
-
-&lt;p&gt;我们想文件的url，名称，描述，和大小。所以在项目文件夹下的&lt;code&gt;item.py&lt;/code&gt;中添加以下内容&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.item&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TorrentItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;定义爬虫&lt;/h3&gt;
-&lt;p&gt;定制爬虫就是定义如何搜索链接和如何选取其中的数据。其中需要用到Xpath和正则的知识。&lt;/p&gt;
-
-&lt;p&gt;首先分析页面内容：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;&quot;&gt;http://www.mininova.org/tor/2676093&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;比如这个网站&lt;/p&gt;
-
-&lt;p&gt;Chrom可以直接观源代码&lt;/p&gt;
-
-&lt;h5 id=&quot;tag-h1-&quot;&gt;文件名称在tag h1 中&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Darwin - The Evolution Of An Exhibition&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;提取应该这样：
-&lt;code&gt;//h1/text()&lt;/code&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;div-tag-with-iddescription&quot;&gt;描述在 &amp;lt;div&amp;gt; tag with id=”description”:&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Description:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;description&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-Short documentary made for Plymouth City Museum and Art Gallery regarding the setup of an exhibit about Charles Darwin in conjunction with the 200th anniversary of his birth.
-
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;所以Xpath就应该是这样：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;//div[@id=&#39;description&#39;]&lt;/code&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;section-3&quot;&gt;最后，有关文件大小&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;specifications&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Category:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/cat/4&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Movies&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; &lt;span class=&quot;ni&quot;&gt;&amp;amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/sub/35&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Documentary&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;strong&amp;gt;&lt;/span&gt;Total size:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
-150.62&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;megabyte&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Xpath提取就应该是这样的：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;//div[@id=&#39;specifications&#39;]/p[2]/text()[2]&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;最后爬虫文件应该长这个样子：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.contrib.spiders&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CrawlSpider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Rule&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.contrib.linkextractors.sgml&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SgmlLinkExtractor&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scrapy.selector&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Selector&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MininovaSpider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CrawlSpider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;mininova&amp;#39;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;allowed_domains&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;mininova.org&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;start_urls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;http://www.mininova.org/today&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;rules&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SgmlLinkExtractor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;/tor/\d+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;parse_torrent&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parse_torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TorrentItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//h1/text()&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;description&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//div[@id=&amp;#39;description&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;size&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;//div[@id=&amp;#39;info-left&amp;#39;]/p[2]/text()[2]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torrent&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;scrapy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crawl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mininova&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scraped_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;最后保存的数据为jason格式。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;[{&amp;quot;url&amp;quot;: &amp;quot;http://www.mininova.org/tor/2676093&amp;quot;, &amp;quot;name&amp;quot;: [&amp;quot;Darwin - The Evolution Of An Exhibition&amp;quot;], &amp;quot;description&amp;quot;: [&amp;quot;Short documentary made for Plymouth ...&amp;quot;], &amp;quot;size&amp;quot;: [&amp;quot;150.62 megabyte&amp;quot;]},
-# ... other items ...
-]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;参考&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://scrapy.org/&quot;&gt;scrapy&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>数据都去哪儿了</title>
-      <link>http://yangchao.me/2014/02/where-is-data</link>
-      <pubDate>24 Feb 2014</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2014/02/where-is-data</guid>
-      <description>&lt;p&gt;在开始介绍数据分析之前，我们要了解为什么要数据分析。这就是通常说的原点思想。&lt;/p&gt;
-
-&lt;p&gt;以学术界的经济学为例，超一流是搞思想的，用的平实精炼的语言总结经济发展规律。一流的人搞模型，用建模的数学方法来诠释经济发展规律。低一流的人用实证，也就是通常的计量经济学模型来验证。&lt;/p&gt;
-
-&lt;p&gt;这样的解释其实不算严谨。这里虽然说低一流，但是其涉及的经济学知识，数据推导也是非常复杂。总结下来就是通常在计量经济学是为了验证理论。&lt;/p&gt;
-
-&lt;p&gt;在业界就更加直观，首先有个总体目标，其次是有个技术目标。商业的核心就是创造价值，创造利润。技术在不断迭代，而主旋律似乎从来没有变过。所以技术是为了真正的商业目的而服务的。这里稍微跑了题，所以对于大多数技术团队，需要和其他的团队进行配合为了整体用户的体验而努力，不可太过纠结于技术。&lt;/p&gt;
-
-&lt;p&gt;回到数据分析，刚介绍了数据分析的目的。 &lt;/p&gt;
-
-&lt;p&gt;下面简单介绍下数据分析的基本步骤。&lt;/p&gt;
-
-&lt;p&gt;最最重要的是，对数据的整体把握和感觉。这个有点玄虚的感觉，但确实如此。我们可以理解为经过时间磨砺的高手在看到数据的时候往往可以知道这个数据感觉是对的还是不对的，如果不对哪里不对。我了解到那些资深的首席经济分析师，精算师通常可以有这种感觉。当然，我们在初期的时候容易拘泥于技术，如何把领导交给的任务完成好，但是这种感觉的培养是必不可少的。比如，我是经济学出身，从业于商业智能，技术还可以。有时候我的同学或者同事请我帮我处理分析一些数据，其实这些基本步骤大抵差不多。就算当我得到一些结果的时候我不会解读，不知道是不是哪儿出问题了。所以，我们在处理自己行业数据的时候应避免出现这样的问题：得到了结果不会解读。&lt;/p&gt;
-
-&lt;p&gt;数据挖掘和数据仓库的大牛Herb Edelstein说过这样一句话:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“If you’ve got terabytes of data, and you’re relying on data mining to find interesting things in 
-there for you, you’ve lost before you’ve even begun. You really need people who understand what 
-it is they are looking for – and what they can do with it once they find it.” &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;大意是说，如果你有TB量级的数据，你想依靠数据挖掘来找到你想要的有意思的东西，你在开始前就已经迷失了。&lt;/p&gt;
-
-&lt;p&gt;这个是我希望大家可以时刻记住的。&lt;/p&gt;
-
-&lt;p&gt;其次，数据分析都是从最基础最底层的描述性分析开始。&lt;/p&gt;
-
-&lt;p&gt;这个很简单，这个很重要。&lt;/p&gt;
-
-&lt;p&gt;了解大概的数据分布情况，基本特征，对于继续分析是很有必要的。在这个基础上再进行更加深化的分析。&lt;/p&gt;
-
-&lt;p&gt;以淘宝为例，我现在想研究双十一促销对商家和淘宝平台的影响。应该怎么办？&lt;/p&gt;
-
-&lt;p&gt;起码先把11月每天的销量统计一遍，肯定不难发现11月11日销量特别高。然后分地域，分商家，分淘宝和天猫再做一遍。这相当于比较高层级的。&lt;/p&gt;
-
-&lt;p&gt;这个时候会看出数据的基本趋势，再选取平均值作为基准，按比例进行同样的运算。这样一点点进行深入分析。&lt;/p&gt;
-
-&lt;p&gt;我发现增长了或者下降了，再有针对性的深入分析。一步步都有条理，很严谨。&lt;/p&gt;
-
-&lt;p&gt;再次，就是进行回归分析，基于机器学习的预测等等稍微高难一点的。&lt;/p&gt;
-
-&lt;p&gt;总结下来：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;数据的把握&lt;/li&gt;
-  &lt;li&gt;统计描述性分析&lt;/li&gt;
-  &lt;li&gt;进一步深度分析&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;大概是这样。&lt;/p&gt;
-
-&lt;p&gt;下面进入动手阶段。&lt;/p&gt;
-
-&lt;p&gt;我提到过，这个专栏会讲到用R，但是不会从头来讲。所以这里我会给出一些推荐教材和推荐文章。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;有关国外的，还是最推荐&lt;a href=&quot;http://www.r-bloggers.com/&quot;&gt;R-blogger&lt;/a&gt;,有关业界学界用R的最新动态，可以说内容丰富。每次看过之后都觉得很通透很爽快。通过这个网站自然可以发掘到其他很多牛人的博客。点进去看就可以了。&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.statmethods.net/&quot;&gt;Quick-R&lt;/a&gt; 这个特别推荐。尤其是初学者，可以把整个网站都过一遍，干活非常的多。&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.ats.ucla.edu/stat/r/&quot;&gt;UCLA的idre&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;肖凯老师的博客可以说是一个启蒙非常好的地方。&lt;a href=&quot;http://xccds1977.blogspot.hk&quot;&gt;http://xccds1977.blogspot.hk&lt;/a&gt;。但是据说这个在国内被墙掉了，不知道为什么。有心人需要想想办法了。&lt;/li&gt;
-  &lt;li&gt;关于书籍。我看过讲R的书多多少少也有10多本了，对于初学者我还是最推荐《The Art of R Programming》，思路相当清晰，我觉得比《R in Action》，《R in nutshell》都要好。所以大家可以搜一下这本书。其中可以不看讲多线程的部分，前边的内容一点一点跟着来。这个配合着Quick-R足够了。然后就配合着我这本专栏。有什么问题，特别欢迎留言，我收到后会跟大家有一个充分的交流和答疑。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;这里做一个小小的广告，因为想学习交互D3的数据可视化，我自己用jekyll在github上托管了一个轻量级博客。域名是:&lt;a href=&quot;yangchao.me&quot;&gt;yangchao.me&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;上面会介绍一些我平时技术上遇到问题的总结，自己写的ggplot的简单教程等等，可能工具和内容更加丰富但是更加散漫。大家有兴趣可以去看下。有同学能注意到，我在这面写过了一些关于R的博客，所有东西是不会出现在这个专栏的，因为我不是那种偷懒的人。&lt;/p&gt;
-
-&lt;p&gt;我发现自己平时看豆瓣阅读都是在晚上上床睡觉之前，所以这样动手的技术博客可能本身并不适合。为了达到可以和大家更好的交流，我希望大家踊跃提出自己平时数据分析遇到的问题，我们来一个充分的互动。这样效果也许是最好的。&lt;/p&gt;
-
-&lt;p&gt;如果你现在连问题也都还提不出来，处于瞎逛的状态，我来给你提个问题。大家都来看看怎么弄，谁的代码最简洁，最方便。&lt;/p&gt;
-
-&lt;p&gt;现在数据是这样的。&lt;/p&gt;
-
-&lt;pre&gt;
-#    id       date      value
-# 1: 27 2014-01-09 0.20597457
-# 2: 27 2014-01-26 0.62911404
-# 3: 27 2014-02-07 0.68702285
-# 4: 37 2014-02-06 0.17655675
-# 5: 37 2014-02-09 0.06178627
-# 6: 37 2014-02-13 0.38410372
-&lt;/pre&gt;
-
-&lt;p&gt;有两个ID，三个日期。我先算出来对于每个ID，在最靠近的两个日期中，value的平均值。&lt;/p&gt;
-
-&lt;p&gt;实际的数据有500万行，id有3000个，日期400多天。所以用excel估计是够呛了，其他的方法大家可以想一下~
-好了，这个就是这一期的作业。&lt;/p&gt;
-
-&lt;p&gt;不会不要紧，下一节我们就要讲啦~&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>烟波至爽，数据为王</title>
-      <link>http://yangchao.me/2014/02/douban</link>
-      <pubDate>02 Feb 2014</pubDate>
-      <author>Peter</author>
-      <guid>http://yangchao.me/2014/02/douban</guid>
-      <description>&lt;p&gt;最近觉得有必要把这段时间数据挖掘的知识做一个详尽的数理，有些东西总也不碰就会忘了。所以想到开一个豆瓣专栏，写一些R进行数据分析、可视化的知识。 尤其是data.table的用法。经过了一次修改，现在专栏计划已经通过了，马上就要发表了。&lt;/p&gt;
-
-&lt;p&gt;前两天和Guy聊天，讲到我们香港的R用户现在人数已经在Dim Sum Lab放不下啦，想让我帮忙从城大定一个教室，我欣然答应。毕竟从成立的不到10个人，每次来的人都一点一点增加，心里真是高兴。下次我会做一个专门针对于&lt;strong&gt;data.table&lt;/strong&gt;的tutorial，这两天赶紧准备下。上次的&lt;code&gt;ggplot2&lt;/code&gt;的tutorial还是挺受欢迎的，当然还有&lt;code&gt;knitr&lt;/code&gt;的, Fuk的几次tutorial讲Rcurl, plyr也都非常棒。靠我们这帮子人刚开始的热情终于让越来越多的人加入到这个社区来。写《The Art of pragramming R》的老爷爷，Norm还是我们香港R用户的一员呢。&lt;/p&gt;
-
-&lt;p&gt;现在的技术路线就是facebook上面的信息用Rcurl发布，展示的内容用knitr写Rmarkdown文件，用slidefy做presentation。 感觉活在R里边了。 &lt;/p&gt;
-
-&lt;p&gt;最近另外一个着迷的就是emacs。 虽然我算是半个vim党，但是emacs的org mode确实太强大了，所以想好好学学。&lt;/p&gt;
-
-&lt;p&gt;专栏是免费阅读，我先放个样章在这里。&lt;/p&gt;
-
-&lt;p&gt;所有的专栏内容都会从新写，不会从现在博客的ggplot2的教程中直接复制过去。更加面向实际操作一点， 而不是一点点的搞起。
-下面大家先一睹为快我的专栏导读把，不是吹， 以后可全是干货啊。都是我平时工作中遇到的实际问题，一点一点总结的经验呢。&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;第一篇 ： 导读&lt;/h3&gt;
-
-&lt;p&gt;在为自己的专栏想一个特别霸气的名字的时候， 我和室友正在纪录片《故宫》， 里边讲到了承德避暑山庄的烟波至爽殿，于是名字也就脱口而出。觉得很满意，显得很有底蕴，特别适合豆瓣文青聚集地。 说到数据为王，这两年有关“大数据”的概念可以说是火的不行， 可以听到大家张口闭口就大数据，都知道这是一个“大数据时代”， 都知道了有的书中提到的”相关性比因果关系更加重要“等等的观点。 &lt;/p&gt;
-
-&lt;p&gt;很遗憾，我可能有个特立独行的毛病，一个东西一旦太过炒作太多我就不太喜欢。但是为了照顾大家的兴致， 我会在专栏最后的部分给大家分享一个大家可能认为还算是一个大数据的数据分析的例子。&lt;/p&gt;
-
-&lt;h5 id=&quot;section-1&quot;&gt;那么我们讲什么呢？&lt;/h5&gt;
-
-&lt;p&gt;按照章节来分类&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;数据处理&lt;/li&gt;
-  &lt;li&gt;数据分析 （篇幅最少）&lt;/li&gt;
-  &lt;li&gt;数据可视化 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;专栏主要讲解利用R语言进行数据的处理、分析、可视化的具体细节和基本要点。主要想和大家分享一下我在平时工作中最常用、也最容易上手的一些基本思路和基本技巧。尤其是关于数据可视化的部分。我非常喜欢像Economicst，New York Times刊登出来那种的图表。看过很多介绍可视化的文章和书籍， 里边分享的很多， 但是当我看到这些图表的时候，我不想只是欣赏，也想自己做出来。但是我们不管是数据分析，还是数据可视化，其中接近百分之五十的经历都是在做一些数据的预处理。把原始数据转变为我们想要的数据进而在分析或者可视化。如果跳过这一部，在我可视化的过程中对数据的操作部分，大家可能看起来就会一知半解。 所以我们会用相当大量的篇幅来介绍数据的预处理。 对数据的预处理，却也是也就包含了一些简单基本的对数据的描述性分析。&lt;/p&gt;
-
-&lt;h5 id=&quot;r&quot;&gt;为什么用R语言？&lt;/h5&gt;
-
-&lt;p&gt;是的，开始这个专栏意味着你要开始学习编程了。虽然其他一些工具，像Excel可以胜任部分工作，为什么要学习一种编程语言呢？
-因为我们要开始学编程了！这难道还不是一个非常充分的理由么？&lt;/p&gt;
-
-&lt;p&gt;其实还有一个理由，因为我们都很懒。对，因为懒而编程。&lt;/p&gt;
-
-&lt;p&gt;我们想要完成一件事情，越快越好，越不费事费力越好。现在电脑可以帮我们完成的很多，只要我们会用命令指挥他们即可。在Excel中我们可以完成很多事情，但是一旦涉及到数据类型比较复杂，或是要重复性操作的时候Excel就显得有点力不从心了。&lt;/p&gt;
-
-&lt;p&gt;借用《Learn Python the Hard Way》中的一句话， &lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;You can code. They cannot. That is pretty damn cool.  &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;这里不太需要再介绍R语言的优越之处，大家上网搜下即可。我的感受是R语言作为一种统计学家发明出来的语言，在数据分析方面有着比较大的优质。近来越来越受到人们的关注和重视，其开源社区的活跃程度让我们看到这个语言的生机勃勃的特性。其拥有大量的工具包，你想完成的事情已经有很多人搞定了。（这也使许多其他开源软件的好处，比如我的挚爱大GNU的Emacs。） 可谓站在了巨人的肩膀上。&lt;/p&gt;
-
-&lt;p&gt;我们学习编程，只是想实现算法，对一般的数据结构又不那么在意，数据量也没有大到内存都放不下， 所以对于初学者，R是可以很快上手并可以尝到甜头让人继续学习的。最重要的，我们想用R处理数据画图或者数据挖掘， 已经有人把代码写好了。我们只需要会看，然后再稍微微调下就可以了。这简直太适合懒人学习了。&lt;/p&gt;
-
-&lt;p&gt;我小时候学过8年的小提琴，天资不算聪颖，但最后练得也还不错。 所以对熟能生巧有特别的感觉。 近来Gladwell在他的畅销书《Outliers》（中文译名《异类》）有个特别时髦的理论， 10000小时理论。也讲得的是同一个意思。 每天上手练一点，慢慢也就熟悉了。无所谓高端还是屌丝， 无他， 唯手熟尔。&lt;/p&gt;
-
-&lt;p&gt;同时我也有另外一个感触，相比于C，C++等更偏向于底层的语言，学习R好比是练钢琴，开始学习的可以唱到甜头， 不用好久可以弹出比较简单但是也很好听的曲子，像”一闪一闪亮晶晶“之类的。不像小提琴， 学了两年可能还跟拉锯一样。 但是像真正精通， 后期的学习曲线还是挺陡峭的，不可避免要学习数据结构， 面向对象等知识， 而且到后来就觉得R在运算的时候很慢， 对内存的管理并不到位等等。 但是现在， 对于大多人来说， R已经足够了，我们不需要做到 “Perfect”， 到“Fairly Good” 对于大多数人就已经足够了。&lt;/p&gt;
-
-&lt;h5 id=&quot;section-2&quot;&gt;目标读者是哪些人？&lt;/h5&gt;
-
-&lt;p&gt;本专栏绝对倾情奉献， 目标读者是包括但不限于&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;喜爱玩数据，喜欢可视化的人！&lt;/li&gt;
-  &lt;li&gt;对编程有点兴趣，也知道这个很有用应该学，但是一直以没时间懒得学年龄大了学不动了为借口拖延症患者！！&lt;/li&gt;
-  &lt;li&gt;想对自己生活有些改变的朋友，并且需要即刻行动起来的人！！！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;尤其对于第三点， 这也是我决心开设这样一个专栏的目的。这里不想心灵鸡汤， 不想拽成功学， 我是那种什么都喜欢折腾， 这么都愿意去学， 也觉得什么都有用的人。 正所谓乔布斯的“Connecting Dots”。 如果我们知道这个对于数据的处理确实有用， 想利用点时间学习下，而不只是逛逛微博， 看看韩剧， 日子这样一天天过去。 那么确实学点数据分析， 从功利主义的角度还是实用主义的角度都是高收益的。 因为我的工作现在是以数据处理为主， 过了大概一年当初的新鲜期感觉已经逐渐褪去， 自己学习的意愿也再减退。 所以这个时候我觉得有必要把我之前看过的那些书籍，走过的弯路，自己学校里比较受欢迎的讲座全都拿出来，温故而知新。 所谓教学相长， 大家一起交流。&lt;/p&gt;
-
-&lt;p&gt;同样，对于那些编程大牛们什么都知道的人， 可能觉得这篇专栏过于幼稚，我所写太过简单简直是在侮辱他们的智商。 首先，本系列倾情奉献， 绝对不能被理解为侮辱智商。我只是可能比我的目标读者们懂得这方面的知识多一点，想一起分享让他们少走弯路。如果你们发现我这个专栏里的每一个句子每一个知识点你已经了如指掌， 还是像《Learn Python the hard way》 里的忠告&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;不要再阅读此专栏， 这不是为你们而写， 我是写给那些并不是什么都知道的人&lt;/li&gt;
-    &lt;li&gt;倒空自己， 如果你已经什么都会了，就很难再向其他人学习任何东西&lt;/li&gt;
-    &lt;li&gt;去学Lisp语言， 通常什么都会的人会喜欢Lisp&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;section-3&quot;&gt;专栏主要特色是什么？&lt;/h5&gt;
-
-&lt;p&gt;我自己想到的专栏的特色可能为三个字：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;接地气&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;因为这个专栏有一个很重要的读者： 我的女朋友。她作为一个纯文科生，学新闻在Marketing从业的绝对文青。 热爱电影，喜欢看小说。 经常觉得我看的讲程序的书都是那种特别“有用但是枯燥“的书，缺少了一种浪漫主义色彩。 这个专栏的存在就是想证明，其实这个这个数据的世界并不枯燥， 而且相当有趣！ 这篇专栏应该看起来满满的都是爱啊！&lt;/p&gt;
-
-&lt;p&gt;所以这个专栏算是手把手来教， 诚意十足。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;我觉得哪些部分在书籍或网上的资料已经相关帖子讨论的相当详尽， 我会给出相关链接， 不会拾人牙慧。&lt;/li&gt;
-  &lt;li&gt;并不会面面俱到，我会着重于数据的整理和可视化。 会将一些琐碎的小案例经过自己的整理，呈现一条主线给大家。&lt;/li&gt;
-  &lt;li&gt;主要以案例学习为主， 以平时工作马上就能用的到为主要目的。 不会像一般介绍R语言从赋值， array， list， dataframe一点点讲起。并不是说这个不重要，为什么如此参见第一条。 这样的写法带来的一个缺陷就是不够系统， 但是希望可以做到一个领进门的作用。刚开始大家对于code可能什么都不动，会做出非常详尽的讲解。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;但是我觉得相比于与其他的网上的教程， 我希望在如下方面可以有所胜出&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;阅读体验 &lt;/li&gt;
-  &lt;li&gt;互动性&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果你遇到什么问题，我会尽可能为您讲解，或是给您相关资料的链接。 遇到最基本的问题解决不了这是我们开始学习编程最容易泄气的地方。当时我一个人想学习Hadoop的相关知识，但是对于linux系统的不熟悉安装时候处处碰壁， 当时心里那种无助的感觉记忆深刻。 所以这个专栏的存在就是为了让大家减轻这方面的痛苦， 更加享受编程的过程。&lt;/p&gt;
-
-&lt;p&gt;我会根据读者的回馈来调整更新自己的内容，把大家普遍反映的问题着重讲。 &lt;/p&gt;
-
-&lt;p&gt;但是不欢迎那些不经任何思考， 光光po问题的人。这点请参考《提问的艺术》。 请认真对待你的问题， 就像你期望大家可以认真的回答一样。在提问之前先思考下， 独立解决问题也是一种能力。提问的时候要表述清楚。 &lt;/p&gt;
-
-&lt;p&gt;我会留作业， 也会判作业。 希望可以交到朋友， 因为和数据打交道了太久， 也想和人打打交道：）。 当然了，写了专栏，还是希望更多人看更多人喜欢！ 街坊邻居觉得好的多替我宣传哈！&lt;/p&gt;
-
-&lt;p&gt;其实我这个人还是挺扯淡的，后期的时候大家可以看到我稍微真实可爱的一面。不过开始还是要严谨， 严肃！&lt;/p&gt;
-
-&lt;h5 id=&quot;section-4&quot;&gt;一个例子&lt;/h5&gt;
-
-&lt;p&gt;现在给大家一个例子， 这个例子看不懂怎么实现的不要紧。 到后来的学习中我们还会提到。主要是让大家感受下，这个专栏中我们反复见到的数据分析的一般流程。&lt;/p&gt;
-
-&lt;p&gt;我现在有一个新浪微博的平时数据，我想来玩一玩这个数据&lt;/p&gt;
-
-&lt;p&gt;数据是这个样子的&lt;/p&gt;
-
-&lt;pre&gt;
-
-            V1       V2         V3 V4 V5 V6 V7 V8  V9 V10 V11 V12
-     1:      1 20120213 1011139914  0  0  1  0  0 \\N   0   0   0
-     2:      2 20120218 1011139914  0  1  2  2  0 \\N   1   0   0
-     3:      3 20120219 1011139914  0  1  0  0  0 \\N   2   0   0
-     4:      4 20120201 1011139914  0  1  0  0  0 \\N   0   0   0
-     5:      5 20120224 1011139914  0  1  2  0  0 \\N   1   0   0
-    ---                                                          
-835353: 835353 20120215  283149150  0  0  0  0  0 \\N   0   0   0
-835354: 835354 20120202  283149150  0  0  0  0  0 \\N   0   0   0
-835355: 835355 20120222  283149150  0  0  0  0  0 \\N   0   0   0
-835356: 835356 20120203  283149150  0  0  0  0  0 \\N   0   0   0
-835357: 835357 20120206  283149150  0  0  0  0  0 \\N   0   0   0
-&lt;/pre&gt;
-
-&lt;p&gt;可以看到，一共是83万行。12列&lt;/p&gt;
-
-&lt;p&gt;每一列其实是有名字的，我们要重新命名&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;    library（data.table&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-    &lt;span class=&quot;c1&quot;&gt;#  我们今后主要介绍的就是这个包，因为它是在太强大了！&lt;/span&gt;
-    column_names &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ID&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;uid&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;origin&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fwd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cmts&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reply&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;fwded&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;ignore&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cmted&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;liked&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;favorate&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 把新的列明起好， 因为防止中文乱码，所以我干脆用了英文来代替。分别表示ID，日期，用户ID，发帖量，评论量，回复量，转发量等等。&lt;/span&gt;
-    setnames&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;DT&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; paste0&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;V&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; column_names&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 把原来的列名 v1 - v12 全部换掉&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;现在数据已经是这个样子了&lt;/p&gt;
-
-&lt;pre&gt;
-            ID     date        uid origin fwd cmts reply fwded ignore cmted
-     1:      1 20120213 1011139914      0   0    1     0     0    \\N     0
-     2:      2 20120218 1011139914      0   1    2     2     0    \\N     1
-     3:      3 20120219 1011139914      0   1    0     0     0    \\N     2
-     4:      4 20120201 1011139914      0   1    0     0     0    \\N     0
-     5:      5 20120224 1011139914      0   1    2     0     0    \\N     1
-    ---                                                                    
-835353: 835353 20120215  283149150      0   0    0     0     0    \\N     0
-835354: 835354 20120202  283149150      0   0    0     0     0    \\N     0
-835355: 835355 20120222  283149150      0   0    0     0     0    \\N     0
-835356: 835356 20120203  283149150      0   0    0     0     0    \\N     0
-835357: 835357 20120206  283149150      0   0    0     0     0    \\N     0
-        liked favorate
-     1:     0        0
-     2:     0        0
-     3:     0        0
-     4:     0        0
-     5:     0        0
-    ---               
-835353:     0        0
-835354:     0        0
-835355:     0        0
-835356:     0        0
-835357:     0        0
-
-&lt;/pre&gt;
-
-&lt;p&gt;这是一个月的数据，我们想对每一天所有用户的发帖量，等所有除了ID，date， uid这三个加总。&lt;/p&gt;
-
-&lt;p&gt;在所有数据分析的开始，先要进行大概的描述性分析。虽然很简单，但是很重要&lt;/p&gt;
-
-&lt;p&gt;这一部也就是说我像知道2012年2月每天的加总情况是怎样的&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt; sum &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; DT&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt; lapply&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;.SD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sum&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; by &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; date&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; .SDcols &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# 仅仅这一句指令啊！ 就实现我说的刚才的事情！ 求出了2012年2月每天的加总量。&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;这里data.table 包里的简洁代码对我这种代码洁癖简直就是太适合了！
-之所以选择data.table， 原因有三点&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;速度快&lt;/li&gt;
-  &lt;li&gt;代码简洁&lt;/li&gt;
-  &lt;li&gt;但是代码不太容易懂，而且官方阅读材料比较少。这也就使得我这个专栏有了最直接的意义！&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;然后我就可以接着做一些可视化的工作了，比如二月有春节，我想知道春节时候的情况&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/cp6Bmzy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这个图完全是用R做出的，用的是非常著名的ggplot2包。网上关于这些包的教程有不少。大家可以搜搜看看，我在这个专栏里会对一些我感兴趣的图形做出针对性的讲解。 &lt;/p&gt;
-
-&lt;p&gt;我现在有大概16个月的微博数据，那我想看看所有这些天的8个指标变化情况应该怎办呢？可以用热力学图。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/R97XKaw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这个也是用R做出来的，调用一个包，代码量也非常少，我们在今后会对代码进行讲解，并分享给大家。&lt;/p&gt;
-
-&lt;p&gt;所以总结下来，这个专栏想让大家记住三个字&lt;/p&gt;
-
-&lt;p&gt;玩数据！&lt;/p&gt;
-
-&lt;p&gt;这次的作业： 安装好R， 初学者建议用Rstudio，简单学习R语法。我们下次再见！&lt;/p&gt;
-
 </description>
     </item>
     
