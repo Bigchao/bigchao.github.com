@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                <meta property="wb:webmaster" content="397a4c282ef1bdba" />
+		<meta name="description" content="天猫推荐算法比赛 | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>天猫推荐算法比赛</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
+        <script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+		<script type="text/javascript" src="/assets/js/pdfobject.js"></script>
+		<script type = "text/javascript">
+		$(document).ready(function(){
+		$("#random").on('click','img',function(){
+			$.get("sitemap.xml",function(data){
+			var $xml=$(data);
+			url=$xml.find("url");
+			n = url.size();
+			n = getRandom(n);
+			position=url.get(n);  
+			hello=position.getElementsByTagName("loc")[0].firstChild.nodeValue; 
+			location.href=hello;
+		})
+    
+	})
+  //随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+})
+	</script>
+		
+	</head>
+	<body>
+		<nav id="nav">
+		    <a id="random" href="#"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><span>机器学习</span></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>其他技术</span></li>
+				<li id="label6" class="label"><span>生活随笔</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">其他技术</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="datamining cate1" href="/2014/03/tmall-algorithm"><span class="circle_icon"></span>天猫推荐算法比赛<span class="date">Mar 2014</span></a>
+			
+				<a class="related cate1" href="/2014/03/pdf-insert"><span class="circle_icon"></span>在网页中内置pdf文件<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/datatble-filter-column"><span class="circle_icon"></span>data.table-案例学习-筛选各列特殊值<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/datatable-faq"><span class="circle_icon"></span>data.table-案例学习-按条件筛选<span class="date">Mar 2014</span></a>
+			
+				<a class="related cate1" href="/2014/03/scrapy-xpath"><span class="circle_icon"></span>Scrapy中Xpath学习小结<span class="date">Mar 2014</span></a>
+			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class="ml cate1" href="/2014/03/distance-similarity"><span class="circle_icon"></span>相似度和距离小结<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/data-table"><span class="circle_icon"></span>SAC思想探索<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/install-scrapy"><span class="circle_icon"></span>scrapy初探-安装和简单操作<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>数据都去哪儿了<span class="date">Feb 2014</span></a>
+			
+				<a class="related cate1" href="/2014/02/douban"><span class="circle_icon"></span>烟波至爽，数据为王<span class="date">Feb 2014</span></a>
+			
+				<a class="life cate1" href="/2013/12/happy-new-year"><span class="circle_icon"></span>Happy New Year<span class="date">Dec 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-lattice-extra"><span class="circle_icon"></span>latticeExtra - Horizon Plot的简单实现<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-plot"><span class="circle_icon"></span>Horizon Chart - 惊艳到爆的哲学<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="life cate1" href="/2013/06/mj-memory"><span class="circle_icon"></span>再次纪念MJ<span class="date">Jun 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/06/plyr-advanced"><span class="circle_icon"></span>Plyr- 多因子整合<span class="date">Jun 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
+			
+				<a class="related cate1" href="/2013/05/Sublime-text-2"><span class="circle_icon"></span>Sublime Text 2学习过程<span class="date">May 2013</span></a>
+			
+				<a class="ml cate1" href="/2013/04/mahout-big-data"><span class="circle_icon"></span>Mahout简单部署备忘<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/Wilkinson-Dot-Plot"><span class="circle_icon"></span>ggplot2 - Wilkinson Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/heat-map"><span class="circle_icon"></span>ggplot2 - Heat Map<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/cleveland-Dotplot"><span class="circle_icon"></span>ggplot2 - Cleveland Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/ggplot2-line-graph"><span class="circle_icon"></span>ggplot2 - Line Graph<span class="date">Apr 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/03/plyr-dataming"><span class="circle_icon"></span>Plyr- 数据整合利器<span class="date">Mar 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>R - Reshape Package II<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>R - Reshape2 Package<span class="date">Feb 2013</span></a>
+			
+				<a class="related cate1" href="/2013/02/hadoop-hive"><span class="circle_icon"></span>大数据体验之Hadoop, Rhadoop, 和Hive<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
+			
+				<a class="life cate1" href="/2012/08/story-vision"><span class="circle_icon"></span>自己的视角，别人的故事<span class="date">Aug 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/memorize-michael-jackson"><span class="circle_icon"></span>纪念 Michael Jackson - This Is It<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/happy-madives"><span class="circle_icon"></span>传说中的马尔代夫<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2011/03/japan-earthquake"><span class="circle_icon"></span>日本地震杂想<span class="date">Mar 2011</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">天猫推荐算法比赛</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>最近天猫举办了一个推荐算法比赛，还是挺有意思的。我们不妨也拿这个数据作为这次的演示。
+注意这里所有的数据只当作教学使用，不涉及任何商业。</p>
+
+<p>我们拿到数据之后，可以大概观察一下。这个数据包含四个字段</p>
+
+<ul>
+  <li>user_id：用户标记，抽样&amp;字段加密</li>
+  <li>Time：	行为时间，精度到天级别&amp;隐藏年份</li>
+  <li>action_type：用户对品牌的行为类型，包括点击、购买、加入购物车、收藏4种行为 (点击：0 购买：1 收藏：2 购物车：3）</li>
+  <li>brand_id：	品牌数字ID，抽样&amp;字段加密</li>
+</ul>
+
+<p>我们这篇专栏会以这个数据作为一个案例数据，用原来介绍的data.table进行简单的数据分析，并巩固data.table的用法。不会涉及推荐的算法等等。</p>
+
+<p>好了，还是想我们之前的那样。 </p>
+
+<p>首先对数据进行描述性分析</p>
+
+<div class="highlight"><pre><code class="r">library<span class="p">(</span>data.table<span class="p">)</span>	
+DT <span class="o">&lt;-</span> fread<span class="p">(</span><span class="s">&quot;t_alibaba_data.csv&quot;</span><span class="p">)</span> <span class="c1"># 读入数据</span>
+</code></pre></div>
+
+<p>在读入数据之前，我们会发现在visit_datetime这个字段是字符串形式，我们要讲其转为日期格式的，可以使得今后的日期运算更加方便。</p>
+
+<div class="highlight"><pre><code class="r">DT<span class="p">[,</span> visit_datetime <span class="o">:=</span> as.Date<span class="p">(</span>DT<span class="o">$</span>visit_datetime<span class="p">,</span> format <span class="o">=</span> <span class="s">&quot;%mm%dd&quot;</span><span class="p">)]</span>	
+</code></pre></div>
+
+<p>我们首先对数据有一个大致的了解</p>
+
+<div class="highlight"><pre><code class="r">length<span class="p">(</span>unique<span class="p">(</span>DT<span class="o">$</span>user_id<span class="p">))</span> <span class="c1"># 884</span>
+length<span class="p">(</span>unique<span class="p">(</span>DT<span class="o">$</span>brand_id<span class="p">))</span> <span class="c1"># 9531</span>
+max<span class="p">(</span>DT<span class="o">$</span>visit_datetime<span class="p">)</span><span class="o">-</span>min<span class="p">(</span>DT<span class="o">$</span>visit_datetime<span class="p">)</span>
+</code></pre></div>
+
+<p>不同的用户有884个，商品有9531件， 时间跨度为122天。</p>
+
+<p>继续向下</p>
+
+<div class="highlight"><pre><code class="r"><span class="c1">## 多少个人买了商品 (748个)</span>
+DT<span class="p">[</span>type <span class="o">==</span><span class="m">1</span><span class="p">,</span> length<span class="p">(</span>unique<span class="p">(</span>user_id<span class="p">))]</span>  	
+</code></pre></div>
+
+<p>我们之前介绍过，在data.table中<code>data.table[i,j,]</code> i表示的基于行的处理，j是基于列的。所以上面的那个就是选择出来type =1 的用户个数， 注意这里要用两个等号。</p>
+
+<p>大家可以基于这个数据，自己跑一下看看type=0，2，3的情况是什么样的呢？
+有过购买行为用户有748个。</p>
+
+<p>好了，我们不止想要这一个简单的数字，比如我现在想知道每个用户都购买了什么。应该怎么办?</p>
+
+<div class="highlight"><pre><code class="r">Associate.rule <span class="o">&lt;-</span> DT<span class="p">[</span>type <span class="o">==</span> <span class="m">1</span><span class="p">,</span> list<span class="p">(</span>brand_id <span class="o">=</span> paste<span class="p">(</span>unique<span class="p">(</span>brand_id<span class="p">),</span> collapse <span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)),</span> by <span class="o">=</span> user_id<span class="p">]</span>	
+</code></pre></div>
+
+<p>稍微详细点介绍下这里的用法，上面非常典型的data.table的用法。大家可以体会下。第一个部分<code>type == 1</code> 是基于行操作的，第二部分<code>list(...)</code> 是基于列操作的，这里创建了一个新的列叫<code>brand_id</code>, 在等号后面就是定义的过程，有关<code>paste</code>, <code>unique</code>大家可以去自己查一下。在命令行输入<code>?paste</code>,<code>?unique</code>就可以了。第三部分<code>by = user_id</code>就是负责分层的。</p>
+
+<p>再举一个例子，也是继续向下分析的过程。</p>
+
+<p>如果我想看下每个用户购买每个商品多少次，应该怎么办？
+我现在想找出在最后一个月出现的购买有哪些呢？</p>
+
+<div class="highlight"><pre><code class="r">setkey<span class="p">(</span>DT<span class="p">,</span> user_id<span class="p">,</span> brand_id<span class="p">)</span>
+Pur.times <span class="o">&lt;-</span> DT<span class="p">[</span>type <span class="o">==</span><span class="m">1</span> <span class="p">,</span> .N<span class="p">,</span> by <span class="o">=</span> key<span class="p">(</span>DT<span class="p">)]</span>
+</code></pre></div>
+
+<p>这时候我想把上面Pur.times中N大于5次的记录找出来应该怎么办呢？</p>
+
+<div class="highlight"><pre><code class="r">Pur.times<span class="p">[</span>N <span class="o">&gt;</span> <span class="m">5</span><span class="p">,]</span>	
+</code></pre></div>
+
+<p>现在我想知道2014年8月1号之后才有记录的新用户，这是推荐系统的冷启动问题。看看这样的用户是很有必要的。</p>
+
+<div class="highlight"><pre><code class="r">	
+New_user <span class="o">&lt;-</span> DT<span class="p">[,</span> .SD<span class="p">[</span>min<span class="p">(</span>visit_datetime<span class="p">)</span> <span class="o">&gt;</span> as.Date<span class="p">(</span><span class="s">&quot;2014-08-01&quot;</span><span class="p">)],</span> by <span class="o">=</span> user_id<span class="p">]</span>
+</code></pre></div>
+
+<p>其中<code>.SD</code>是一个算是高级的用法。表示除索引列之外所有的列。有关.SD的用法大家可以参照官方的手册。<code>.SD</code>是subset data的意思。</p>
+
+<p>最后给大家一个稍微复杂一点的例子，大家可以体会一下。</p>
+
+<p>因为数据中是包含时间字段这个信息的，而这个信息又非常有用。我们现在想知道对于每个用户来说，在购买特定产品之前，他点击了这个产品多少次（type = 0）， 收藏了多少次（type = 2）， 加入购物车多少次（type = 3）。</p>
+
+<div class="highlight"><pre><code class="r">DT<span class="p">[,</span> purch.id <span class="o">:=</span> c<span class="p">(</span><span class="m">0</span><span class="p">,</span> head<span class="p">(</span>cumsum<span class="p">(</span>type<span class="o">==</span> <span class="m">1</span><span class="p">),</span> <span class="m">-1</span><span class="p">)),</span> by<span class="o">=</span>list<span class="p">(</span>user_id<span class="p">,</span> brand_id<span class="p">)]</span>
+
+Sum_behaviour <span class="o">&lt;-</span> DT<span class="p">[,</span> <span class="kr">if</span><span class="p">(</span><span class="m">1</span> <span class="o">%in%</span> type<span class="p">)</span> .SD<span class="p">,</span> by<span class="o">=</span>list<span class="p">(</span>user_id<span class="p">,</span> brand_id<span class="p">,</span> purch.id<span class="p">)][,</span> list<span class="p">(</span>Click<span class="o">=</span>sum<span class="p">(</span>type<span class="o">==</span><span class="m">0</span><span class="p">),</span> Cart<span class="o">=</span>sum<span class="p">(</span>type<span class="o">==</span><span class="m">2</span><span class="p">)),</span> by<span class="o">=</span>list<span class="p">(</span>user_id<span class="p">,</span> brand_id<span class="p">,</span> purch.id<span class="p">)]</span>
+</code></pre></div>
+
+<p>大家可以体会下这个的用法，和一些列分析的思路。</p>
+
+<p>在数据分析其实就是这么一步步推进的。我们在改进推荐算法之前，这一系列的折腾数据是必不可少的。</p>
+
+<p>大家也可以根据我这给的思路继续往下分析，用data.table。如果有什么实现不了的话，欢迎给我发邮件。</p>
+
+<p>这里给大家一些思路，刚我给出的几个样例都是针对于用户的一系列的操作。</p>
+
+<p>大家可以模仿我的这些代码做出针对商品的一些列的操作。</p>
+
+<p>比如哪些商品被卖出的最多？被卖出的商品通常先被点击收藏多少次再被卖出？哪个月卖出的商品最多？</p>
+
+<p>通过这一系列的问题，我们锻炼了动手能力也同时培养了对数据的感觉。</p>
+
+<p>我的邮箱地址是 yangchao.hk@gmail.com，大家如果自己没有报名这次比赛想得到数据可以给我发邮件我转发大家。</p>
+
+
+		
+		<div id="donation">
+		<b><a href="https://me.alipay.com/bigchao">请我喝一杯</a></b>
+		</div>
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2014/03/tmall-algorithm&title=天猫推荐算法比赛"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2014/03/tmall-algorithm&text=天猫推荐算法比赛"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+		</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+
+
+
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		
+		
+		
+		
+	</body>
+</html>

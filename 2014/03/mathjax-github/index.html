@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                <meta property="wb:webmaster" content="397a4c282ef1bdba" />
+		<meta name="description" content="在Github中使用MathJax编辑公式 | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>在Github中使用MathJax编辑公式</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
+		
+	</head>
+	<body>
+		<nav id="nav">
+		    <a id="random" href="#"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><span>机器学习</span></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>其他技术</span></li>
+				<li id="label6" class="label"><span>生活随笔</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">其他技术</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class="ml cate1" href="/2014/03/distance-similarity"><span class="circle_icon"></span>相似度和距离小结<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/data-table"><span class="circle_icon"></span>SAC思想探索<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/install-scrapy"><span class="circle_icon"></span>scrapy初探-安装和简单操作<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>数据都去哪儿了<span class="date">Feb 2014</span></a>
+			
+				<a class="related cate1" href="/2014/02/douban"><span class="circle_icon"></span>烟波至爽，数据为王<span class="date">Feb 2014</span></a>
+			
+				<a class="life cate1" href="/2013/12/happy-new-year"><span class="circle_icon"></span>Happy New Year<span class="date">Dec 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-lattice-extra"><span class="circle_icon"></span>latticeExtra - Horizon Plot的简单实现<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-plot"><span class="circle_icon"></span>Horizon Chart - 惊艳到爆的哲学<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="life cate1" href="/2013/06/mj-memory"><span class="circle_icon"></span>再次纪念MJ<span class="date">Jun 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/06/plyr-advanced"><span class="circle_icon"></span>Plyr- 多因子整合<span class="date">Jun 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
+			
+				<a class="related cate1" href="/2013/05/Sublime-text-2"><span class="circle_icon"></span>Sublime Text 2学习过程<span class="date">May 2013</span></a>
+			
+				<a class="ml cate1" href="/2013/04/mahout-big-data"><span class="circle_icon"></span>Mahout简单部署备忘<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/Wilkinson-Dot-Plot"><span class="circle_icon"></span>ggplot2 - Wilkinson Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/heat-map"><span class="circle_icon"></span>ggplot2 - Heat Map<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/cleveland-Dotplot"><span class="circle_icon"></span>ggplot2 - Cleveland Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/ggplot2-line-graph"><span class="circle_icon"></span>ggplot2 - Line Graph<span class="date">Apr 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/03/plyr-dataming"><span class="circle_icon"></span>Plyr- 数据整合利器<span class="date">Mar 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>R - Reshape Package II<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>R - Reshape2 Package<span class="date">Feb 2013</span></a>
+			
+				<a class="related cate1" href="/2013/02/hadoop-hive"><span class="circle_icon"></span>大数据体验之Hadoop, Rhadoop, 和Hive<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
+			
+				<a class="life cate1" href="/2012/08/story-vision"><span class="circle_icon"></span>自己的视角，别人的故事<span class="date">Aug 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/memorize-michael-jackson"><span class="circle_icon"></span>纪念 Michael Jackson - This Is It<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/happy-madives"><span class="circle_icon"></span>传说中的马尔代夫<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2011/03/japan-earthquake"><span class="circle_icon"></span>日本地震杂想<span class="date">Mar 2011</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">在Github中使用MathJax编辑公式</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>因为近期想写一点关于数据挖掘，机器学习的东西时要用到公式，所以就寻思着在自己github上的博客上加上公式编辑的功能。</p>
+
+<p>找了网上相关的资料，其实实现起来并不难。</p>
+
+<p>主要步骤：</p>
+
+<p><strong>1 在html加入指向MathJax的命令</strong></p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span>
+ <span class="na">src=</span><span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+
+<p>注意通常情况下，我们把这段话放在Jekyll默认的html头文件下面。这样就省得再今后每次使用都继续修改了。</p>
+
+<p>一般这个文件的位置是在<code>/_layout/index.html</code> 中。</p>
+
+<p>如果想稍微折腾下的话，其实Mathjax有一些设定的参数可以调整</p>
+
+<p>比如我想让Mathjax支持公式的编号和引用，就在还是上面的文件中加上了如下代码。</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
+ <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
+ <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span><span class="nx">equationNumbers</span><span class="o">:</span> <span class="p">{</span><span class="nx">autoNumber</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;AMS&quot;</span><span class="p">],</span> <span class="nx">useLabelIds</span><span class="o">:</span> <span class="kc">true</span><span class="p">}},</span>
+ <span class="s2">&quot;HTML-CSS&quot;</span><span class="o">:</span> <span class="p">{</span><span class="nx">linebreaks</span><span class="o">:</span> <span class="p">{</span><span class="nx">automatic</span><span class="o">:</span> <span class="kc">true</span><span class="p">}},</span>
+ <span class="nx">SVG</span><span class="o">:</span> <span class="p">{</span><span class="nx">linebreaks</span><span class="o">:</span> <span class="p">{</span><span class="nx">automatic</span><span class="o">:</span> <span class="kc">true</span><span class="p">}}</span>
+ <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+
+<p><strong>2 安装kramdown解析器</strong></p>
+
+<p>一般默认的rdiscount会出现一些问题。所以用kramdown比较方便。有网友给出了rdiscount相关问题的解决方法，我也懒得折腾了，直接改成了kramdown。</p>
+
+<p>安装过程非常简单</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="n">install</span> <span class="n">kramdown</span>
+</code></pre></div>
+
+<p><strong>3 修改默认值</strong></p>
+
+<p>修改_config.yml，把markdown选项修改为:</p>
+
+<p><code>markdown: kramdown</code></p>
+
+<p>安装就应该没有问题了。</p>
+
+<p>测试：</p>
+
+<div class="highlight"><pre><code class="latex"><span class="sb">$$</span><span class="nb"></span>
+<span class="nb">a^</span><span class="m">2</span><span class="nb"> </span><span class="o">+</span><span class="nb"> b^</span><span class="m">2</span><span class="nb"> </span><span class="o">=</span><span class="nb"> c^</span><span class="m">2</span><span class="nb"></span>
+<span class="s">$$</span>
+</code></pre></div>
+
+<p>在想加入公式前后两端加入两个<code>$</code>符号就可以了。
+最后效果是这个样子的。</p>
+
+<script type="math/tex; mode=display">
+a^2 + b^2 = c^2
+</script>
+
+<p>kramdown还给出了一个稍微复杂一点的例子。关于对齐的。</p>
+
+<div class="highlight"><pre><code class="latex"><span class="sb">$$</span><span class="nb"></span>
+<span class="nv">\begin</span><span class="nb">{align</span><span class="o">*</span><span class="nb">}</span>
+<span class="nb">  &amp; </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">x,y</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\phi</span><span class="nb"> </span><span class="nv">\left</span><span class="o">(</span><span class="nv">\sum</span><span class="nb">_{i</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n x_ie_i, </span><span class="nv">\sum</span><span class="nb">_{j</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n y_je_j </span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">  </span><span class="o">=</span><span class="nb"> </span><span class="nv">\sum</span><span class="nb">_{i</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n </span><span class="nv">\sum</span><span class="nb">_{j</span><span class="o">=</span><span class="m">1</span><span class="nb">}^n x_i y_j </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_i, e_j</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">  &amp; </span><span class="o">(</span><span class="nb">x_</span><span class="m">1</span><span class="nb">, </span><span class="nv">\ldots</span><span class="nb">, x_n</span><span class="o">)</span><span class="nb"> </span><span class="nv">\left</span><span class="o">(</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{array}{ccc}</span>
+<span class="nb">      </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_</span><span class="m">1</span><span class="nb">, e_</span><span class="m">1</span><span class="o">)</span><span class="nb"> &amp; </span><span class="nv">\cdots</span><span class="nb"> &amp; </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_</span><span class="m">1</span><span class="nb">, e_n</span><span class="o">)</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      </span><span class="nv">\vdots</span><span class="nb"> &amp; </span><span class="nv">\ddots</span><span class="nb"> &amp; </span><span class="nv">\vdots</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_n, e_</span><span class="m">1</span><span class="o">)</span><span class="nb"> &amp; </span><span class="nv">\cdots</span><span class="nb"> &amp; </span><span class="nv">\phi</span><span class="o">(</span><span class="nb">e_n, e_n</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">    </span><span class="nv">\end</span><span class="nb">{array} </span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">  </span><span class="nv">\left</span><span class="o">(</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{array}{c}</span>
+<span class="nb">      y_</span><span class="m">1</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      </span><span class="nv">\vdots</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">      y_n</span>
+<span class="nb">    </span><span class="nv">\end</span><span class="nb">{array} </span><span class="nv">\right</span><span class="o">)</span><span class="nb"></span>
+<span class="nv">\end</span><span class="nb">{align</span><span class="o">*</span><span class="nb">}</span>
+<span class="s">$$</span>
+</code></pre></div>
+
+<p>得到的效果是这个样子的：</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+ %]]></script>
+
+<p>刚我加过的小小指令就是可以给公式加入标号。</p>
+
+<div class="highlight"><pre><code class="latex"><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span><span class="k">\label</span><span class="nb">{</span>exampleone<span class="nb">}</span>r = r<span class="nb">_</span>F+ <span class="k">\beta</span> (r<span class="nb">_</span>M - r<span class="nb">_</span>F) + <span class="k">\epsilon\end</span><span class="nb">{</span>equation<span class="nb">}</span><span class="err">\</span>
+</code></pre></div>
+
+<p>并且可以引用公式(\ref{exampleone})：</p>
+
+<p>\begin{equation}\label{exampleone}r = r_F+ \beta (r_M - r_F) + \epsilon\end{equation}\</p>
+
+<p>有关使用，强烈建议去看看kramdown和mathjax的官网，有非常详尽的介绍。和相关的Latex介绍数学公式的书籍。</p>
+
+<h2 id="section">有用链接：</h2>
+<p><a href="http://kramdown.gettalong.org/syntax.html#math-blocks">kramdown官网的相关链接</a>
+<a href="www.ctan.org/tex-archive/info/mil/mil.pdf">Math into LATEX</a>
+<a href="http://zhiqiang.org/blog/it/mathjax-make-mathematics-beautiful.html#mjx-eqn-exampleone">MathJax让你爱上数学公式</a></p>
+
+		
+		<div id="donation">
+		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
+		</div>
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2014/03/mathjax-github&title=在Github中使用MathJax编辑公式"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2014/03/mathjax-github&text=在Github中使用MathJax编辑公式"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+		</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+
+
+
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+		
+		<script>
+		$(document).ready(function(){
+		$("#random").on('click','img',function(){
+			$.get("sitemap.xml",function(data){
+			var $xml=$(data);
+			url=$xml.find("url");
+			n = url.size();
+			n = getRandom(n);
+			position=url.get(n);  
+			hello=position.getElementsByTagName("loc")[0].firstChild.nodeValue; 
+			location.href=hello;
+		})
+    
+	})
+  //随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+})
+	</script>
+		
+	</body>
+</html>

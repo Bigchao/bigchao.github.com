@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                <meta property="wb:webmaster" content="397a4c282ef1bdba" />
+		<meta name="description" content="ggplot2 - Cleveland Dot Plot | 技术改变世界">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>ggplot2 - Cleveland Dot Plot</title>
+		<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/assets/ie.html"><![endif]-->
+		<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/style.css">
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-45407331-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	"		})();
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+        });
+        </script>
+		
+	</head>
+	<body>
+		<nav id="nav">
+		    <a id="random" href="#"><img id="profile" src="/assets/images/profile.png" alt="" height="100" width="100"></a>
+			<ul id="menu">
+				<li id="label1" class="label selected"><span>最新文章</span></li>
+				<li id="label2" class="label"><span>机器学习</span></li>
+				<li id="label3" class="label"><span>数据可视化</span></li>
+				<li id="label4" class="label"><span>数据挖掘</span></li>
+				<li id="label5" class="label"><span>其他技术</span></li>
+				<li id="label6" class="label"><span>生活随笔</span></li>
+				<a id="about" href="/index.html">关于我</a>
+			</ul>
+
+		</nav>
+
+		<aside id="sidebar">
+			<div id="title_wrap" class="select1">
+				<h2 id="title1" class="title">最新文章</h2>
+				<h2 id="title2" class="title">机器学习</h2>
+				<h2 id="title3" class="title">数据可视化</h2>
+				<h2 id="title4" class="title">数据挖掘</h2>
+				<h2 id="title5" class="title">其他技术</h2>
+				<h2 id="title6" class="title">生活随笔</h2>
+			</div>
+
+			<div id="post_list">
+			
+				<a class="related cate1" href="/2014/03/mathjax-github"><span class="circle_icon"></span>在Github中使用MathJax编辑公式<span class="date">Mar 2014</span></a>
+			
+				<a class="ml cate1" href="/2014/03/distance-similarity"><span class="circle_icon"></span>相似度和距离小结<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/data-table"><span class="circle_icon"></span>SAC思想探索<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-re-sub"><span class="circle_icon"></span>python正则表达式：re.sub<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/python-regular-expression"><span class="circle_icon"></span>python正则表达式<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/03/install-scrapy"><span class="circle_icon"></span>scrapy初探-安装和简单操作<span class="date">Mar 2014</span></a>
+			
+				<a class="datamining cate1" href="/2014/02/where-is-data"><span class="circle_icon"></span>数据都去哪儿了<span class="date">Feb 2014</span></a>
+			
+				<a class="related cate1" href="/2014/02/douban"><span class="circle_icon"></span>烟波至爽，数据为王<span class="date">Feb 2014</span></a>
+			
+				<a class="life cate1" href="/2013/12/happy-new-year"><span class="circle_icon"></span>Happy New Year<span class="date">Dec 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/11/ggplot2-2d-density"><span class="circle_icon"></span>ggplot2 - 二维数据密度图<span class="date">Nov 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-lattice-extra"><span class="circle_icon"></span>latticeExtra - Horizon Plot的简单实现<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/10/horizon-plot"><span class="circle_icon"></span>Horizon Chart - 惊艳到爆的哲学<span class="date">Oct 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/09/Significance-ggplot2"><span class="circle_icon"></span>ggplot2 - 为拟合曲线加置信空间<span class="date">Sep 2013</span></a>
+			
+				<a class="life cate1" href="/2013/06/mj-memory"><span class="circle_icon"></span>再次纪念MJ<span class="date">Jun 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/06/plyr-advanced"><span class="circle_icon"></span>Plyr- 多因子整合<span class="date">Jun 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/05/stack-area-ggplot2"><span class="circle_icon"></span>ggplot2 - Stacked Area Graph<span class="date">May 2013</span></a>
+			
+				<a class="related cate1" href="/2013/05/Sublime-text-2"><span class="circle_icon"></span>Sublime Text 2学习过程<span class="date">May 2013</span></a>
+			
+				<a class="ml cate1" href="/2013/04/mahout-big-data"><span class="circle_icon"></span>Mahout简单部署备忘<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/Wilkinson-Dot-Plot"><span class="circle_icon"></span>ggplot2 - Wilkinson Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/heat-map"><span class="circle_icon"></span>ggplot2 - Heat Map<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/cleveland-Dotplot"><span class="circle_icon"></span>ggplot2 - Cleveland Dot Plot<span class="date">Apr 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/04/ggplot2-line-graph"><span class="circle_icon"></span>ggplot2 - Line Graph<span class="date">Apr 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/03/plyr-dataming"><span class="circle_icon"></span>Plyr- 数据整合利器<span class="date">Mar 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-histogram"><span class="circle_icon"></span>ggplot2 - Histogram<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-advanced"><span class="circle_icon"></span>R - Reshape Package II<span class="date">Feb 2013</span></a>
+			
+				<a class="datamining cate1" href="/2013/02/reshape-basic"><span class="circle_icon"></span>R - Reshape2 Package<span class="date">Feb 2013</span></a>
+			
+				<a class="related cate1" href="/2013/02/hadoop-hive"><span class="circle_icon"></span>大数据体验之Hadoop, Rhadoop, 和Hive<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/02/ggplot2-bar-chart"><span class="circle_icon"></span>ggplot2 - Barchart<span class="date">Feb 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/intro-ggplot2"><span class="circle_icon"></span>ggplot2 - 作图哲学<span class="date">Jan 2013</span></a>
+			
+				<a class="datavis cate1" href="/2013/01/welcome-ggplot2"><span class="circle_icon"></span>ggplot2 - Welcome!<span class="date">Jan 2013</span></a>
+			
+				<a class="life cate1" href="/2012/08/story-vision"><span class="circle_icon"></span>自己的视角，别人的故事<span class="date">Aug 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/memorize-michael-jackson"><span class="circle_icon"></span>纪念 Michael Jackson - This Is It<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2012/06/happy-madives"><span class="circle_icon"></span>传说中的马尔代夫<span class="date">Jun 2012</span></a>
+			
+				<a class="life cate1" href="/2011/03/japan-earthquake"><span class="circle_icon"></span>日本地震杂想<span class="date">Mar 2011</span></a>
+			
+			</div>
+		</aside>
+
+		<div id="container">
+			<div id="pjax">
+				
+				<article id="post">
+	<header id="header">
+		<h1 id="identifier">ggplot2 - Cleveland Dot Plot</h1>
+		<button id="fullscreen" class="header_icon"></button>
+		<button id="fontsize" class="header_icon"></button>
+	</header>
+	<div id="content">
+		<p>在<a href="http://www.amazon.com/Elements-Graphing-Data-William-Cleveland/dp/0963488414">The Elements of Graphing Data</a>中，作者Cleveland提出了一种新的数据表现形式，以后就命名为Cleveland Dot Plot。（实在没有找到对应的中文名是什么）</p>
+
+<p>用GGPLOT2可以非常容易的实现</p>
+
+<ul>
+  <li>用 <strong>geom_point</strong>即可</li>
+  <li>其他的进行小小的微调</li>
+</ul>
+
+<p><strong>Basic Plot</strong></p>
+
+<div class="highlight"><pre><code class="r">	library<span class="p">(</span>gcookbook<span class="p">)</span> 
+	<span class="c1"># For the data set</span>
+	tophit <span class="o">&lt;-</span> tophitters2001<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span> <span class="p">]</span> 
+	<span class="c1"># Take the top 25 from the tophitters data set</span>
+	ggplot<span class="p">(</span>tophit<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>avg<span class="p">,</span> y<span class="o">=</span>name<span class="p">))</span> <span class="o">+</span> 
+	geom_point<span class="p">()</span>
+</code></pre></div>
+
+<p><img src="/assets/images/ggplot2-clp/hVabevA.png" alt="" /></p>
+
+<p>从图中看出，数据的排列顺序是按照名称的字母排列来的。效果就是造成的图不直观，比较乱</p>
+
+<ul>
+  <li>用reorder函数进行重新排序</li>
+  <li>对图形背景进行微调</li>
+</ul>
+
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tophit<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>avg<span class="p">,</span>y<span class="o">=</span>reorder<span class="p">(</span>name<span class="p">,</span>avg<span class="p">)))</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">3</span><span class="p">)</span> <span class="o">+</span>  <span class="c1"># Use a larger dot</span>
+    theme_bw<span class="p">()</span> <span class="o">+</span>
+    theme<span class="p">(</span>panel.grid.major.x <span class="o">=</span>element_blank<span class="p">(),</span>
+          panel.grid.minor.x <span class="o">=</span>element_blank<span class="p">(),</span>
+          panel.grid.major.y <span class="o">=</span>element_line<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;grey60&quot;</span><span class="p">,</span>linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">))</span>
+      <span class="c1"># 以上两行是将x轴的坐标轴主刻度线和副刻度线都去掉,同时y轴的刻度线改为间断线型，同时颜色改为灰色</span>
+</code></pre></div>
+
+<p><img src="/assets/images/ggplot2-clp/mUmcaIv.png" alt="" /></p>
+
+<p>当然也可以调换x，y轴的顺序</p>
+
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tophit<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>name<span class="p">,</span> avg<span class="p">),</span> y<span class="o">=</span>avg<span class="p">))</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">3</span><span class="p">)</span> <span class="o">+</span>                        <span class="c1"># Use a larger dot</span>
+    theme_bw<span class="p">()</span> <span class="o">+</span>
+    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>angle<span class="o">=</span><span class="m">60</span><span class="p">,</span> hjust<span class="o">=</span><span class="m">1</span><span class="p">),</span>
+          panel.grid.major.y <span class="o">=</span> element_blank<span class="p">(),</span>
+          panel.grid.minor.y <span class="o">=</span> element_blank<span class="p">(),</span>
+          panel.grid.major.x <span class="o">=</span> element_line<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;grey60&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p><img src="/assets/images/ggplot2-clp/3z81WG7.png" alt="" /></p>
+
+<p>如果想要根据不同类别再次作图
+- 重新进行排序
+- 微调图型元素</p>
+
+<p>因为reorder只能对一个变量排序，如果想按照两个排序则必须要手动来。书中给出的方法如下</p>
+
+<div class="highlight"><pre><code class="r">	<span class="c1"># Get the names, sorted first by lg, then by avg</span>
+	nameorder <span class="o">&lt;-</span> tophit<span class="o">$</span>name<span class="p">[</span>order<span class="p">(</span>tophit<span class="o">$</span>lg<span class="p">,</span> tophit<span class="o">$</span>avg<span class="p">)]</span>
+	<span class="c1"># Turn name into a factor, with levels in the order of nameorder</span>
+	tophit<span class="o">$</span>name <span class="o">&lt;-</span> factor<span class="p">(</span>tophit<span class="o">$</span>name<span class="p">,</span> levels<span class="o">=</span>nameorder<span class="p">)</span>
+</code></pre></div>
+
+<ul>
+  <li>geom_segment:实现将直线只到圆点位置</li>
+  <li>把图例放在图中需要在theme中修改<code>legend.position()</code></li>
+</ul>
+
+<p>整个代码</p>
+
+<div class="highlight"><pre><code class="r">	ggplot<span class="p">(</span>tophit<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>avg<span class="p">,</span> y<span class="o">=</span>name<span class="p">))</span> <span class="o">+</span>
+    geom_segment<span class="p">(</span>aes<span class="p">(</span>yend<span class="o">=</span>name<span class="p">),</span> xend<span class="o">=</span><span class="m">0</span><span class="p">,</span> colour<span class="o">=</span><span class="s">&quot;grey50&quot;</span><span class="p">)</span> <span class="o">+</span>
+    geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">3</span><span class="p">,</span> aes<span class="p">(</span>colour<span class="o">=</span>lg<span class="p">))</span> <span class="o">+</span>
+    scale_colour_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Set1&quot;</span><span class="p">,</span> limits<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;NL&quot;</span><span class="p">,</span><span class="s">&quot;AL&quot;</span><span class="p">))</span> <span class="o">+</span>
+    theme_bw<span class="p">()</span> <span class="o">+</span>
+    theme<span class="p">(</span>panel.grid.major.y <span class="o">=</span> element_blank<span class="p">(),</span>   
+		  <span class="c1"># No horizontal grid lines</span>
+          legend.position<span class="o">=</span>c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0.55</span><span class="p">),</span>             
+		  <span class="c1"># Put legend inside plot area</span>
+          legend.justification<span class="o">=</span>c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0.5</span><span class="p">))</span>
+</code></pre></div>
+
+<p><img src="/assets/images/ggplot2-clp/cKWISqQ.png" alt="" /></p>
+
+<p>也可以用facet_grid来实现相关
+代码改动量不大</p>
+
+<div class="highlight"><pre><code class="r">    ggplot<span class="p">(</span>tophit<span class="p">,</span>aes<span class="p">(</span>x<span class="o">=</span>avg<span class="p">,</span>y<span class="o">=</span>name<span class="p">))</span> <span class="o">+</span>
+      geom_segment<span class="p">(</span>aes<span class="p">(</span>yend<span class="o">=</span>name<span class="p">),</span>xend<span class="o">=</span><span class="m">0</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;grey50&quot;</span><span class="p">)</span> <span class="o">+</span>
+      geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">3</span><span class="p">,</span>aes<span class="p">(</span>colour<span class="o">=</span>lg<span class="p">))</span> <span class="o">+</span>
+      scale_colour_brewer<span class="p">(</span>palette<span class="o">=</span><span class="s">&quot;Set1&quot;</span><span class="p">,</span>limits<span class="o">=</span>c<span class="p">(</span><span class="s">&quot;NL&quot;</span><span class="p">,</span><span class="s">&quot;AL&quot;</span><span class="p">),</span>guide<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+      theme_bw<span class="p">()</span> <span class="o">+</span>
+      theme<span class="p">(</span>panel.grid.major.y <span class="o">=</span>element_blank<span class="p">())</span> <span class="o">+</span>
+      facet_grid<span class="p">(</span>lg <span class="o">~</span> .<span class="p">,</span>scales<span class="o">=</span><span class="s">&quot;free_y&quot;</span><span class="p">,</span>space<span class="o">=</span><span class="s">&quot;free_y&quot;</span><span class="p">)</span>
+    <span class="c1"># 只是把scale_colour_brewer部分和后面改了一点</span>
+    
+</code></pre></div>
+
+<p><img src="/assets/images/ggplot2-clp/3u738ru.png" alt="" /></p>
+
+<p>注意在facet_grid中的参数</p>
+
+<ul>
+  <li>scales：表示是否允许不同面（facet）的坐标轴变化，或者固定。 <code>scales=free_y</code> 表示y轴随意变化。我们看到因为两个facet所含数据是不一样的，所以改成<code>free_y</code>显得更加好看</li>
+  <li>
+    <p>space： 也是一个道理</p>
+  </li>
+  <li>文中代码和图片下载在： <a href="http://pan.baidu.com/s/1LAKA">这里</a></li>
+</ul>
+
+
+		
+		<div id="donation">
+		<b><a href="https://me.alipay.com/bigchao">Buy Me A Drink!</a>>, Come on!:)</b>
+		</div>
+		<div id="social">
+		    <a id="weibo" href="http://v.t.sina.com.cn/share/share.php?url=http://yangchao.me/2013/04/cleveland-Dotplot&title=ggplot2 - Cleveland Dot Plot"></a>
+			<a id="twitter" href="https://twitter.com/intent/tweet?url=http://yangchao.me/2013/04/cleveland-Dotplot&text=ggplot2 - Cleveland Dot Plot"></a>
+			<a id="end_cc" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"></a>
+		</div>
+	</div>
+</article>
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
+
+
+
+			</div>
+		</div>
+
+		<div id="notice">左右滑动</div>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.pjax.js"></script>
+		<script type="text/javascript" src="/assets/js/script.js"></script>
+		
+		<script>
+		$(document).ready(function(){
+		$("#random").on('click','img',function(){
+			$.get("sitemap.xml",function(data){
+			var $xml=$(data);
+			url=$xml.find("url");
+			n = url.size();
+			n = getRandom(n);
+			position=url.get(n);  
+			hello=position.getElementsByTagName("loc")[0].firstChild.nodeValue; 
+			location.href=hello;
+		})
+    
+	})
+  //随机数发生器
+       function getRandom(n){return Math.floor(Math.random()*(n+1))}
+})
+	</script>
+		
+	</body>
+</html>
